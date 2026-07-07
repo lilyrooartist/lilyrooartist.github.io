@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T01:48:32.873571Z",
+  "generated_at": "2026-07-07T02:09:22.562090Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -120,102 +120,6 @@
           "new_value": "",
           "evidence_note": "",
           "collection_hint": "Open X analytics for https://x.com/i/web/status/2069786481556635841 and record subs_delta."
-        }
-      ]
-    },
-    {
-      "post_id": "FP-AUTO-278",
-      "experiment_format": "Release-art image + story hook",
-      "platform": "Facebook",
-      "song": "The Other One's Charging",
-      "post_url": "https://www.facebook.com/903693509504290_122120594715249470",
-      "published_date": "2026-06-30",
-      "source_row": "30",
-      "pending_field_count": 6,
-      "ready_field_count": 0,
-      "wide_ready_field_count": 0,
-      "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
-        "subs_delta"
-      ],
-      "ready_fields": [],
-      "wide_ready_fields": [],
-      "wide_entry_row": {
-        "experiment_format": "Release-art image + story hook",
-        "post_id": "FP-AUTO-278",
-        "platform": "Facebook",
-        "song": "The Other One's Charging",
-        "post_url": "https://www.facebook.com/903693509504290_122120594715249470",
-        "published_date": "2026-06-30",
-        "source_row": "30",
-        "views": "",
-        "likes": "",
-        "comments": "",
-        "shares": "",
-        "saves": "",
-        "subs_delta": "",
-        "evidence_note": ""
-      },
-      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
-      "evidence_sources": [
-        {
-          "label": "Logged public post",
-          "url": "https://www.facebook.com/903693509504290_122120594715249470",
-          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
-        },
-        {
-          "label": "Meta Business Suite",
-          "url": "https://business.facebook.com/latest/insights",
-          "instruction": "Open post insights for the Lily Roo page post and copy the available result values."
-        }
-      ],
-      "collection_checklist": [
-        "Open the logged public post and confirm it matches this post_id.",
-        "Open the platform analytics or insights source listed for this card.",
-        "Copy only numeric values that are visible in the source.",
-        "Enter values in the wide entry CSV row for this post_id and source_row.",
-        "Add an evidence_note with source and collection date before import preview."
-      ],
-      "fields": [
-        {
-          "field": "views",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record views."
-        },
-        {
-          "field": "likes",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record likes."
-        },
-        {
-          "field": "comments",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record comments."
-        },
-        {
-          "field": "shares",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record shares."
-        },
-        {
-          "field": "saves",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record saves."
-        },
-        {
-          "field": "subs_delta",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record subs_delta."
         }
       ]
     },
@@ -1466,6 +1370,102 @@
           "collection_hint": "Open X analytics for https://x.com/i/web/status/2073772787177861205 and record subs_delta."
         }
       ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "X",
+      "song": "Analog Myth",
+      "post_url": "https://x.com/i/web/status/2074135149185266159",
+      "published_date": "2026-07-06",
+      "source_row": "54",
+      "pending_field_count": 6,
+      "ready_field_count": 0,
+      "wide_ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "ready_fields": [],
+      "wide_ready_fields": [],
+      "wide_entry_row": {
+        "experiment_format": "Release-art image + story hook",
+        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "platform": "X",
+        "song": "Analog Myth",
+        "post_url": "https://x.com/i/web/status/2074135149185266159",
+        "published_date": "2026-07-06",
+        "source_row": "54",
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": "",
+        "subs_delta": "",
+        "evidence_note": ""
+      },
+      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
+      "evidence_sources": [
+        {
+          "label": "Logged public post",
+          "url": "https://x.com/i/web/status/2074135149185266159",
+          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
+        },
+        {
+          "label": "X Analytics",
+          "url": "https://analytics.x.com/",
+          "instruction": "Use the logged post URL or post ID to find the post and copy visible analytics values."
+        }
+      ],
+      "collection_checklist": [
+        "Open the logged public post and confirm it matches this post_id.",
+        "Open the platform analytics or insights source listed for this card.",
+        "Copy only numeric values that are visible in the source.",
+        "Enter values in the wide entry CSV row for this post_id and source_row.",
+        "Add an evidence_note with source and collection date before import preview."
+      ],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2074135149185266159 and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2074135149185266159 and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2074135149185266159 and record comments."
+        },
+        {
+          "field": "shares",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2074135149185266159 and record shares."
+        },
+        {
+          "field": "saves",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2074135149185266159 and record saves."
+        },
+        {
+          "field": "subs_delta",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2074135149185266159 and record subs_delta."
+        }
+      ]
     }
   ],
   "missing_public_url_cards": [
@@ -1495,27 +1495,6 @@
     }
   ],
   "measurement_priority_cards": [
-    {
-      "action": "collect_metrics",
-      "priority": 1,
-      "post_id": "FP-AUTO-278",
-      "platform": "Facebook",
-      "song": "The Other One's Charging",
-      "experiment_format": "Release-art image + story hook",
-      "post_url": "https://www.facebook.com/903693509504290_122120594715249470",
-      "source_row": "30",
-      "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
-        "subs_delta"
-      ],
-      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 15 logged post(s), 1 missing URL(s) in this format."
-    },
     {
       "action": "collect_metrics",
       "priority": 1,
@@ -1727,6 +1706,27 @@
       "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 15 logged post(s), 1 missing URL(s) in this format."
     },
     {
+      "action": "collect_metrics",
+      "priority": 1,
+      "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+      "platform": "X",
+      "song": "Analog Myth",
+      "experiment_format": "Release-art image + story hook",
+      "post_url": "https://x.com/i/web/status/2074135149185266159",
+      "source_row": "54",
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --source-row 54 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --source-row 54 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 15 logged post(s), 1 missing URL(s) in this format."
+    },
+    {
       "action": "clear_platform_blocker",
       "priority": 4,
       "post_id": "FP-AUTO-279",
@@ -1751,12 +1751,12 @@
   ],
   "first_measurement_runbook": {
     "status": "ready_to_collect_metrics",
-    "post_id": "FP-AUTO-278",
+    "post_id": "FP-AUTO-283",
     "platform": "Facebook",
-    "song": "The Other One's Charging",
+    "song": "Twelve Dollars",
     "experiment_format": "Release-art image + story hook",
-    "post_url": "https://www.facebook.com/903693509504290_122120594715249470",
-    "source_row": "30",
+    "post_url": "https://www.facebook.com/903693509504290_122120643825249470",
+    "source_row": "41",
     "pending_fields": [
       "views",
       "likes",
@@ -1767,8 +1767,8 @@
     ],
     "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
     "entry_csv_path": "data/experiment_result_entry_template.csv",
-    "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-    "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+    "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+    "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
     "wide_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
     "wide_import_apply_command": "",
     "evidence_note_template": "Facebook analytics YYYY-MM-DD",
@@ -1776,7 +1776,7 @@
     "evidence_sources": [
       {
         "label": "Logged public post",
-        "url": "https://www.facebook.com/903693509504290_122120594715249470",
+        "url": "https://www.facebook.com/903693509504290_122120643825249470",
         "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
       },
       {
