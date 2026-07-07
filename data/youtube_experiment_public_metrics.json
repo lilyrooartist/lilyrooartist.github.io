@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T21:13:44Z",
+  "generated_at": "2026-07-07T00:53:49Z",
   "safe_mode": true,
   "source": {
     "template": "data/experiment_result_entry_wide_template.csv",
@@ -15,7 +15,7 @@
     "importable_post_count": 0,
     "importable_field_count": 0,
     "missing_video_ids": [],
-    "error": "YouTube OAuth token request failed (400): {\"error\": \"invalid_grant\", \"error_description\": \"Token has been expired or revoked.\"}",
+    "error": "Missing YouTube OAuth key(s): GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
     "output_csv": "data/youtube_experiment_public_metrics.csv",
     "preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/youtube_experiment_public_metrics.csv --dry-run",
     "apply_command": ""
