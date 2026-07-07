@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-06T23:39:33.287478Z",
+  "generated_at": "2026-07-07T00:45:44.315193Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/8f5062c7ec0dab5ed28948b2e8616f7531379076/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/59ba723dabebc698a3de4a753a587aa28144415d/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -20,9 +20,18 @@
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
+    "scheduler_simulated_at": "2026-07-07T15:21:00Z",
+    "scheduler_simulated_due_count": 2,
+    "scheduler_simulated_would_post_count": 2,
+    "scheduler_simulated_blocked_count": 0,
     "scheduler_due_count": 2,
     "scheduler_would_post_count": 2,
     "scheduler_blocked_count": 0,
+    "current_scheduler_checked_at": "2026-07-07T00:44:28.803423Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-07T00:44:28.652382Z",
+    "current_scheduler_due_count": 0,
+    "current_scheduler_would_post_count": 0,
+    "current_scheduler_blocked_count": 0,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
     "blocked_ids": [],
@@ -286,6 +295,7 @@
     "Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.",
     "It does not publish, approve, mutate, or import metrics.",
     "A ready preflight proves only that the next window is executable at the simulated due time.",
+    "The current scheduler dry-run is reported separately so the admin does not imply future posts are due before their scheduled window.",
     "DistroKid HyperFollow 403/429 checks are non-blocking warnings because GitHub-hosted probes can be bot-filtered while the browser-visible public link remains the intended listening hub.",
     "YouTube 429 link checks are non-blocking warnings because GitHub-hosted probes can be rate-limited while the scheduler and Lily Roo-hosted links remain ready."
   ]

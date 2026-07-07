@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-06T21:13:38.240424Z",
+  "updated_at": "2026-07-07T00:43:50.758322Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -10,8 +10,79 @@
   "summary": {
     "execution_count": 51,
     "current_execution_count": 36,
-    "superseded_execution_count": 0,
-    "superseded_executions": [],
+    "superseded_execution_count": 15,
+    "superseded_executions": [
+      {
+        "post_id": "FP-AUTO-284",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-07-03T06:45:48.898Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "",
+        "superseded_reason": "post_id_not_in_current_queue"
+      },
+      {
+        "post_id": "FP-AUTO-282",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-07-03T06:45:47.986Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "",
+        "superseded_reason": "post_id_not_in_current_queue"
+      },
+      {
+        "post_id": "FP-AUTO-279",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-07-03T06:45:46.972Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "",
+        "superseded_reason": "post_id_not_in_current_queue"
+      },
+      {
+        "post_id": "FP-AUTO-277",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-07-03T06:45:46.090Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "",
+        "superseded_reason": "post_id_not_in_current_queue"
+      },
+      {
+        "post_id": "FP-AUTO-272",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-07-03T06:45:44.782Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "",
+        "superseded_reason": "post_id_not_in_current_queue"
+      }
+    ],
     "current_executions": [
       {
         "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
@@ -1044,11 +1115,5 @@
     "ok": true,
     "execution_count": 51
   },
-  "action_needed": "",
-  "reconciled_at": "2026-07-06T21:13:38.298106Z",
-  "reconciliation": {
-    "source": "current scheduled_posts.csv",
-    "superseded_execution_count": 0,
-    "guardrail": "Rows are only removed from active attention lists when their post_id is gone from the queue or the queue platform/type has superseded the captured execution."
-  }
+  "action_needed": ""
 }

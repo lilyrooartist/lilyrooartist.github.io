@@ -1,12 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T23:39:33.287478Z
+Generated: 2026-07-07T00:45:44.315193Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-07** at `2026-07-07T15:21:00Z`
 - Expected posts: **2**
-- Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-07T15:21:00Z`, due **2**, would post **2**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-07T00:44:28.803423Z`, requested `2026-07-07T00:44:28.652382Z`, due **0**, would post **0**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
@@ -39,5 +40,6 @@ Generated: 2026-07-06T23:39:33.287478Z
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
 - It does not publish, approve, mutate, or import metrics.
 - A ready preflight proves only that the next window is executable at the simulated due time.
+- The current scheduler dry-run is reported separately so the admin does not imply future posts are due before their scheduled window.
 - DistroKid HyperFollow 403/429 checks are non-blocking warnings because GitHub-hosted probes can be bot-filtered while the browser-visible public link remains the intended listening hub.
 - YouTube 429 link checks are non-blocking warnings because GitHub-hosted probes can be rate-limited while the scheduler and Lily Roo-hosted links remain ready.
