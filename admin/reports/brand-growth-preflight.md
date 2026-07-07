@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-07T10:02:13.522419Z
+Generated: 2026-07-07T15:16:15.717707Z
 
 ## Summary
-- Status: **ready**
+- Status: **needs_attention**
 - Next window: **2026-07-07** at `2026-07-07T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-07T15:21:00Z`, due **2**, would post **2**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-07T10:02:08.559824Z`, requested `2026-07-07T10:02:08.382215Z`, due **0**, would post **0**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-07T15:21:00Z`, due **2**, would post **1**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-07T15:16:11.482900Z`, requested `2026-07-07T15:16:11.196761Z`, due **1**, would post **0**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
@@ -17,6 +17,9 @@ Generated: 2026-07-07T10:02:13.522419Z
 ## Expected Posts
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X at `2026-07-07T10:15:00-04:00`
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` Facebook at `2026-07-07T11:20:00-04:00`
+
+## Missing From Dry Run
+- `FP-BRAND-AM-04-SPILLING-THE-TEA-X`
 
 ## Link Checks
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X imagery_url` 200 image/jpeg

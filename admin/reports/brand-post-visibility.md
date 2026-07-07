@@ -1,13 +1,13 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-07T10:02:08.072619Z
+Generated: 2026-07-07T15:16:10.884561Z
 
 ## Summary
 - Status: **verified**
-- Checked posts: **6**
-- Public visibility OK: **6**
+- Checked posts: **7**
+- Public visibility OK: **7**
 - Attention: **0**
-- X copy confirmed: **3**
+- X copy confirmed: **4**
 - Facebook pages loaded: **3**
 
 ## Rows
@@ -41,6 +41,11 @@ Generated: 2026-07-07T10:02:08.072619Z
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
   - HTTP: `200`; copy matched: `True`
   - Note: Facebook public page loaded without the common unavailable-content marker.
+- **FP-BRAND-AM-04-SPILLING-THE-TEA-X** X - `visible_copy_confirmed`
+  - Logged URL: https://x.com/i/web/status/2074497538409779510
+  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074497538409779510
+  - HTTP: `200`; copy matched: `True`
+  - Note: X public oEmbed returned Lily Roo post copy.
 
 ## Guardrails
 - Read-only public URL probe; it does not publish, edit, or collect private analytics.

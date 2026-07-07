@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-07T10:02:13.522419Z",
+  "generated_at": "2026-07-07T15:16:15.717707Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/1b1940164e7471bc6a918fd6a7387e9e5f02c973/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/6024e5291f17b1ad1b45e26b1d7add7e900ab2de/admin/future-posts.json"
   },
   "summary": {
-    "status": "ready",
+    "status": "needs_attention",
     "next_window_date": "2026-07-07",
     "scheduled_time": "2026-07-07T15:21:00Z",
     "expected_post_count": 2,
@@ -22,17 +22,19 @@
     "scheduler_fallback_reason": "",
     "scheduler_simulated_at": "2026-07-07T15:21:00Z",
     "scheduler_simulated_due_count": 2,
-    "scheduler_simulated_would_post_count": 2,
+    "scheduler_simulated_would_post_count": 1,
     "scheduler_simulated_blocked_count": 0,
     "scheduler_due_count": 2,
-    "scheduler_would_post_count": 2,
+    "scheduler_would_post_count": 1,
     "scheduler_blocked_count": 0,
-    "current_scheduler_checked_at": "2026-07-07T10:02:08.559824Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-07T10:02:08.382215Z",
-    "current_scheduler_due_count": 0,
+    "current_scheduler_checked_at": "2026-07-07T15:16:11.482900Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-07T15:16:11.196761Z",
+    "current_scheduler_due_count": 1,
     "current_scheduler_would_post_count": 0,
     "current_scheduler_blocked_count": 0,
-    "missing_due_ids": [],
+    "missing_due_ids": [
+      "FP-BRAND-AM-04-SPILLING-THE-TEA-X"
+    ],
     "unexpected_due_ids": [],
     "blocked_ids": [],
     "link_check_count": 8,
@@ -51,34 +53,24 @@
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-07T15:21:00Z",
     "next_measurement_due_at": "2026-07-08T15:20:00Z",
-    "readout_next_proof_due_at": "2026-07-07T15:21:00Z",
+    "readout_next_proof_due_at": "2026-07-08T15:21:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
     "due_count": 2,
     "result_count": 2,
-    "would_post_count": 2,
+    "would_post_count": 1,
     "blocked_count": 0,
     "status_counts": {
-      "would_post": 2
+      "posted": 1,
+      "would_post": 1
     },
     "platform_counts": {
       "Facebook": 1,
-      "X": 1
+      "Unknown": 1
     },
     "would_post": [
-      {
-        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-        "platform": "X",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
         "platform": "Facebook",

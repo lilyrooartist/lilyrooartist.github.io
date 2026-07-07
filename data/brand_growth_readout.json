@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T10:02:13.437717Z",
+  "generated_at": "2026-07-07T15:16:15.627789Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -22,17 +22,17 @@
     },
     "status_counts": {
       "posted_waiting_measurement_window": 2,
-      "ready_for_metric_capture": 4,
-      "scheduled_future": 58
+      "ready_for_metric_capture": 5,
+      "scheduled_future": 57
     },
     "approved_auto_rows": 64,
     "future_queue_visible_rows": 58,
-    "posted_or_measured_rows": 6,
+    "posted_or_measured_rows": 7,
     "measured_rows": 0,
-    "ready_for_metric_capture_rows": 4,
+    "ready_for_metric_capture_rows": 5,
     "public_visibility_status": "verified",
-    "public_visibility_checked_post_count": 6,
-    "public_visibility_ok_count": 6,
+    "public_visibility_checked_post_count": 7,
+    "public_visibility_ok_count": 7,
     "public_visibility_attention_count": 0,
     "public_visibility_report_path": "admin/reports/brand-post-visibility.md",
     "campaign_click_status": "ready",
@@ -47,10 +47,10 @@
     "campaign_click_tracking_url_count": 174,
     "campaign_click_tracking_expected_url_count": 174,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 4,
-    "next_scheduled_post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-    "next_scheduled_at": "2026-07-07T10:15:00-04:00",
-    "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X",
+    "attention_rows": 5,
+    "next_scheduled_post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
+    "next_scheduled_at": "2026-07-07T11:20:00-04:00",
+    "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
     "facebook_metric_capture_status": "skipped_missing_secrets",
@@ -74,9 +74,9 @@
     ],
     "post_slot_watch_window_count": 32,
     "post_slot_watch_status_counts": {
-      "measurement_due": 2,
+      "measurement_due": 3,
       "posted_waiting_measurement": 1,
-      "scheduled_future": 29
+      "scheduled_future": 28
     },
     "next_action_window_date": "2026-07-04",
     "next_action_window_status": "measurement_due",
@@ -85,15 +85,15 @@
       "FP-BRAND-AM-01-13-X",
       "FP-BRAND-AM-01-13-FACEBOOK"
     ],
-    "next_proof_window_date": "2026-07-07",
+    "next_proof_window_date": "2026-07-08",
     "next_proof_window_status": "scheduled_future",
-    "next_proof_due_at": "2026-07-07T15:21:00Z",
+    "next_proof_due_at": "2026-07-08T15:21:00Z",
     "next_measurement_window_date": "2026-07-04",
     "next_measurement_window_status": "measurement_due",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "next_proof_post_ids": [
-      "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-      "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+      "FP-BRAND-AM-05-NO-MORTGAGE-X",
+      "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK"
     ],
     "next_metric_post_ids": [
       "FP-BRAND-AM-01-13-X",
@@ -111,9 +111,9 @@
     "summary": {
       "window_count": 32,
       "status_counts": {
-        "measurement_due": 2,
+        "measurement_due": 3,
         "posted_waiting_measurement": 1,
-        "scheduled_future": 29
+        "scheduled_future": 28
       },
       "next_window_date": "2026-07-04",
       "next_window_status": "measurement_due",
@@ -129,12 +129,12 @@
         "FP-BRAND-AM-01-13-X",
         "FP-BRAND-AM-01-13-FACEBOOK"
       ],
-      "next_post_proof_window_date": "2026-07-07",
+      "next_post_proof_window_date": "2026-07-08",
       "next_post_proof_window_status": "scheduled_future",
-      "next_post_proof_due_at": "2026-07-07T15:21:00Z",
+      "next_post_proof_due_at": "2026-07-08T15:21:00Z",
       "next_post_proof_post_ids": [
-        "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-        "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+        "FP-BRAND-AM-05-NO-MORTGAGE-X",
+        "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK"
       ],
       "next_metric_window_date": "2026-07-04",
       "next_metric_window_status": "measurement_due",
@@ -209,7 +209,7 @@
       },
       {
         "date": "2026-07-06",
-        "status": "posted_waiting_measurement",
+        "status": "measurement_due",
         "post_ids": [
           "FP-BRAND-AM-03-ANALOG-MYTH-X",
           "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
@@ -223,19 +223,22 @@
         "proof_due_at": "2026-07-06T15:21:00Z",
         "measurement_due_at": "2026-07-07T15:20:00Z",
         "status_counts": {
-          "posted_waiting_measurement_window": 2
+          "posted_waiting_measurement_window": 1,
+          "ready_for_metric_capture": 1
         },
         "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
+        "rows_ready_for_metrics": [
+          "FP-BRAND-AM-03-ANALOG-MYTH-X"
+        ],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the first measurement window before capturing result metrics."
+        "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "next_action": "Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected."
       },
       {
         "date": "2026-07-07",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement",
         "post_ids": [
           "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
           "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
@@ -249,7 +252,8 @@
         "proof_due_at": "2026-07-07T15:21:00Z",
         "measurement_due_at": "2026-07-08T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "posted_waiting_measurement_window": 1,
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -257,7 +261,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Wait for the first measurement window before capturing result metrics."
       },
       {
         "date": "2026-07-08",
@@ -1096,8 +1100,8 @@
       "public_visibility_status": "visible_copy_confirmed",
       "public_visibility_ok": true,
       "public_visibility_note": "X public oEmbed returned Lily Roo post copy.",
-      "status": "posted_waiting_measurement_window",
-      "next_action": "Wait until 2026-07-07T14:15:30.540000+00:00 before capturing metrics.",
+      "status": "ready_for_metric_capture",
+      "next_action": "Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).",
       "visible_in_future_queue": false
     },
     {
@@ -1130,18 +1134,18 @@
       "execution_mode": "auto",
       "post_type": "image",
       "text": "Analog Myth track 4: Spilling the Tea turns gossip into cinema and keeps the receipt drawer open.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-x&to=album",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
+      "post_url": "https://x.com/i/web/status/2074497538409779510",
+      "published_log_row": 56,
+      "execution_status": "posted",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-07-08T14:15:31.050000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "public_visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "public_visibility_note": "X public oEmbed returned Lily Roo post copy.",
+      "status": "posted_waiting_measurement_window",
+      "next_action": "Wait until 2026-07-08T14:15:31.050000+00:00 before capturing metrics.",
       "visible_in_future_queue": true
     },
     {
@@ -2404,11 +2408,11 @@
     "headline": "First-party clicks checked; no response yet",
     "next_action": "Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.",
     "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py",
-    "due_at": "2026-07-07T15:21:00Z",
+    "due_at": "2026-07-08T15:21:00Z",
     "click_status": "ready",
     "click_count": 0,
     "click_post_count": 0,
-    "ready_for_learning_count": 4,
+    "ready_for_learning_count": 5,
     "native_metric_missing_secret_names": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -2422,20 +2426,21 @@
       "FP-BRAND-AM-01-13-X",
       "FP-BRAND-AM-01-13-FACEBOOK",
       "FP-BRAND-AM-02-GIRLS-CAMP-X",
-      "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
+      "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
+      "FP-BRAND-AM-03-ANALOG-MYTH-X"
     ],
     "waiting_post_ids": [
-      "FP-BRAND-AM-03-ANALOG-MYTH-X",
-      "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
+      "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
+      "FP-BRAND-AM-04-SPILLING-THE-TEA-X"
     ],
     "next_proof_post_ids": [
-      "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-      "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+      "FP-BRAND-AM-05-NO-MORTGAGE-X",
+      "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK"
     ]
   },
   "next_actions": [
     "Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.",
-    "After `2026-07-07T15:21:00Z`, capture executor proof for FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK.",
+    "After `2026-07-08T15:21:00Z`, capture executor proof for FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK.",
     "Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting."
   ],
   "guardrails": [

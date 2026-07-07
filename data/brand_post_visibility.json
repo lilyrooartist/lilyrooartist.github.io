@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T10:02:08.072619Z",
+  "generated_at": "2026-07-07T15:16:10.884561Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -9,10 +9,10 @@
   },
   "summary": {
     "status": "verified",
-    "checked_post_count": 6,
-    "public_visibility_ok_count": 6,
+    "checked_post_count": 7,
+    "public_visibility_ok_count": 7,
     "attention_count": 0,
-    "x_copy_confirmed_count": 3,
+    "x_copy_confirmed_count": 4,
     "facebook_page_loaded_count": 3,
     "report_path": "admin/reports/brand-post-visibility.md",
     "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
@@ -146,6 +146,22 @@
           "copy_matched": true
         }
       ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
+      "platform": "X",
+      "published_date": "2026-07-07",
+      "source_row": 56,
+      "logged_url": "https://x.com/i/web/status/2074497538409779510",
+      "checked_url": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074497538409779510",
+      "final_url": "https://x.com/lilyrooartist/status/2074497538409779510",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "X public oEmbed returned Lily Roo post copy.",
+      "attempts": []
     }
   ],
   "guardrails": [

@@ -1,22 +1,22 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-07T10:02:13.437717Z
+Generated: 2026-07-07T15:16:15.627789Z
 
 ## Summary
 - Campaign rows: **64**
 - Approved auto rows: **64**
 - Visible in future queue: **58**
-- Posted or measured rows: **6**
+- Posted or measured rows: **7**
 - Measured rows: **0**
-- Ready for metric capture: **4**
-- Public visibility: **verified** (6 / 6 checked OK; 0 attention)
+- Ready for metric capture: **5**
+- Public visibility: **verified** (7 / 7 checked OK; 0 attention)
 - Campaign clicks: **0** across **0** post(s); last click `none yet`
 - Click tracking links: **ready** (58 / 58 future rows; 174 / 174 URLs)
 - Post-slot watch windows: **32**
-- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 4, scheduled_future: 58**
-- Next scheduled: `FP-BRAND-AM-04-SPILLING-THE-TEA-X` at `2026-07-07T10:15:00-04:00`
+- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 5, scheduled_future: 57**
+- Next scheduled: `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` at `2026-07-07T11:20:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
-- Next scheduled post proof: `2026-07-07` due `2026-07-07T15:21:00Z`
+- Next scheduled post proof: `2026-07-08` due `2026-07-08T15:21:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
 - YouTube total views: **None**
 - Spotify monthly listeners: **1**
@@ -25,14 +25,14 @@ Generated: 2026-07-07T10:02:13.437717Z
 - Status: **clicks_checked_no_response_yet**
 - Headline: **First-party clicks checked; no response yet**
 - First-party clicks: **0** across **0** post(s)
-- Public posts ready for learning: **4**
+- Public posts ready for learning: **5**
 - Next learning action: Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py`
-- Due: `2026-07-07T15:21:00Z`
+- Due: `2026-07-08T15:21:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
-- Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
-- Waiting posts: `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Next proof posts: `FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK`
+- Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X`
+- Waiting posts: `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK, FP-BRAND-AM-04-SPILLING-THE-TEA-X`
+- Next proof posts: `FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK`
 
 ## Commands
 - Refresh state: `python3 scripts/refresh_promo_admin.py`
@@ -41,7 +41,7 @@ Generated: 2026-07-07T10:02:13.437717Z
 - Apply post-slot proof after scheduled executor runs: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin`
 - Capture campaign clicks: `python3 scripts/capture_brand_campaign_clicks.py`
 - Verify click tracking links: `admin/reports/brand-click-tracking-health.md`
-- Capture X metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X`
+- Capture X metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X`
 - Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
 - Re-check public visibility: `admin/reports/brand-post-visibility.md`
 
@@ -53,7 +53,7 @@ Generated: 2026-07-07T10:02:13.437717Z
 
 ## Next Actions
 - Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.
-- After `2026-07-07T15:21:00Z`, capture executor proof for FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK.
+- After `2026-07-08T15:21:00Z`, capture executor proof for FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK.
 - Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting.
 
 ## Post-Slot Watch
@@ -65,11 +65,12 @@ Generated: 2026-07-07T10:02:13.437717Z
   - Next: Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
-- `2026-07-06` **posted_waiting_measurement** proof due `2026-07-06T15:21:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-  - Next: Wait for the first measurement window before capturing result metrics.
+- `2026-07-06` **measurement_due** proof due `2026-07-06T15:21:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
+  - Next: Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-07` **scheduled_future** proof due `2026-07-07T15:21:00Z` for `FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-03-ANALOG-MYTH-X`
+- `2026-07-07` **posted_waiting_measurement** proof due `2026-07-07T15:21:00Z` for `FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK`
+  - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-08` **scheduled_future** proof due `2026-07-08T15:21:00Z` for `FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -173,16 +174,18 @@ Generated: 2026-07-07T10:02:13.437717Z
   - URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
   - Next: Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).
-- `FP-BRAND-AM-03-ANALOG-MYTH-X` X 2026-07-06T10:15:00-04:00 - **posted_waiting_measurement_window**
+- `FP-BRAND-AM-03-ANALOG-MYTH-X` X 2026-07-06T10:15:00-04:00 - **ready_for_metric_capture**
   - URL: https://x.com/i/web/status/2074135149185266159
   - Public visibility: `visible_copy_confirmed` OK
-  - Next: Wait until 2026-07-07T14:15:30.540000+00:00 before capturing metrics.
+  - Next: Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).
 - `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-06T11:20:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
   - Next: Wait until 2026-07-07T15:30:39.575000+00:00 before capturing metrics.
-- `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://x.com/i/web/status/2074497538409779510
+  - Public visibility: `visible_copy_confirmed` OK
+  - Next: Wait until 2026-07-08T14:15:31.050000+00:00 before capturing metrics.
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-07T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-BRAND-AM-05-NO-MORTGAGE-X` X 2026-07-08T10:15:00-04:00 - **scheduled_future**
