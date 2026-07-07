@@ -33922,6 +33922,21 @@ Generated: 2026-07-07T01:48:33.098079Z
     return simpleJoin((posts||[]).map(post=>post.platform).filter(Boolean)) || 'the approved channels';
   }
 
+  function simpleFormatEvidenceCopy(readiness){
+    const ready=Number(readiness?.ready_candidate_count||0);
+    const target=Number(readiness?.winner_count_target||3);
+    const pendingValues=Number(readiness?.pending_result_field_count||0);
+    const missingLinks=Number(readiness?.missing_published_log_count||0);
+    const named=ready>=target && ready>0;
+    const cleanup=[pendingValues?simpleCount(pendingValues,'result value'):'',missingLinks?simpleCount(missingLinks,'public link'):''].filter(Boolean);
+    if(named && cleanup.length){
+      return `${simpleCount(ready,'repeatable format')} named; ${simpleJoin(cleanup)} still need cleanup before the next readout is fully trusted.`;
+    }
+    if(named) return `${simpleCount(ready,'repeatable format')} named and ready to keep in rotation.`;
+    if(ready) return `${simpleCount(ready,'repeatable format')} has enough evidence; ${simpleCount(Math.max(target-ready,0),'more format')} still needs proof.`;
+    return 'Repeatable formats still need measured post evidence.';
+  }
+
   function simpleCampaignName(title){
     const value=String(title||'').trim();
     if(!value) return 'Campaign post';
@@ -34103,7 +34118,8 @@ Generated: 2026-07-07T01:48:33.098079Z
     executions,
     xResults,
     facebookResults,
-    brandPostVisibility
+    brandPostVisibility,
+    promoHealth
   }){
     const statusStrip=document.getElementById('simple-status-strip');
     const statusCopy=document.getElementById('simple-status-copy');
@@ -34126,6 +34142,8 @@ Generated: 2026-07-07T01:48:33.098079Z
 	    };
     const preflightSummary=brandGrowthPreflight?.summary||{};
     const automationSummary=postingAutomationStatus?.summary||{};
+    const growthGoal=promoHealth?.kpi?.growth_goal||{};
+    const formatReadiness=growthGoal.format_winner_readiness||{};
     const primaryAction=pulseSummary.primary_action||{};
     const brandRows=Array.isArray(brandGrowthReadout?.rows)?brandGrowthReadout.rows:[];
     const executionSummary=executions?.summary||{};
@@ -34193,6 +34211,17 @@ Generated: 2026-07-07T01:48:33.098079Z
 	      : resultNote;
 			    const lastUpdated=brandGrowthPulse?.generated_at || brandPostVisibility?.generated_at || brandGrowthReadout?.generated_at || brandGrowthPreflight?.generated_at || '';
 	    const proofDueAt=automationSummary.active_campaign_next_proof_due_at||readoutSummary.next_proof_due_at||pulseSummary.proof_due_at||primaryAction.due_at||'';
+	    const growthCurrent=growthGoal.current_total_plays_views;
+	    const growthTarget=growthGoal.target_total_plays_views;
+	    const growthReached=String(growthGoal.status||'')==='target_reached';
+	    const formatCopy=simpleFormatEvidenceCopy(formatReadiness);
+	    const formatReadyCount=Number(formatReadiness.ready_candidate_count||0);
+	    const formatTargetCount=Number(formatReadiness.winner_count_target||3);
+	    const pendingFormatValues=Number(formatReadiness.pending_result_field_count||0);
+	    const missingFormatLinks=Number(formatReadiness.missing_published_log_count||0);
+	    const formatCleanupDue=pendingFormatValues||missingFormatLinks;
+	    const formatCardClass=formatReadyCount>=formatTargetCount ? (formatCleanupDue?'neutral':'ok') : 'warn';
+	    const formatCardValue=formatReadyCount ? `${formatReadyCount}/${formatTargetCount} formats` : 'Needs proof';
 
 	    const manualPostingRequired=Boolean(pulseSummary.manual_posting_required || readoutSummary.manual_posting_required || preflightSummary.manual_posting_required);
 	    const topClass=campaignReady && !visibilityAttentionCount && !manualPostingRequired ? 'ok' : 'warn';
@@ -34217,6 +34246,10 @@ Generated: 2026-07-07T01:48:33.098079Z
 				        campaignReady ? 'Automatic posts are on.' : 'Promotion needs a readiness refresh.',
 				        nextPosts.length ? `Next: ${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)} at ${nextDateLabel}.` : 'No next post is queued.',
 				        `${simpleCount(postedCount,'recent campaign post')} logged.`,
+				        growthReached && growthCurrent!=null && growthTarget!=null
+				          ? `Growth target reached: ${compactNumber(Number(growthCurrent))} plays/views against a ${compactNumber(Number(growthTarget))} target.`
+				          : '',
+				        formatCopy,
 				        readyMetricRows.length
 				          ? `${simpleCount(readyMetricRows.length,'post')} ready for a result read.`
 				          : waitingMetricRows.length
@@ -34227,7 +34260,7 @@ Generated: 2026-07-07T01:48:33.098079Z
 				          : visibilityAttentionCount
 				            ? `${simpleCount(visibilityAttentionCount,'public link')} needs another public check.`
 				            : 'No manual posting is in the active plan.'
-				      ].join(' ').replace(/\s+/g,' ').trim();
+				      ].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();
 				    }
 
 		    const attentionLabel=manualPostingRequired
@@ -34259,7 +34292,7 @@ Generated: 2026-07-07T01:48:33.098079Z
 				      simpleStatusCard('Current', campaignReady?'Automatic':'Needs check', campaignReady?`${simpleCount(futureCount,'future post')} approved and queued. No manual posting is in the active plan.`:'Refresh readiness before the next publishing window.', topClass),
 				      simpleStatusCard('Next', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
 				      simpleStatusCard('Recent', `${postedCount} logged`, visibilityAttentionCount?'One or more public links need another check.':'Recent public links are saved.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
-				      simpleStatusCard('Results', attentionLabel, attentionNote, attentionClass)
+				      simpleStatusCard('Learning', formatCardValue, formatCopy, formatCardClass)
 				    ].join('');
 
 	    const recentItems=simpleActivityGroups(postedRows, true)
@@ -34324,8 +34357,18 @@ Generated: 2026-07-07T01:48:33.098079Z
 	          status,
           row.post_id_or_url
         ));
-      });
+		    });
     }
+
+	    if(growthReached && growthCurrent!=null && growthTarget!=null){
+	      recentItems.unshift(simpleActivityItem(
+	        'Growth target reached',
+	        '30-day brand goal',
+	        `${compactNumber(Number(growthCurrent))} plays/views are recorded against a ${compactNumber(Number(growthTarget))} target. ${formatCopy}`,
+	        {label:'Reached',className:'ok'},
+	        '/admin/reports/brand-growth-readout.md'
+	      ));
+	    }
 
     recentRoot.innerHTML=recentItems.length?recentItems.join(''):'<div class="muted">No recent activity is logged yet.</div>';
 
@@ -34410,6 +34453,16 @@ Generated: 2026-07-07T01:48:33.098079Z
 		        '/admin/reports/brand-growth-readout.md'
 		      ));
 		    }
+
+	    if(formatCleanupDue){
+	      upcomingItems.push(simpleUpcomingItem(
+	        'Clean up the format evidence',
+	        'Before the next readout',
+	        `${formatCopy} No manual posting is required; this is evidence cleanup for the already-running campaign.`,
+	        {label:'Evidence due',className:'warn'},
+	        '/admin/reports/experiment-result-clipboard.md'
+	      ));
+	    }
 
 	    const remainingFutureCount=Math.max(0,futurePosts.length-nextPosts.slice(0,2).length);
 	    if(remainingFutureCount){
@@ -34548,7 +34601,8 @@ Generated: 2026-07-07T01:48:33.098079Z
       executions,
       xResults,
       facebookResults,
-      brandPostVisibility
+      brandPostVisibility,
+      promoHealth
     });
 
     const showDebugDashboard=new URLSearchParams(window.location.search).get('debug')==='1';
