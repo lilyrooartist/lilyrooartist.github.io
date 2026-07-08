@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-07T22:24:10.234136Z
+Generated: 2026-07-08T02:38:40.230107Z
 
 ## Summary
 - Campaign rows: **64**
@@ -9,7 +9,7 @@ Generated: 2026-07-07T22:24:10.234136Z
 - Posted or measured rows: **8**
 - Measured rows: **0**
 - Ready for metric capture: **6**
-- Public visibility: **attention** (7 / 8 checked OK; 1 attention)
+- Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **0** across **0** post(s); last click `none yet`
 - Click tracking links: **ready** (56 / 56 future rows; 168 / 168 URLs)
 - Post-slot watch windows: **32**
@@ -160,7 +160,7 @@ Generated: 2026-07-07T22:24:10.234136Z
 ## Rows
 - `FP-BRAND-AM-01-13-X` X 2026-07-04T10:15:00-04:00 - **ready_for_metric_capture**
   - URL: https://x.com/i/web/status/2073410401006751908
-  - Public visibility: `probe_failed` attention
+  - Public visibility: `visible_copy_confirmed` OK
   - Next: Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).
 - `FP-BRAND-AM-01-13-FACEBOOK` Facebook 2026-07-04T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: https://www.facebook.com/lilyrooartist/posts/122120959905249470

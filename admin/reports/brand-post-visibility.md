@@ -1,13 +1,13 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-07T22:24:04.741394Z
+Generated: 2026-07-08T02:38:33.896597Z
 
 ## Summary
-- Status: **attention**
+- Status: **verified**
 - Checked posts: **8**
-- Public visibility OK: **7**
-- Attention: **1**
-- X copy confirmed: **3**
+- Public visibility OK: **8**
+- Attention: **0**
+- X copy confirmed: **4**
 - Facebook pages loaded: **4**
 
 ## Rows
@@ -16,11 +16,11 @@ Generated: 2026-07-07T22:24:04.741394Z
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122120959905249470
   - HTTP: `200`; copy matched: `True`
   - Note: Facebook public page loaded without the common unavailable-content marker.
-- **FP-BRAND-AM-01-13-X** X - `probe_failed`
+- **FP-BRAND-AM-01-13-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2073410401006751908
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073410401006751908
-  - HTTP: `503`; copy matched: `False`
-  - Note: HTTP 503
+  - HTTP: `200`; copy matched: `True`
+  - Note: X public oEmbed returned Lily Roo post copy.
 - **FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
   - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
