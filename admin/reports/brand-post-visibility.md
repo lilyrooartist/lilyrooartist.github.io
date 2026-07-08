@@ -1,21 +1,16 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-08T14:41:56.307899Z
+Generated: 2026-07-08T16:56:00.516840Z
 
 ## Summary
 - Status: **verified**
 - Checked posts: **8**
 - Public visibility OK: **8**
 - Attention: **0**
-- X copy confirmed: **5**
-- Facebook pages loaded: **3**
+- X copy confirmed: **4**
+- Facebook pages loaded: **4**
 
 ## Rows
-- **FP-BRAND-AM-01-13-X** X - `visible_copy_confirmed`
-  - Logged URL: https://x.com/i/web/status/2073410401006751908
-  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073410401006751908
-  - HTTP: `200`; copy matched: `True`
-  - Note: X public oEmbed returned Lily Roo post copy.
 - **FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
   - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
@@ -51,6 +46,11 @@ Generated: 2026-07-08T14:41:56.307899Z
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074859954704441417
   - HTTP: `200`; copy matched: `True`
   - Note: X public oEmbed returned Lily Roo post copy.
+- **FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
+  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121305865249470
+  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121305865249470
+  - HTTP: `200`; copy matched: `False`
+  - Note: Facebook public page loaded without the common unavailable-content marker.
 
 ## Guardrails
 - Read-only public URL probe; it does not publish, edit, or collect private analytics.

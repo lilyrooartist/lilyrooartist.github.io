@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T14:42:02.257205Z",
+  "generated_at": "2026-07-08T16:56:06.226406Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -30,7 +30,7 @@
       "label": "Current operations next action: Watch active Analog Myth proof window",
       "phase": "Operations packet",
       "status": "ready",
-      "detail": "The active Analog Myth proof window is coming up within 48 hours.",
+      "detail": "The active Analog Myth proof window is due; capture executor proof and export confirmed URLs.",
       "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
       "after_review_command": "",
       "context": {

@@ -1,40 +1,40 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-08T14:42:01.236743Z
+Generated: 2026-07-08T16:56:05.040254Z
 
 ## Summary
 - Status: **ready**
-- Next window: **2026-07-08** at `2026-07-08T15:21:00Z`
+- Next window: **2026-07-09** at `2026-07-09T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-08T15:21:00Z`, due **2**, satisfied **2**, would post **1**, posted **1**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-08T14:41:57.113311Z`, requested `2026-07-08T14:41:56.627578Z`, due **1**, would post **0**, posted **1**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-09T15:21:00Z`, due **4**, satisfied **2**, would post **2**, posted **2**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-08T16:56:01.202897Z`, requested `2026-07-08T16:56:00.871292Z`, due **2**, would post **0**, posted **2**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-08T15:21:00Z`
-- Current window measurement due: `2026-07-09T15:20:00Z`
+- Current window proof due: `2026-07-09T15:21:00Z`
+- Current window measurement due: `2026-07-10T15:20:00Z`
 
 ## Expected Posts
-- `FP-BRAND-AM-05-NO-MORTGAGE-X` X at `2026-07-08T10:15:00-04:00`
-- `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK` Facebook at `2026-07-08T11:20:00-04:00`
+- `FP-BRAND-AM-06-GUARDS-DOWN-X` X at `2026-07-09T10:15:00-04:00`
+- `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK` Facebook at `2026-07-09T11:20:00-04:00`
 
 ## Link Checks
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Album` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Echo` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Video` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Analog Myth` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Echo Thread` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Track video` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X Album` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X Echo` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X Video` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Analog Myth` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Echo Thread` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Track video` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Album target album` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Echo target echo` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Video target video` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Analog Myth target album` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Echo Thread target echo` 200 text/html
-- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Track video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X Album target album` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X Echo target echo` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-X Video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Analog Myth target album` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Echo Thread target echo` 200 text/html
+- **ok** `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Track video target video` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T14:42:01.995098Z",
+  "generated_at": "2026-07-08T16:56:05.986294Z",
   "safe_mode": true,
   "status": "campaign_running",
   "source": {
@@ -21,20 +21,20 @@
     },
     "active_campaign_ready": true,
     "posting_preflight_ready": true,
-    "queued_future_posts": 56,
-    "posted_or_measured_rows": 9,
-    "ready_for_metric_capture_rows": 7,
+    "queued_future_posts": 55,
+    "posted_or_measured_rows": 10,
+    "ready_for_metric_capture_rows": 8,
     "click_count": 0,
     "click_post_count": 0,
     "clicks_by_platform": {},
     "clicks_by_destination": {},
-    "click_snapshot_updated_at": "2026-07-08T14:41:58.468665Z",
+    "click_snapshot_updated_at": "2026-07-08T16:56:02.387236Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
-    "next_post_at": "2026-07-08T11:20:00-04:00",
+    "next_post_at": "2026-07-09T10:15:00-04:00",
     "proof_due_at": "2026-07-09T15:21:00Z",
-    "hours_until_next_post": 0.63,
-    "hours_until_proof_due": 24.65,
+    "hours_until_next_post": 21.32,
+    "hours_until_proof_due": 22.42,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -46,9 +46,9 @@
     "learning_status": "first_party_click_checked",
     "learning_headline": "First-party clicks checked",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_rows": 7,
+    "measurement_due_rows": 8,
     "waiting_measurement_rows": 2,
-    "next_learning_due_at": "2026-07-08T15:30:35.825000Z",
+    "next_learning_due_at": "2026-07-09T14:15:37.423000Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
@@ -57,13 +57,13 @@
     "status": "first_party_click_checked",
     "label": "Checked",
     "headline": "First-party clicks checked",
-    "note": "Fresh click evidence covers 7 public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window.",
+    "note": "Fresh click evidence covers 8 public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_count": 7,
+    "measurement_due_count": 8,
     "waiting_measurement_count": 2,
-    "scheduled_future_count": 56,
-    "next_learning_due_at": "2026-07-08T15:30:35.825000Z",
-    "click_snapshot_updated_at": "2026-07-08T14:41:58.468665Z",
+    "scheduled_future_count": 55,
+    "next_learning_due_at": "2026-07-09T14:15:37.423000Z",
+    "click_snapshot_updated_at": "2026-07-08T16:56:02.387236Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -79,7 +79,7 @@
     "proof_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
     "metric_capture_commands": [
       "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
+      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
     ],
     "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
     "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.",
@@ -92,7 +92,7 @@
         "scheduled_at": "2026-07-04T10:15:00-04:00",
         "measurement_due_at": "2026-07-05T14:15:36.859000+00:00",
         "post_url": "https://x.com/i/web/status/2073410401006751908",
-        "public_visibility_ok": true,
+        "public_visibility_ok": null,
         "learning_use": "Ready for post-window comparison"
       },
       {
@@ -129,17 +129,6 @@
         "learning_use": "Ready for post-window comparison"
       },
       {
-        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-        "platform": "Facebook",
-        "title": "Spilling The Tea",
-        "status": "posted_waiting_measurement_window",
-        "scheduled_at": "2026-07-07T11:20:00-04:00",
-        "measurement_due_at": "2026-07-08T15:30:35.825000+00:00",
-        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470",
-        "public_visibility_ok": true,
-        "learning_use": "Waiting for first useful result check"
-      },
-      {
         "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
         "platform": "X",
         "title": "No Mortgage",
@@ -154,12 +143,12 @@
         "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
         "platform": "Facebook",
         "title": "No Mortgage",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement_window",
         "scheduled_at": "2026-07-08T11:20:00-04:00",
-        "measurement_due_at": "",
-        "post_url": "",
-        "public_visibility_ok": null,
-        "learning_use": "Next queued learning input"
+        "measurement_due_at": "2026-07-09T15:30:49.213000+00:00",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121305865249470",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
       },
       {
         "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
@@ -171,9 +160,20 @@
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
+      },
+      {
+        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
+        "platform": "Facebook",
+        "title": "Guards Down",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-09T11:20:00-04:00",
+        "measurement_due_at": "",
+        "post_url": "",
+        "public_visibility_ok": null,
+        "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": 0.81
+    "hours_until_next_learning_due": 21.33
   },
   "recommendations": [
     {

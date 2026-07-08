@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-08T14:42:00.687554Z
+Generated: 2026-07-08T16:56:04.426868Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **56 / 56**
-- Tracking URLs checked: **168 / 168**
-- X main-post album links: **28 / 28**
-- Visible album click paths: **56 / 56**
-- Visible full destination sets: **56 / 56**
+- Future campaign rows ready: **55 / 55**
+- Tracking URLs checked: **165 / 165**
+- X main-post album links: **27 / 27**
+- Visible album click paths: **55 / 55**
+- Visible full destination sets: **55 / 55**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,15 +24,15 @@ Generated: 2026-07-08T14:42:00.687554Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 56, echo: 56, video: 56**
+- Destinations: **album: 55, echo: 55, video: 55**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-brand-am-05-no-mortgage-x`
-- Event: **x / album / track 05**
+- Probe campaign id: `fp-brand-am-06-guards-down-x`
+- Event: **x / album / track 06**
 
 ## Redirect Checks
 - exists: **ok**
@@ -194,10 +194,6 @@ Generated: 2026-07-08T14:42:00.687554Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-BRAND-AM-05-NO-MORTGAGE-X` X 2026-07-08T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
 - `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK` Facebook 2026-07-08T11:20:00-04:00 - **ready** (3 links)
   - Destinations: `album, echo, video`
   - Visible surface: **ready** (`album, echo, video`)

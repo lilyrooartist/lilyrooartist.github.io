@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-08T14:41:53.419154Z",
+  "updated_at": "2026-07-08T16:55:57.099087Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,11 +8,24 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 54,
-    "current_execution_count": 39,
+    "execution_count": 55,
+    "current_execution_count": 40,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-08T15:30:49.213Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122121305865249470",
+        "external_id": "903693509504290_122121305865249470",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
         "platform": "X",
@@ -523,6 +536,19 @@
     ],
     "posted": [
       {
+        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-08T15:30:49.213Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122121305865249470",
+        "external_id": "903693509504290_122121305865249470",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
         "platform": "X",
         "status": "posted",
@@ -1031,21 +1057,34 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 39,
+    "posted_count": 40,
     "draft_uploaded_count": 0,
     "attention_count": 0,
     "approval_needed_count": 0,
     "platform_fix_needed_count": 0,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "posted": 39
+      "posted": 40
     },
     "platform_counts": {
-      "Facebook": 17,
+      "Facebook": 18,
       "X": 17,
       "YouTube": 5
     },
     "latest_posted": [
+      {
+        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-08T15:30:49.213Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122121305865249470",
+        "external_id": "903693509504290_122121305865249470",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
         "platform": "X",
@@ -1097,19 +1136,6 @@
         "external_id": "903693509504290_122121136809249470",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
-        "platform": "X",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-06T14:15:30.540Z",
-        "source": "cron",
-        "post_url": "https://x.com/i/web/status/2074135149185266159",
-        "external_id": "2074135149185266159",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
@@ -1120,10 +1146,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 54
+    "execution_count": 55
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-08T14:41:53.467198Z",
+  "reconciled_at": "2026-07-08T16:55:57.142881Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

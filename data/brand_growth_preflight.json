@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-07-08T14:42:01.236743Z",
+  "generated_at": "2026-07-08T16:56:05.040254Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/6f628cc17e1701c3b0cb9b525d986cf0092c61a7/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/bcf034d7e0860e2e411369979c22ce143ea7fb96/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
-    "next_window_date": "2026-07-08",
-    "scheduled_time": "2026-07-08T15:21:00Z",
+    "next_window_date": "2026-07-09",
+    "scheduled_time": "2026-07-09T15:21:00Z",
     "expected_post_count": 2,
     "expected_post_ids": [
-      "FP-BRAND-AM-05-NO-MORTGAGE-X",
-      "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK"
+      "FP-BRAND-AM-06-GUARDS-DOWN-X",
+      "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
-    "scheduler_simulated_at": "2026-07-08T15:21:00Z",
-    "scheduler_simulated_due_count": 2,
-    "scheduler_simulated_would_post_count": 1,
-    "scheduler_simulated_posted_count": 1,
+    "scheduler_simulated_at": "2026-07-09T15:21:00Z",
+    "scheduler_simulated_due_count": 4,
+    "scheduler_simulated_would_post_count": 2,
+    "scheduler_simulated_posted_count": 2,
     "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 0,
-    "scheduler_due_count": 2,
-    "scheduler_would_post_count": 1,
-    "scheduler_posted_count": 1,
+    "scheduler_due_count": 4,
+    "scheduler_would_post_count": 2,
+    "scheduler_posted_count": 2,
     "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 0,
-    "current_scheduler_checked_at": "2026-07-08T14:41:57.113311Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-08T14:41:56.627578Z",
-    "current_scheduler_due_count": 1,
+    "current_scheduler_checked_at": "2026-07-08T16:56:01.202897Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-08T16:56:00.871292Z",
+    "current_scheduler_due_count": 2,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 1,
+    "current_scheduler_posted_count": 2,
     "current_scheduler_blocked_count": 0,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -54,29 +54,41 @@
     "expected_target_link_check_count": 6,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
-    "next_proof_due_at": "2026-07-08T15:21:00Z",
-    "next_measurement_due_at": "2026-07-09T15:20:00Z",
+    "next_proof_due_at": "2026-07-09T15:21:00Z",
+    "next_measurement_due_at": "2026-07-10T15:20:00Z",
     "readout_next_proof_due_at": "2026-07-09T15:21:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 2,
-    "result_count": 2,
-    "would_post_count": 1,
-    "posted_count": 1,
+    "due_count": 4,
+    "result_count": 4,
+    "would_post_count": 2,
+    "posted_count": 2,
     "blocked_count": 0,
     "status_counts": {
-      "posted": 1,
-      "would_post": 1
+      "posted": 2,
+      "would_post": 2
     },
     "platform_counts": {
       "Facebook": 1,
-      "Unknown": 1
+      "Unknown": 2,
+      "X": 1
     },
     "would_post": [
       {
-        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
+        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
+        "platform": "X",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
         "platform": "Facebook",
         "status": "would_post",
         "reason": "",
@@ -98,94 +110,105 @@
         "updated_at": "",
         "source": "",
         "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
       }
     ],
     "blocked": []
   },
   "link_checks": [
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X imagery_url",
-      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/05-no-mortgage.jpg",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X imagery_url",
+      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/06-guards-down.jpg",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/05-no-mortgage.jpg",
+      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/06-guards-down.jpg",
       "content_type": "image/jpeg",
-      "content_length": "7902",
+      "content_length": "115647",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X Album",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=album",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X Album",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=album",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=album",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=album",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X Echo",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=echo",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X Echo",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=echo",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=echo",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=echo",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X Video",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=video",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X Video",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=video",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=video",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=video",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK imagery_url",
-      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/05-no-mortgage.jpg",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK imagery_url",
+      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/06-guards-down.jpg",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/05-no-mortgage.jpg",
+      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/06-guards-down.jpg",
       "content_type": "image/jpeg",
-      "content_length": "7902",
+      "content_length": "115647",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Analog Myth",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=album",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Analog Myth",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=album",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=album",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=album",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Echo Thread",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=echo",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Echo Thread",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=echo",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=echo",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=echo",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Track video",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=video",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Track video",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=video",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=video",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=video",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
@@ -194,7 +217,7 @@
   ],
   "target_checks": [
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X Album target album",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X Album target album",
       "url": "https://www.lilyroo.com/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -203,13 +226,13 @@
       "content_length": "17933",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=album",
       "destination": "album",
-      "track": "05",
-      "post_id": "fp-brand-am-05-no-mortgage-x"
+      "track": "06",
+      "post_id": "fp-brand-am-06-guards-down-x"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X Echo target echo",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X Echo target echo",
       "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -218,27 +241,27 @@
       "content_length": "8535",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=echo",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=echo",
       "destination": "echo",
-      "track": "05",
-      "post_id": "fp-brand-am-05-no-mortgage-x"
+      "track": "06",
+      "post_id": "fp-brand-am-06-guards-down-x"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-X Video target video",
-      "url": "https://youtu.be/-r7khqOLpjQ",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-X Video target video",
+      "url": "https://youtu.be/yn_315-h5vM",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=-r7khqOLpjQ&feature=youtu.be",
+      "final_url": "https://www.youtube.com/watch?v=yn_315-h5vM&feature=youtu.be",
       "content_type": "text/html; charset=utf-8",
       "content_length": "",
       "error": "",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=video",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=video",
       "destination": "video",
-      "track": "05",
-      "post_id": "fp-brand-am-05-no-mortgage-x"
+      "track": "06",
+      "post_id": "fp-brand-am-06-guards-down-x"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Analog Myth target album",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Analog Myth target album",
       "url": "https://www.lilyroo.com/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -247,13 +270,13 @@
       "content_length": "17933",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=album",
       "destination": "album",
-      "track": "05",
-      "post_id": "fp-brand-am-05-no-mortgage-facebook"
+      "track": "06",
+      "post_id": "fp-brand-am-06-guards-down-facebook"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Echo Thread target echo",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Echo Thread target echo",
       "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -262,42 +285,42 @@
       "content_length": "8535",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=echo",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=echo",
       "destination": "echo",
-      "track": "05",
-      "post_id": "fp-brand-am-05-no-mortgage-facebook"
+      "track": "06",
+      "post_id": "fp-brand-am-06-guards-down-facebook"
     },
     {
-      "label": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Track video target video",
-      "url": "https://youtu.be/-r7khqOLpjQ",
+      "label": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK Track video target video",
+      "url": "https://youtu.be/yn_315-h5vM",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=-r7khqOLpjQ&feature=youtu.be",
+      "final_url": "https://www.youtube.com/watch?v=yn_315-h5vM&feature=youtu.be",
       "content_type": "text/html; charset=utf-8",
       "content_length": "",
       "error": "",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-facebook&to=video",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-facebook&to=video",
       "destination": "video",
-      "track": "05",
-      "post_id": "fp-brand-am-05-no-mortgage-facebook"
+      "track": "06",
+      "post_id": "fp-brand-am-06-guards-down-facebook"
     }
   ],
   "next_window_posts": [
     {
-      "id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
+      "id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
       "platform": "X",
-      "scheduled_at": "2026-07-08T10:15:00-04:00",
+      "scheduled_at": "2026-07-09T10:15:00-04:00",
       "execution_mode": "auto",
       "post_type": "image",
-      "text": "Analog Myth track 5: No Mortgage makes domestic anxiety feel bright, strange, and ready to bolt.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-05-no-mortgage-x&to=album"
+      "text": "Analog Myth track 6: Guards Down catches the armor right as it starts making noise on the floor.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-06-guards-down-x&to=album"
     },
     {
-      "id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
+      "id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
       "platform": "Facebook",
-      "scheduled_at": "2026-07-08T11:20:00-04:00",
+      "scheduled_at": "2026-07-09T11:20:00-04:00",
       "execution_mode": "auto",
       "post_type": "image",
-      "text": "Analog Myth track 5: No Mortgage turns domestic anxiety into a bright little dare.\n\nA bright little dare about escape plans, domestic panic, and the fantasy of putting the keys down."
+      "text": "Analog Myth track 6: Guards Down is the moment the armor starts making noise on the floor.\n\nThe brave face slips here, and the soft part gets the microphone for a minute."
     }
   ],
   "guardrails": [

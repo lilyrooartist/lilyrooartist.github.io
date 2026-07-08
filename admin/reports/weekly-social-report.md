@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-07-02 to 2026-07-08
-**Last updated:** 2026-07-08 02:42 PM UTC
+**Last updated:** 2026-07-08 04:56 PM UTC
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -83,7 +83,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **11 live, 4 checked pending, 0 pending, 7 snapshots**
-- Social executor history: **54 records, 39 posted, 0 platform fixes, 0 approval blockers**
+- Social executor history: **55 records, 40 posted, 0 platform fixes, 0 approval blockers**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -125,10 +125,10 @@
 ### Facebook
 - Followers/Page likes: **0**
 - Reach (7d): **pending**
-- Latest post: https://www.facebook.com/lilyrooartist/posts/122121211923249470
+- Latest post: https://www.facebook.com/lilyrooartist/posts/122121305865249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-07-08T14:41:42.735Z**
+- Live API captured: **2026-07-08T16:55:45.246Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -138,9 +138,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-08T14:42:02.335617+00:00**
+- All-release store verification captured: **2026-07-08T16:56:06.297840+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-07-08T14:41:53.419154Z**
+- Social executor history captured: **2026-07-08T16:55:57.099087Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
