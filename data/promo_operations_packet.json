@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T16:56:06.076568Z",
+  "generated_at": "2026-07-08T17:38:18.589475Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -34,18 +34,18 @@
         "FP-BRAND-AM-06-GUARDS-DOWN-X",
         "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
       ],
-      "next_proof_due_at": "2026-07-08T15:21:00Z",
-      "next_measurement_due_at": "2026-07-09T15:20:00Z",
+      "next_proof_due_at": "2026-07-09T15:21:00Z",
+      "next_measurement_due_at": "2026-07-10T15:20:00Z",
       "scheduler_http_status": 200,
       "scheduler_would_post_count": 2,
       "scheduler_blocked_count": 0,
       "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
       "report_path": "admin/reports/brand-growth-readout.md",
-      "note": "After 2026-07-08T15:21:00Z, capture executor proof for FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK and export confirmed URLs."
+      "note": "After 2026-07-09T15:21:00Z, capture executor proof for FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK and export confirmed URLs."
     },
     "phase": "Automated brand campaign",
     "urgency": "high",
-    "urgency_reason": "The active Analog Myth proof window is due; capture executor proof and export confirmed URLs.",
+    "urgency_reason": "The active Analog Myth proof window is coming up within 48 hours.",
     "status": "ready",
     "sort_key": [
       1,
@@ -97,18 +97,18 @@
           "FP-BRAND-AM-06-GUARDS-DOWN-X",
           "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
         ],
-        "next_proof_due_at": "2026-07-08T15:21:00Z",
-        "next_measurement_due_at": "2026-07-09T15:20:00Z",
+        "next_proof_due_at": "2026-07-09T15:21:00Z",
+        "next_measurement_due_at": "2026-07-10T15:20:00Z",
         "scheduler_http_status": 200,
         "scheduler_would_post_count": 2,
         "scheduler_blocked_count": 0,
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "report_path": "admin/reports/brand-growth-readout.md",
-        "note": "After 2026-07-08T15:21:00Z, capture executor proof for FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK and export confirmed URLs."
+        "note": "After 2026-07-09T15:21:00Z, capture executor proof for FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK and export confirmed URLs."
       },
       "phase": "Automated brand campaign",
       "urgency": "high",
-      "urgency_reason": "The active Analog Myth proof window is due; capture executor proof and export confirmed URLs.",
+      "urgency_reason": "The active Analog Myth proof window is coming up within 48 hours.",
       "status": "ready",
       "sort_key": [
         1,
@@ -133,18 +133,18 @@
           "FP-BRAND-AM-06-GUARDS-DOWN-X",
           "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
         ],
-        "next_proof_due_at": "2026-07-08T15:21:00Z",
-        "next_measurement_due_at": "2026-07-09T15:20:00Z",
+        "next_proof_due_at": "2026-07-09T15:21:00Z",
+        "next_measurement_due_at": "2026-07-10T15:20:00Z",
         "scheduler_http_status": 200,
         "scheduler_would_post_count": 2,
         "scheduler_blocked_count": 0,
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "report_path": "admin/reports/brand-growth-readout.md",
-        "note": "After 2026-07-08T15:21:00Z, capture executor proof for FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK and export confirmed URLs."
+        "note": "After 2026-07-09T15:21:00Z, capture executor proof for FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK and export confirmed URLs."
       },
       "phase": "Automated brand campaign",
       "urgency": "high",
-      "urgency_reason": "The active Analog Myth proof window is due; capture executor proof and export confirmed URLs.",
+      "urgency_reason": "The active Analog Myth proof window is coming up within 48 hours.",
       "status": "ready",
       "sort_key": [
         1,
@@ -331,25 +331,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-07-08T16:55:45.416202+00:00",
+        "checked_at": "2026-07-08T17:37:57.361251+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-09T16:55:45.416202+00:00",
+        "next_recheck_at": "2026-07-09T17:37:57.361251+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-08T16:55:45.416202Z",
+          "updated_at": "2026-07-08T17:37:57.361251Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-08T16:55:45.416202+00:00",
+          "checked_at": "2026-07-08T17:37:57.361251+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-09T16:55:45.416202+00:00",
+          "next_recheck_at": "2026-07-09T17:37:57.361251+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T16:55:45.416202+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T17:37:57.361251+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -369,25 +369,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-07-08T16:55:47.041459+00:00",
+        "checked_at": "2026-07-08T17:37:58.975222+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-09T16:55:47.041459+00:00",
+        "next_recheck_at": "2026-07-09T17:37:58.975222+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-08T16:55:47.041459Z",
+          "updated_at": "2026-07-08T17:37:58.975222Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-08T16:55:47.041459+00:00",
+          "checked_at": "2026-07-08T17:37:58.975222+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-09T16:55:47.041459+00:00",
+          "next_recheck_at": "2026-07-09T17:37:58.975222+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T16:55:47.041459+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T17:37:58.975222+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -407,25 +407,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-07-08T16:55:47.159661+00:00",
+        "checked_at": "2026-07-08T17:37:59.118546+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-09T16:55:47.159661+00:00",
+        "next_recheck_at": "2026-07-09T17:37:59.118546+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-08T16:55:47.159661Z",
+          "updated_at": "2026-07-08T17:37:59.118546Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-08T16:55:47.159661+00:00",
+          "checked_at": "2026-07-08T17:37:59.118546+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-09T16:55:47.159661+00:00",
+          "next_recheck_at": "2026-07-09T17:37:59.118546+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T16:55:47.159661+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T17:37:59.118546+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -445,25 +445,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-07-08T16:55:47.223604+00:00",
+        "checked_at": "2026-07-08T17:37:59.185717+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-09T16:55:47.223604+00:00",
+        "next_recheck_at": "2026-07-09T17:37:59.185717+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-08T16:55:47.223604Z",
+          "updated_at": "2026-07-08T17:37:59.185717Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-07-08T16:55:47.223604+00:00",
+          "checked_at": "2026-07-08T17:37:59.185717+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-09T16:55:47.223604+00:00",
+          "next_recheck_at": "2026-07-09T17:37:59.185717+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T16:55:47.223604+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-09T17:37:59.185717+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",

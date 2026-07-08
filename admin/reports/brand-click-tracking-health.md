@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-08T16:56:04.426868Z
+Generated: 2026-07-08T17:38:17.181158Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **55 / 55**
-- Tracking URLs checked: **165 / 165**
+- Future campaign rows ready: **54 / 54**
+- Tracking URLs checked: **162 / 162**
 - X main-post album links: **27 / 27**
-- Visible album click paths: **55 / 55**
-- Visible full destination sets: **55 / 55**
+- Visible album click paths: **54 / 54**
+- Visible full destination sets: **54 / 54**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,7 +24,7 @@ Generated: 2026-07-08T16:56:04.426868Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 55, echo: 55, video: 55**
+- Destinations: **album: 54, echo: 54, video: 54**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
@@ -194,9 +194,6 @@ Generated: 2026-07-08T16:56:04.426868Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK` Facebook 2026-07-08T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
 - `FP-BRAND-AM-06-GUARDS-DOWN-X` X 2026-07-09T10:15:00-04:00 - **ready** (3 links)
   - Destinations: `album, echo, video`
   - Visible surface: **ready** (`album, echo, video`)
