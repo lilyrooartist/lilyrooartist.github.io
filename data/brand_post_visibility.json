@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T08:44:55.509528Z",
+  "generated_at": "2026-07-08T14:41:56.307899Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -12,39 +12,12 @@
     "checked_post_count": 8,
     "public_visibility_ok_count": 8,
     "attention_count": 0,
-    "x_copy_confirmed_count": 4,
-    "facebook_page_loaded_count": 4,
+    "x_copy_confirmed_count": 5,
+    "facebook_page_loaded_count": 3,
     "report_path": "admin/reports/brand-post-visibility.md",
     "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
   },
   "rows": [
-    {
-      "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
-      "platform": "Facebook",
-      "published_date": "2026-07-04",
-      "source_row": 50,
-      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
-      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
-      "final_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
-      "http_status": 200,
-      "content_type": "text/html; charset=\"utf-8\"",
-      "visibility_status": "page_loaded_no_unavailable_marker",
-      "public_visibility_ok": true,
-      "copy_matched": true,
-      "note": "Facebook public page loaded without the common unavailable-content marker.",
-      "attempts": [
-        {
-          "url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": false,
-          "copy_matched": true
-        }
-      ]
-    },
     {
       "post_id": "FP-BRAND-AM-01-13-X",
       "platform": "X",
@@ -189,6 +162,22 @@
           "copy_matched": false
         }
       ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
+      "platform": "X",
+      "published_date": "2026-07-08",
+      "source_row": 58,
+      "logged_url": "https://x.com/i/web/status/2074859954704441417",
+      "checked_url": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074859954704441417",
+      "final_url": "https://x.com/lilyrooartist/status/2074859954704441417",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "X public oEmbed returned Lily Roo post copy.",
+      "attempts": []
     }
   ],
   "guardrails": [
