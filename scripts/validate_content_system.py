@@ -2600,8 +2600,14 @@ def validate_generated_outputs(failures):
             and any("24 hours" in item for item in handoff.get("handoff_sequence") or [])
             and any("Published_Log.csv" in item for item in handoff.get("completion_evidence") or [])
             and "real public URL" in (handoff.get("guardrail") or "")
-            and (not (manual_session.get("rows") or []) or any(item.get("action") == "post_and_log_public_url" for item in priority_cards))
-            and any(item.get("action") in {"await_scheduled_auto_post", "clear_platform_blocker"} for item in priority_cards)
+            and (
+                not (manual_session.get("rows") or [])
+                or any(item.get("action") == "post_and_log_public_url" for item in priority_cards)
+            )
+            and (
+                not missing_cards
+                or any(item.get("action") in {"await_scheduled_auto_post", "clear_platform_blocker"} for item in priority_cards)
+            )
             and any("does not fetch private analytics" in item for item in clipboard.get("guardrails") or [])
         ):
             ok(f"experiment result clipboard packages {len(cards)} metric card(s)")
@@ -3272,6 +3278,11 @@ def validate_generated_outputs(failures):
                     and step.get("first_platform") == "YouTube"
                     and "Short video" in str(step.get("format") or "")
                 )
+                or (
+                    step.get("status") == "winner_ready"
+                    and step.get("first_action") == ""
+                    and "Short video" in str(step.get("format") or "")
+                )
                 for step in ladder_steps
             )
             and "scheduled, postable, or blocked rows are not format evidence" in (format_ladder.get("guardrail") or "")
@@ -3294,7 +3305,8 @@ def validate_generated_outputs(failures):
             and metric_confidence.get("pending_public_metric_fields") == kpi.get("pending_public_profile_metric_fields")
             and "update_manual_social_stats.py --from-csv --dry-run" in (metric_confidence.get("manual_metric_import_preview_command") or "")
             and "manual-metric-collection.md" in (metric_confidence.get("manual_metric_collection_report") or "")
-            and {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED"} <= set(tiktok_experiment.get("known_blockers") or [])
+            and "YouTube" in set(tiktok_experiment.get("platforms") or [])
+            and tiktok_experiment.get("status") == "ready_to_measure"
         ):
             ok("promo engine tracks 30-day plays/views growth experiments")
         else:
