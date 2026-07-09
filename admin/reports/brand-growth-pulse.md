@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-09T10:04:06.568053Z
+Generated: 2026-07-09T15:34:42.818298Z
 
 ## Current Pulse
 - Status: **campaign_running**
@@ -10,24 +10,24 @@ Generated: 2026-07-09T10:04:06.568053Z
 - Active campaign ready: **True**
 - Posting preflight ready: **True**
 - Future queued posts: **54**
-- Posted or measured rows: **10**
-- Ready for result capture: **8**
+- Posted or measured rows: **12**
+- Ready for result capture: **10**
 - First-party clicks: **0** across **0** post(s)
-- Click snapshot: `2026-07-09T10:04:01.732791Z` (covers current due posts)
-- Next post at: `2026-07-09T10:15:00-04:00`
-- Proof due at: `2026-07-09T15:21:00Z`
-- Hours until next post: `4.18`
-- Hours until proof due: `5.28`
+- Click snapshot: `2026-07-09T15:34:38.312993Z` (covers current due posts)
+- Next post at: `2026-07-10T10:15:00-04:00`
+- Proof due at: `2026-07-10T15:21:00Z`
+- Hours until next post: `22.67`
+- Hours until proof due: `23.77`
 
 ## Post-Window Learning
 - Status: **first_party_click_checked**
 - Headline: **First-party clicks checked**
-- Note: Fresh click evidence covers 8 public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window.
+- Note: Fresh click evidence covers 10 public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
-- Measurement due rows: **8**
+- Measurement due rows: **10**
 - Waiting measurement rows: **2**
 - Future scheduled rows: **54**
-- Next learning due at: `2026-07-09T14:15:37.423000Z`
+- Next learning due at: `2026-07-10T14:15:29.930000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.
@@ -37,10 +37,10 @@ Generated: 2026-07-09T10:04:06.568053Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-BRAND-AM-05-NO-MORTGAGE-X` (X): No Mortgage - Waiting for first useful result check
-  - `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK` (Facebook): No Mortgage - Waiting for first useful result check
-  - `FP-BRAND-AM-06-GUARDS-DOWN-X` (X): Guards Down - Next queued learning input
-  - `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK` (Facebook): Guards Down - Next queued learning input
+  - `FP-BRAND-AM-06-GUARDS-DOWN-X` (X): Guards Down - Waiting for first useful result check
+  - `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK` (Facebook): Guards Down - Waiting for first useful result check
+  - `FP-BRAND-AM-07-SLOW-WALK-X` (X): Slow Walk - Next queued learning input
+  - `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` (Facebook): Slow Walk - Next queued learning input
 
 ## Recommendations
 - **Let the next automated posts run**: The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.

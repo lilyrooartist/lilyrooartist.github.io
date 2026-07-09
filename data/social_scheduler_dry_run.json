@@ -1,34 +1,61 @@
 {
   "ok": true,
-  "updated_at": "2026-07-09T10:04:00.235974Z",
+  "updated_at": "2026-07-09T15:34:33.433643Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-09T10:04:00.046318Z",
-  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/79a6f7e29c79b4568c38c211dcbe1cd9cf93373b/admin/future-posts.json",
-  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/79a6f7e29c79b4568c38c211dcbe1cd9cf93373b/admin/future-posts.json",
+  "requested_scheduled_time": "2026-07-09T15:34:33.010355Z",
+  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/583d73a19db024a4e058e9a5387ba5939a9e02a8/admin/future-posts.json",
+  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/583d73a19db024a4e058e9a5387ba5939a9e02a8/admin/future-posts.json",
   "queue_source": "commit_queue_url",
   "fallback_reason": "",
   "dry_run": true,
-  "checked_at": "2026-07-09T10:04:00.046Z",
+  "checked_at": "2026-07-09T15:34:33.010Z",
   "summary": {
-    "due_count": 0,
-    "result_count": 0,
+    "due_count": 2,
+    "result_count": 2,
     "would_post_count": 0,
-    "posted_count": 0,
+    "posted_count": 2,
     "blocked_count": 0,
-    "status_counts": {},
-    "platform_counts": {},
+    "status_counts": {
+      "posted": 2
+    },
+    "platform_counts": {
+      "Unknown": 2
+    },
     "would_post": [],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": []
   },
   "payload": {
     "ok": true,
-    "due_count": 0,
-    "result_count": 0
+    "due_count": 2,
+    "result_count": 2
   },
   "action_needed": ""
 }

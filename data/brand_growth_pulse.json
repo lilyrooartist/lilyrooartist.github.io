@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T10:04:06.568053Z",
+  "generated_at": "2026-07-09T15:34:42.818298Z",
   "safe_mode": true,
   "status": "campaign_running",
   "source": {
@@ -17,24 +17,24 @@
       "label": "Let the next automated posts run",
       "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
       "command": "python3 scripts/refresh_promo_admin.py",
-      "due_at": "2026-07-09T15:21:00Z"
+      "due_at": "2026-07-10T15:21:00Z"
     },
     "active_campaign_ready": true,
     "posting_preflight_ready": true,
     "queued_future_posts": 54,
-    "posted_or_measured_rows": 10,
-    "ready_for_metric_capture_rows": 8,
+    "posted_or_measured_rows": 12,
+    "ready_for_metric_capture_rows": 10,
     "click_count": 0,
     "click_post_count": 0,
     "clicks_by_platform": {},
     "clicks_by_destination": {},
-    "click_snapshot_updated_at": "2026-07-09T10:04:01.732791Z",
+    "click_snapshot_updated_at": "2026-07-09T15:34:38.312993Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
-    "next_post_at": "2026-07-09T10:15:00-04:00",
-    "proof_due_at": "2026-07-09T15:21:00Z",
-    "hours_until_next_post": 4.18,
-    "hours_until_proof_due": 5.28,
+    "next_post_at": "2026-07-10T10:15:00-04:00",
+    "proof_due_at": "2026-07-10T15:21:00Z",
+    "hours_until_next_post": 22.67,
+    "hours_until_proof_due": 23.77,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -46,9 +46,9 @@
     "learning_status": "first_party_click_checked",
     "learning_headline": "First-party clicks checked",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_rows": 8,
+    "measurement_due_rows": 10,
     "waiting_measurement_rows": 2,
-    "next_learning_due_at": "2026-07-09T14:15:37.423000Z",
+    "next_learning_due_at": "2026-07-10T14:15:29.930000Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
@@ -57,13 +57,13 @@
     "status": "first_party_click_checked",
     "label": "Checked",
     "headline": "First-party clicks checked",
-    "note": "Fresh click evidence covers 8 public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window.",
+    "note": "Fresh click evidence covers 10 public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_count": 8,
+    "measurement_due_count": 10,
     "waiting_measurement_count": 2,
     "scheduled_future_count": 54,
-    "next_learning_due_at": "2026-07-09T14:15:37.423000Z",
-    "click_snapshot_updated_at": "2026-07-09T10:04:01.732791Z",
+    "next_learning_due_at": "2026-07-10T14:15:29.930000Z",
+    "click_snapshot_updated_at": "2026-07-09T15:34:38.312993Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -71,15 +71,15 @@
       "FP-BRAND-AM-01-13-FACEBOOK"
     ],
     "next_proof_post_ids": [
-      "FP-BRAND-AM-06-GUARDS-DOWN-X",
-      "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
+      "FP-BRAND-AM-07-SLOW-WALK-X",
+      "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
     ],
     "click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
     "pulse_refresh_command": "python3 scripts/build_brand_growth_pulse.py",
     "proof_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
     "metric_capture_commands": [
-      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X",
+      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK"
     ],
     "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
     "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.",
@@ -114,7 +114,7 @@
         "scheduled_at": "2026-07-05T10:15:00-04:00",
         "measurement_due_at": "2026-07-06T14:15:36.373000+00:00",
         "post_url": "https://x.com/i/web/status/2073772787177861205",
-        "public_visibility_ok": true,
+        "public_visibility_ok": null,
         "learning_use": "Ready for post-window comparison"
       },
       {
@@ -125,55 +125,55 @@
         "scheduled_at": "2026-07-05T11:20:00-04:00",
         "measurement_due_at": "2026-07-06T15:30:46.255000+00:00",
         "post_url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
-        "public_visibility_ok": true,
+        "public_visibility_ok": null,
         "learning_use": "Ready for post-window comparison"
-      },
-      {
-        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
-        "platform": "X",
-        "title": "No Mortgage",
-        "status": "posted_waiting_measurement_window",
-        "scheduled_at": "2026-07-08T10:15:00-04:00",
-        "measurement_due_at": "2026-07-09T14:15:37.423000+00:00",
-        "post_url": "https://x.com/i/web/status/2074859954704441417",
-        "public_visibility_ok": true,
-        "learning_use": "Waiting for first useful result check"
-      },
-      {
-        "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-        "platform": "Facebook",
-        "title": "No Mortgage",
-        "status": "posted_waiting_measurement_window",
-        "scheduled_at": "2026-07-08T11:20:00-04:00",
-        "measurement_due_at": "2026-07-09T15:30:49.213000+00:00",
-        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121305865249470",
-        "public_visibility_ok": true,
-        "learning_use": "Waiting for first useful result check"
       },
       {
         "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
         "platform": "X",
         "title": "Guards Down",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement_window",
         "scheduled_at": "2026-07-09T10:15:00-04:00",
+        "measurement_due_at": "2026-07-10T14:15:29.930000+00:00",
+        "post_url": "https://x.com/i/web/status/2075222310240535024",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
+        "platform": "Facebook",
+        "title": "Guards Down",
+        "status": "posted_waiting_measurement_window",
+        "scheduled_at": "2026-07-09T11:20:00-04:00",
+        "measurement_due_at": "2026-07-10T15:30:43.039000+00:00",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121402309249470",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
+        "platform": "X",
+        "title": "Slow Walk",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-10T10:15:00-04:00",
         "measurement_due_at": "",
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
       },
       {
-        "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
         "platform": "Facebook",
-        "title": "Guards Down",
+        "title": "Slow Walk",
         "status": "scheduled_future",
-        "scheduled_at": "2026-07-09T11:20:00-04:00",
+        "scheduled_at": "2026-07-10T11:20:00-04:00",
         "measurement_due_at": "",
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": 4.19
+    "hours_until_next_learning_due": 22.68
   },
   "recommendations": [
     {
