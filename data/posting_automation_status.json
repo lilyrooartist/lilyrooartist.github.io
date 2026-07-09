@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T15:34:40.397838Z",
+  "generated_at": "2026-07-09T15:35:28.423817Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -22,8 +22,8 @@
       "Facebook",
       "X"
     ],
-    "active_campaign_next_proof_due_at": "2026-07-09T15:21:00Z",
-    "active_campaign_next_measurement_due_at": "2026-07-10T15:20:00Z",
+    "active_campaign_next_proof_due_at": "2026-07-10T15:21:00Z",
+    "active_campaign_next_measurement_due_at": "2026-07-11T15:20:00Z",
     "ready_lane_count": 7,
     "blocked_lane_count": 0,
     "deferred_lane_count": 3,
@@ -35,14 +35,14 @@
       "05 16 * * *"
     ],
     "active_campaign_proof_refresh_status": "ready",
-    "active_campaign_next_proof_refresh_at": "2026-07-09T15:25:00Z",
+    "active_campaign_next_proof_refresh_at": "2026-07-10T15:25:00Z",
     "active_campaign_proof_refresh_lag_minutes": 4,
     "active_campaign_proof_refresh_cron": "25 15 * * *",
     "active_campaign_proof_export_status": "ready",
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 2,
+    "active_campaign_proof_export_added_last_run": 0,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
@@ -57,12 +57,12 @@
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Automatic proof/export is scheduled at 2026-07-09T15:25:00Z; verify the active posts in Published_Log after that run."
+    "next_action": "Automatic proof/export is scheduled at 2026-07-10T15:25:00Z; verify the active posts in Published_Log after that run."
   },
   "proof_refresh": {
     "status": "ready",
-    "proof_due_at": "2026-07-09T15:21:00Z",
-    "next_refresh_at": "2026-07-09T15:25:00Z",
+    "proof_due_at": "2026-07-10T15:21:00Z",
+    "next_refresh_at": "2026-07-10T15:25:00Z",
     "lag_minutes": 4,
     "cron": "25 15 * * *",
     "detail": "next fixed refresh 4 minute(s) after proof due"
@@ -71,28 +71,28 @@
     {
       "label": "Active Analog Myth brand campaign",
       "status": "ready",
-      "detail": "64 approved auto posts; next=FP-BRAND-AM-06-GUARDS-DOWN-X at 2026-07-09T10:15:00-04:00; preflight=ready",
+      "detail": "64 approved auto posts; next=FP-BRAND-AM-07-SLOW-WALK-X at 2026-07-10T10:15:00-04:00; preflight=ready",
       "evidence": "data/brand_growth_preflight.json",
-      "next_action": "Automatic proof/export is scheduled at 2026-07-09T15:25:00Z; verify the active posts in Published_Log after that run."
+      "next_action": "Automatic proof/export is scheduled at 2026-07-10T15:25:00Z; verify the active posts in Published_Log after that run."
     },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
       "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29030018661",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "ready",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=2 dry_run=False; next proof refresh=2026-07-09T15:25:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-10T15:25:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-09T15:34:38.323140Z",
+      "detail": "19 refresh commands captured at 2026-07-09T15:35:24.675102Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },

@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-09T15:34:40.397838Z
+Generated: 2026-07-09T15:35:28.423817Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -11,23 +11,23 @@ Generated: 2026-07-09T15:34:40.397838Z
 - Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Proof refresh: **ready** at `2026-07-09T15:25:00Z` (4 min)
+- Proof refresh: **ready** at `2026-07-10T15:25:00Z` (4 min)
 - Proof export: **ready** via `python3 scripts/export_social_executions.py`
-- Next action: Automatic proof/export is scheduled at 2026-07-09T15:25:00Z; verify the active posts in Published_Log after that run.
+- Next action: Automatic proof/export is scheduled at 2026-07-10T15:25:00Z; verify the active posts in Published_Log after that run.
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `ready`
-  - Detail: 64 approved auto posts; next=FP-BRAND-AM-06-GUARDS-DOWN-X at 2026-07-09T10:15:00-04:00; preflight=ready
+  - Detail: 64 approved auto posts; next=FP-BRAND-AM-07-SLOW-WALK-X at 2026-07-10T10:15:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
-  - Next: Automatic proof/export is scheduled at 2026-07-09T15:25:00Z; verify the active posts in Published_Log after that run.
+  - Next: Automatic proof/export is scheduled at 2026-07-10T15:25:00Z; verify the active posts in Published_Log after that run.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29030018661
 - **Published URL export** - `ready`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=2 dry_run=False; next proof refresh=2026-07-09T15:25:00Z
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-10T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-09T15:34:38.323140Z
+  - Detail: 19 refresh commands captured at 2026-07-09T15:35:24.675102Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=2 would_post=0

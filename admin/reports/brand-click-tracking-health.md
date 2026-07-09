@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-09T15:34:40.475657Z
+Generated: 2026-07-09T15:35:28.503837Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **54 / 54**
-- Tracking URLs checked: **162 / 162**
-- X main-post album links: **27 / 27**
-- Visible album click paths: **54 / 54**
-- Visible full destination sets: **54 / 54**
+- Future campaign rows ready: **52 / 52**
+- Tracking URLs checked: **156 / 156**
+- X main-post album links: **26 / 26**
+- Visible album click paths: **52 / 52**
+- Visible full destination sets: **52 / 52**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,15 +24,15 @@ Generated: 2026-07-09T15:34:40.475657Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 54, echo: 54, video: 54**
+- Destinations: **album: 52, echo: 52, video: 52**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-brand-am-06-guards-down-x`
-- Event: **x / album / track 06**
+- Probe campaign id: `fp-brand-am-07-slow-walk-x`
+- Event: **x / album / track 07**
 
 ## Redirect Checks
 - exists: **ok**
@@ -194,13 +194,6 @@ Generated: 2026-07-09T15:34:40.475657Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-BRAND-AM-06-GUARDS-DOWN-X` X 2026-07-09T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-07-09T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
 - `FP-BRAND-AM-07-SLOW-WALK-X` X 2026-07-10T10:15:00-04:00 - **ready** (3 links)
   - Destinations: `album, echo, video`
   - Visible surface: **ready** (`album, echo, video`)
