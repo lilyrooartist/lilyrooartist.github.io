@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-10T09:54:34.802015Z",
+  "updated_at": "2026-07-10T15:02:27.536145Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,11 +8,24 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 57,
-    "current_execution_count": 42,
+    "execution_count": 58,
+    "current_execution_count": 43,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-10T14:15:30.211Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2075584699003740283",
+        "external_id": "2075584699003740283",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
         "platform": "Facebook",
@@ -562,6 +575,19 @@
     ],
     "posted": [
       {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-10T14:15:30.211Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2075584699003740283",
+        "external_id": "2075584699003740283",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
         "platform": "Facebook",
         "status": "posted",
@@ -1109,21 +1135,34 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 42,
+    "posted_count": 43,
     "draft_uploaded_count": 0,
     "attention_count": 0,
     "approval_needed_count": 0,
     "platform_fix_needed_count": 0,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "posted": 42
+      "posted": 43
     },
     "platform_counts": {
       "Facebook": 19,
-      "X": 18,
+      "X": 19,
       "YouTube": 5
     },
     "latest_posted": [
+      {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-10T14:15:30.211Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2075584699003740283",
+        "external_id": "2075584699003740283",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
         "platform": "Facebook",
@@ -1175,19 +1214,6 @@
         "external_id": "2074859954704441417",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-        "platform": "Facebook",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-07T15:30:35.825Z",
-        "source": "cron",
-        "post_url": "https://www.facebook.com/122119767927249470/posts/122121211923249470",
-        "external_id": "903693509504290_122121211923249470",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
@@ -1198,10 +1224,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 57
+    "execution_count": 58
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-10T09:54:34.842391Z",
+  "reconciled_at": "2026-07-10T15:02:27.577479Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

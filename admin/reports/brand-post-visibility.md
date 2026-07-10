@@ -1,6 +1,6 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-10T09:54:36.906559Z
+Generated: 2026-07-10T15:02:34.095273Z
 
 ## Summary
 - Status: **verified**
@@ -11,11 +11,6 @@ Generated: 2026-07-10T09:54:36.906559Z
 - Facebook pages loaded: **4**
 
 ## Rows
-- **FP-BRAND-AM-03-ANALOG-MYTH-X** X - `visible_copy_confirmed`
-  - Logged URL: https://x.com/i/web/status/2074135149185266159
-  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074135149185266159
-  - HTTP: `200`; copy matched: `True`
-  - Note: X public oEmbed returned Lily Roo post copy.
 - **FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
   - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
@@ -49,6 +44,11 @@ Generated: 2026-07-10T09:54:36.906559Z
 - **FP-BRAND-AM-06-GUARDS-DOWN-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2075222310240535024
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2075222310240535024
+  - HTTP: `200`; copy matched: `True`
+  - Note: X public oEmbed returned Lily Roo post copy.
+- **FP-BRAND-AM-07-SLOW-WALK-X** X - `visible_copy_confirmed`
+  - Logged URL: https://x.com/i/web/status/2075584699003740283
+  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2075584699003740283
   - HTTP: `200`; copy matched: `True`
   - Note: X public oEmbed returned Lily Roo post copy.
 

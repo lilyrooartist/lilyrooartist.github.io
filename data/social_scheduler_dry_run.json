@@ -1,34 +1,50 @@
 {
   "ok": true,
-  "updated_at": "2026-07-10T09:54:37.613308Z",
+  "updated_at": "2026-07-10T15:02:34.901419Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-10T09:54:37.212991Z",
-  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/e7c3508584f86ac99aceb9159ab7fe9c35072555/admin/future-posts.json",
-  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/e7c3508584f86ac99aceb9159ab7fe9c35072555/admin/future-posts.json",
+  "requested_scheduled_time": "2026-07-10T15:02:34.464977Z",
+  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/af9142f3583026e440fcbdc821af6ec732a5bde1/admin/future-posts.json",
+  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/af9142f3583026e440fcbdc821af6ec732a5bde1/admin/future-posts.json",
   "queue_source": "commit_queue_url",
   "fallback_reason": "",
   "dry_run": true,
-  "checked_at": "2026-07-10T09:54:37.212Z",
+  "checked_at": "2026-07-10T15:02:34.464Z",
   "summary": {
-    "due_count": 0,
-    "result_count": 0,
+    "due_count": 1,
+    "result_count": 1,
     "would_post_count": 0,
-    "posted_count": 0,
+    "posted_count": 1,
     "blocked_count": 0,
-    "status_counts": {},
-    "platform_counts": {},
+    "status_counts": {
+      "posted": 1
+    },
+    "platform_counts": {
+      "Unknown": 1
+    },
     "would_post": [],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": []
   },
   "payload": {
     "ok": true,
-    "due_count": 0,
-    "result_count": 0
+    "due_count": 1,
+    "result_count": 1
   },
   "action_needed": ""
 }

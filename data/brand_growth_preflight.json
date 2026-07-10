@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-10T09:54:43.528434Z",
+  "generated_at": "2026-07-10T15:02:39.004269Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/e7c3508584f86ac99aceb9159ab7fe9c35072555/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/af9142f3583026e440fcbdc821af6ec732a5bde1/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -22,20 +22,20 @@
     "scheduler_fallback_reason": "",
     "scheduler_simulated_at": "2026-07-10T15:21:00Z",
     "scheduler_simulated_due_count": 2,
-    "scheduler_simulated_would_post_count": 2,
-    "scheduler_simulated_posted_count": 0,
+    "scheduler_simulated_would_post_count": 1,
+    "scheduler_simulated_posted_count": 1,
     "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 0,
     "scheduler_due_count": 2,
-    "scheduler_would_post_count": 2,
-    "scheduler_posted_count": 0,
+    "scheduler_would_post_count": 1,
+    "scheduler_posted_count": 1,
     "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 0,
-    "current_scheduler_checked_at": "2026-07-10T09:54:37.613308Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-10T09:54:37.212991Z",
-    "current_scheduler_due_count": 0,
+    "current_scheduler_checked_at": "2026-07-10T15:02:34.901419Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-10T15:02:34.464977Z",
+    "current_scheduler_due_count": 1,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 0,
+    "current_scheduler_posted_count": 1,
     "current_scheduler_blocked_count": 0,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -56,35 +56,25 @@
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-10T15:21:00Z",
     "next_measurement_due_at": "2026-07-11T15:20:00Z",
-    "readout_next_proof_due_at": "2026-07-10T15:21:00Z",
+    "readout_next_proof_due_at": "2026-07-11T15:21:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
     "due_count": 2,
     "result_count": 2,
-    "would_post_count": 2,
-    "posted_count": 0,
+    "would_post_count": 1,
+    "posted_count": 1,
     "blocked_count": 0,
     "status_counts": {
-      "would_post": 2
+      "posted": 1,
+      "would_post": 1
     },
     "platform_counts": {
       "Facebook": 1,
-      "X": 1
+      "Unknown": 1
     },
     "would_post": [
-      {
-        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
-        "platform": "X",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
         "platform": "Facebook",
@@ -97,7 +87,19 @@
         "error_summary": ""
       }
     ],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": []
   },
   "link_checks": [
