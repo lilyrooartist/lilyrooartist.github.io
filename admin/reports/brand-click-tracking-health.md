@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-10T15:02:38.181707Z
+Generated: 2026-07-10T17:16:10.235001Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **52 / 52**
-- Tracking URLs checked: **156 / 156**
-- X main-post album links: **26 / 26**
-- Visible album click paths: **52 / 52**
-- Visible full destination sets: **52 / 52**
+- Future campaign rows ready: **51 / 51**
+- Tracking URLs checked: **153 / 153**
+- X main-post album links: **25 / 25**
+- Visible album click paths: **51 / 51**
+- Visible full destination sets: **51 / 51**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,15 +24,15 @@ Generated: 2026-07-10T15:02:38.181707Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 52, echo: 52, video: 52**
+- Destinations: **album: 51, echo: 51, video: 51**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-brand-am-07-slow-walk-x`
-- Event: **x / album / track 07**
+- Probe campaign id: `fp-brand-am-08-the-power-of-light-x`
+- Event: **x / album / track 08**
 
 ## Redirect Checks
 - exists: **ok**
@@ -194,10 +194,6 @@ Generated: 2026-07-10T15:02:38.181707Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-BRAND-AM-07-SLOW-WALK-X` X 2026-07-10T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
 - `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` Facebook 2026-07-10T11:20:00-04:00 - **ready** (3 links)
   - Destinations: `album, echo, video`
   - Visible surface: **ready** (`album, echo, video`)

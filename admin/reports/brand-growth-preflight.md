@@ -1,40 +1,40 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-10T15:02:39.004269Z
+Generated: 2026-07-10T17:16:10.756999Z
 
 ## Summary
 - Status: **ready**
-- Next window: **2026-07-10** at `2026-07-10T15:21:00Z`
+- Next window: **2026-07-11** at `2026-07-11T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-10T15:21:00Z`, due **2**, satisfied **2**, would post **1**, posted **1**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-10T15:02:34.901419Z`, requested `2026-07-10T15:02:34.464977Z`, due **1**, would post **0**, posted **1**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-11T15:21:00Z`, due **4**, satisfied **2**, would post **2**, posted **2**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-10T17:16:06.577321Z`, requested `2026-07-10T17:16:06.407530Z`, due **2**, would post **0**, posted **2**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-10T15:21:00Z`
-- Current window measurement due: `2026-07-11T15:20:00Z`
+- Current window proof due: `2026-07-11T15:21:00Z`
+- Current window measurement due: `2026-07-12T15:20:00Z`
 
 ## Expected Posts
-- `FP-BRAND-AM-07-SLOW-WALK-X` X at `2026-07-10T10:15:00-04:00`
-- `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` Facebook at `2026-07-10T11:20:00-04:00`
+- `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` X at `2026-07-11T10:15:00-04:00`
+- `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook at `2026-07-11T11:20:00-04:00`
 
 ## Link Checks
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X Album` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X Echo` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X Video` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Analog Myth` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Echo Thread` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Track video` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X imagery_url` 200 image/png
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK imagery_url` 200 image/png
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X Album target album` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X Echo target echo` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-X Video target video` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Analog Myth target album` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Echo Thread target echo` 200 text/html
-- **ok** `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Track video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album target album` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo target echo` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth target album` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread target echo` 200 text/html
+- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video target video` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

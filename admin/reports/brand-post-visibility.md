@@ -1,6 +1,6 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-10T15:02:34.095273Z
+Generated: 2026-07-10T17:16:06.085664Z
 
 ## Summary
 - Status: **verified**
@@ -11,11 +11,6 @@ Generated: 2026-07-10T15:02:34.095273Z
 - Facebook pages loaded: **4**
 
 ## Rows
-- **FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
-  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
-  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
-  - HTTP: `200`; copy matched: `True`
-  - Note: Facebook public page loaded without the common unavailable-content marker.
 - **FP-BRAND-AM-04-SPILLING-THE-TEA-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2074497538409779510
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074497538409779510
@@ -51,6 +46,11 @@ Generated: 2026-07-10T15:02:34.095273Z
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2075584699003740283
   - HTTP: `200`; copy matched: `True`
   - Note: X public oEmbed returned Lily Roo post copy.
+- **FP-BRAND-AM-07-SLOW-WALK-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
+  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121496545249470
+  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121496545249470
+  - HTTP: `200`; copy matched: `False`
+  - Note: Facebook public page loaded without the common unavailable-content marker.
 
 ## Guardrails
 - Read-only public URL probe; it does not publish, edit, or collect private analytics.

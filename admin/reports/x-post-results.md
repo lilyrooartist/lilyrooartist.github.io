@@ -1,10 +1,10 @@
 # X Post Results - Lily Roo
 
-Generated: 2026-07-10T15:02:34.279349Z
+Generated: 2026-07-10T17:16:06.200332Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
-- Captured posts: **22**
+- Captured posts: **23**
 - Fillable posts: **0**
 - Fillable result fields: **0**
 - Apply command: `python3 scripts/capture_x_post_results.py --apply-results --refresh-admin`
@@ -140,6 +140,12 @@ Generated: 2026-07-10T15:02:34.279349Z
   - Evidence: X metric capture skipped 2026-07-10: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-05-NO-MORTGAGE-X** row `58`
   - URL: https://x.com/i/web/status/2074859954704441417
+  - Lookup: `skipped_missing_secrets`
+  - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
+  - Fillable fields: `none`
+  - Evidence: X metric capture skipped 2026-07-10: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+- **FP-BRAND-AM-06-GUARDS-DOWN-X** row `61`
+  - URL: https://x.com/i/web/status/2075222310240535024
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`

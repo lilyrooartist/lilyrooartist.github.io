@@ -1,41 +1,41 @@
 {
-  "generated_at": "2026-07-10T15:02:39.004269Z",
+  "generated_at": "2026-07-10T17:16:10.756999Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/af9142f3583026e440fcbdc821af6ec732a5bde1/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/db9775b9969e8a43d1caf28a2898e429946f7b9a/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
-    "next_window_date": "2026-07-10",
-    "scheduled_time": "2026-07-10T15:21:00Z",
+    "next_window_date": "2026-07-11",
+    "scheduled_time": "2026-07-11T15:21:00Z",
     "expected_post_count": 2,
     "expected_post_ids": [
-      "FP-BRAND-AM-07-SLOW-WALK-X",
-      "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
+      "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
+      "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK"
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
-    "scheduler_simulated_at": "2026-07-10T15:21:00Z",
-    "scheduler_simulated_due_count": 2,
-    "scheduler_simulated_would_post_count": 1,
-    "scheduler_simulated_posted_count": 1,
+    "scheduler_simulated_at": "2026-07-11T15:21:00Z",
+    "scheduler_simulated_due_count": 4,
+    "scheduler_simulated_would_post_count": 2,
+    "scheduler_simulated_posted_count": 2,
     "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 0,
-    "scheduler_due_count": 2,
-    "scheduler_would_post_count": 1,
-    "scheduler_posted_count": 1,
+    "scheduler_due_count": 4,
+    "scheduler_would_post_count": 2,
+    "scheduler_posted_count": 2,
     "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 0,
-    "current_scheduler_checked_at": "2026-07-10T15:02:34.901419Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-10T15:02:34.464977Z",
-    "current_scheduler_due_count": 1,
+    "current_scheduler_checked_at": "2026-07-10T17:16:06.577321Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-10T17:16:06.407530Z",
+    "current_scheduler_due_count": 2,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 1,
+    "current_scheduler_posted_count": 2,
     "current_scheduler_blocked_count": 0,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -54,29 +54,41 @@
     "expected_target_link_check_count": 6,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
-    "next_proof_due_at": "2026-07-10T15:21:00Z",
-    "next_measurement_due_at": "2026-07-11T15:20:00Z",
+    "next_proof_due_at": "2026-07-11T15:21:00Z",
+    "next_measurement_due_at": "2026-07-12T15:20:00Z",
     "readout_next_proof_due_at": "2026-07-11T15:21:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 2,
-    "result_count": 2,
-    "would_post_count": 1,
-    "posted_count": 1,
+    "due_count": 4,
+    "result_count": 4,
+    "would_post_count": 2,
+    "posted_count": 2,
     "blocked_count": 0,
     "status_counts": {
-      "posted": 1,
-      "would_post": 1
+      "posted": 2,
+      "would_post": 2
     },
     "platform_counts": {
       "Facebook": 1,
-      "Unknown": 1
+      "Unknown": 2,
+      "X": 1
     },
     "would_post": [
       {
-        "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
+        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
+        "platform": "X",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
         "platform": "Facebook",
         "status": "would_post",
         "reason": "",
@@ -98,94 +110,105 @@
         "updated_at": "",
         "source": "",
         "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
       }
     ],
     "blocked": []
   },
   "link_checks": [
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X imagery_url",
-      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/07-slow-walk.jpg",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X imagery_url",
+      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/08-the-power-of-light.png",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/07-slow-walk.jpg",
-      "content_type": "image/jpeg",
-      "content_length": "107139",
+      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/08-the-power-of-light.png",
+      "content_type": "image/png",
+      "content_length": "2243441",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X Album",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=album",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=album",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=album",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=album",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X Echo",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=echo",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=echo",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=echo",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=echo",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X Video",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=video",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=video",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=video",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=video",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK imagery_url",
-      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/07-slow-walk.jpg",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK imagery_url",
+      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/08-the-power-of-light.png",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/07-slow-walk.jpg",
-      "content_type": "image/jpeg",
-      "content_length": "107139",
+      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/08-the-power-of-light.png",
+      "content_type": "image/png",
+      "content_length": "2243441",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Analog Myth",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=album",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=album",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=album",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=album",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Echo Thread",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=echo",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=echo",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=echo",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=echo",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Track video",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=video",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=video",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=video",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=video",
       "content_type": "text/html",
       "content_length": "13508",
       "error": "",
@@ -194,7 +217,7 @@
   ],
   "target_checks": [
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X Album target album",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album target album",
       "url": "https://www.lilyroo.com/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -203,13 +226,13 @@
       "content_length": "17933",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=album",
       "destination": "album",
-      "track": "07",
-      "post_id": "fp-brand-am-07-slow-walk-x"
+      "track": "08",
+      "post_id": "fp-brand-am-08-the-power-of-light-x"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X Echo target echo",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo target echo",
       "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -218,27 +241,27 @@
       "content_length": "8535",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=echo",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=echo",
       "destination": "echo",
-      "track": "07",
-      "post_id": "fp-brand-am-07-slow-walk-x"
+      "track": "08",
+      "post_id": "fp-brand-am-08-the-power-of-light-x"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-X Video target video",
-      "url": "https://youtu.be/nPuGjQf7lKY",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video target video",
+      "url": "https://youtu.be/ctZ2TRBWC-c",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=nPuGjQf7lKY&feature=youtu.be",
+      "final_url": "https://www.youtube.com/watch?v=ctZ2TRBWC-c&feature=youtu.be",
       "content_type": "text/html; charset=utf-8",
       "content_length": "",
       "error": "",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=video",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=video",
       "destination": "video",
-      "track": "07",
-      "post_id": "fp-brand-am-07-slow-walk-x"
+      "track": "08",
+      "post_id": "fp-brand-am-08-the-power-of-light-x"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Analog Myth target album",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth target album",
       "url": "https://www.lilyroo.com/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -247,13 +270,13 @@
       "content_length": "17933",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=album",
       "destination": "album",
-      "track": "07",
-      "post_id": "fp-brand-am-07-slow-walk-facebook"
+      "track": "08",
+      "post_id": "fp-brand-am-08-the-power-of-light-facebook"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Echo Thread target echo",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread target echo",
       "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
       "ok": true,
       "status": 200,
@@ -262,42 +285,42 @@
       "content_length": "8535",
       "error": "",
       "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=echo",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=echo",
       "destination": "echo",
-      "track": "07",
-      "post_id": "fp-brand-am-07-slow-walk-facebook"
+      "track": "08",
+      "post_id": "fp-brand-am-08-the-power-of-light-facebook"
     },
     {
-      "label": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK Track video target video",
-      "url": "https://youtu.be/nPuGjQf7lKY",
+      "label": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video target video",
+      "url": "https://youtu.be/ctZ2TRBWC-c",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=nPuGjQf7lKY&feature=youtu.be",
+      "final_url": "https://www.youtube.com/watch?v=ctZ2TRBWC-c&feature=youtu.be",
       "content_type": "text/html; charset=utf-8",
       "content_length": "",
       "error": "",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=video",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-facebook&to=video",
       "destination": "video",
-      "track": "07",
-      "post_id": "fp-brand-am-07-slow-walk-facebook"
+      "track": "08",
+      "post_id": "fp-brand-am-08-the-power-of-light-facebook"
     }
   ],
   "next_window_posts": [
     {
-      "id": "FP-BRAND-AM-07-SLOW-WALK-X",
+      "id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
       "platform": "X",
-      "scheduled_at": "2026-07-10T10:15:00-04:00",
+      "scheduled_at": "2026-07-11T10:15:00-04:00",
       "execution_mode": "auto",
       "post_type": "image",
-      "text": "Analog Myth track 7: Slow Walk refuses the sprint and lets the whole room adjust to its pace.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-x&to=album"
+      "text": "The Power of Light closes Analog Myth with a switch you can almost hear.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-08-the-power-of-light-x&to=album"
     },
     {
-      "id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
+      "id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
       "platform": "Facebook",
-      "scheduled_at": "2026-07-10T11:20:00-04:00",
+      "scheduled_at": "2026-07-11T11:20:00-04:00",
       "execution_mode": "auto",
       "post_type": "image",
-      "text": "Analog Myth track 7: Slow Walk refuses the sprint. The song takes its time and still gets there first.\n\nA song for keeping your own pace while the rest of the room mistakes speed for power."
+      "text": "Analog Myth track 8: The Power of Light closes the room with a switch you can almost hear.\n\nThe closer turns the last switch into a small revelation."
     }
   ],
   "guardrails": [

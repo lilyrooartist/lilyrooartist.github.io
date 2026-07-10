@@ -1,30 +1,34 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-07-10T15:02:36.221184Z
+Generated: 2026-07-10T17:16:08.165104Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **0**
-- Posts with clicks: **0**
-- First click: `none yet`
-- Last click: `none yet`
+- Clicks captured: **3**
+- Posts with clicks: **1**
+- First click: `2026-07-10T15:30:43.264Z`
+- Last click: `2026-07-10T15:30:43.299Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
-- No clicks recorded yet.
+- facebook: **3**
 
 ### Destination
-- No clicks recorded yet.
+- album: **1**
+- echo: **1**
+- video: **1**
 
 ### Wave
-- No clicks recorded yet.
+- track-moments: **3**
 
 ### Track
-- No clicks recorded yet.
+- slow-walk: **3**
 
 ## Recent Clicks
-- No clicks recorded yet.
+- `2026-07-10T15:30:43.299Z` facebook album `fp-brand-am-07-slow-walk-facebook`
+- `2026-07-10T15:30:43.268Z` facebook echo `fp-brand-am-07-slow-walk-facebook`
+- `2026-07-10T15:30:43.264Z` facebook video `fp-brand-am-07-slow-walk-facebook`
 
 ## Guardrails
 - Click capture stores campaign metadata only; it does not store IP addresses.

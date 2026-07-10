@@ -1,23 +1,99 @@
 {
   "ok": true,
-  "updated_at": "2026-07-10T15:02:36.221184Z",
+  "updated_at": "2026-07-10T17:16:08.165104Z",
   "source": "lilyroo-social-executor-clicks",
   "url": "https://www.lilyroo.com/api/social/clicks",
   "http_status": 200,
   "error": null,
   "retention_days": 180,
   "summary": {
-    "click_count": 0,
-    "post_count": 0,
-    "first_click_at": "",
-    "last_click_at": "",
-    "by_post_id": [],
-    "by_platform": [],
-    "by_destination": [],
-    "by_wave": [],
-    "by_track": []
+    "click_count": 3,
+    "post_count": 1,
+    "first_click_at": "2026-07-10T15:30:43.264Z",
+    "last_click_at": "2026-07-10T15:30:43.299Z",
+    "by_post_id": [
+      {
+        "key": "fp-brand-am-07-slow-walk-facebook",
+        "count": 3
+      }
+    ],
+    "by_platform": [
+      {
+        "key": "facebook",
+        "count": 3
+      }
+    ],
+    "by_destination": [
+      {
+        "key": "album",
+        "count": 1
+      },
+      {
+        "key": "echo",
+        "count": 1
+      },
+      {
+        "key": "video",
+        "count": 1
+      }
+    ],
+    "by_wave": [
+      {
+        "key": "track-moments",
+        "count": 3
+      }
+    ],
+    "by_track": [
+      {
+        "key": "slow-walk",
+        "count": 3
+      }
+    ]
   },
-  "recent_clicks": [],
+  "recent_clicks": [
+    {
+      "type": "brand_campaign_click",
+      "post_id": "fp-brand-am-07-slow-walk-facebook",
+      "platform": "facebook",
+      "wave": "track-moments",
+      "track": "07",
+      "track_slug": "slow-walk",
+      "destination": "album",
+      "target_url": "https://www.lilyroo.com/analog-myth.html?utm_source=facebook&utm_medium=social&utm_campaign=analog_myth_brand_growth&utm_content=fp-brand-am-07-slow-walk-facebook&utm_wave=track-moments&utm_term=track_07_slow-walk",
+      "page_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=album&fbclid=IwZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAEetFJYXEAWkW-mySLy96j2gi-3ymKxoln6qmnHjt929TZ_GddZi9u1TTMW-iA_aem_xp87wL5DRVQZ3zPz8RGdEg",
+      "referer_host": "www.lilyroo.com",
+      "user_agent_family": "desktop",
+      "recorded_at": "2026-07-10T15:30:43.299Z"
+    },
+    {
+      "type": "brand_campaign_click",
+      "post_id": "fp-brand-am-07-slow-walk-facebook",
+      "platform": "facebook",
+      "wave": "track-moments",
+      "track": "07",
+      "track_slug": "slow-walk",
+      "destination": "echo",
+      "target_url": "https://www.lilyroo.com/podcasts/analog-myth.html?utm_source=facebook&utm_medium=social&utm_campaign=analog_myth_brand_growth&utm_content=fp-brand-am-07-slow-walk-facebook&utm_wave=track-moments&utm_term=track_07_slow-walk",
+      "page_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=echo&fbclid=IwZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAEeua4GkmjqJiji6EGNIhmdXSj9GgdEwxV8QI-Fb9neGc6-2xnSRrQiEbwqwgI_aem_WsjIqO3DrXDyHlbR22z92A",
+      "referer_host": "www.lilyroo.com",
+      "user_agent_family": "desktop",
+      "recorded_at": "2026-07-10T15:30:43.268Z"
+    },
+    {
+      "type": "brand_campaign_click",
+      "post_id": "fp-brand-am-07-slow-walk-facebook",
+      "platform": "facebook",
+      "wave": "track-moments",
+      "track": "07",
+      "track_slug": "slow-walk",
+      "destination": "video",
+      "target_url": "https://youtu.be/nPuGjQf7lKY?utm_source=facebook&utm_medium=social&utm_campaign=analog_myth_brand_growth&utm_content=fp-brand-am-07-slow-walk-facebook&utm_wave=track-moments&utm_term=track_07_slow-walk",
+      "page_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-07-slow-walk-facebook&to=video&fbclid=IwZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAEesi396w65eZ51LpcjuquO_XCbI-HUnFsUIax9IyzqxublUqSC1XAkGL151HQ_aem_OTGfezLd0hIlKaPSo0Dfkw",
+      "referer_host": "www.lilyroo.com",
+      "user_agent_family": "desktop",
+      "recorded_at": "2026-07-10T15:30:43.264Z"
+    }
+  ],
   "report_path": "admin/reports/brand-campaign-clicks.md",
   "refresh_command": "python3 scripts/capture_brand_campaign_clicks.py"
 }

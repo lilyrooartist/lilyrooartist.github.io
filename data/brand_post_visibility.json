@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T15:02:34.095273Z",
+  "generated_at": "2026-07-10T17:16:06.085664Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -18,33 +18,6 @@
     "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
   },
   "rows": [
-    {
-      "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-      "platform": "Facebook",
-      "published_date": "2026-07-06",
-      "source_row": 55,
-      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
-      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
-      "final_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
-      "http_status": 200,
-      "content_type": "text/html; charset=\"utf-8\"",
-      "visibility_status": "page_loaded_no_unavailable_marker",
-      "public_visibility_ok": true,
-      "copy_matched": true,
-      "note": "Facebook public page loaded without the common unavailable-content marker.",
-      "attempts": [
-        {
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": false,
-          "copy_matched": true
-        }
-      ]
-    },
     {
       "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
       "platform": "X",
@@ -189,6 +162,33 @@
       "copy_matched": true,
       "note": "X public oEmbed returned Lily Roo post copy.",
       "attempts": []
+    },
+    {
+      "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
+      "platform": "Facebook",
+      "published_date": "2026-07-10",
+      "source_row": 63,
+      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470",
+      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470",
+      "final_url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470",
+      "http_status": 200,
+      "content_type": "text/html; charset=\"utf-8\"",
+      "visibility_status": "page_loaded_no_unavailable_marker",
+      "public_visibility_ok": true,
+      "copy_matched": false,
+      "note": "Facebook public page loaded without the common unavailable-content marker.",
+      "attempts": [
+        {
+          "url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": false,
+          "copy_matched": false
+        }
+      ]
     }
   ],
   "guardrails": [

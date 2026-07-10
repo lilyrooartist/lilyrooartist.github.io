@@ -1,20 +1,20 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-10T15:02:38.925393Z
+Generated: 2026-07-10T17:16:10.671015Z
 
 ## Summary
 - Campaign rows: **64**
 - Approved auto rows: **64**
-- Visible in future queue: **52**
-- Posted or measured rows: **13**
+- Visible in future queue: **51**
+- Posted or measured rows: **14**
 - Measured rows: **0**
-- Ready for metric capture: **11**
+- Ready for metric capture: **12**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
-- Campaign clicks: **0** across **0** post(s); last click `none yet`
-- Click tracking links: **ready** (52 / 52 future rows; 156 / 156 URLs)
+- Campaign clicks: **3** across **1** post(s); last click `2026-07-10T15:30:43.299Z`
+- Click tracking links: **ready** (51 / 51 future rows; 153 / 153 URLs)
 - Post-slot watch windows: **32**
-- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 11, scheduled_future: 51**
-- Next scheduled: `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` at `2026-07-10T11:20:00-04:00`
+- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 12, scheduled_future: 50**
+- Next scheduled: `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` at `2026-07-11T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-11` due `2026-07-11T15:21:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -22,16 +22,16 @@ Generated: 2026-07-10T15:02:38.925393Z
 - Spotify monthly listeners: **1**
 
 ## Learning Now
-- Status: **clicks_checked_no_response_yet**
-- Headline: **First-party clicks checked; no response yet**
-- First-party clicks: **0** across **0** post(s)
-- Public posts ready for learning: **11**
-- Next learning action: Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.
+- Status: **click_response_ready**
+- Headline: **First-party click response is ready to review**
+- First-party clicks: **3** across **1** post(s)
+- Public posts ready for learning: **12**
+- Next learning action: Review the tracks, platforms, and destinations with click response before changing the next copy wave.
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py`
-- Due: `2026-07-11T15:21:00Z`
+- Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Waiting posts: `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK, FP-BRAND-AM-07-SLOW-WALK-X`
+- Waiting posts: `FP-BRAND-AM-07-SLOW-WALK-X, FP-BRAND-AM-07-SLOW-WALK-FACEBOOK`
 - Next proof posts: `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
 
 ## Commands
@@ -42,7 +42,7 @@ Generated: 2026-07-10T15:02:38.925393Z
 - Capture campaign clicks: `python3 scripts/capture_brand_campaign_clicks.py`
 - Verify click tracking links: `admin/reports/brand-click-tracking-health.md`
 - Capture X metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X`
-- Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK`
+- Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK`
 - Re-check public visibility: `admin/reports/brand-post-visibility.md`
 
 ## Optional Native Metric Capture
@@ -52,7 +52,7 @@ Generated: 2026-07-10T15:02:38.925393Z
 - Facebook metric credentials needed: `META_LONG_LIVED_TOKEN, FB_PAGE_ID`
 
 ## Next Actions
-- Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.
+- Review the tracks, platforms, and destinations with click response before changing the next copy wave.
 - After `2026-07-11T15:21:00Z`, capture executor proof for FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK.
 - Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting.
 
@@ -80,7 +80,7 @@ Generated: 2026-07-10T15:02:38.925393Z
 - `2026-07-09` **measurement_due** proof due `2026-07-09T15:21:00Z` for `FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK`
   - Next: Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-  - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-06-GUARDS-DOWN-X`
+  - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-06-GUARDS-DOWN-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK`
 - `2026-07-10` **posted_waiting_measurement** proof due `2026-07-10T15:21:00Z` for `FP-BRAND-AM-07-SLOW-WALK-X, FP-BRAND-AM-07-SLOW-WALK-FACEBOOK`
   - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
@@ -178,7 +178,6 @@ Generated: 2026-07-10T15:02:38.925393Z
   - Next: Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).
 - `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-06T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
-  - Public visibility: `page_loaded_no_unavailable_marker` OK
   - Next: Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready_for_metric_capture**
   - URL: https://x.com/i/web/status/2074497538409779510
@@ -200,16 +199,18 @@ Generated: 2026-07-10T15:02:38.925393Z
   - URL: https://x.com/i/web/status/2075222310240535024
   - Public visibility: `visible_copy_confirmed` OK
   - Next: Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).
-- `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-07-09T11:20:00-04:00 - **posted_waiting_measurement_window**
+- `FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-07-09T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: https://www.facebook.com/lilyrooartist/posts/122121402309249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
-  - Next: Wait until 2026-07-10T15:30:43.039000+00:00 before capturing metrics.
+  - Next: Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).
 - `FP-BRAND-AM-07-SLOW-WALK-X` X 2026-07-10T10:15:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://x.com/i/web/status/2075584699003740283
   - Public visibility: `visible_copy_confirmed` OK
   - Next: Wait until 2026-07-11T14:15:30.211000+00:00 before capturing metrics.
-- `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` Facebook 2026-07-10T11:20:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` Facebook 2026-07-10T11:20:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://www.facebook.com/lilyrooartist/posts/122121496545249470
+  - Public visibility: `page_loaded_no_unavailable_marker` OK
+  - Next: Wait until 2026-07-11T15:30:34.013000+00:00 before capturing metrics.
 - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` X 2026-07-11T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-07-11T11:20:00-04:00 - **scheduled_future**
