@@ -1,17 +1,17 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-10T17:16:10.671015Z
+Generated: 2026-07-10T17:16:48.630647Z
 
 ## Summary
 - Campaign rows: **64**
 - Approved auto rows: **64**
-- Visible in future queue: **51**
+- Visible in future queue: **50**
 - Posted or measured rows: **14**
 - Measured rows: **0**
 - Ready for metric capture: **12**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **3** across **1** post(s); last click `2026-07-10T15:30:43.299Z`
-- Click tracking links: **ready** (51 / 51 future rows; 153 / 153 URLs)
+- Click tracking links: **ready** (50 / 50 future rows; 150 / 150 URLs)
 - Post-slot watch windows: **32**
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 12, scheduled_future: 50**
 - Next scheduled: `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` at `2026-07-11T10:15:00-04:00`
