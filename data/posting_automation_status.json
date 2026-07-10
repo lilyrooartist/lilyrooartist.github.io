@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T17:16:48.108483Z",
+  "generated_at": "2026-07-10T17:48:46.228315Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -78,8 +78,8 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29110337812",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29112260147",
       "next_action": ""
     },
     {
@@ -92,14 +92,14 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-10T17:16:44.047380Z",
+      "detail": "19 refresh commands captured at 2026-07-10T17:48:44.193963Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=1 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=0 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },

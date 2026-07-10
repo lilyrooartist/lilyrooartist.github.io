@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-10T17:16:48.715847Z
+Generated: 2026-07-10T17:48:47.021057Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-11** at `2026-07-11T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-11T15:21:00Z`, due **3**, satisfied **2**, would post **2**, posted **1**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-10T17:16:42.890742Z`, requested `2026-07-10T17:16:42.690375Z`, due **1**, would post **0**, posted **1**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-11T15:21:00Z`, due **2**, satisfied **2**, would post **2**, posted **0**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-10T17:48:40.865689Z`, requested `2026-07-10T17:48:40.363460Z`, due **0**, would post **0**, posted **0**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
