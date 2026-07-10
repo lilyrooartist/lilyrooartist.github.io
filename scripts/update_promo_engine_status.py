@@ -3014,6 +3014,8 @@ def build_status():
             "promo_refresh_workflow_status": str(PROMO_REFRESH_WORKFLOW_STATUS.relative_to(ROOT)),
         },
         "objective": "Build a repeatable Lily Roo promotion engine that turns every release, clip, and story asset into measurable audience growth.",
+        "manual_metric_import_manifest": manual_metric_packet.get("worksheet_import_manifest") or {},
+        "manual_metric_completion_manifest": manual_metric_packet.get("metric_completion_manifest") or {},
         "kpi": {
             "primary": growth_goal["primary"],
             "growth_goal": growth_goal,
