@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T20:44:22.232746Z",
+  "generated_at": "2026-07-10T20:47:30.130166Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -8,7 +8,7 @@
     "api": "youtube.videos.list(part=snippet,statistics)"
   },
   "summary": {
-    "status": "skipped_invalid_youtube_oauth",
+    "status": "skipped_missing_secrets",
     "captured_post_count": 10,
     "fillable_post_count": 0,
     "fillable_result_field_count": 0,
@@ -29,11 +29,14 @@
       "likes",
       "comments"
     ],
-    "oauth_error": "invalid_grant",
+    "missing_secret_names": [
+      "GOOGLE_CLIENT_ID",
+      "YOUTUBE_REFRESH_TOKEN"
+    ],
     "apply_command": "python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin",
     "retry_command": "python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
     "report_path": "admin/reports/youtube-post-results.md",
-    "next_action": "Reconnect the YouTube OAuth helper when native YouTube metrics are needed; this does not block automatic posting."
+    "next_action": "Add the missing YouTube OAuth credential names locally or in GitHub Actions, then rerun capture."
   },
   "rows": [
     {
@@ -49,11 +52,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -69,11 +72,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -89,11 +92,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -109,11 +112,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -129,11 +132,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -149,11 +152,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -169,11 +172,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -189,11 +192,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -209,11 +212,11 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     },
     {
@@ -229,17 +232,17 @@
         "comments": "0"
       },
       "title": "",
-      "lookup_status": "skipped_invalid_youtube_oauth",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-10: OAuth refresh token is expired or revoked.",
+      "evidence_note": "YouTube metric capture skipped 2026-07-10: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
       "direct_apply_command": ""
     }
   ],
-  "redaction": "OAuth error class is recorded for operator diagnostics; token values are never written here.",
+  "redaction": "Secret names are listed for operator diagnostics; secret values are never written here.",
   "guardrails": [
-    "Metrics come from public YouTube video statistics for already-published Lily Roo videos when OAuth credentials are valid.",
+    "Metrics come from public YouTube video statistics for already-published Lily Roo videos when OAuth credentials are present.",
     "This skipped report does not contain OAuth credentials.",
     "Only views, likes, and comments are imported; shares, saves, and subscriber deltas stay blank unless another evidence source supplies them.",
     "Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified."
