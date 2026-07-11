@@ -1,16 +1,16 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-11T13:55:33.359663Z
+Generated: 2026-07-11T13:56:15.867151Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-11** at `2026-07-11T15:21:00Z`
 - Expected posts: **2**
 - Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-11T15:21:00Z`, due **2**, satisfied **2**, would post **2**, posted **0**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-11T13:55:27.746754Z`, requested `2026-07-11T13:55:27.617397Z`, due **0**, would post **0**, posted **0**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-11T13:56:10.525257Z`, requested `2026-07-11T13:56:10.065259Z`, due **0**, would post **0**, posted **0**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
-- Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
+- Redirect targets: **6 / 6 checked**, **4 ok**, **2 warning**, **0 blocking failed**
 - Current window proof due: `2026-07-11T15:21:00Z`
 - Current window measurement due: `2026-07-12T15:20:00Z`
 
@@ -31,10 +31,10 @@ Generated: 2026-07-11T13:55:33.359663Z
 ## Redirect Target Checks
 - **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album target album` 200 text/html
 - **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo target echo` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video target video` 200 text/html; charset=utf-8
+- **warning** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video target video` 429 HTTP 429: Too Many Requests
 - **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth target album` 200 text/html
 - **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread target echo` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video target video` 200 text/html; charset=utf-8
+- **warning** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video target video` 429 HTTP 429: Too Many Requests
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
