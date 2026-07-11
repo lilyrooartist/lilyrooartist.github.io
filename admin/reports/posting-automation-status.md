@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-11T19:32:49.967168Z
+Generated: 2026-07-11T23:36:23.232423Z
 
 ## Summary
 - Status: **blocked**
@@ -21,14 +21,14 @@ Generated: 2026-07-11T19:32:49.967168Z
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh is 1279 minute(s) after proof due
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh is 1279 minute(s) after proof due
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29165440374
 - **Published URL export** - `needs_attention`
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-14T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-11T19:32:48.062789Z
+  - Detail: 19 refresh commands captured at 2026-07-11T23:36:20.939565Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -37,7 +37,7 @@ Generated: 2026-07-11T19:32:49.967168Z
   - Detail: posted=46 attention=0 platform_fix_needed=0
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `deferred`
-  - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube
+  - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Optional expansion only; unsupported platforms stay inactive until their automated lane is ready.
 - **TikTok API lane** - `blocked`
@@ -45,7 +45,7 @@ Generated: 2026-07-11T19:32:49.967168Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 - **Blocker input readiness** - `blocked`
-  - Detail: 1 ready; 5 missing local input; 1 external action needed
+  - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
   - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env.
 - **Story throughput** - `ready`

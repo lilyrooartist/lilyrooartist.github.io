@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T19:32:50.040367Z",
+  "generated_at": "2026-07-11T23:36:23.285052Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -13,34 +13,35 @@
   },
   "summary": {
     "status": "ready",
-    "future_campaign_rows": 20,
-    "ready_future_campaign_rows": 20,
+    "future_campaign_rows": 32,
+    "ready_future_campaign_rows": 32,
     "broken_future_campaign_rows": 0,
-    "tracking_url_count": 20,
-    "expected_tracking_url_count": 20,
+    "tracking_url_count": 32,
+    "expected_tracking_url_count": 32,
     "x_main_album_link_count": 0,
     "expected_x_main_album_link_count": 0,
-    "visible_surface_album_link_count": 5,
-    "expected_visible_surface_album_link_count": 20,
-    "visible_surface_full_destination_count": 20,
-    "expected_visible_surface_full_destination_count": 20,
+    "visible_surface_album_link_count": 8,
+    "expected_visible_surface_album_link_count": 32,
+    "visible_surface_full_destination_count": 32,
+    "expected_visible_surface_full_destination_count": 32,
     "destination_counts": {
-      "album": 5,
-      "echo": 5,
-      "spotify": 5,
-      "video": 5
+      "album": 8,
+      "echo": 8,
+      "spotify": 8,
+      "video": 8
     },
     "platform_counts": {
       "facebook": 12,
-      "x": 8
+      "x": 8,
+      "youtube": 12
     },
     "wave_counts": {
-      "video-reset": 20
+      "video-reset": 32
     },
     "track_counts": {
-      "04": 4,
-      "05": 4,
-      "07": 4
+      "04": 8,
+      "05": 8,
+      "07": 8
     },
     "issue_counts": {},
     "redirect_status": "ready",
@@ -119,7 +120,7 @@
     "wave": "video-reset",
     "track": "",
     "destination": "album",
-    "recorded_at": "2026-07-11T19:32:50.085Z"
+    "recorded_at": "2026-07-11T23:36:23.570Z"
   },
   "site_share": {
     "status": "ready",
@@ -142,7 +143,7 @@
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-11T19:32:50.128Z"
+      "recorded_at": "2026-07-11T23:36:23.697Z"
     },
     "rows": [
       {
@@ -255,7 +256,7 @@
       "wave": "site-home",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-11T19:32:50.169Z"
+      "recorded_at": "2026-07-11T23:36:23.801Z"
     },
     "rows": [
       {
@@ -480,7 +481,7 @@
       "wave": "site-podcast",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-11T19:32:50.225Z"
+      "recorded_at": "2026-07-11T23:36:23.932Z"
     },
     "rows": [
       {
@@ -585,7 +586,7 @@
       "wave": "site-music",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-11T19:32:50.265Z"
+      "recorded_at": "2026-07-11T23:36:24.048Z"
     },
     "rows": [
       {
@@ -658,7 +659,7 @@
       "wave": "site-album",
       "track": "",
       "destination": "listen",
-      "recorded_at": "2026-07-11T19:32:50.313Z"
+      "recorded_at": "2026-07-11T23:36:24.185Z"
     },
     "rows": [
       {
@@ -763,7 +764,7 @@
       "wave": "site-lyrics",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-11T19:32:50.368Z"
+      "recorded_at": "2026-07-11T23:36:24.331Z"
     },
     "rows": [
       {
@@ -1493,6 +1494,37 @@
   },
   "rows": [
     {
+      "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-13T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "07",
+      "tracking_url_count": 1,
+      "destinations": [
+        "spotify"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-01-slow-walk-lyric-punch-line-youtube&to=spotify&utm_wave=video-reset&utm_term=slow-walk-lyric-punch-line",
+          "destination": "spotify",
+          "post_id_param": "fp-growth-reset-01-slow-walk-lyric-punch-line-youtube",
+          "expected_post_id_param": "fp-growth-reset-01-slow-walk-lyric-punch-line-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "spotify"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
       "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-13T11:20:00-04:00",
@@ -1555,6 +1587,37 @@
       "visible_surface_tracking_url_count": 1
     },
     {
+      "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-15T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "07",
+      "tracking_url_count": 1,
+      "destinations": [
+        "album"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
+          "destination": "album",
+          "post_id_param": "fp-growth-reset-02-slow-walk-relatable-situation-youtube",
+          "expected_post_id_param": "fp-growth-reset-02-slow-walk-relatable-situation-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": true,
+      "visible_surface_destinations": [
+        "album"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
       "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-15T11:20:00-04:00",
@@ -1582,6 +1645,37 @@
       "visible_surface_album_link_ok": true,
       "visible_surface_destinations": [
         "album"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
+      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-17T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "07",
+      "tracking_url_count": 1,
+      "destinations": [
+        "video"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
+          "destination": "video",
+          "post_id_param": "fp-growth-reset-03-slow-walk-visual-story-youtube",
+          "expected_post_id_param": "fp-growth-reset-03-slow-walk-visual-story-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "video"
       ],
       "visible_surface_tracking_url_count": 1
     },
@@ -1648,6 +1742,37 @@
       "visible_surface_tracking_url_count": 1
     },
     {
+      "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-19T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "07",
+      "tracking_url_count": 1,
+      "destinations": [
+        "echo"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
+          "destination": "echo",
+          "post_id_param": "fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube",
+          "expected_post_id_param": "fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "echo"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
       "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-19T11:20:00-04:00",
@@ -1710,6 +1835,37 @@
       "visible_surface_tracking_url_count": 1
     },
     {
+      "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-21T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "04",
+      "tracking_url_count": 1,
+      "destinations": [
+        "spotify"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-05-spilling-the-tea-lyric-punch-line-youtube&to=spotify&utm_wave=video-reset&utm_term=spilling-the-tea-lyric-punch-line",
+          "destination": "spotify",
+          "post_id_param": "fp-growth-reset-05-spilling-the-tea-lyric-punch-line-youtube",
+          "expected_post_id_param": "fp-growth-reset-05-spilling-the-tea-lyric-punch-line-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "spotify"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
       "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-21T11:20:00-04:00",
@@ -1737,6 +1893,37 @@
       "visible_surface_album_link_ok": false,
       "visible_surface_destinations": [
         "spotify"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
+      "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-23T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "04",
+      "tracking_url_count": 1,
+      "destinations": [
+        "album"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-06-spilling-the-tea-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=spilling-the-tea-relatable-situation",
+          "destination": "album",
+          "post_id_param": "fp-growth-reset-06-spilling-the-tea-relatable-situation-youtube",
+          "expected_post_id_param": "fp-growth-reset-06-spilling-the-tea-relatable-situation-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": true,
+      "visible_surface_destinations": [
+        "album"
       ],
       "visible_surface_tracking_url_count": 1
     },
@@ -1803,6 +1990,37 @@
       "visible_surface_tracking_url_count": 1
     },
     {
+      "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-25T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "04",
+      "tracking_url_count": 1,
+      "destinations": [
+        "video"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-07-spilling-the-tea-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-visual-story",
+          "destination": "video",
+          "post_id_param": "fp-growth-reset-07-spilling-the-tea-visual-story-youtube",
+          "expected_post_id_param": "fp-growth-reset-07-spilling-the-tea-visual-story-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "video"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
       "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-25T11:20:00-04:00",
@@ -1830,6 +2048,37 @@
       "visible_surface_album_link_ok": false,
       "visible_surface_destinations": [
         "video"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
+      "id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-27T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "04",
+      "tracking_url_count": 1,
+      "destinations": [
+        "echo"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=spilling-the-tea-echo-thread-setup-song-payoff",
+          "destination": "echo",
+          "post_id_param": "fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-youtube",
+          "expected_post_id_param": "fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "echo"
       ],
       "visible_surface_tracking_url_count": 1
     },
@@ -1896,6 +2145,37 @@
       "visible_surface_tracking_url_count": 1
     },
     {
+      "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-29T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "05",
+      "tracking_url_count": 1,
+      "destinations": [
+        "spotify"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-09-no-mortgage-lyric-punch-line-youtube&to=spotify&utm_wave=video-reset&utm_term=no-mortgage-lyric-punch-line",
+          "destination": "spotify",
+          "post_id_param": "fp-growth-reset-09-no-mortgage-lyric-punch-line-youtube",
+          "expected_post_id_param": "fp-growth-reset-09-no-mortgage-lyric-punch-line-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "spotify"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
       "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-29T11:20:00-04:00",
@@ -1923,6 +2203,37 @@
       "visible_surface_album_link_ok": false,
       "visible_surface_destinations": [
         "spotify"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
+      "id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-31T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "05",
+      "tracking_url_count": 1,
+      "destinations": [
+        "album"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-10-no-mortgage-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=no-mortgage-relatable-situation",
+          "destination": "album",
+          "post_id_param": "fp-growth-reset-10-no-mortgage-relatable-situation-youtube",
+          "expected_post_id_param": "fp-growth-reset-10-no-mortgage-relatable-situation-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": true,
+      "visible_surface_destinations": [
+        "album"
       ],
       "visible_surface_tracking_url_count": 1
     },
@@ -1976,6 +2287,37 @@
           "destination": "video",
           "post_id_param": "fp-growth-reset-voice-06-x",
           "expected_post_id_param": "fp-growth-reset-voice-06-x",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "video"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
+      "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-08-02T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "05",
+      "tracking_url_count": 1,
+      "destinations": [
+        "video"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
+          "destination": "video",
+          "post_id_param": "fp-growth-reset-11-no-mortgage-visual-story-youtube",
+          "expected_post_id_param": "fp-growth-reset-11-no-mortgage-visual-story-youtube",
           "ok": true,
           "issues": []
         }
@@ -2047,6 +2389,37 @@
       "visible_surface_album_link_ok": false,
       "visible_surface_destinations": [
         "spotify"
+      ],
+      "visible_surface_tracking_url_count": 1
+    },
+    {
+      "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-08-04T10:15:00-04:00",
+      "wave": "video-reset",
+      "track": "05",
+      "tracking_url_count": 1,
+      "destinations": [
+        "echo"
+      ],
+      "missing_destinations": [],
+      "ok": true,
+      "issues": [],
+      "tracking_urls": [
+        {
+          "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
+          "destination": "echo",
+          "post_id_param": "fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube",
+          "expected_post_id_param": "fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube",
+          "ok": true,
+          "issues": []
+        }
+      ],
+      "main_text_album_link_ok": true,
+      "main_text_tracking_urls": [],
+      "visible_surface_album_link_ok": false,
+      "visible_surface_destinations": [
+        "echo"
       ],
       "visible_surface_tracking_url_count": 1
     },

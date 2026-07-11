@@ -1,15 +1,14 @@
 # YouTube Experiment Public Metrics - Lily Roo
 
-Generated: 2026-07-11T19:32:49Z
+Generated: 2026-07-11T23:36:22Z
 
 ## Summary
-- Status: **blocked**
+- Status: **no_public_metrics**
 - YouTube template rows: **0**
 - Importable posts: **0**
 - Importable fields: **0**
 - Output CSV: `data/youtube_experiment_public_metrics.csv`
 - Preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/youtube_experiment_public_metrics.csv --dry-run`
-- Error: `Missing YouTube OAuth key(s): GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN`
 
 ## Measurements
 - No importable YouTube public metrics were found.

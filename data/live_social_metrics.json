@@ -1,12 +1,21 @@
 {
   "ok": true,
-  "updated_at": "2026-07-11T19:32:33.011Z",
+  "updated_at": "2026-07-11T23:36:00.827Z",
   "platforms": {
     "youtube": {
-      "ok": false,
-      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-      "metrics": {},
-      "status": 400
+      "ok": true,
+      "source": "youtube-data-api",
+      "metrics": {
+        "subscribers": 5,
+        "total_views": 489,
+        "video_count": 34
+      },
+      "channel_title": "Lily Roo",
+      "period_28d": {
+        "startDate": "2026-06-13",
+        "endDate": "2026-07-10"
+      },
+      "analytics_status": "Request had insufficient authentication scopes."
     },
     "spotify": {
       "ok": true,
@@ -55,10 +64,8 @@
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
       "http_status": 200,
-      "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
-      "public_capture_status": "ok",
-      "preserved_previous_public_metrics": true,
-      "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+      "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
+      "public_capture_status": "ok"
     },
     "facebook": {
       "ok": true,
@@ -84,7 +91,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 91347,
+      "html_bytes": 91704,
       "public_capture_status": "ok"
     }
   },
@@ -123,10 +130,8 @@
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
         "http_status": 200,
-        "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
-        "public_capture_status": "ok",
-        "preserved_previous_public_metrics": true,
-        "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+        "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
+        "public_capture_status": "ok"
       },
       "x": {
         "ok": true,
@@ -136,7 +141,7 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 91347,
+        "html_bytes": 91704,
         "public_capture_status": "ok"
       }
     }

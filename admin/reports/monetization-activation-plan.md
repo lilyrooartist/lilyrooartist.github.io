@@ -1,10 +1,10 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-11T19:32:51.368683Z
+Generated: 2026-07-11T23:36:25.764572Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
-- Runway status: **moving**
+- Runway status: **stalled**
 - Ready release-forward approvals: **0**
 - Solicitation rewrites available: **0**
 - Platform fixes: **0**

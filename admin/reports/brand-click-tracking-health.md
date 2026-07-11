@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-11T19:32:50.040367Z
+Generated: 2026-07-11T23:36:23.285052Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **20 / 20**
-- Tracking URLs checked: **20 / 20**
+- Future campaign rows ready: **32 / 32**
+- Tracking URLs checked: **32 / 32**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **5 / 20**
-- Visible full destination sets: **20 / 20**
+- Visible album click paths: **8 / 32**
+- Visible full destination sets: **32 / 32**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,7 +24,7 @@ Generated: 2026-07-11T19:32:50.040367Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 5, echo: 5, spotify: 5, video: 5**
+- Destinations: **album: 8, echo: 8, spotify: 8, video: 8**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
@@ -194,6 +194,9 @@ Generated: 2026-07-11T19:32:50.040367Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-13T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
@@ -201,9 +204,15 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-15T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube 2026-07-17T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook 2026-07-17T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `video`
   - Visible surface: **attention** (`video`)
@@ -211,6 +220,9 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `video`
   - Visible surface: **attention** (`video`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-19T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-19T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)
@@ -218,9 +230,15 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-21T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-21T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-23T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
@@ -228,9 +246,15 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube 2026-07-25T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` Facebook 2026-07-25T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `video`
   - Visible surface: **attention** (`video`)
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-27T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-27T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)
@@ -238,9 +262,15 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-29T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
+- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-31T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-31T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
@@ -248,6 +278,9 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `video`
   - Visible surface: **attention** (`video`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube 2026-08-02T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
 - `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `video`
   - Visible surface: **attention** (`video`)
@@ -255,6 +288,9 @@ Generated: 2026-07-11T19:32:50.040367Z
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
   - Main-post album link: **ready**
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)

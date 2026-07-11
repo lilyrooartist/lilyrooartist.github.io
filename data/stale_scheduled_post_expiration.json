@@ -1,11 +1,11 @@
 {
   "ok": true,
   "mode": "write",
-  "generated_at": "2026-07-11T19:32:36.790630Z",
+  "generated_at": "2026-07-11T23:36:04.893538Z",
   "source": "data/scheduled_posts.csv",
   "archive": "data/expired_scheduled_posts.csv",
   "older_than_hours": 24.0,
-  "cutoff": "2026-07-10T19:32:36.790630Z",
+  "cutoff": "2026-07-10T23:36:04.893538Z",
   "input_count": 94,
   "kept_count": 81,
   "expired_count": 13,
@@ -26,8 +26,7 @@
   ],
   "skipped_reasons": {
     "already_published": 49,
-    "approved": 20,
-    "inside_stale_grace_window": 12
+    "approved": 32
   },
   "source_pruned": false,
   "guardrail": "Only unapproved, unpublished, past-due rows outside the stale grace window are archived; source pruning requires --prune-source."

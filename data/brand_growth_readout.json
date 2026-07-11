@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T19:32:50.437611Z",
+  "generated_at": "2026-07-11T23:36:24.240651Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -24,15 +24,15 @@
     },
     "active_platform_counts": {
       "Facebook": 20,
-      "X": 16
+      "X": 16,
+      "YouTube": 12
     },
     "status_counts": {
       "posted_waiting_measurement_window": 2,
       "ready_for_metric_capture": 14,
-      "scheduled_future": 20,
-      "waiting_platform_readiness": 12
+      "scheduled_future": 32
     },
-    "approved_auto_rows": 36,
+    "approved_auto_rows": 48,
     "future_queue_visible_rows": 32,
     "posted_or_measured_rows": 16,
     "measured_rows": 0,
@@ -49,14 +49,14 @@
     "campaign_click_report_path": "admin/reports/brand-campaign-clicks.md",
     "campaign_click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
     "campaign_click_tracking_status": "ready",
-    "campaign_click_tracking_ready_rows": 20,
-    "campaign_click_tracking_future_rows": 20,
-    "campaign_click_tracking_url_count": 20,
-    "campaign_click_tracking_expected_url_count": 20,
+    "campaign_click_tracking_ready_rows": 32,
+    "campaign_click_tracking_future_rows": 32,
+    "campaign_click_tracking_url_count": 32,
+    "campaign_click_tracking_expected_url_count": 32,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
     "attention_rows": 14,
-    "next_scheduled_post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
-    "next_scheduled_at": "2026-07-13T11:20:00-04:00",
+    "next_scheduled_post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+    "next_scheduled_at": "2026-07-13T10:15:00-04:00",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
@@ -99,6 +99,7 @@
     "next_measurement_window_status": "measurement_due",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "next_proof_post_ids": [
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "FP-GROWTH-RESET-VOICE-01-X"
     ],
@@ -111,7 +112,7 @@
     "export_social_executions_command": "python3 scripts/export_social_executions.py --refresh-admin",
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
     "report_path": "admin/reports/brand-growth-readout.md",
-    "live_youtube_total_views": null,
+    "live_youtube_total_views": 489,
     "live_spotify_monthly_listeners": 1
   },
   "post_slot_watch": {
@@ -140,6 +141,7 @@
       "next_post_proof_window_status": "scheduled_future",
       "next_post_proof_due_at": "2026-07-13T18:06:00Z",
       "next_post_proof_post_ids": [
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
         "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
         "FP-GROWTH-RESET-VOICE-01-X"
       ],
@@ -389,19 +391,21 @@
         "date": "2026-07-13",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "FP-GROWTH-RESET-VOICE-01-X"
         ],
         "platforms": [
           "Facebook",
-          "X"
+          "X",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-13T15:20:00Z",
+        "first_scheduled_at": "2026-07-13T14:15:00Z",
         "last_scheduled_at": "2026-07-13T18:05:00Z",
         "proof_due_at": "2026-07-13T18:06:00Z",
         "measurement_due_at": "2026-07-14T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 3
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -415,17 +419,19 @@
         "date": "2026-07-15",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
           "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-15T15:20:00Z",
+        "first_scheduled_at": "2026-07-15T14:15:00Z",
         "last_scheduled_at": "2026-07-15T15:20:00Z",
         "proof_due_at": "2026-07-15T15:21:00Z",
         "measurement_due_at": "2026-07-16T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -439,19 +445,21 @@
         "date": "2026-07-17",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
           "FP-GROWTH-RESET-VOICE-02-X"
         ],
         "platforms": [
           "Facebook",
-          "X"
+          "X",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-17T15:20:00Z",
+        "first_scheduled_at": "2026-07-17T14:15:00Z",
         "last_scheduled_at": "2026-07-17T18:05:00Z",
         "proof_due_at": "2026-07-17T18:06:00Z",
         "measurement_due_at": "2026-07-18T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 3
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -465,17 +473,19 @@
         "date": "2026-07-19",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-19T15:20:00Z",
+        "first_scheduled_at": "2026-07-19T14:15:00Z",
         "last_scheduled_at": "2026-07-19T15:20:00Z",
         "proof_due_at": "2026-07-19T15:21:00Z",
         "measurement_due_at": "2026-07-20T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -513,17 +523,19 @@
         "date": "2026-07-21",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
           "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-21T15:20:00Z",
+        "first_scheduled_at": "2026-07-21T14:15:00Z",
         "last_scheduled_at": "2026-07-21T15:20:00Z",
         "proof_due_at": "2026-07-21T15:21:00Z",
         "measurement_due_at": "2026-07-22T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -537,17 +549,19 @@
         "date": "2026-07-23",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-23T15:20:00Z",
+        "first_scheduled_at": "2026-07-23T14:15:00Z",
         "last_scheduled_at": "2026-07-23T15:20:00Z",
         "proof_due_at": "2026-07-23T15:21:00Z",
         "measurement_due_at": "2026-07-24T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -585,17 +599,19 @@
         "date": "2026-07-25",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-25T15:20:00Z",
+        "first_scheduled_at": "2026-07-25T14:15:00Z",
         "last_scheduled_at": "2026-07-25T15:20:00Z",
         "proof_due_at": "2026-07-25T15:21:00Z",
         "measurement_due_at": "2026-07-26T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -609,19 +625,21 @@
         "date": "2026-07-27",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
           "FP-GROWTH-RESET-VOICE-05-X"
         ],
         "platforms": [
           "Facebook",
-          "X"
+          "X",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-27T15:20:00Z",
+        "first_scheduled_at": "2026-07-27T14:15:00Z",
         "last_scheduled_at": "2026-07-27T18:05:00Z",
         "proof_due_at": "2026-07-27T18:06:00Z",
         "measurement_due_at": "2026-07-28T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 3
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -635,17 +653,19 @@
         "date": "2026-07-29",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
           "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-29T15:20:00Z",
+        "first_scheduled_at": "2026-07-29T14:15:00Z",
         "last_scheduled_at": "2026-07-29T15:20:00Z",
         "proof_due_at": "2026-07-29T15:21:00Z",
         "measurement_due_at": "2026-07-30T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -659,19 +679,21 @@
         "date": "2026-07-31",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
           "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-VOICE-06-X"
         ],
         "platforms": [
           "Facebook",
-          "X"
+          "X",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-07-31T15:20:00Z",
+        "first_scheduled_at": "2026-07-31T14:15:00Z",
         "last_scheduled_at": "2026-07-31T18:05:00Z",
         "proof_due_at": "2026-07-31T18:06:00Z",
         "measurement_due_at": "2026-08-01T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 3
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -685,17 +707,19 @@
         "date": "2026-08-02",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-08-02T15:20:00Z",
+        "first_scheduled_at": "2026-08-02T14:15:00Z",
         "last_scheduled_at": "2026-08-02T15:20:00Z",
         "proof_due_at": "2026-08-02T15:21:00Z",
         "measurement_due_at": "2026-08-03T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -733,17 +757,19 @@
         "date": "2026-08-04",
         "status": "scheduled_future",
         "post_ids": [
+          "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
         ],
         "platforms": [
-          "Facebook"
+          "Facebook",
+          "YouTube"
         ],
-        "first_scheduled_at": "2026-08-04T15:20:00Z",
+        "first_scheduled_at": "2026-08-04T14:15:00Z",
         "last_scheduled_at": "2026-08-04T15:20:00Z",
         "proof_due_at": "2026-08-04T15:21:00Z",
         "measurement_due_at": "2026-08-05T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "scheduled_future": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -1136,7 +1162,7 @@
       "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-13T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "What is the rush to the same place? Slow Walk keeps its own time. #Shorts",
@@ -1150,8 +1176,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1202,7 +1228,7 @@
       "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-15T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "When everyone says you are behind, but you are the only one still arriving. #Shorts",
@@ -1216,8 +1242,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1246,7 +1272,7 @@
       "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-17T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "A quiet walk through the pressure until the pressure learns your pace. #Shorts",
@@ -1260,8 +1286,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1312,7 +1338,7 @@
       "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-19T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "What did you stop rushing? Slow Walk answers without speeding up. #Shorts",
@@ -1326,8 +1352,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1378,7 +1404,7 @@
       "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-21T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "Some truths arrive with a little steam. Spilling the Tea is already in the room. #Shorts",
@@ -1392,8 +1418,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1422,7 +1448,7 @@
       "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-23T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "When the group chat says we need to talk and you already know. #Shorts",
@@ -1436,8 +1462,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1488,7 +1514,7 @@
       "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-25T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "One cup. One secret. A whole room changing temperature. #Shorts",
@@ -1502,8 +1528,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1532,7 +1558,7 @@
       "id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-27T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "What truth are you ready to say out loud? Spilling the Tea lets it pour. #Shorts",
@@ -1546,8 +1572,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1598,7 +1624,7 @@
       "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-29T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "Tiny house. One light. No Mortgage. That is the whole escape plan. #Shorts",
@@ -1612,8 +1638,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1642,7 +1668,7 @@
       "id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-07-31T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "When your dream home is mostly somewhere nobody can find you. #Shorts",
@@ -1656,8 +1682,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1708,7 +1734,7 @@
       "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-08-02T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "Trade the noise for a wide sky. Keep the signal. Lose the debt. #Shorts",
@@ -1722,8 +1748,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1774,7 +1800,7 @@
       "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "platform": "YouTube",
       "scheduled_at": "2026-08-04T10:15:00-04:00",
-      "approved": "no",
+      "approved": "yes",
       "execution_mode": "auto",
       "post_type": "video",
       "text": "What would you keep if you needed less? No Mortgage has a short list. #Shorts",
@@ -1788,8 +1814,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "waiting_platform_readiness",
-      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
     },
     {
@@ -1869,13 +1895,14 @@
       "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK"
     ],
     "next_proof_post_ids": [
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "FP-GROWTH-RESET-VOICE-01-X"
     ]
   },
   "next_actions": [
     "Review the tracks, platforms, and destinations with click response before changing the next copy wave.",
-    "After `2026-07-13T18:06:00Z`, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X.",
+    "After `2026-07-13T18:06:00Z`, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X.",
     "Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting."
   ],
   "guardrails": [

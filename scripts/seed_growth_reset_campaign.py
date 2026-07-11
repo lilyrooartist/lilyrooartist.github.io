@@ -288,7 +288,8 @@ def main() -> int:
     retained = [row for row in existing if row not in retired and not str(row.get("id") or "").startswith(PREFIX)]
 
     if args.apply:
-        write_csv(ARCHIVE, retired, fieldnames)
+        if retired:
+            write_csv(ARCHIVE, retired, fieldnames)
         write_csv(QUEUE, sorted(retained + candidates, key=lambda row: row.get("scheduled_at") or ""), fieldnames)
 
     end = start + timedelta(days=29)

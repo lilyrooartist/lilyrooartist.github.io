@@ -1,12 +1,12 @@
 # Lily Roo Growth Reset Outcomes
 
-Generated: 2026-07-11T19:32:51.139264Z
+Generated: 2026-07-11T23:36:25.537563Z
 Status: **scheduled**
 
 ## Scorecard
 - Native video plays: **0 / 5000**
 - Qualified clicks: **0 / 25**
-- YouTube subscribers: **6 / 11**
+- YouTube subscribers: **5 / 11**
 - Spotify monthly listeners: **1 / 10**
 - Repeatable formats: **0 / 2**
 

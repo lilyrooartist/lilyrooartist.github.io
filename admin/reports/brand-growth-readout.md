@@ -1,24 +1,24 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-11T19:32:50.437611Z
+Generated: 2026-07-11T23:36:24.240651Z
 
 ## Summary
 - Campaign rows: **48**
-- Approved auto rows: **36**
+- Approved auto rows: **48**
 - Visible in future queue: **32**
 - Posted or measured rows: **16**
 - Measured rows: **0**
 - Ready for metric capture: **14**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **3** across **1** post(s); last click `2026-07-10T15:30:43.299Z`
-- Click tracking links: **ready** (20 / 20 future rows; 20 / 20 URLs)
+- Click tracking links: **ready** (32 / 32 future rows; 32 / 32 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 14, scheduled_future: 20, waiting_platform_readiness: 12**
-- Next scheduled: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` at `2026-07-13T11:20:00-04:00`
+- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 14, scheduled_future: 32**
+- Next scheduled: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` at `2026-07-13T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
-- YouTube total views: **None**
+- YouTube total views: **489**
 - Spotify monthly listeners: **1**
 
 ## Learning Now
@@ -32,7 +32,7 @@ Generated: 2026-07-11T19:32:50.437611Z
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
 - Waiting posts: `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
-- Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
+- Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
 - Refresh state: `python3 scripts/refresh_promo_admin.py`
@@ -53,7 +53,7 @@ Generated: 2026-07-11T19:32:50.437611Z
 
 ## Next Actions
 - Review the tracks, platforms, and destinations with click response before changing the next copy wave.
-- After `2026-07-13T18:06:00Z`, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X.
+- After `2026-07-13T18:06:00Z`, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X.
 - Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting.
 
 ## Post-Slot Watch
@@ -88,49 +88,49 @@ Generated: 2026-07-11T19:32:50.437611Z
 - `2026-07-11` **posted_waiting_measurement** proof due `2026-07-11T15:21:00Z` for `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
   - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-13` **scheduled_future** proof due `2026-07-13T18:06:00Z` for `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
+- `2026-07-13` **scheduled_future** proof due `2026-07-13T18:06:00Z` for `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-15` **scheduled_future** proof due `2026-07-15T15:21:00Z` for `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
+- `2026-07-15` **scheduled_future** proof due `2026-07-15T15:21:00Z` for `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-17` **scheduled_future** proof due `2026-07-17T18:06:00Z` for `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK, FP-GROWTH-RESET-VOICE-02-X`
+- `2026-07-17` **scheduled_future** proof due `2026-07-17T18:06:00Z` for `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK, FP-GROWTH-RESET-VOICE-02-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-19` **scheduled_future** proof due `2026-07-19T15:21:00Z` for `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+- `2026-07-19` **scheduled_future** proof due `2026-07-19T15:21:00Z` for `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-20` **scheduled_future** proof due `2026-07-20T18:06:00Z` for `FP-GROWTH-RESET-VOICE-03-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-21` **scheduled_future** proof due `2026-07-21T15:21:00Z` for `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
+- `2026-07-21` **scheduled_future** proof due `2026-07-21T15:21:00Z` for `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-23` **scheduled_future** proof due `2026-07-23T15:21:00Z` for `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
+- `2026-07-23` **scheduled_future** proof due `2026-07-23T15:21:00Z` for `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-24` **scheduled_future** proof due `2026-07-24T18:06:00Z` for `FP-GROWTH-RESET-VOICE-04-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-25` **scheduled_future** proof due `2026-07-25T15:21:00Z` for `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
+- `2026-07-25` **scheduled_future** proof due `2026-07-25T15:21:00Z` for `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-27` **scheduled_future** proof due `2026-07-27T18:06:00Z` for `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK, FP-GROWTH-RESET-VOICE-05-X`
+- `2026-07-27` **scheduled_future** proof due `2026-07-27T18:06:00Z` for `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK, FP-GROWTH-RESET-VOICE-05-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-29` **scheduled_future** proof due `2026-07-29T15:21:00Z` for `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK`
+- `2026-07-29` **scheduled_future** proof due `2026-07-29T15:21:00Z` for `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-31` **scheduled_future** proof due `2026-07-31T18:06:00Z` for `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-VOICE-06-X`
+- `2026-07-31` **scheduled_future** proof due `2026-07-31T18:06:00Z` for `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-VOICE-06-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-02` **scheduled_future** proof due `2026-08-02T15:21:00Z` for `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK`
+- `2026-08-02` **scheduled_future** proof due `2026-08-02T15:21:00Z` for `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-08-03` **scheduled_future** proof due `2026-08-03T18:06:00Z` for `FP-GROWTH-RESET-VOICE-07-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-04` **scheduled_future** proof due `2026-08-04T15:21:00Z` for `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+- `2026-08-04` **scheduled_future** proof due `2026-08-04T15:21:00Z` for `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-08-07` **scheduled_future** proof due `2026-08-07T18:06:00Z` for `FP-GROWTH-RESET-VOICE-08-X`
@@ -194,66 +194,66 @@ Generated: 2026-07-11T19:32:50.437611Z
   - URL: https://www.facebook.com/lilyrooartist/posts/122121593013249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
   - Next: Wait until 2026-07-12T15:30:56.380000+00:00 before capturing metrics.
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-13T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-13T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-01-X` X 2026-07-13T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-15T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-15T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube 2026-07-17T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube 2026-07-17T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook 2026-07-17T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-02-X` X 2026-07-17T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-19T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-19T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-19T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-03-X` X 2026-07-20T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-21T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-21T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-21T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-23T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-23T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-04-X` X 2026-07-24T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube 2026-07-25T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube 2026-07-25T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` Facebook 2026-07-25T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-27T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-27T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-27T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-05-X` X 2026-07-27T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-29T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-29T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-31T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-31T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-31T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-06-X` X 2026-07-31T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube 2026-08-02T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube 2026-08-02T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-07-X` X 2026-08-03T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **waiting_platform_readiness**
-  - Next: Keep YouTube inactive until its automated posting and analytics credentials are ready.
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **scheduled_future**

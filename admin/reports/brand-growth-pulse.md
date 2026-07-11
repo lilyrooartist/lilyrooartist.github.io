@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-11T19:32:51.086211Z
+Generated: 2026-07-11T23:36:25.498627Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-07-11T19:32:51.086211Z
 - Posted or measured rows: **16**
 - Ready for result capture: **14**
 - First-party clicks: **3** across **1** post(s)
-- Click snapshot: `2026-07-11T19:32:48.054362Z` (covers current due posts)
-- Next post at: `2026-07-13T11:20:00-04:00`
+- Click snapshot: `2026-07-11T23:36:20.933942Z` (covers current due posts)
+- Next post at: `2026-07-13T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `43.79`
-- Hours until proof due: `46.55`
+- Hours until next post: `38.64`
+- Hours until proof due: `42.49`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -39,8 +39,8 @@ Generated: 2026-07-11T19:32:51.086211Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` (X): The Power Of Light - Waiting for first useful result check
   - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` (Facebook): The Power Of Light - Waiting for first useful result check
+  - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` (YouTube): Slow Walk Lyric Punch Line - Next queued learning input
   - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): Slow Walk Lyric Punch Line - Next queued learning input
-  - `FP-GROWTH-RESET-VOICE-01-X` (X): Voice 01 - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.
