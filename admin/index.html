@@ -137,6 +137,16 @@
 	    .simple-status-card .metric-label{font-size:11px}
     .simple-status-card strong{display:block;color:#fff;font-size:17px;line-height:1.1;margin-top:6px;word-break:break-word;overflow-wrap:anywhere}
     .simple-status-card p{margin:6px 0 0;color:#b6bed6;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+    .simple-outcomes{margin-top:16px;padding-top:16px;border-top:1px solid #26314e}
+    .simple-outcomes-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:10px}
+    .simple-outcomes-head h2{margin:0;color:#fff;font-size:16px;line-height:1.2}
+    .simple-outcomes-head p{margin:0;color:#b8c1dc;font-size:12px;line-height:1.35}
+    .simple-outcome-strip{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:10px}
+    .simple-outcome-card{border:1px solid #334062;border-radius:8px;background:#101523;padding:13px;min-height:92px;box-sizing:border-box;min-width:0}
+    .simple-outcome-card.status-ok{border-color:#1f684d;background:#0f201b}
+    .simple-outcome-card.status-warn{border-color:#6c4b16;background:#211a10}
+    .simple-outcome-card strong{display:block;color:#fff;font-size:22px;line-height:1.1;margin-top:6px;overflow-wrap:anywhere}
+    .simple-outcome-card p{margin:6px 0 0;color:#b6bed6;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
     .simple-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
     .simple-columns .simple-section{background:#111827;border:1px solid #26314e;border-radius:8px;padding:16px;min-height:0}
 	    .simple-list{display:grid;gap:10px}
@@ -247,11 +257,11 @@
     .auth-card input{box-sizing:border-box;width:100%;background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:10px;margin:10px 0}
     .auth-error{min-height:18px;color:#ff9fa8;font-size:12px;margin:4px 0 10px}
 	    @media(max-width:1180px){.report-grid,.today-grid,.simple-columns{grid-template-columns:1fr}}
-    @media(max-width:1080px){.main-grid,.library-grid{grid-template-columns:1fr}.metric-grid,.library-stats,.simple-status-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.nav,.library-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero,.library-hero,.simple-section-head,.simple-intro{flex-direction:column;align-items:flex-start}.report-actions,.library-actions,.simple-section-actions{justify-content:flex-start}.simple-status-side{justify-items:start}}
+    @media(max-width:1080px){.main-grid,.library-grid{grid-template-columns:1fr}.metric-grid,.library-stats,.simple-status-strip,.simple-outcome-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.nav,.library-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero,.library-hero,.simple-section-head,.simple-intro{flex-direction:column;align-items:flex-start}.report-actions,.library-actions,.simple-section-actions{justify-content:flex-start}.simple-status-side{justify-items:start}}
     @media(max-width:620px){
       .content{padding:14px}
       .song-grid,.story-grid,.metric-grid,.library-stats,.source-grid{grid-template-columns:1fr}
-      .simple-status-strip{grid-template-columns:1fr}
+      .simple-status-strip,.simple-outcome-strip{grid-template-columns:1fr}
       .nav{padding:9px 10px;gap:8px}
       .brand{font-size:13px}
       .brand small{display:none}
@@ -274,7 +284,7 @@
       .report-table td:first-child{white-space:normal}
       .report-table td::before{content:attr(data-label);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:800}
     }
-    @media(max-width:360px){.simple-status-strip{grid-template-columns:1fr}}
+	    @media(max-width:360px){.simple-status-strip,.simple-outcome-strip{grid-template-columns:1fr}}
   </style>
 </head>
 <body class="auth-pending">
@@ -467,6 +477,19 @@
 		                <strong>Loading</strong>
 		                <p>Checking the active Analog Myth queue.</p>
 	              </article>
+	            </div>
+	            <div class="simple-outcomes" aria-labelledby="simple-outcomes-heading">
+	              <div class="simple-outcomes-head">
+	                <h2 id="simple-outcomes-heading">Audience outcomes</h2>
+	                <p id="simple-outcomes-copy">Loading the latest audience and response signals.</p>
+	              </div>
+	              <div class="simple-outcome-strip" id="simple-outcome-strip">
+	                <article class="simple-outcome-card">
+	                  <div class="metric-label">Audience</div>
+	                  <strong>Loading</strong>
+	                  <p>Checking current outcome sources.</p>
+	                </article>
+	              </div>
 	            </div>
 	          </section>
 
@@ -845,7 +868,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-07-04 to 2026-07-10
-**Last updated:** 2026-07-10 04:55 PM EDT
+**Last updated:** 2026-07-10 11:04 PM EDT
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -972,7 +995,7 @@
 - Latest post: https://www.facebook.com/lilyrooartist/posts/122121496545249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-07-10T20:55:07.256Z**
+- Live API captured: **2026-07-11T03:04:16.723Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -982,9 +1005,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-10T20:55:30.545564+00:00**
+- All-release store verification captured: **2026-07-11T03:04:42.804563+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-07-10T20:55:18.562317Z**
+- Social executor history captured: **2026-07-11T03:04:29.904273Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -1109,7 +1132,7 @@ Album room: https://www.lilyroo.com/go/am.htm",site_link,no,yes,,,,,,,queue_id=F
 A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-WALK-FACEBOOK; exported from Worker execution state</script>
 
 <script type="application/json" id="embedded-future-posts">{
-  "last_synced": "2026-07-10T20:55:11.643506+00:00",
+  "last_synced": "2026-07-11T03:04:22.172412+00:00",
   "source": "data/scheduled_posts.csv",
   "published_log": "admin/content/Published_Log.csv",
   "excluded_published_ids": [
@@ -2240,7 +2263,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-07-10T20:55:30.818588+00:00",
+  "generated_at": "2026-07-11T03:04:43.065427+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -2501,7 +2524,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "delta_plays_views": 236,
       "lift_percent": 94.02,
       "percent_to_target": 155.1,
-      "days_remaining": 12,
+      "days_remaining": 11,
       "status": "target_reached",
       "action_needed": "Keep publishing and identify the winning repeatable formats from measured post results.",
       "top_repeatable_format_candidates": [
@@ -3113,18 +3136,18 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "tracked": true,
         "count_visible": false,
         "source": "YouTube public audience metric, with metrics history fallback",
-        "window_days": 31,
+        "window_days": 32,
         "delta": 1,
-        "per_week": 0.23
+        "per_week": 0.22
       },
       "runway": {
         "status": "moving",
-        "snapshot_count": 26,
+        "snapshot_count": 27,
         "first_date": "2026-06-09",
-        "latest_date": "2026-07-10",
-        "window_days": 31,
+        "latest_date": "2026-07-11",
+        "window_days": 32,
         "audience_signal_delta": 1,
-        "audience_signal_per_week": 0.23,
+        "audience_signal_per_week": 0.22,
         "action_needed": "Maintain release-forward distribution and compare measured post formats after each proof window."
       },
       "approved_upcoming_posts": 50,
@@ -3481,15 +3504,15 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "Import only nonnegative numeric new_value cells from the named analytics source."
       ]
     },
-    "live_metrics_updated_at": "2026-07-10T20:55:07.256Z",
+    "live_metrics_updated_at": "2026-07-11T03:04:16.723Z",
     "metrics_history": {
-      "snapshot_count": 26,
-      "updated_at": "2026-07-10T20:55:23.098582Z",
-      "latest_date": "2026-07-10",
+      "snapshot_count": 27,
+      "updated_at": "2026-07-11T03:04:35.529933Z",
+      "latest_date": "2026-07-11",
       "latest": {
-        "date": "2026-07-10",
-        "captured_at": "2026-07-10T20:55:23.098582Z",
-        "live_metrics_updated_at": "2026-07-10T20:55:07.256Z",
+        "date": "2026-07-11",
+        "captured_at": "2026-07-11T03:04:35.529933Z",
+        "live_metrics_updated_at": "2026-07-11T03:04:16.723Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 487,
@@ -3527,7 +3550,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "approved_total": 76,
           "scheduled_total": 110
         },
-        "preserved_from_same_day_snapshot": [
+        "preserved_from_previous_snapshot": [
           "youtube.total_views",
           "youtube.video_count"
         ],
@@ -3540,14 +3563,14 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "instagram.followers": 0,
           "tiktok.followers": 0,
           "x.followers": 0,
-          "publishing.published_30d": 2,
-          "publishing.published_total": 2,
-          "queue.approved_upcoming": -2,
+          "publishing.published_30d": 0,
+          "publishing.published_total": 0,
+          "queue.approved_upcoming": 0,
           "queue.approved_total": 0,
           "queue.scheduled_total": 0
         }
       },
-      "previous_date": "2026-07-09",
+      "previous_date": "2026-07-10",
       "delta_from_previous": {
         "youtube.subscribers": 0,
         "youtube.total_views": 0,
@@ -3557,9 +3580,9 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "instagram.followers": 0,
         "tiktok.followers": 0,
         "x.followers": 0,
-        "publishing.published_30d": 2,
-        "publishing.published_total": 2,
-        "queue.approved_upcoming": -2,
+        "publishing.published_30d": 0,
+        "publishing.published_total": 0,
+        "queue.approved_upcoming": 0,
         "queue.approved_total": 0,
         "queue.scheduled_total": 0
       }
@@ -5546,7 +5569,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "next_learning_due_at": "2026-07-11T14:15:30.211000Z",
       "click_count": 3,
       "click_post_count": 1,
-      "click_snapshot_updated_at": "2026-07-10T20:55:25.130050Z",
+      "click_snapshot_updated_at": "2026-07-11T03:04:37.415937Z",
       "click_snapshot_covers_ready_measurements": true,
       "manual_posting_required": false,
       "next_action": "Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run."
@@ -5582,7 +5605,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "recheck_due": 0,
       "waiting_for_next_recheck": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-11T20:55:07.415255+00:00"
+      "next_recheck_at": "2026-07-12T03:04:16.848905+00:00"
     },
     "store_verification": {
       "source_path": "data/store_verification_history.json",
@@ -5603,12 +5626,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5622,12 +5645,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5641,12 +5664,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5660,12 +5683,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5682,12 +5705,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5700,12 +5723,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5718,12 +5741,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5736,12 +5759,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5753,7 +5776,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+      "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -5764,12 +5787,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5783,12 +5806,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5802,12 +5825,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5821,12 +5844,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5836,7 +5859,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-07-10T20:55:11.040307Z",
+        "updated_at": "2026-07-11T03:04:21.450946Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -5852,7 +5875,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-07-10T20:55:18.562317Z",
+      "updated_at": "2026-07-11T03:04:29.904273Z",
       "http_status": 200,
       "execution_count": 59,
       "current_execution_count": 44,
@@ -5879,11 +5902,11 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-07-10T20:55:22.994109Z",
+      "updated_at": "2026-07-11T03:04:35.424703Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-07-10T20:55:22.774776Z",
-      "checked_at": "2026-07-10T20:55:22.774Z",
+      "requested_scheduled_time": "2026-07-11T03:04:35.169846Z",
+      "checked_at": "2026-07-11T03:04:35.169Z",
       "dry_run": true,
       "due_count": 0,
       "result_count": 0,
@@ -5901,14 +5924,14 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "39dd44b6a18754843498420526eb9070a74cda38",
-        "short_commit": "39dd44b6",
+        "commit": "df088cf3c4ba836d4ffb94a1dff1ad3f3088aab0",
+        "short_commit": "df088cf3",
         "branch": "main",
-        "committed_at": "2026-07-10T16:52:40-04:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/39dd44b6a18754843498420526eb9070a74cda38"
+        "committed_at": "2026-07-10T16:55:36-04:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/df088cf3c4ba836d4ffb94a1dff1ad3f3088aab0"
       },
-      "finished_at": "2026-07-10T20:55:30.773690Z",
-      "duration_seconds": 26.26,
+      "finished_at": "2026-07-11T03:04:43.021343Z",
+      "duration_seconds": 29.34,
       "command_count": 62,
       "passed": 62,
       "failed": 0,
@@ -5926,11 +5949,11 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "39dd44b6a18754843498420526eb9070a74cda38",
-        "short_commit": "39dd44b6",
+        "commit": "df088cf3c4ba836d4ffb94a1dff1ad3f3088aab0",
+        "short_commit": "df088cf3",
         "branch": "main",
-        "committed_at": "2026-07-10T16:52:40-04:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/39dd44b6a18754843498420526eb9070a74cda38"
+        "committed_at": "2026-07-10T16:55:36-04:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/df088cf3c4ba836d4ffb94a1dff1ad3f3088aab0"
       },
       "latest_run_covers_source_commit": false,
       "latest_run_coverage_basis": "source_changed_after_latest_run",
@@ -7661,12 +7684,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7680,12 +7703,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7699,12 +7722,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7718,12 +7741,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7740,12 +7763,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7758,12 +7781,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7776,12 +7799,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7794,12 +7817,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7811,7 +7834,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+      "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -7822,12 +7845,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7841,12 +7864,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7860,12 +7883,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7879,12 +7902,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7894,7 +7917,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-07-10T20:55:11.040307Z",
+        "updated_at": "2026-07-11T03:04:21.450946Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -7916,18 +7939,18 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-07-10T20:55:30.818588+00:00"
+      "checked_at": "2026-07-11T03:04:43.065427+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 177.7,
+        "age_hours": 183.9,
         "max_age_hours": 72,
         "timestamp": "2026-07-03T11:10:52.058673+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-07-10T20:55:30.818588+00:00",
+        "checked_at": "2026-07-11T03:04:43.065427+00:00",
         "checked_age_hours": 0.0,
         "evidence": "4 pending store links checked; no new public URLs found."
       },
@@ -7937,7 +7960,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-07-10T20:55:11.644320+00:00",
+        "timestamp": "2026-07-11T03:04:22.173395+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -7946,14 +7969,14 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:23.055199+00:00",
+        "timestamp": "2026-07-11T03:04:35.487385+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 6.4,
         "max_age_hours": 168,
         "timestamp": "2026-07-10T20:39:25.779404+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -7971,7 +7994,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 494.0,
+        "age_hours": 500.2,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -7982,7 +8005,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:07.256000+00:00",
+        "timestamp": "2026-07-11T03:04:16.723000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -7991,7 +8014,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:23.098582+00:00",
+        "timestamp": "2026-07-11T03:04:35.529933+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -8000,7 +8023,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:11.545565+00:00",
+        "timestamp": "2026-07-11T03:04:22.074185+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8009,7 +8032,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:30.818588+00:00",
+        "timestamp": "2026-07-11T03:04:43.065427+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -8018,7 +8041,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:18.562317+00:00",
+        "timestamp": "2026-07-11T03:04:29.904273+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8027,7 +8050,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:22.994109+00:00",
+        "timestamp": "2026-07-11T03:04:35.424703+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8036,7 +8059,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:27.603248+00:00",
+        "timestamp": "2026-07-11T03:04:39.808355+00:00",
         "refresh_command": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8045,7 +8068,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:30.774695+00:00",
+        "timestamp": "2026-07-11T03:04:43.022300+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -8054,7 +8077,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:23.900368+00:00",
+        "timestamp": "2026-07-11T03:04:36.243280+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8063,7 +8086,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-10T20:55:30.200795+00:00",
+        "timestamp": "2026-07-11T03:04:42.442561+00:00",
         "refresh_command": "python3 scripts/build_brand_growth_pulse.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -8207,12 +8230,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:07.415255Z",
+            "updated_at": "2026-07-11T03:04:16.848905Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:07.415255+00:00",
+            "checked_at": "2026-07-11T03:04:16.848905+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+            "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8224,12 +8247,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:08.876947Z",
+            "updated_at": "2026-07-11T03:04:19.226625Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-10T20:55:08.876947+00:00",
+            "checked_at": "2026-07-11T03:04:19.226625+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8241,12 +8264,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.364872Z",
+            "updated_at": "2026-07-11T03:04:19.686603Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-10T20:55:09.364872+00:00",
+            "checked_at": "2026-07-11T03:04:19.686603+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8340,12 +8363,12 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-10T20:55:09.430375Z",
+            "updated_at": "2026-07-11T03:04:19.752582Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-10T20:55:09.430375+00:00",
+            "checked_at": "2026-07-11T03:04:19.752582+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+            "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8393,7 +8416,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
     "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
     "Collect experiment results: 96 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-11T20:55:07.415255+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-12T03:04:16.848905+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
     "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
   ]
 }</script>
@@ -8475,7 +8498,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-07-10T16:55:23.055199-04:00",
+  "generated_at": "2026-07-10T23:04:35.487385-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -8513,7 +8536,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-07-10T20:55:11.545565Z",
+    "updated_at": "2026-07-11T03:04:22.074185Z",
     "ok": true,
     "counts": {},
     "rows": []
@@ -8523,7 +8546,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-07-10T20:55:30.300362Z",
+  "generated_at": "2026-07-11T03:04:42.523577Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -8883,25 +8906,25 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-07-10T20:55:07.415255+00:00",
+        "checked_at": "2026-07-11T03:04:16.848905+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+        "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-10T20:55:07.415255Z",
+          "updated_at": "2026-07-11T03:04:16.848905Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-10T20:55:07.415255+00:00",
+          "checked_at": "2026-07-11T03:04:16.848905+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-11T20:55:07.415255+00:00",
+          "next_recheck_at": "2026-07-12T03:04:16.848905+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:07.415255+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:16.848905+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -8921,25 +8944,25 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-07-10T20:55:08.876947+00:00",
+        "checked_at": "2026-07-11T03:04:19.226625+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+        "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-10T20:55:08.876947Z",
+          "updated_at": "2026-07-11T03:04:19.226625Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-10T20:55:08.876947+00:00",
+          "checked_at": "2026-07-11T03:04:19.226625+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-11T20:55:08.876947+00:00",
+          "next_recheck_at": "2026-07-12T03:04:19.226625+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:08.876947+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:19.226625+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -8959,25 +8982,25 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-07-10T20:55:09.364872+00:00",
+        "checked_at": "2026-07-11T03:04:19.686603+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+        "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-10T20:55:09.364872Z",
+          "updated_at": "2026-07-11T03:04:19.686603Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-10T20:55:09.364872+00:00",
+          "checked_at": "2026-07-11T03:04:19.686603+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-11T20:55:09.364872+00:00",
+          "next_recheck_at": "2026-07-12T03:04:19.686603+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:09.364872+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:19.686603+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -8997,25 +9020,25 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-07-10T20:55:09.430375+00:00",
+        "checked_at": "2026-07-11T03:04:19.752582+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+        "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-10T20:55:09.430375Z",
+          "updated_at": "2026-07-11T03:04:19.752582Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-07-10T20:55:09.430375+00:00",
+          "checked_at": "2026-07-11T03:04:19.752582+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-11T20:55:09.430375+00:00",
+          "next_recheck_at": "2026-07-12T03:04:19.752582+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:09.430375+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:19.752582+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -9318,7 +9341,7 @@ A song for keeping your own pace whi",,no,no,,,,,,,queue_id=FP-BRAND-AM-07-SLOW-
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-10T20:55:30.300362Z
+Generated: 2026-07-11T03:04:42.523577Z
 
 ## Summary
 - Actions: **9**
@@ -9370,23 +9393,23 @@ Generated: 2026-07-10T20:55:30.300362Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:07.415255+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-10T20:55:07.415255+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:16.848905+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-11T03:04:16.848905+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:08.876947+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-10T20:55:08.876947+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:19.226625+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-11T03:04:19.226625+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:09.364872+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-10T20:55:09.364872+00:00`
+  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:19.686603+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-11T03:04:19.686603+00:00`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on YouTube Music**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-11T20:55:09.430375+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-10T20:55:09.430375+00:00`
+  - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T03:04:19.752582+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-11T03:04:19.752582+00:00`
   - Command: `python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'`
 
 ### Fill manual metrics
@@ -9415,7 +9438,7 @@ Generated: 2026-07-10T20:55:30.300362Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-07-10T20:55:26.559947Z
+Generated: 2026-07-11T03:04:38.897220Z
 
 Pending fields: **6**
 
@@ -9471,7 +9494,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `Meta Business Suite > Insights 2026-07-10`
+- Evidence note template: `Meta Business Suite > Insights 2026-07-11`
 - Collection sequence:
   - Open https://www.facebook.com/903693509504290.
   - Collect the listed metric fields from the named analytics surface.
@@ -9488,7 +9511,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `Instagram Professional Dashboard > Insights 2026-07-10`
+- Evidence note template: `Instagram Professional Dashboard > Insights 2026-07-11`
 - Collection sequence:
   - Open https://www.instagram.com/lilyroo.artist/.
   - Collect the listed metric fields from the named analytics surface.
@@ -9505,7 +9528,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `Spotify for Artists > Music/Stats export 2026-07-10`
+- Evidence note template: `Spotify for Artists > Music/Stats export 2026-07-11`
 - Collection sequence:
   - Open https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a.
   - Collect the listed metric fields from the named analytics surface.
@@ -9525,7 +9548,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `TikTok Studio or Creator Center analytics 2026-07-10`
+- Evidence note template: `TikTok Studio or Creator Center analytics 2026-07-11`
 - Collection sequence:
   - Open https://www.tiktok.com/@lilyroo930.
   - Collect the listed metric fields from the named analytics surface.
@@ -9542,7 +9565,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `X Analytics or account profile metrics 2026-07-10`
+- Evidence note template: `X Analytics or account profile metrics 2026-07-11`
 - Collection sequence:
   - Open https://x.com/lilyrooartist.
   - Collect the listed metric fields from the named analytics surface.
@@ -9734,7 +9757,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE -
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-07-10T20:55:26.389310Z",
+  "generated_at": "2026-07-11T03:04:38.740642Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -9757,7 +9780,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE -
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-07-10T20:55:25.404476Z",
+  "generated_at": "2026-07-11T03:04:37.756081Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -9794,7 +9817,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE -
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-07-10T20:55:25.404476Z
+Generated: 2026-07-11T03:04:37.756081Z
 
 ## Summary
 - Drafts needing review: **0**
@@ -9820,7 +9843,7 @@ Generated: 2026-07-10T20:55:25.404476Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-07-10T20:55:25.478951Z",
+  "generated_at": "2026-07-11T03:04:37.830662Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -10599,7 +10622,7 @@ Generated: 2026-07-10T20:55:25.404476Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Solicitation Copy Audit - Lily Roo
 
-Generated: 2026-07-10T20:55:25.478951Z
+Generated: 2026-07-11T03:04:37.830662Z
 
 ## Summary
 - Draft posts: **0**
@@ -10632,7 +10655,7 @@ Generated: 2026-07-10T20:55:25.478951Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-07-10T20:55:30.496331Z",
+  "generated_at": "2026-07-11T03:04:42.751152Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -10677,7 +10700,7 @@ Generated: 2026-07-10T20:55:25.478951Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-10T20:55:30.496331Z
+Generated: 2026-07-11T03:04:42.751152Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
@@ -10700,7 +10723,7 @@ Generated: 2026-07-10T20:55:30.496331Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-07-10T16:55:25.332984-04:00",
+  "generated_at": "2026-07-10T23:04:37.662612-04:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10801,7 +10824,7 @@ Generated: 2026-07-10T20:55:30.496331Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-10T16:55:25.332984-04:00
+Generated: 2026-07-10T23:04:37.662612-04:00
 
 ## Summary
 - Approved backlog rows: **0**
@@ -10874,7 +10897,7 @@ Generated: 2026-07-10T16:55:25.332984-04:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-07-10T20:55:26.389310Z
+Generated: 2026-07-11T03:04:38.740642Z
 
 ## Summary
 - Platform fixes: **0**
@@ -10894,7 +10917,7 @@ Generated: 2026-07-10T20:55:26.389310Z
 
 
 <script type="application/json" id="embedded-manual-distribution-packet">{
-  "generated_at": "2026-07-10T20:55:25.523249Z",
+  "generated_at": "2026-07-11T03:04:37.866464Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -10997,7 +11020,7 @@ Generated: 2026-07-10T20:55:26.389310Z
 
 <script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
 
-Generated: 2026-07-10T20:55:25.523249Z
+Generated: 2026-07-11T03:04:37.866464Z
 
 ## Summary
 - Manual-ready posts: **0**
@@ -11064,7 +11087,7 @@ Generated: 2026-07-10T20:55:25.523249Z
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-07-10T20:55:26.559947Z",
+  "generated_at": "2026-07-11T03:04:38.897220Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -11531,7 +11554,7 @@ Generated: 2026-07-10T20:55:25.523249Z
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "Meta Business Suite > Insights 2026-07-10",
+      "evidence_note_template": "Meta Business Suite > Insights 2026-07-11",
       "collection_sequence": [
         "Open https://www.facebook.com/903693509504290.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -11581,7 +11604,7 @@ Generated: 2026-07-10T20:55:25.523249Z
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "Instagram Professional Dashboard > Insights 2026-07-10",
+      "evidence_note_template": "Instagram Professional Dashboard > Insights 2026-07-11",
       "collection_sequence": [
         "Open https://www.instagram.com/lilyroo.artist/.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -11650,7 +11673,7 @@ Generated: 2026-07-10T20:55:25.523249Z
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "Spotify for Artists > Music/Stats export 2026-07-10",
+      "evidence_note_template": "Spotify for Artists > Music/Stats export 2026-07-11",
       "collection_sequence": [
         "Open https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -11700,7 +11723,7 @@ Generated: 2026-07-10T20:55:25.523249Z
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "TikTok Studio or Creator Center analytics 2026-07-10",
+      "evidence_note_template": "TikTok Studio or Creator Center analytics 2026-07-11",
       "collection_sequence": [
         "Open https://www.tiktok.com/@lilyroo930.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -11750,7 +11773,7 @@ Generated: 2026-07-10T20:55:25.523249Z
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "X Analytics or account profile metrics 2026-07-10",
+      "evidence_note_template": "X Analytics or account profile metrics 2026-07-11",
       "collection_sequence": [
         "Open https://x.com/lilyrooartist.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -12634,7 +12657,7 @@ Generated: 2026-07-10T20:55:25.523249Z
 
 
 <script type="application/json" id="embedded-scheduled-approval-packet">{
-  "generated_at": "2026-07-10T20:55:25.442017Z",
+  "generated_at": "2026-07-11T03:04:37.794599Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -12889,7 +12912,7 @@ Generated: 2026-07-10T20:55:25.523249Z
 
 <script type="text/plain" id="embedded-scheduled-approval-report"># Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-07-10T20:55:25.442017Z
+Generated: 2026-07-11T03:04:37.794599Z
 
 ## Summary
 - Approval blockers: **0**
@@ -12976,7 +12999,7 @@ Generated: 2026-07-10T20:55:25.442017Z
 
 
 <script type="application/json" id="embedded-promotion-blocker-ledger">{
-  "generated_at": "2026-07-10T20:55:26.596730Z",
+  "generated_at": "2026-07-11T03:04:38.937910Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 0,
@@ -13178,7 +13201,7 @@ Generated: 2026-07-10T20:55:25.442017Z
 
 <script type="text/plain" id="embedded-promotion-blocker-ledger-report"># Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-10T20:55:26.596730Z
+Generated: 2026-07-11T03:04:38.937910Z
 
 ## Summary
 - Open blockers: **0**
@@ -13230,7 +13253,7 @@ Generated: 2026-07-10T20:55:26.596730Z
 
 
 <script type="application/json" id="embedded-human-handoff-packet">{
-  "generated_at": "2026-07-10T20:55:26.635171Z",
+  "generated_at": "2026-07-11T03:04:38.975643Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13999,7 +14022,7 @@ Generated: 2026-07-10T20:55:26.596730Z
 
 <script type="text/plain" id="embedded-human-handoff-report"># Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-10T20:55:26.635171Z
+Generated: 2026-07-11T03:04:38.975643Z
 
 ## Summary
 - Open handoff tasks: **3**
@@ -14083,7 +14106,7 @@ Generated: 2026-07-10T20:55:26.635171Z
 
 
 <script type="application/json" id="embedded-promo-consistency-audit">{
-  "generated_at": "2026-07-10T20:55:30.994198Z",
+  "generated_at": "2026-07-11T03:04:43.227469Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -14336,7 +14359,7 @@ Generated: 2026-07-10T20:55:26.635171Z
         "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
         "Collect experiment results: 96 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
         "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this.",
-        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-11T20:55:07.415255+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-12T03:04:16.848905+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
         "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
       ]
     },
@@ -14426,7 +14449,7 @@ Generated: 2026-07-10T20:55:26.635171Z
         "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
         "Collect experiment results: 96 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
         "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this.",
-        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-11T20:55:07.415255+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-12T03:04:16.848905+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
         "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
       ]
     },
@@ -14468,7 +14491,7 @@ Generated: 2026-07-10T20:55:26.635171Z
 
 <script type="text/plain" id="embedded-promo-consistency-audit-report"># Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-10T20:55:30.994198Z
+Generated: 2026-07-11T03:04:43.227469Z
 
 ## Summary
 - Status: **pass**
@@ -14545,7 +14568,7 @@ Generated: 2026-07-10T20:55:30.994198Z
 
 
 <script type="application/json" id="embedded-tiktok-setup-preflight">{
-  "generated_at": "2026-07-10T20:55:26.448567Z",
+  "generated_at": "2026-07-11T03:04:38.782719Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -15038,7 +15061,7 @@ Generated: 2026-07-10T20:55:30.994198Z
 
 <script type="text/plain" id="embedded-tiktok-setup-preflight-report"># TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-07-10T20:55:26.448567Z
+Generated: 2026-07-11T03:04:38.782719Z
 
 ## Summary
 - Status: **blocked**
@@ -15191,7 +15214,7 @@ Generated: 2026-07-10T20:55:26.448567Z
 
 
 <script type="application/json" id="embedded-tiktok-repair-runbook">{
-  "generated_at": "2026-07-10T20:55:26.525190Z",
+  "generated_at": "2026-07-11T03:04:38.858168Z",
   "safe_mode": true,
   "status": "ready_for_backlog_clearance",
   "source": {
@@ -15415,7 +15438,7 @@ Generated: 2026-07-10T20:55:26.448567Z
 
 <script type="text/plain" id="embedded-tiktok-repair-runbook-report"># TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-07-10T20:55:26.525190Z
+Generated: 2026-07-11T03:04:38.858168Z
 
 ## Summary
 - Status: **ready_for_backlog_clearance**
@@ -15500,7 +15523,7 @@ Generated: 2026-07-10T20:55:26.525190Z
 
 
 <script type="application/json" id="embedded-published-log-reconciliation">{
-  "generated_at": "2026-07-10T20:55:26.879207Z",
+  "generated_at": "2026-07-11T03:04:39.208442Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -15575,7 +15598,7 @@ Generated: 2026-07-10T20:55:26.525190Z
 
 <script type="text/plain" id="embedded-published-log-reconciliation-report"># Published Log Reconciliation - Lily Roo
 
-Generated: 2026-07-10T20:55:26.879207Z
+Generated: 2026-07-11T03:04:39.208442Z
 
 ## Summary
 - Published log status: **fresh**
@@ -15611,7 +15634,7 @@ Generated: 2026-07-10T20:55:26.879207Z
 
 
 <script type="application/json" id="embedded-human-handoff-resolution-preview">{
-  "generated_at": "2026-07-10T20:55:26.806549Z",
+  "generated_at": "2026-07-11T03:04:39.139938Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -15703,7 +15726,7 @@ Generated: 2026-07-10T20:55:26.879207Z
 
 <script type="text/plain" id="embedded-human-handoff-resolution-preview-report"># Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-07-10T20:55:26.806549Z
+Generated: 2026-07-11T03:04:39.139938Z
 
 ## Summary
 - Worksheet rows: **3**
@@ -15739,7 +15762,7 @@ Generated: 2026-07-10T20:55:26.806549Z
 
 
 <script type="application/json" id="embedded-promo-unlock-sequence">{
-  "generated_at": "2026-07-10T20:55:30.694635Z",
+  "generated_at": "2026-07-11T03:04:42.944832Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
@@ -15766,7 +15789,7 @@ Generated: 2026-07-10T20:55:26.806549Z
     "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
     "Collect experiment results: 96 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-11T20:55:07.415255+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-12T03:04:16.848905+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
     "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
   ],
   "steps": [
@@ -15932,7 +15955,7 @@ Generated: 2026-07-10T20:55:26.806549Z
 
 <script type="text/plain" id="embedded-promo-unlock-sequence-report"># Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-10T20:55:30.694635Z
+Generated: 2026-07-11T03:04:42.944832Z
 
 ## Summary
 - Steps: **5**
@@ -15979,7 +16002,7 @@ Generated: 2026-07-10T20:55:30.694635Z
 
 
 <script type="application/json" id="embedded-experiment-result-collection">{
-  "generated_at": "2026-07-10T20:55:27.087257Z",
+  "generated_at": "2026-07-11T03:04:39.410368Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -17625,7 +17648,7 @@ Generated: 2026-07-10T20:55:30.694635Z
 
 <script type="text/plain" id="embedded-experiment-result-collection-report"># Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-10T20:55:27.087257Z
+Generated: 2026-07-11T03:04:39.410368Z
 
 ## Summary
 - Experiment count: **3**
@@ -17682,7 +17705,7 @@ Generated: 2026-07-10T20:55:27.087257Z
 
 
 <script type="application/json" id="embedded-experiment-publish-runway">{
-  "generated_at": "2026-07-10T20:55:30.255832Z",
+  "generated_at": "2026-07-11T03:04:42.483056Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -17737,7 +17760,7 @@ Generated: 2026-07-10T20:55:27.087257Z
 
 <script type="text/plain" id="embedded-experiment-publish-runway-report"># Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-10T20:55:30.255832Z
+Generated: 2026-07-11T03:04:42.483056Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -17765,7 +17788,7 @@ Generated: 2026-07-10T20:55:30.255832Z
 
 
 <script type="application/json" id="embedded-manual-posting-clipboard">{
-  "generated_at": "2026-07-10T20:55:26.196917Z",
+  "generated_at": "2026-07-11T03:04:38.541809Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -17858,7 +17881,7 @@ Generated: 2026-07-10T20:55:30.255832Z
 
 <script type="text/plain" id="embedded-manual-posting-clipboard-report"># Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-07-10T20:55:26.196917Z
+Generated: 2026-07-11T03:04:38.541809Z
 
 ## Summary
 - Status: **empty**
@@ -17885,7 +17908,7 @@ Generated: 2026-07-10T20:55:26.196917Z
 
 
 <script type="application/json" id="embedded-experiment-result-clipboard">{
-  "generated_at": "2026-07-10T20:55:27.530064Z",
+  "generated_at": "2026-07-11T03:04:39.737182Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -19808,7 +19831,7 @@ Generated: 2026-07-10T20:55:26.196917Z
 
 <script type="text/plain" id="embedded-experiment-result-clipboard-report"># Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-10T20:55:27.530064Z
+Generated: 2026-07-11T03:04:39.737182Z
 
 ## Summary
 - Status: **needs_values**
@@ -20296,7 +20319,7 @@ Generated: 2026-07-10T20:55:27.530064Z
 
 
 <script type="application/json" id="embedded-youtube-community-url-reconciliation">{
-  "generated_at": "2026-07-10T20:55:26.157956Z",
+  "generated_at": "2026-07-11T03:04:38.479057Z",
   "safe_mode": true,
   "source": {
     "manual_posting_clipboard": "data/manual_posting_clipboard.json",
@@ -20327,7 +20350,7 @@ Generated: 2026-07-10T20:55:27.530064Z
 
 <script type="text/plain" id="embedded-youtube-community-url-reconciliation-report"># YouTube Community URL Reconciliation - Lily Roo
 
-Generated: 2026-07-10T20:55:26.157956Z
+Generated: 2026-07-11T03:04:38.479057Z
 
 ## Summary
 - Status: **waiting_for_public_posts**
@@ -20349,7 +20372,7 @@ Generated: 2026-07-10T20:55:26.157956Z
 
 
 <script type="application/json" id="embedded-story-throughput-tracking">{
-  "generated_at": "2026-07-10T20:55:27.564763Z",
+  "generated_at": "2026-07-11T03:04:39.772008Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -20461,7 +20484,7 @@ Generated: 2026-07-10T20:55:26.157956Z
 
 <script type="text/plain" id="embedded-story-throughput-tracking-report"># Story Throughput Tracking - Lily Roo
 
-Generated: 2026-07-10T20:55:27.564763Z
+Generated: 2026-07-11T03:04:39.772008Z
 
 ## Summary
 - Story posts scheduled: **6**
@@ -20515,7 +20538,7 @@ Generated: 2026-07-10T20:55:27.564763Z
 
 
 <script type="application/json" id="embedded-posting-automation-status">{
-  "generated_at": "2026-07-10T20:55:27.641164Z",
+  "generated_at": "2026-07-11T03:04:39.841716Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -20608,7 +20631,7 @@ Generated: 2026-07-10T20:55:27.564763Z
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-10T20:55:25.140817Z",
+      "detail": "19 refresh commands captured at 2026-07-11T03:04:37.428667Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -20675,7 +20698,7 @@ Generated: 2026-07-10T20:55:27.564763Z
 
 <script type="text/plain" id="embedded-posting-automation-status-report"># Posting Automation Status - Lily Roo
 
-Generated: 2026-07-10T20:55:27.641164Z
+Generated: 2026-07-11T03:04:39.841716Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -20702,7 +20725,7 @@ Generated: 2026-07-10T20:55:27.641164Z
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-11T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-10T20:55:25.140817Z
+  - Detail: 19 refresh commands captured at 2026-07-11T03:04:37.428667Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -20747,7 +20770,7 @@ Generated: 2026-07-10T20:55:27.641164Z
 
 
 <script type="application/json" id="embedded-social-blocker-input-status">{
-  "generated_at": "2026-07-10T20:55:27.603248Z",
+  "generated_at": "2026-07-11T03:04:39.808355Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
@@ -21222,7 +21245,7 @@ Generated: 2026-07-10T20:55:27.641164Z
 
 <script type="text/plain" id="embedded-social-blocker-input-status-report"># Social Blocker Input Status - Lily Roo
 
-Generated: 2026-07-10T20:55:27.603248Z
+Generated: 2026-07-11T03:04:39.808355Z
 
 ## Summary
 - Status: **missing_local_input**
@@ -21368,7 +21391,7 @@ Generated: 2026-07-10T20:55:27.603248Z
 
 
 <script type="application/json" id="embedded-brand-growth-readout">{
-  "generated_at": "2026-07-10T20:55:28.716567Z",
+  "generated_at": "2026-07-11T03:04:40.945455Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -23836,7 +23859,7 @@ Generated: 2026-07-10T20:55:27.603248Z
 
 <script type="text/plain" id="embedded-brand-growth-readout-report"># Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-10T20:55:28.716567Z
+Generated: 2026-07-11T03:04:40.945455Z
 
 ## Summary
 - Campaign rows: **64**
@@ -24160,13 +24183,13 @@ Generated: 2026-07-10T20:55:28.716567Z
 
 
 <script type="application/json" id="embedded-brand-growth-preflight">{
-  "generated_at": "2026-07-10T20:55:28.777583Z",
+  "generated_at": "2026-07-11T03:04:41.014006Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/39dd44b6a18754843498420526eb9070a74cda38/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/df088cf3c4ba836d4ffb94a1dff1ad3f3088aab0/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -24192,8 +24215,8 @@ Generated: 2026-07-10T20:55:28.716567Z
     "scheduler_posted_count": 0,
     "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 0,
-    "current_scheduler_checked_at": "2026-07-10T20:55:22.994109Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-10T20:55:22.774776Z",
+    "current_scheduler_checked_at": "2026-07-11T03:04:35.424703Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-11T03:04:35.169846Z",
     "current_scheduler_due_count": 0,
     "current_scheduler_would_post_count": 0,
     "current_scheduler_posted_count": 0,
@@ -24473,14 +24496,14 @@ Generated: 2026-07-10T20:55:28.716567Z
 
 <script type="text/plain" id="embedded-brand-growth-preflight-report"># Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-10T20:55:28.777583Z
+Generated: 2026-07-11T03:04:41.014006Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-11** at `2026-07-11T15:21:00Z`
 - Expected posts: **2**
 - Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-11T15:21:00Z`, due **2**, satisfied **2**, would post **2**, posted **0**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-10T20:55:22.994109Z`, requested `2026-07-10T20:55:22.774776Z`, due **0**, would post **0**, posted **0**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-11T03:04:35.424703Z`, requested `2026-07-11T03:04:35.169846Z`, due **0**, would post **0**, posted **0**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
@@ -24520,7 +24543,7 @@ Generated: 2026-07-10T20:55:28.777583Z
 
 
 <script type="application/json" id="embedded-brand-post-visibility">{
-  "generated_at": "2026-07-10T20:55:22.311912Z",
+  "generated_at": "2026-07-11T03:04:34.619222Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -24723,7 +24746,7 @@ Generated: 2026-07-10T20:55:28.777583Z
 
 <script type="text/plain" id="embedded-brand-post-visibility-report"># Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-10T20:55:22.311912Z
+Generated: 2026-07-11T03:04:34.619222Z
 
 ## Summary
 - Status: **verified**
@@ -24783,7 +24806,7 @@ Generated: 2026-07-10T20:55:22.311912Z
 
 
 <script type="application/json" id="embedded-brand-growth-pulse">{
-  "generated_at": "2026-07-10T20:55:30.200795Z",
+  "generated_at": "2026-07-11T03:04:42.442561Z",
   "safe_mode": true,
   "status": "learn_from_clicks",
   "source": {
@@ -24818,13 +24841,13 @@ Generated: 2026-07-10T20:55:22.311912Z
       "echo": 1,
       "video": 1
     },
-    "click_snapshot_updated_at": "2026-07-10T20:55:25.130050Z",
+    "click_snapshot_updated_at": "2026-07-11T03:04:37.415937Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_post_at": "2026-07-11T10:15:00-04:00",
     "proof_due_at": "2026-07-11T15:21:00Z",
-    "hours_until_next_post": 17.32,
-    "hours_until_proof_due": 18.42,
+    "hours_until_next_post": 11.17,
+    "hours_until_proof_due": 12.27,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -24853,7 +24876,7 @@ Generated: 2026-07-10T20:55:22.311912Z
     "waiting_measurement_count": 2,
     "scheduled_future_count": 50,
     "next_learning_due_at": "2026-07-11T14:15:30.211000Z",
-    "click_snapshot_updated_at": "2026-07-10T20:55:25.130050Z",
+    "click_snapshot_updated_at": "2026-07-11T03:04:37.415937Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -24963,7 +24986,7 @@ Generated: 2026-07-10T20:55:22.311912Z
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": 17.33
+    "hours_until_next_learning_due": 11.18
   },
   "recommendations": [
     {
@@ -25015,7 +25038,7 @@ Generated: 2026-07-10T20:55:22.311912Z
 
 <script type="text/plain" id="embedded-brand-growth-pulse-report"># Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-10T20:55:30.200795Z
+Generated: 2026-07-11T03:04:42.442561Z
 
 ## Current Pulse
 - Status: **learn_from_clicks**
@@ -25028,11 +25051,11 @@ Generated: 2026-07-10T20:55:30.200795Z
 - Posted or measured rows: **14**
 - Ready for result capture: **12**
 - First-party clicks: **3** across **1** post(s)
-- Click snapshot: `2026-07-10T20:55:25.130050Z` (covers current due posts)
+- Click snapshot: `2026-07-11T03:04:37.415937Z` (covers current due posts)
 - Next post at: `2026-07-11T10:15:00-04:00`
 - Proof due at: `2026-07-11T15:21:00Z`
-- Hours until next post: `17.32`
-- Hours until proof due: `18.42`
+- Hours until next post: `11.17`
+- Hours until proof due: `12.27`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25078,7 +25101,7 @@ Generated: 2026-07-10T20:55:30.200795Z
 
 
 <script type="application/json" id="embedded-brand-click-tracking-health">{
-  "generated_at": "2026-07-10T20:55:27.708394Z",
+  "generated_at": "2026-07-11T03:04:39.897416Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -25205,7 +25228,7 @@ Generated: 2026-07-10T20:55:30.200795Z
     "wave": "track-moments",
     "track": "08",
     "destination": "album",
-    "recorded_at": "2026-07-10T20:55:27.947Z"
+    "recorded_at": "2026-07-11T03:04:40.225Z"
   },
   "site_share": {
     "status": "ready",
@@ -25228,7 +25251,7 @@ Generated: 2026-07-10T20:55:30.200795Z
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-10T20:55:28.082Z"
+      "recorded_at": "2026-07-11T03:04:40.362Z"
     },
     "rows": [
       {
@@ -25341,7 +25364,7 @@ Generated: 2026-07-10T20:55:30.200795Z
       "wave": "site-home",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-10T20:55:28.207Z"
+      "recorded_at": "2026-07-11T03:04:40.499Z"
     },
     "rows": [
       {
@@ -25566,7 +25589,7 @@ Generated: 2026-07-10T20:55:30.200795Z
       "wave": "site-podcast",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-10T20:55:28.335Z"
+      "recorded_at": "2026-07-11T03:04:40.641Z"
     },
     "rows": [
       {
@@ -25671,7 +25694,7 @@ Generated: 2026-07-10T20:55:30.200795Z
       "wave": "site-music",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-10T20:55:28.480Z"
+      "recorded_at": "2026-07-11T03:04:40.764Z"
     },
     "rows": [
       {
@@ -25744,7 +25767,7 @@ Generated: 2026-07-10T20:55:30.200795Z
       "wave": "site-album",
       "track": "",
       "destination": "listen",
-      "recorded_at": "2026-07-10T20:55:28.599Z"
+      "recorded_at": "2026-07-11T03:04:40.906Z"
     },
     "rows": [
       {
@@ -25849,7 +25872,7 @@ Generated: 2026-07-10T20:55:30.200795Z
       "wave": "site-lyrics",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-10T20:55:28.730Z"
+      "recorded_at": "2026-07-11T03:04:41.047Z"
     },
     "rows": [
       {
@@ -29375,7 +29398,7 @@ Generated: 2026-07-10T20:55:30.200795Z
 
 <script type="text/plain" id="embedded-brand-click-tracking-health-report"># Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-10T20:55:27.708394Z
+Generated: 2026-07-11T03:04:39.897416Z
 
 ## Summary
 - Status: **ready**
@@ -33174,6 +33197,58 @@ Generated: 2026-07-10T20:55:27.708394Z
     </article>`;
   }
 
+  function simpleOutcomeCard(label, value, note, className='neutral'){
+    return `<article class="simple-outcome-card status-${escapeHtml(className)}">
+      <div class="metric-label">${escapeHtml(label)}</div>
+      <strong>${escapeHtml(value)}</strong>
+      <p>${escapeHtml(note)}</p>
+    </article>`;
+  }
+
+  function renderAudienceOutcomes(metrics, brandGrowthPulse, brandGrowthReadout, promoHealth){
+    const root=document.getElementById('simple-outcome-strip');
+    const copy=document.getElementById('simple-outcomes-copy');
+    if(!root) return;
+
+    const platforms=metrics?.platforms||{};
+    const youtube=platforms.youtube||{};
+    const spotify=platforms.spotify||{};
+    const pulseSummary=brandGrowthPulse?.summary||{};
+    const readoutSummary=brandGrowthReadout?.summary||{};
+    const history=promoHealth?.kpi?.metrics_history?.latest?.youtube||{};
+    const historyDate=promoHealth?.kpi?.metrics_history?.latest_date||'';
+    const youtubeSubscribers=autoMetricNumber(youtube,'subscribers') ?? history.subscribers;
+    const youtubeViews=autoMetricNumber(youtube,'views_28d') ?? readoutSummary.live_youtube_total_views ?? history.total_views;
+    const spotifyListeners=autoMetricNumber(spotify,'monthly_listeners') ?? readoutSummary.live_spotify_monthly_listeners;
+    const clicks=Number(pulseSummary.click_count ?? readoutSummary.campaign_click_count ?? 0);
+    const clickPosts=Number(pulseSummary.click_post_count ?? readoutSummary.campaign_click_post_count ?? 0);
+    const outcomes=[];
+
+    const historicalYoutubeNote=historyDate
+      ? `Last verified channel total (${historyDate}); reconnect YouTube Analytics for change tracking.`
+      : 'Reconnect YouTube Analytics to begin tracking subscriber change.';
+    outcomes.push(youtubeSubscribers==null
+      ? simpleOutcomeCard('YouTube subscribers','Unavailable','Reconnect YouTube Analytics to begin tracking subscriber change.','warn')
+      : simpleOutcomeCard('YouTube subscribers',compactNumber(youtubeSubscribers),youtube.ok ? 'Current channel total from YouTube Analytics.' : historicalYoutubeNote,youtube.ok?'ok':'neutral'));
+    outcomes.push(youtubeViews==null
+      ? simpleOutcomeCard('YouTube views','Unavailable','Reconnect YouTube Analytics to track view growth.','warn')
+      : simpleOutcomeCard('YouTube views',compactNumber(youtubeViews),youtube.ok ? 'Current 28-day view total from YouTube Analytics.' : historicalYoutubeNote,youtube.ok?'ok':'neutral'));
+    outcomes.push(spotifyListeners==null
+      ? simpleOutcomeCard('Spotify listeners','Unavailable','Spotify public listener data has not been captured yet.','neutral')
+      : simpleOutcomeCard('Spotify listeners',compactNumber(spotifyListeners),'Current monthly listeners from Spotify’s public artist page.','ok'));
+    outcomes.push(simpleOutcomeCard('Promotion clicks',compactNumber(clicks),clicks
+      ? `${clicks} tracked click${clicks===1?'':'s'} from ${clickPosts||1} recent post${clickPosts===1?'':'s'}.`
+      : 'No tracked responses yet. This counts clicks from published promo links.','ok'));
+
+    root.innerHTML=outcomes.join('');
+    if(copy){
+      const updatedAt=metrics?.updated_at || brandGrowthPulse?.generated_at || brandGrowthReadout?.generated_at;
+      copy.textContent=updatedAt
+        ? `Audience and response signals, updated ${formatQueueDate(updatedAt)}.`
+        : 'Audience and response signals from connected public and first-party sources.';
+    }
+  }
+
 	  function simpleActivityStatus(row){
 	    const status=String(row.status||row.execution_status||'').trim();
 	    if(row.public_visibility_ok===false){
@@ -33241,6 +33316,8 @@ Generated: 2026-07-10T20:55:27.708394Z
     const updatedChip=document.getElementById('simple-updated-chip');
     const recentRoot=document.getElementById('simple-recent-activity');
     const upcomingRoot=document.getElementById('simple-upcoming-activity');
+    const outcomeRoot=document.getElementById('simple-outcome-strip');
+    const outcomeCopy=document.getElementById('simple-outcomes-copy');
     if(statusCopy) statusCopy.textContent='Status snapshot could not refresh. The page is still useful: open the activity log or queue while the snapshot catches up.';
     if(updatedChip){
       updatedChip.className='status-chip warn';
@@ -33254,6 +33331,15 @@ Generated: 2026-07-10T20:55:27.708394Z
         simpleStatusCard('Results','Snapshot pending','Technical errors stay hidden unless debug mode is open.','neutral')
       ].join('');
     }
+    if(outcomeRoot){
+      outcomeRoot.innerHTML=[
+        simpleOutcomeCard('YouTube subscribers','Unavailable','Outcome sources could not refresh.','warn'),
+        simpleOutcomeCard('YouTube views','Unavailable','Outcome sources could not refresh.','warn'),
+        simpleOutcomeCard('Spotify listeners','Unavailable','Outcome sources could not refresh.','neutral'),
+        simpleOutcomeCard('Promotion clicks','Unavailable','Outcome sources could not refresh.','neutral')
+      ].join('');
+    }
+    if(outcomeCopy) outcomeCopy.textContent='Outcome sources could not refresh.';
     if(recentRoot){
       recentRoot.innerHTML=simpleActivityItem(
         'Activity log is available',
@@ -33285,7 +33371,8 @@ Generated: 2026-07-10T20:55:27.708394Z
     xResults,
     facebookResults,
     brandPostVisibility,
-    promoHealth
+    promoHealth,
+    metrics
   }){
     const statusStrip=document.getElementById('simple-status-strip');
     const statusCopy=document.getElementById('simple-status-copy');
@@ -33293,6 +33380,7 @@ Generated: 2026-07-10T20:55:27.708394Z
     const recentRoot=document.getElementById('simple-recent-activity');
     const upcomingRoot=document.getElementById('simple-upcoming-activity');
     if(!statusStrip||!recentRoot||!upcomingRoot) return;
+    renderAudienceOutcomes(metrics, brandGrowthPulse, brandGrowthReadout, promoHealth);
 
     const readoutSummary=brandGrowthReadout?.summary||{};
 	    const pulseSummary=brandGrowthPulse?.summary||{};
@@ -33754,7 +33842,8 @@ Generated: 2026-07-10T20:55:27.708394Z
       xResults,
       facebookResults,
       brandPostVisibility,
-      promoHealth
+      promoHealth,
+      metrics
     });
 
     const showDebugDashboard=new URLSearchParams(window.location.search).get('debug')==='1';
