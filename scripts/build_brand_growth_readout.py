@@ -10,13 +10,14 @@ from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CAMPAIGN = ROOT / "data" / "brand_growth_campaign.json"
+CAMPAIGN = ROOT / "data" / "growth_reset_campaign.json"
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 X_RESULTS = ROOT / "data" / "x_post_results.json"
 FACEBOOK_RESULTS = ROOT / "data" / "facebook_post_results.json"
+YOUTUBE_RESULTS = ROOT / "data" / "youtube_post_results.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 BRAND_POST_VISIBILITY = ROOT / "data" / "brand_post_visibility.json"
 BRAND_CAMPAIGN_CLICKS = ROOT / "data" / "brand_campaign_clicks.json"
@@ -31,7 +32,7 @@ RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
 # Match the scheduler preflight probe, which checks the final paired post slot one minute later.
 POST_PROOF_DELAY_MINUTES = 1
 FIRST_MEASUREMENT_DELAY_HOURS = 24
-CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
+CAMPAIGN_ID_PREFIXES = ("FP-GROWTH-RESET-", "FP-BRAND-AM")
 
 
 def read_json(path: Path, fallback):
@@ -174,7 +175,7 @@ def scheduled_status(scheduled_at: datetime | None, now: datetime) -> str:
 def campaign_rows(campaign: dict, queue_rows: list[dict]) -> list[dict]:
     queue_campaign_rows = [
         row for row in queue_rows
-        if str(row.get("id") or "").startswith(CAMPAIGN_ID_PREFIX)
+        if str(row.get("id") or "").startswith(CAMPAIGN_ID_PREFIXES)
     ]
     if queue_campaign_rows:
         return queue_campaign_rows
@@ -184,22 +185,29 @@ def campaign_rows(campaign: dict, queue_rows: list[dict]) -> list[dict]:
 def capture_command(platform: str, post_ids: list[str]) -> str:
     if not post_ids:
         return ""
-    script = "capture_x_post_results.py" if platform == "X" else "capture_facebook_post_results.py"
+    script = {
+        "X": "capture_x_post_results.py",
+        "Facebook": "capture_facebook_post_results.py",
+        "YouTube": "capture_youtube_post_results.py",
+    }.get(platform, "")
+    if not script:
+        return ""
     ids = " ".join(f"--post-id {post_id}" for post_id in post_ids)
     return f"python3 scripts/{script} {ids}"
 
 
-def missing_metric_secret_names(platform: str, x_results: dict, facebook_results: dict) -> list[str]:
-    payload = x_results if platform == "X" else facebook_results
+def missing_metric_secret_names(platform: str, x_results: dict, facebook_results: dict, youtube_results: dict | None = None) -> list[str]:
+    payload = x_results if platform == "X" else youtube_results if platform == "YouTube" else facebook_results
+    payload = payload or {}
     summary = payload.get("summary") or {}
     return list(summary.get("missing_secret_names") or [])
 
 
-def metric_capture_next_action(platform: str, post_ids: list[str], x_results: dict, facebook_results: dict) -> str:
+def metric_capture_next_action(platform: str, post_ids: list[str], x_results: dict, facebook_results: dict, youtube_results: dict | None = None) -> str:
     command = capture_command(platform, post_ids)
-    missing = missing_metric_secret_names(platform, x_results, facebook_results)
+    missing = missing_metric_secret_names(platform, x_results, facebook_results, youtube_results)
     if missing:
-        label = "X" if platform == "X" else "Meta"
+        label = "X" if platform == "X" else "YouTube" if platform == "YouTube" else "Meta"
         return (
             f"Use first-party click tracking for this post now; native {label} result counts can join "
             f"after analytics credentials are connected ({', '.join(missing)})."
@@ -342,8 +350,10 @@ def build_payload() -> dict:
     executions = execution_lookup(read_json(EXECUTIONS, {}))
     x_results_payload = read_json(X_RESULTS, {})
     facebook_results_payload = read_json(FACEBOOK_RESULTS, {})
+    youtube_results_payload = read_json(YOUTUBE_RESULTS, {})
     x_results = result_lookup(x_results_payload)
     facebook_results = result_lookup(facebook_results_payload)
+    youtube_results = result_lookup(youtube_results_payload)
     visibility_payload = read_json(BRAND_POST_VISIBILITY, {})
     visibility = visibility_lookup(visibility_payload)
     live_metrics = read_json(LIVE_METRICS, {})
@@ -371,17 +381,18 @@ def build_payload() -> dict:
             measurement_due_at = parse_date(published_row.get("date"))
             if measurement_due_at:
                 measurement_due_at += timedelta(hours=24)
-        result_row = x_results.get(post_id) if platform == "X" else facebook_results.get(post_id)
+        result_row = youtube_results.get(post_id) if platform == "YouTube" else x_results.get(post_id) if platform == "X" else facebook_results.get(post_id)
         visibility_row = visibility.get(post_id) or {}
         imported_fields = measured_fields(published_row)
         api_fields = captured_fields(result_row)
 
+        approved = str(queue_row.get("approved") or "").strip().lower()
         if imported_fields:
             status = "measured"
             next_action = "Review result totals and compare against the rest of the campaign."
         elif published_row and measurement_due_at and measurement_due_at <= now:
             status = "ready_for_metric_capture"
-            next_action = metric_capture_next_action(platform, [post_id], x_results_payload, facebook_results_payload)
+            next_action = metric_capture_next_action(platform, [post_id], x_results_payload, facebook_results_payload, youtube_results_payload)
         elif published_row:
             status = "posted_waiting_measurement_window"
             next_action = f"Wait until {measurement_due_at.isoformat() if measurement_due_at else 'the first measurement window'} before capturing metrics."
@@ -392,6 +403,9 @@ def build_payload() -> dict:
             status = "execution_attention"
             detail = execution.get("error_summary") or execution.get("reason") or "executor attention required"
             next_action = f"Inspect executor state for {post_id}: {detail}"
+        elif approved != "yes":
+            status = "waiting_platform_readiness"
+            next_action = f"Keep {platform} inactive until its automated posting and analytics credentials are ready."
         else:
             status = scheduled_status(scheduled_at, now)
             next_action = "Wait for the scheduled social executor, then refresh admin and export executions." if status == "scheduled_future" else "Run scheduler dry-run or capture social executions to verify due post state."
@@ -421,6 +435,7 @@ def build_payload() -> dict:
 
     status_counts = Counter(row["status"] for row in rows)
     platform_counts = Counter(row["platform"] for row in rows)
+    active_platform_counts = Counter(row["platform"] for row in rows if row["approved"] == "yes" and row["execution_mode"] == "auto")
     ready_x_ids = [row["id"] for row in rows if row["platform"] == "X" and row["status"] == "ready_for_metric_capture"]
     ready_facebook_ids = [row["id"] for row in rows if row["platform"] == "Facebook" and row["status"] == "ready_for_metric_capture"]
     due_rows = [row for row in rows if row["status"] in {"scheduled_due", "execution_attention", "posted_needs_published_log_export", "ready_for_metric_capture"}]
@@ -432,7 +447,8 @@ def build_payload() -> dict:
         [row for row in rows if row["status"] == "scheduled_future"],
         key=lambda row: row.get("scheduled_at") or "",
     )
-    watch_windows, watch_summary = post_slot_watch(rows, now, native_metric_blocked=bool(native_metric_missing_names))
+    active_rows = [row for row in rows if row["approved"] == "yes" and row["execution_mode"] == "auto"]
+    watch_windows, watch_summary = post_slot_watch(active_rows, now, native_metric_blocked=bool(native_metric_missing_names))
     live_platforms = (live_metrics.get("platforms") or {}) if isinstance(live_metrics, dict) else {}
     click_summary = click_payload.get("summary") or {}
     campaign_click_count = int(click_summary.get("click_count") or 0)
@@ -508,6 +524,7 @@ def build_payload() -> dict:
             "social_execution_snapshot": rel(EXECUTIONS),
             "x_post_results": rel(X_RESULTS),
             "facebook_post_results": rel(FACEBOOK_RESULTS),
+            "youtube_post_results": rel(YOUTUBE_RESULTS),
             "live_social_metrics": rel(LIVE_METRICS),
             "brand_post_visibility": rel(BRAND_POST_VISIBILITY),
             "brand_campaign_clicks": rel(BRAND_CAMPAIGN_CLICKS),
@@ -516,6 +533,7 @@ def build_payload() -> dict:
         "summary": {
             "campaign_row_count": len(rows),
             "platform_counts": dict(sorted(platform_counts.items())),
+            "active_platform_counts": dict(sorted(active_platform_counts.items())),
             "status_counts": dict(sorted(status_counts.items())),
             "approved_auto_rows": sum(1 for row in rows if row["approved"] == "yes" and row["execution_mode"] == "auto"),
             "future_queue_visible_rows": sum(1 for row in rows if row["visible_in_future_queue"]),

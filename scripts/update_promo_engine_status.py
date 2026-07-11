@@ -1465,6 +1465,7 @@ GENERATED_REFRESH_PATHS = {
     "data/brand_growth_preflight.json",
     "data/brand_growth_pulse.json",
     "data/brand_growth_readout.json",
+    "data/growth_reset_outcomes.json",
     "data/brand_post_visibility.json",
     "data/executor_readiness_snapshot.json",
     "data/experiment_publish_runway.json",

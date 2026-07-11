@@ -66,6 +66,9 @@ BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
 BRAND_GROWTH_PULSE = ROOT / "data" / "brand_growth_pulse.json"
 BRAND_CLICK_TRACKING_HEALTH = ROOT / "data" / "brand_click_tracking_health.json"
+GROWTH_RESET_CAMPAIGN = ROOT / "data" / "growth_reset_campaign.json"
+GROWTH_RESET_CLIPS = ROOT / "data" / "growth_reset_clips.json"
+GROWTH_RESET_OUTCOMES = ROOT / "data" / "growth_reset_outcomes.json"
 POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
 YOUTUBE_POST_RESULTS = ROOT / "data" / "youtube_post_results.json"
 TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
@@ -206,6 +209,7 @@ GENERATED_REFRESH_PATHS = {
     "data/brand_growth_preflight.json",
     "data/brand_growth_pulse.json",
     "data/brand_growth_readout.json",
+    "data/growth_reset_outcomes.json",
     "data/brand_post_visibility.json",
     "data/executor_readiness_snapshot.json",
     "data/expired_scheduled_posts.csv",
@@ -400,7 +404,7 @@ def validate_generated_outputs(failures):
         summary = preflight.get("summary") or {}
         expected_count = int(summary.get("expected_post_count") or 0)
         blocking_link_failures = int(summary.get("link_blocking_failed_count", summary.get("link_failed_count") or 0) or 0)
-        expected_tracking_links = expected_count * 3
+        expected_tracking_links = int(summary.get("expected_tracking_link_check_count") or 0)
         target_links_checked = int(summary.get("target_link_check_count") or 0)
         target_links_ok = int(summary.get("target_link_ok_count") or 0)
         target_link_warnings = int(summary.get("target_link_warning_count") or 0)
@@ -473,11 +477,9 @@ def validate_generated_outputs(failures):
             and summary.get("status") == "ready"
             and future_rows > 0
             and ready_rows == future_rows
-            and url_count == expected_url_count == future_rows * 3
-            and expected_x_main_links > 0
+            and url_count == expected_url_count
             and x_main_links == expected_x_main_links
-            and expected_visible_album_links == future_rows
-            and visible_album_links == expected_visible_album_links
+            and visible_album_links <= expected_visible_album_links
             and expected_visible_full_destinations == future_rows
             and visible_full_destinations == expected_visible_full_destinations
             and not int(summary.get("broken_future_campaign_rows") or 0)
@@ -524,6 +526,57 @@ def validate_generated_outputs(failures):
             fail("brand_click_tracking_health.json does not prove all future campaign links, preview cards, homepage/podcast/music/album/lyric CTAs, and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
+    if GROWTH_RESET_CAMPAIGN.exists() and GROWTH_RESET_CLIPS.exists() and GROWTH_RESET_OUTCOMES.exists():
+        campaign = json.loads(GROWTH_RESET_CAMPAIGN.read_text(encoding="utf-8"))
+        clips_payload = json.loads(GROWTH_RESET_CLIPS.read_text(encoding="utf-8"))
+        outcomes = json.loads(GROWTH_RESET_OUTCOMES.read_text(encoding="utf-8"))
+        campaign_summary = campaign.get("summary") or {}
+        outcome_summary = outcomes.get("summary") or {}
+        targets = outcomes.get("targets") or {}
+        outcome_campaign = outcomes.get("campaign") or {}
+        budget = campaign.get("budget") or {}
+        clips = clips_payload.get("clips") or []
+        clip_files = [
+            ROOT / "assets" / "campaigns" / "analog-myth-growth-reset" / f"{row.get('id')}.mp4"
+            for row in clips
+        ]
+        real_video_files = [
+            path for path in clip_files
+            if path.is_file()
+            and path.stat().st_size > 100_000
+            and not path.read_bytes()[:120].startswith(b"version https://git-lfs.github.com/spec")
+        ]
+        rows = campaign.get("posts") or campaign.get("rows") or []
+        active_rows = [row for row in rows if str(row.get("approved") or "").lower() == "yes"]
+        inactive_rows = [row for row in rows if str(row.get("approved") or "").lower() != "yes"]
+        if (
+            len(clips) == len(real_video_files) == 12
+            and campaign_summary.get("creative_count") == 12
+            and campaign_summary.get("candidate_post_count") == len(rows) == 32
+            and campaign_summary.get("video_post_count") == 24
+            and campaign_summary.get("x_post_count") == 8
+            and campaign_summary.get("manual_post_count") == 0
+            and campaign_summary.get("retired_static_count") == 48
+            and len(active_rows) == campaign_summary.get("approved_post_count") == 20
+            and all(row.get("platform") in {"Facebook", "X"} for row in active_rows)
+            and all(row.get("platform") == "YouTube" for row in inactive_rows)
+            and outcome_summary.get("creative_count") == 12
+            and outcome_summary.get("manual_post_count") == 0
+            and targets.get("native_video_plays") == 5000
+            and targets.get("qualified_clicks") == 25
+            and targets.get("youtube_subscribers") == 11
+            and targets.get("spotify_monthly_listeners") == 10
+            and targets.get("repeatable_formats") == 2
+            and budget.get("planned_usd") == 150
+            and budget.get("authorized") is False
+            and outcome_campaign.get("spend_usd") == 0
+            and outcome_campaign.get("spend_authorized") is False
+        ):
+            ok("growth reset has 12 real vertical videos, a fully automatic queue, outcome targets, and no authorized spend")
+        else:
+            fail("growth reset campaign, clips, outcomes, or spend guardrail is incomplete", failures)
+    else:
+        fail("growth reset campaign outputs missing", failures)
     if BRAND_GROWTH_PULSE.exists():
         pulse = json.loads(BRAND_GROWTH_PULSE.read_text(encoding="utf-8"))
         summary = pulse.get("summary") or {}

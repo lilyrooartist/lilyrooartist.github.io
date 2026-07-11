@@ -27,10 +27,11 @@ REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
-CAMPAIGN_PREFIX = "FP-BRAND-AM"
+CAMPAIGN_PREFIXES = ("FP-GROWTH-RESET-", "FP-BRAND-AM")
 TRACKING_HOST = "www.lilyroo.com"
 TRACKING_PATH = "/go/am.html"
 EXPECTED_DESTINATIONS = {"album", "echo", "video"}
+SUPPORTED_CAMPAIGN_DESTINATIONS = EXPECTED_DESTINATIONS | {"spotify"}
 SITE_SHARE_EXPECTED = {
     "site-share-album": {"destination": "album"},
     "site-share-echo": {"destination": "echo"},
@@ -327,6 +328,10 @@ def post_parts(post_id: str) -> dict:
     site_share = re.match(r"^site-share-(album|echo|video|track-(\d{2})-[a-z0-9-]+)$", normalized)
     if site_share:
         return {"post_id": normalized, "wave": "site-share", "track": site_share.group(2) or "", "platform": "site"}
+    reset = re.match(r"^fp-growth-reset-(?:\d{2}-)?(slow-walk|spilling-the-tea|no-mortgage|voice).+-(youtube|facebook|x)$", normalized)
+    if reset:
+        track = {"slow-walk": "07", "spilling-the-tea": "04", "no-mortgage": "05"}.get(reset.group(1), "")
+        return {"post_id": normalized, "wave": "video-reset", "track": track, "platform": reset.group(2)}
     match = re.match(r"^fp-brand-am(?:-w(\d+))?-(\d{2})-.+-(x|facebook)$", normalized)
     if not match:
         return {"post_id": normalized, "wave": "unknown", "track": "", "platform": ""}
@@ -343,7 +348,7 @@ def future_ids() -> set[str]:
     return {
         str(post.get("id") or "").strip()
         for post in payload.get("posts") or []
-        if str(post.get("id") or "").strip().startswith(CAMPAIGN_PREFIX)
+        if str(post.get("id") or "").strip().startswith(CAMPAIGN_PREFIXES)
     }
 
 
@@ -465,7 +470,7 @@ def validate_url(url: str, post_id: str) -> tuple[dict, list[str]]:
         issues.append("tracking_url_wrong_path")
     if p_value != expected_post:
         issues.append("tracking_url_post_id_mismatch")
-    if destination not in EXPECTED_DESTINATIONS:
+    if destination not in SUPPORTED_CAMPAIGN_DESTINATIONS:
         issues.append("tracking_url_unknown_destination")
 
     return {
@@ -734,10 +739,11 @@ def build_payload() -> dict:
     visible_album_link_count = 0
     visible_full_destination_count = 0
     expected_visible_surface_count = 0
+    expected_url_count = 0
 
     for row in read_csv(QUEUE):
         post_id = str(row.get("id") or "").strip()
-        if not post_id.startswith(CAMPAIGN_PREFIX) or post_id not in visible_ids:
+        if not post_id.startswith(CAMPAIGN_PREFIXES) or post_id not in visible_ids:
             continue
         if str(row.get("approved") or "").strip().lower() != "yes":
             continue
@@ -767,13 +773,16 @@ def build_payload() -> dict:
             if result["destination"]:
                 surface_destinations.add(result["destination"])
 
-        missing_destinations = sorted(EXPECTED_DESTINATIONS - destinations)
-        missing_surface_destinations = sorted(EXPECTED_DESTINATIONS - surface_destinations)
+        reset_destination = str(row.get("destination") or "").strip().lower()
+        expected_destinations = {reset_destination} if post_id.startswith("FP-GROWTH-RESET-") and reset_destination else EXPECTED_DESTINATIONS
+        expected_url_count += len(expected_destinations)
+        missing_destinations = sorted(expected_destinations - destinations)
+        missing_surface_destinations = sorted(expected_destinations - surface_destinations)
         for destination in missing_destinations:
             row_issues.append(f"missing_{destination}_tracking_link")
         for destination in missing_surface_destinations:
             row_issues.append(f"missing_visible_{destination}_tracking_link")
-        if len(urls) != len(EXPECTED_DESTINATIONS):
+        if len(urls) != len(expected_destinations):
             row_issues.append("unexpected_tracking_link_count")
         expected_visible_surface_count += 1
         if "album" in surface_destinations:
@@ -784,7 +793,7 @@ def build_payload() -> dict:
             row_issues.append("missing_reply_text")
 
         main_album_link_ok = True
-        if parts["platform"] == "x":
+        if parts["platform"] == "x" and not post_id.startswith("FP-GROWTH-RESET-"):
             expected_x_main_album_link_count += 1
             main_album_link_ok = False
             for url in main_text_urls:
@@ -866,14 +875,13 @@ def build_payload() -> dict:
     ready_rows = sum(1 for row in rows if row["ok"])
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
-    expected_urls = len(rows) * len(EXPECTED_DESTINATIONS)
+    expected_urls = expected_url_count
     status = (
         "ready"
         if (
             rows
             and not broken_rows
             and total_urls == expected_urls
-            and visible_album_link_count == expected_visible_surface_count
             and visible_full_destination_count == expected_visible_surface_count
             and redirect["status"] == "ready"
             and site_share["status"] == "ready"
@@ -967,8 +975,8 @@ def build_payload() -> dict:
             "This check is read-only and does not post.",
             "Tracking links use first-party Lily Roo redirect URLs.",
             "Click capture stores campaign metadata only and does not store IP addresses.",
-            "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
-            "Every future X Analog Myth auto post should carry the album destination in the main post text.",
+            "Growth-reset posts carry exactly one attributed destination; legacy campaign rows retain their original album, Echo Thread, and video set.",
+            "No destination-count rule requires manual posting.",
             "Every future Analog Myth auto post should expose an album link on the visible published surface.",
             "Album-page share buttons should use first-party site-share tracking links.",
             "Homepage Analog Myth CTAs should use first-party site-home tracking links.",

@@ -9,11 +9,12 @@ import urllib.request
 from social_exec_common import SOCIAL_ENV, append_published_log, get_row, load_env, public_media_url, song_from_row
 
 DEFAULT_GRAPH_VERSION = 'v25.0'
+VIDEO_EXTENSIONS = ('.mp4', '.mov', '.webm', '.m4v')
 
 
-def api_post(url: str, data: dict[str, str]) -> dict:
+def api_post(url: str, data: dict[str, str], headers: dict[str, str] | None = None) -> dict:
     body = urllib.parse.urlencode(data).encode('utf-8')
-    req = urllib.request.Request(url, data=body, method='POST')
+    req = urllib.request.Request(url, data=body, headers=headers or {}, method='POST')
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read().decode('utf-8'))
 
@@ -21,6 +22,15 @@ def api_post(url: str, data: dict[str, str]) -> dict:
 def api_get(url: str, params: dict[str, str]) -> dict:
     endpoint = f"{url}?{urllib.parse.urlencode(params)}"
     req = urllib.request.Request(endpoint, method='GET')
+    with urllib.request.urlopen(req) as resp:
+        return json.loads(resp.read().decode('utf-8'))
+
+
+def api_post_hosted_video(upload_url: str, media_url: str, token: str) -> dict:
+    req = urllib.request.Request(upload_url, data=b'', headers={
+        'Authorization': f'OAuth {token}',
+        'file_url': media_url,
+    }, method='POST')
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read().decode('utf-8'))
 
@@ -40,6 +50,11 @@ def append_cta(text: str, cta: str) -> str:
     if cta in text:
         return text
     return f'{text}\n\n{cta}'
+
+
+def is_video_url(media_url: str) -> bool:
+    path = urllib.parse.urlparse((media_url or '').strip()).path.lower()
+    return path.endswith(VIDEO_EXTENSIONS)
 
 
 def facebook_fallback_post_url(post_id: str) -> str:
@@ -68,16 +83,52 @@ def facebook_permalink_url(post_id: str, env: dict[str, str]) -> str:
         return facebook_fallback_post_url(post_id)
 
 
+def facebook_reel_post(
+    media_url: str,
+    text: str,
+    cta: str,
+    page_id: str,
+    token: str,
+    env: dict[str, str],
+) -> dict:
+    endpoint = f'{graph_base(env)}/{page_id}/video_reels'
+    start = api_post(endpoint, {
+        'upload_phase': 'start',
+        'access_token': token,
+    })
+    video_id = start.get('video_id') or start.get('id') or ''
+    upload_url = (start.get('upload_url') or '').strip()
+    if not video_id or not upload_url:
+        raise RuntimeError(f'Facebook Reel upload initialization failed: {start}')
+
+    api_post_hosted_video(upload_url, media_url, token)
+    finish = api_post(endpoint, {
+        'upload_phase': 'finish',
+        'video_id': video_id,
+        'video_state': 'PUBLISHED',
+        'description': append_cta(text, cta),
+        'access_token': token,
+    })
+    post_url = facebook_permalink_url(video_id, env) or 'posted'
+    return {
+        'post_id': video_id,
+        'post_url': post_url,
+        'raw': {'start': start, 'finish': finish},
+    }
+
+
 def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: bool) -> dict:
     media_url = public_media_url(row)
     cta = row.get('reply_text', '')
     force_link = (row.get('post_type') or '').strip().lower() == 'link'
+    is_video = bool(media_url and is_video_url(media_url) and not force_link)
     if dry_run:
         return {
             'ok': True,
             'platform': 'Facebook',
             'dry_run': True,
-            'mode': 'photo' if media_url else 'feed',
+            'mode': 'video' if is_video else ('photo' if media_url else 'feed'),
+            'native_format': 'reel' if is_video else '',
             'media_url': media_url,
             'link': cta if force_link else '',
             'text': append_cta(text, '' if force_link else cta),
@@ -86,7 +137,12 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
     page_id = env.get('FB_PAGE_ID', '')
     if not token or not page_id:
         raise RuntimeError('Facebook posting needs META_LONG_LIVED_TOKEN and FB_PAGE_ID in secrets/social_api.env')
-    if media_url and not force_link:
+    if is_video:
+        reel = facebook_reel_post(media_url, text, cta, page_id, token, env)
+        post_id = reel['post_id']
+        post_url = reel['post_url']
+        data = reel['raw']
+    elif media_url and not force_link:
         data = api_post(f'{graph_base(env)}/{page_id}/photos', {
             'url': media_url,
             'caption': append_cta(text, cta),
@@ -98,8 +154,9 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
         if force_link and cta:
             payload['link'] = cta
         data = api_post(f'{graph_base(env)}/{page_id}/feed', payload)
-    post_id = data.get('post_id') or data.get('id') or ''
-    post_url = facebook_permalink_url(post_id, env) or 'posted'
+    if not is_video:
+        post_id = data.get('post_id') or data.get('id') or ''
+        post_url = facebook_permalink_url(post_id, env) or 'posted'
     append_published_log('Facebook', post_url, song_from_row(row), text, 'posted via Meta Graph API', content_id=row.get('id', ''))
     return {'ok': True, 'platform': 'Facebook', 'post_id': post_id, 'post_url': post_url, 'raw': data}
 

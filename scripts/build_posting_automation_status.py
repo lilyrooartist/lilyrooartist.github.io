@@ -174,7 +174,7 @@ def campaign_packet(readout: dict, preflight: dict) -> dict:
     )
     return {
         "status": status,
-        "platforms": sorted((readout_summary.get("platform_counts") or {}).keys()),
+        "platforms": sorted((readout_summary.get("active_platform_counts") or readout_summary.get("platform_counts") or {}).keys()),
         "detail": (
             f"{int(readout_summary.get('approved_auto_rows') or 0)} approved auto posts; "
             f"next={readout_summary.get('next_scheduled_post_id') or 'none'} at "
@@ -304,7 +304,7 @@ def build_packet() -> dict:
             (
                 "Repair the active campaign platform before the next scheduled slot."
                 if blocked_platforms_in_active_campaign
-                else "Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes."
+                else "Optional expansion only; unsupported platforms stay inactive until their automated lane is ready."
             ) if blocked_platforms else "",
         ),
         lane_status(

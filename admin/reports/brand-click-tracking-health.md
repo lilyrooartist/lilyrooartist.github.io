@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-11T03:44:41.862722Z
+Generated: 2026-07-11T04:21:45.795320Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **50 / 50**
-- Tracking URLs checked: **150 / 150**
-- X main-post album links: **25 / 25**
-- Visible album click paths: **50 / 50**
-- Visible full destination sets: **50 / 50**
+- Future campaign rows ready: **22 / 22**
+- Tracking URLs checked: **26 / 26**
+- X main-post album links: **1 / 1**
+- Visible album click paths: **7 / 22**
+- Visible full destination sets: **22 / 22**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,7 +24,7 @@ Generated: 2026-07-11T03:44:41.862722Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 50, echo: 50, video: 50**
+- Destinations: **album: 7, echo: 7, spotify: 5, video: 7**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
@@ -201,181 +201,81 @@ Generated: 2026-07-11T03:44:41.862722Z
 - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-07-11T11:20:00-04:00 - **ready** (3 links)
   - Destinations: `album, echo, video`
   - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-01-13-X` X 2026-07-12T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
+- `FP-GROWTH-RESET-VOICE-01-X` X 2026-07-13T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-01-13-FACEBOOK` Facebook 2026-07-12T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-02-GIRLS-CAMP-X` X 2026-07-13T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook 2026-07-17T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
+- `FP-GROWTH-RESET-VOICE-02-X` X 2026-07-17T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-03-ANALOG-MYTH-X` X 2026-07-14T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-19T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
+- `FP-GROWTH-RESET-VOICE-03-X` X 2026-07-20T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-14T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-04-SPILLING-THE-TEA-X` X 2026-07-15T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-21T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
+- `FP-GROWTH-RESET-VOICE-04-X` X 2026-07-24T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-05-NO-MORTGAGE-X` X 2026-07-16T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` Facebook 2026-07-25T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-27T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
+- `FP-GROWTH-RESET-VOICE-05-X` X 2026-07-27T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-05-NO-MORTGAGE-FACEBOOK` Facebook 2026-07-16T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-06-GUARDS-DOWN-X` X 2026-07-17T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
+- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-31T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `album`
+  - Visible surface: **ready** (`album`)
+- `FP-GROWTH-RESET-VOICE-06-X` X 2026-07-31T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-07-17T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-07-SLOW-WALK-X` X 2026-07-18T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `video`
+  - Visible surface: **attention** (`video`)
+- `FP-GROWTH-RESET-VOICE-07-X` X 2026-08-03T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `spotify`
+  - Visible surface: **attention** (`spotify`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-07-SLOW-WALK-FACEBOOK` Facebook 2026-07-18T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-X` X 2026-07-19T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
+- `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **ready** (1 link)
+  - Destinations: `echo`
+  - Visible surface: **attention** (`echo`)
   - Main-post album link: **ready**
-- `FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-07-19T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-01-13-X` X 2026-07-20T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-01-13-FACEBOOK` Facebook 2026-07-20T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-02-GIRLS-CAMP-X` X 2026-07-21T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-21T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-03-ANALOG-MYTH-X` X 2026-07-22T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-22T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-04-SPILLING-THE-TEA-X` X 2026-07-23T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-05-NO-MORTGAGE-X` X 2026-07-24T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-05-NO-MORTGAGE-FACEBOOK` Facebook 2026-07-24T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-06-GUARDS-DOWN-X` X 2026-07-25T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-07-25T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-07-SLOW-WALK-X` X 2026-07-26T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-07-SLOW-WALK-FACEBOOK` Facebook 2026-07-26T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X` X 2026-07-27T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-07-27T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-01-13-X` X 2026-07-28T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-01-13-FACEBOOK` Facebook 2026-07-28T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-02-GIRLS-CAMP-X` X 2026-07-29T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-03-ANALOG-MYTH-X` X 2026-07-30T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-30T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X` X 2026-07-31T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-31T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-05-NO-MORTGAGE-X` X 2026-08-01T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK` Facebook 2026-08-01T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-06-GUARDS-DOWN-X` X 2026-08-02T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-07-SLOW-WALK-X` X 2026-08-03T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK` Facebook 2026-08-03T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-- `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X` X 2026-08-04T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
 
 ## Guardrails
 - This check is read-only and does not post.
 - Tracking links use first-party Lily Roo redirect URLs.
 - Click capture stores campaign metadata only and does not store IP addresses.
-- Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.
-- Every future X Analog Myth auto post should carry the album destination in the main post text.
+- Growth-reset posts carry exactly one attributed destination; legacy campaign rows retain their original album, Echo Thread, and video set.
+- No destination-count rule requires manual posting.
 - Every future Analog Myth auto post should expose an album link on the visible published surface.
 - Album-page share buttons should use first-party site-share tracking links.
 - Homepage Analog Myth CTAs should use first-party site-home tracking links.

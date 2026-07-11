@@ -29,7 +29,7 @@ OUT = ROOT / "data" / "brand_growth_preflight.json"
 REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
-CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
+CAMPAIGN_ID_PREFIXES = ("FP-GROWTH-RESET-", "FP-BRAND-AM")
 TRACK_VIDEO_URLS = {
     "01": "https://youtu.be/XL5VOVxwTw4",
     "02": "https://youtu.be/TxBhM3_nAU8",
@@ -45,6 +45,7 @@ DESTINATION_TARGETS = {
     "echo": "https://www.lilyroo.com/podcasts/analog-myth.html",
     "listen": "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
     "playlist": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+    "spotify": "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
 }
 REPLY_LINK_LABELS = {
     "Listen",
@@ -139,7 +140,12 @@ def local_content_type(path: Path) -> str:
 
 
 def next_window(posts: list[dict], now: datetime) -> dict:
-    campaign = [post for post in posts if str(post.get("id") or "").startswith(CAMPAIGN_ID_PREFIX)]
+    campaign = [
+        post for post in posts
+        if str(post.get("id") or "").startswith(CAMPAIGN_ID_PREFIXES)
+        and str(post.get("approved") or "").strip().lower() == "yes"
+        and str(post.get("execution_mode") or "auto").strip().lower() == "auto"
+    ]
     by_day: dict[str, list[dict]] = {}
     for post in campaign:
         scheduled = parse_datetime(post.get("scheduled_at"))
@@ -253,6 +259,10 @@ def tracking_target(url: str) -> dict | None:
     post_id = (query.get("p") or [""])[0]
     match = re.match(r"^fp-brand-am(?:-w\d+)?-(\d{2})-.+-(?:x|facebook)$", post_id)
     track = match.group(1) if match else ""
+    if not track and post_id.startswith("fp-growth-reset-"):
+        slug_match = re.match(r"^fp-growth-reset-\d{2}-(slow-walk|spilling-the-tea|no-mortgage)-", post_id)
+        if slug_match:
+            track = {"slow-walk": "07", "spilling-the-tea": "04", "no-mortgage": "05"}[slug_match.group(1)]
     target_url = TRACK_VIDEO_URLS.get(track, "") if destination == "video" else DESTINATION_TARGETS.get(destination, "")
     return {
         "post_id": post_id,
@@ -290,6 +300,10 @@ def link_checks(posts: list[dict]) -> list[dict]:
     seen: set[tuple[str, str, str]] = set()
     for post in posts:
         post_id = str(post.get("id") or "")
+        if post.get("clip_url"):
+            key = (post_id, "clip_url", str(post.get("clip_url") or ""))
+            seen.add(key)
+            checks.append(check_url(str(post.get("clip_url") or ""), f"{post_id} clip_url"))
         if post.get("imagery_url"):
             key = (post_id, "imagery_url", str(post.get("imagery_url") or ""))
             seen.add(key)
@@ -358,7 +372,12 @@ def build_payload() -> dict:
     checks = link_checks(window["posts"])
     tracking_checks = [item for item in checks if "/go/am.html" in str(item.get("url") or "")]
     target_checks = target_link_checks(tracking_checks)
-    expected_tracking_checks = len(expected) * 3
+    expected_tracking_checks = sum(
+        1
+        for post in window["posts"]
+        for line in str(post.get("reply_text") or "").splitlines()
+        if "/go/am.html" in line
+    )
     check_counts = Counter("ok" if item.get("ok") else "failed" for item in checks)
     tracking_ok_count = sum(1 for item in tracking_checks if item.get("ok"))
     target_check_counts = Counter("ok" if item.get("ok") else "failed" for item in target_checks)

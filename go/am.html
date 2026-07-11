@@ -198,6 +198,11 @@
       if (siteShare) {
         return { postId: normalized, wave: "site-share", track: siteShare[2] || "", platform: "site" };
       }
+      const reset = normalized.match(/^fp-growth-reset-(?:\d{2}-)?(slow-walk|spilling-the-tea|no-mortgage|voice).+-(youtube|facebook|x)$/);
+      if (reset) {
+        const track = { "slow-walk": "07", "spilling-the-tea": "04", "no-mortgage": "05" }[reset[1]] || "";
+        return { postId: normalized, wave: "video-reset", track, platform: reset[2] };
+      }
       const match = normalized.match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-.+-(x|facebook)$/);
       if (!match) {
         return { postId: normalized || "unknown", wave: "unknown", track: "", platform: "social" };
@@ -227,7 +232,7 @@
       const track = TRACKS[parts.track] || {};
       target.searchParams.set("utm_source", parts.platform);
       target.searchParams.set("utm_medium", "social");
-      target.searchParams.set("utm_campaign", "analog_myth_brand_growth");
+      target.searchParams.set("utm_campaign", parts.wave === "video-reset" ? "analog_myth_growth_reset" : "analog_myth_brand_growth");
       target.searchParams.set("utm_content", parts.postId);
       target.searchParams.set("utm_wave", parts.wave);
       if (parts.track) {

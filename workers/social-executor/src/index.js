@@ -15,7 +15,7 @@ const SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed";
 const DEFAULT_QUEUE_URL = "https://www.lilyroo.com/admin/future-posts.json";
 const EXECUTION_STATE_PREFIX = "post:";
 const CLICK_STATE_PREFIX = "click:";
-const BRAND_CLICK_POST_PATTERN = /^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/;
+const BRAND_CLICK_POST_PATTERN = /^(?:fp-brand-am(?:-w\d+)?-\d{2}-.+-(?:x|facebook)|fp-growth-reset-.+-(?:youtube|facebook|x))$/;
 const SITE_SHARE_CLICK_PATTERN = /^site-share-(album|echo|video|track-\d{2}-[a-z0-9-]+)$/;
 const SITE_HOME_CLICK_PATTERN = /^site-home-(hero|starter|launch|video|podcast|share|follow)-([a-z0-9-]+)$/;
 const SITE_PODCAST_CLICK_PATTERN = /^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$/;
@@ -467,7 +467,6 @@ async function validateExecutablePost(payload, env, options = {}) {
 
   if (platform.includes("facebook")) {
     if (!env.META_LONG_LIVED_TOKEN || !env.FB_PAGE_ID) return blocked("blocked", "facebook_credentials_missing");
-    if (postType === "video" || postType === "reel" || isVideoUrl(url)) return blocked("blocked", "facebook_video_unsupported_v1");
     return executable();
   }
 
@@ -717,6 +716,15 @@ function campaignPostParts(postId) {
       trackSlug: siteShare[4] || siteShare[1],
       platform: "site",
     };
+  }
+  const reset = normalized.match(/^fp-growth-reset-\d{2}-(slow-walk|spilling-the-tea|no-mortgage)-(.+)-(youtube|facebook)$/);
+  if (reset) {
+    const track = { "slow-walk": "07", "spilling-the-tea": "04", "no-mortgage": "05" }[reset[1]] || "";
+    return { wave: "video-reset", track, trackSlug: reset[1], platform: reset[3] };
+  }
+  const resetVoice = normalized.match(/^fp-growth-reset-voice-\d{2}-x$/);
+  if (resetVoice) {
+    return { wave: "video-reset", track: "", trackSlug: "brand-voice", platform: "x" };
   }
   const match = normalized.match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-(.+)-(x|facebook)$/);
   if (!match) {
@@ -1043,6 +1051,9 @@ async function postFacebook(payload, env) {
   requireEnv(env, ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"], "Facebook posting");
   const url = mediaUrl(payload, env);
   const forceLink = text(payload.postType).toLowerCase() === "link";
+  if (url && !forceLink && isVideoUrl(url)) {
+    return postFacebookReel(payload, env, url);
+  }
   const endpoint = url && !forceLink ? `${metaBase(env)}/${env.FB_PAGE_ID}/photos` : `${metaBase(env)}/${env.FB_PAGE_ID}/feed`;
   const params = {
     access_token: env.META_LONG_LIVED_TOKEN,
@@ -1064,6 +1075,45 @@ async function postFacebook(payload, env) {
     post_id: postId,
     post_url: postUrl || "posted",
     raw: data,
+  };
+}
+
+async function postFacebookReel(payload, env, mediaUrl) {
+  const endpoint = `${metaBase(env)}/${env.FB_PAGE_ID}/video_reels`;
+  const start = await formPost(endpoint, {
+    upload_phase: "start",
+    access_token: env.META_LONG_LIVED_TOKEN,
+  });
+  const videoId = text(start.video_id || start.id);
+  const uploadUrl = text(start.upload_url);
+  if (!videoId || !uploadUrl) throw new Error(`Facebook Reel upload initialization failed: ${JSON.stringify(start)}`);
+
+  const upload = await fetch(uploadUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `OAuth ${env.META_LONG_LIVED_TOKEN}`,
+      file_url: mediaUrl,
+    },
+  });
+  if (!upload.ok) {
+    throw new Error(`Facebook Reel hosted upload failed (${upload.status}): ${await safeText(upload)}`);
+  }
+
+  const finish = await formPost(endpoint, {
+    upload_phase: "finish",
+    video_id: videoId,
+    video_state: "PUBLISHED",
+    description: appendCta(text(payload.text), text(payload.replyText)),
+    access_token: env.META_LONG_LIVED_TOKEN,
+  });
+  const postUrl = await facebookPermalinkUrl(videoId, env);
+  return {
+    ok: true,
+    platform: "Facebook",
+    post_id: videoId,
+    post_url: postUrl || "posted",
+    native_format: "reel",
+    raw: { start, finish },
   };
 }
 

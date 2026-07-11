@@ -91,6 +91,10 @@ def load_posts(path: Path, published_ids=None, expired_ids=None):
                 'execution_mode': execution_mode(r),
                 'post_type': (r.get('post_type') or infer_post_type(r)).strip(),
                 'desired_privacy': (r.get('desired_privacy') or '').strip(),
+                'creative_id': (r.get('creative_id') or '').strip(),
+                'clip_id': (r.get('clip_id') or '').strip(),
+                'concept': (r.get('concept') or '').strip(),
+                'destination': (r.get('destination') or '').strip(),
             })
     return items
 

@@ -1,32 +1,39 @@
 {
-  "generated_at": "2026-07-11T03:44:42.362488Z",
+  "generated_at": "2026-07-11T04:16:40.404538Z",
   "safe_mode": true,
   "source": {
-    "brand_growth_campaign": "data/brand_growth_campaign.json",
+    "brand_growth_campaign": "data/growth_reset_campaign.json",
     "scheduled_posts": "data/scheduled_posts.csv",
     "future_posts": "admin/future-posts.json",
     "published_log": "admin/content/Published_Log.csv",
     "social_execution_snapshot": "data/social_execution_snapshot.json",
     "x_post_results": "data/x_post_results.json",
     "facebook_post_results": "data/facebook_post_results.json",
+    "youtube_post_results": "data/youtube_post_results.json",
     "live_social_metrics": "data/live_social_metrics.json",
     "brand_post_visibility": "data/brand_post_visibility.json",
     "brand_campaign_clicks": "data/brand_campaign_clicks.json",
     "brand_click_tracking_health": "data/brand_click_tracking_health.json"
   },
   "summary": {
-    "campaign_row_count": 64,
+    "campaign_row_count": 48,
     "platform_counts": {
-      "Facebook": 32,
-      "X": 32
+      "Facebook": 20,
+      "X": 16,
+      "YouTube": 12
+    },
+    "active_platform_counts": {
+      "Facebook": 20,
+      "X": 16
     },
     "status_counts": {
       "posted_waiting_measurement_window": 2,
       "ready_for_metric_capture": 12,
-      "scheduled_future": 50
+      "scheduled_future": 22,
+      "waiting_platform_readiness": 12
     },
-    "approved_auto_rows": 64,
-    "future_queue_visible_rows": 50,
+    "approved_auto_rows": 36,
+    "future_queue_visible_rows": 34,
     "posted_or_measured_rows": 14,
     "measured_rows": 0,
     "ready_for_metric_capture_rows": 12,
@@ -72,11 +79,11 @@
       "X_API_KEY",
       "X_API_SECRET"
     ],
-    "post_slot_watch_window_count": 32,
+    "post_slot_watch_window_count": 24,
     "post_slot_watch_status_counts": {
       "measurement_due": 6,
       "posted_waiting_measurement": 1,
-      "scheduled_future": 25
+      "scheduled_future": 17
     },
     "next_action_window_date": "2026-07-04",
     "next_action_window_status": "measurement_due",
@@ -109,11 +116,11 @@
   },
   "post_slot_watch": {
     "summary": {
-      "window_count": 32,
+      "window_count": 24,
       "status_counts": {
         "measurement_due": 6,
         "posted_waiting_measurement": 1,
-        "scheduled_future": 25
+        "scheduled_future": 17
       },
       "next_window_date": "2026-07-04",
       "next_window_status": "measurement_due",
@@ -376,72 +383,20 @@
         "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
       },
       {
-        "date": "2026-07-12",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W2-01-13-X",
-          "FP-BRAND-AM-W2-01-13-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-12T14:15:00Z",
-        "last_scheduled_at": "2026-07-12T15:20:00Z",
-        "proof_due_at": "2026-07-12T15:21:00Z",
-        "measurement_due_at": "2026-07-13T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
         "date": "2026-07-13",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W2-02-GIRLS-CAMP-X",
-          "FP-BRAND-AM-W2-02-GIRLS-CAMP-FACEBOOK"
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-01-X"
         ],
         "platforms": [
           "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-07-13T14:15:00Z",
-        "last_scheduled_at": "2026-07-13T15:20:00Z",
-        "proof_due_at": "2026-07-13T15:21:00Z",
-        "measurement_due_at": "2026-07-14T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-14",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W2-03-ANALOG-MYTH-X",
-          "FP-BRAND-AM-W2-03-ANALOG-MYTH-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-14T14:15:00Z",
-        "last_scheduled_at": "2026-07-14T15:20:00Z",
-        "proof_due_at": "2026-07-14T15:21:00Z",
-        "measurement_due_at": "2026-07-15T15:20:00Z",
+        "first_scheduled_at": "2026-07-13T15:20:00Z",
+        "last_scheduled_at": "2026-07-13T18:05:00Z",
+        "proof_due_at": "2026-07-13T18:06:00Z",
+        "measurement_due_at": "2026-07-14T18:05:00Z",
         "status_counts": {
           "scheduled_future": 2
         },
@@ -457,45 +412,17 @@
         "date": "2026-07-15",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W2-04-SPILLING-THE-TEA-X",
-          "FP-BRAND-AM-W2-04-SPILLING-THE-TEA-FACEBOOK"
+          "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-07-15T14:15:00Z",
+        "first_scheduled_at": "2026-07-15T15:20:00Z",
         "last_scheduled_at": "2026-07-15T15:20:00Z",
         "proof_due_at": "2026-07-15T15:21:00Z",
         "measurement_due_at": "2026-07-16T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-16",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W2-05-NO-MORTGAGE-X",
-          "FP-BRAND-AM-W2-05-NO-MORTGAGE-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-16T14:15:00Z",
-        "last_scheduled_at": "2026-07-16T15:20:00Z",
-        "proof_due_at": "2026-07-16T15:21:00Z",
-        "measurement_due_at": "2026-07-17T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -509,43 +436,17 @@
         "date": "2026-07-17",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W2-06-GUARDS-DOWN-X",
-          "FP-BRAND-AM-W2-06-GUARDS-DOWN-FACEBOOK"
+          "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-02-X"
         ],
         "platforms": [
           "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-07-17T14:15:00Z",
-        "last_scheduled_at": "2026-07-17T15:20:00Z",
-        "proof_due_at": "2026-07-17T15:21:00Z",
-        "measurement_due_at": "2026-07-18T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-18",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W2-07-SLOW-WALK-X",
-          "FP-BRAND-AM-W2-07-SLOW-WALK-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-18T14:15:00Z",
-        "last_scheduled_at": "2026-07-18T15:20:00Z",
-        "proof_due_at": "2026-07-18T15:21:00Z",
-        "measurement_due_at": "2026-07-19T15:20:00Z",
+        "first_scheduled_at": "2026-07-17T15:20:00Z",
+        "last_scheduled_at": "2026-07-17T18:05:00Z",
+        "proof_due_at": "2026-07-17T18:06:00Z",
+        "measurement_due_at": "2026-07-18T18:05:00Z",
         "status_counts": {
           "scheduled_future": 2
         },
@@ -561,19 +462,17 @@
         "date": "2026-07-19",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-X",
-          "FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-FACEBOOK"
+          "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-07-19T14:15:00Z",
+        "first_scheduled_at": "2026-07-19T15:20:00Z",
         "last_scheduled_at": "2026-07-19T15:20:00Z",
         "proof_due_at": "2026-07-19T15:21:00Z",
         "measurement_due_at": "2026-07-20T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -587,19 +486,17 @@
         "date": "2026-07-20",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W3-01-13-X",
-          "FP-BRAND-AM-W3-01-13-FACEBOOK"
+          "FP-GROWTH-RESET-VOICE-03-X"
         ],
         "platforms": [
-          "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-07-20T14:15:00Z",
-        "last_scheduled_at": "2026-07-20T15:20:00Z",
-        "proof_due_at": "2026-07-20T15:21:00Z",
-        "measurement_due_at": "2026-07-21T15:20:00Z",
+        "first_scheduled_at": "2026-07-20T18:05:00Z",
+        "last_scheduled_at": "2026-07-20T18:05:00Z",
+        "proof_due_at": "2026-07-20T18:06:00Z",
+        "measurement_due_at": "2026-07-21T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -613,45 +510,17 @@
         "date": "2026-07-21",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W3-02-GIRLS-CAMP-X",
-          "FP-BRAND-AM-W3-02-GIRLS-CAMP-FACEBOOK"
+          "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-07-21T14:15:00Z",
+        "first_scheduled_at": "2026-07-21T15:20:00Z",
         "last_scheduled_at": "2026-07-21T15:20:00Z",
         "proof_due_at": "2026-07-21T15:21:00Z",
         "measurement_due_at": "2026-07-22T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-22",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W3-03-ANALOG-MYTH-X",
-          "FP-BRAND-AM-W3-03-ANALOG-MYTH-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-22T14:15:00Z",
-        "last_scheduled_at": "2026-07-22T15:20:00Z",
-        "proof_due_at": "2026-07-22T15:21:00Z",
-        "measurement_due_at": "2026-07-23T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -665,19 +534,17 @@
         "date": "2026-07-23",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W3-04-SPILLING-THE-TEA-X",
-          "FP-BRAND-AM-W3-04-SPILLING-THE-TEA-FACEBOOK"
+          "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-07-23T14:15:00Z",
+        "first_scheduled_at": "2026-07-23T15:20:00Z",
         "last_scheduled_at": "2026-07-23T15:20:00Z",
         "proof_due_at": "2026-07-23T15:21:00Z",
         "measurement_due_at": "2026-07-24T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -691,19 +558,17 @@
         "date": "2026-07-24",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W3-05-NO-MORTGAGE-X",
-          "FP-BRAND-AM-W3-05-NO-MORTGAGE-FACEBOOK"
+          "FP-GROWTH-RESET-VOICE-04-X"
         ],
         "platforms": [
-          "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-07-24T14:15:00Z",
-        "last_scheduled_at": "2026-07-24T15:20:00Z",
-        "proof_due_at": "2026-07-24T15:21:00Z",
-        "measurement_due_at": "2026-07-25T15:20:00Z",
+        "first_scheduled_at": "2026-07-24T18:05:00Z",
+        "last_scheduled_at": "2026-07-24T18:05:00Z",
+        "proof_due_at": "2026-07-24T18:06:00Z",
+        "measurement_due_at": "2026-07-25T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -717,45 +582,17 @@
         "date": "2026-07-25",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W3-06-GUARDS-DOWN-X",
-          "FP-BRAND-AM-W3-06-GUARDS-DOWN-FACEBOOK"
+          "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-07-25T14:15:00Z",
+        "first_scheduled_at": "2026-07-25T15:20:00Z",
         "last_scheduled_at": "2026-07-25T15:20:00Z",
         "proof_due_at": "2026-07-25T15:21:00Z",
         "measurement_due_at": "2026-07-26T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-26",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W3-07-SLOW-WALK-X",
-          "FP-BRAND-AM-W3-07-SLOW-WALK-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-26T14:15:00Z",
-        "last_scheduled_at": "2026-07-26T15:20:00Z",
-        "proof_due_at": "2026-07-26T15:21:00Z",
-        "measurement_due_at": "2026-07-27T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -769,43 +606,17 @@
         "date": "2026-07-27",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X",
-          "FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-05-X"
         ],
         "platforms": [
           "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-07-27T14:15:00Z",
-        "last_scheduled_at": "2026-07-27T15:20:00Z",
-        "proof_due_at": "2026-07-27T15:21:00Z",
-        "measurement_due_at": "2026-07-28T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-28",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W4-01-13-X",
-          "FP-BRAND-AM-W4-01-13-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-28T14:15:00Z",
-        "last_scheduled_at": "2026-07-28T15:20:00Z",
-        "proof_due_at": "2026-07-28T15:21:00Z",
-        "measurement_due_at": "2026-07-29T15:20:00Z",
+        "first_scheduled_at": "2026-07-27T15:20:00Z",
+        "last_scheduled_at": "2026-07-27T18:05:00Z",
+        "proof_due_at": "2026-07-27T18:06:00Z",
+        "measurement_due_at": "2026-07-28T18:05:00Z",
         "status_counts": {
           "scheduled_future": 2
         },
@@ -821,45 +632,17 @@
         "date": "2026-07-29",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W4-02-GIRLS-CAMP-X",
-          "FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK"
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-07-29T14:15:00Z",
+        "first_scheduled_at": "2026-07-29T15:20:00Z",
         "last_scheduled_at": "2026-07-29T15:20:00Z",
         "proof_due_at": "2026-07-29T15:21:00Z",
         "measurement_due_at": "2026-07-30T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-07-30",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W4-03-ANALOG-MYTH-X",
-          "FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-07-30T14:15:00Z",
-        "last_scheduled_at": "2026-07-30T15:20:00Z",
-        "proof_due_at": "2026-07-30T15:21:00Z",
-        "measurement_due_at": "2026-07-31T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -873,43 +656,17 @@
         "date": "2026-07-31",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X",
-          "FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK"
+          "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-06-X"
         ],
         "platforms": [
           "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-07-31T14:15:00Z",
-        "last_scheduled_at": "2026-07-31T15:20:00Z",
-        "proof_due_at": "2026-07-31T15:21:00Z",
-        "measurement_due_at": "2026-08-01T15:20:00Z",
-        "status_counts": {
-          "scheduled_future": 2
-        },
-        "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
-        "capture_executions_command": "python3 scripts/capture_social_executions.py",
-        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
-        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
-      },
-      {
-        "date": "2026-08-01",
-        "status": "scheduled_future",
-        "post_ids": [
-          "FP-BRAND-AM-W4-05-NO-MORTGAGE-X",
-          "FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK"
-        ],
-        "platforms": [
-          "Facebook",
-          "X"
-        ],
-        "first_scheduled_at": "2026-08-01T14:15:00Z",
-        "last_scheduled_at": "2026-08-01T15:20:00Z",
-        "proof_due_at": "2026-08-01T15:21:00Z",
-        "measurement_due_at": "2026-08-02T15:20:00Z",
+        "first_scheduled_at": "2026-07-31T15:20:00Z",
+        "last_scheduled_at": "2026-07-31T18:05:00Z",
+        "proof_due_at": "2026-07-31T18:06:00Z",
+        "measurement_due_at": "2026-08-01T18:05:00Z",
         "status_counts": {
           "scheduled_future": 2
         },
@@ -925,19 +682,17 @@
         "date": "2026-08-02",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W4-06-GUARDS-DOWN-X",
-          "FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK"
+          "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-08-02T14:15:00Z",
+        "first_scheduled_at": "2026-08-02T15:20:00Z",
         "last_scheduled_at": "2026-08-02T15:20:00Z",
         "proof_due_at": "2026-08-02T15:21:00Z",
         "measurement_due_at": "2026-08-03T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -951,19 +706,17 @@
         "date": "2026-08-03",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W4-07-SLOW-WALK-X",
-          "FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK"
+          "FP-GROWTH-RESET-VOICE-07-X"
         ],
         "platforms": [
-          "Facebook",
           "X"
         ],
-        "first_scheduled_at": "2026-08-03T14:15:00Z",
-        "last_scheduled_at": "2026-08-03T15:20:00Z",
-        "proof_due_at": "2026-08-03T15:21:00Z",
-        "measurement_due_at": "2026-08-04T15:20:00Z",
+        "first_scheduled_at": "2026-08-03T18:05:00Z",
+        "last_scheduled_at": "2026-08-03T18:05:00Z",
+        "proof_due_at": "2026-08-03T18:06:00Z",
+        "measurement_due_at": "2026-08-04T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -977,19 +730,41 @@
         "date": "2026-08-04",
         "status": "scheduled_future",
         "post_ids": [
-          "FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X",
-          "FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK"
+          "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
         ],
         "platforms": [
-          "Facebook",
-          "X"
+          "Facebook"
         ],
-        "first_scheduled_at": "2026-08-04T14:15:00Z",
+        "first_scheduled_at": "2026-08-04T15:20:00Z",
         "last_scheduled_at": "2026-08-04T15:20:00Z",
         "proof_due_at": "2026-08-04T15:21:00Z",
         "measurement_due_at": "2026-08-05T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "scheduled_future": 1
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-08-07",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-GROWTH-RESET-VOICE-08-X"
+        ],
+        "platforms": [
+          "X"
+        ],
+        "first_scheduled_at": "2026-08-07T18:05:00Z",
+        "last_scheduled_at": "2026-08-07T18:05:00Z",
+        "proof_due_at": "2026-08-07T18:06:00Z",
+        "measurement_due_at": "2026-08-08T18:05:00Z",
+        "status_counts": {
+          "scheduled_future": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -1355,57 +1130,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-01-13-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-12T10:15:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "13 counts down and refuses to become clean math. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-01-13-x&to=album",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W2-01-13-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-12T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 1: 13 counts down and refuses to become clean math.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W2-02-GIRLS-CAMP-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-13T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Girls Camp leaves the old cabin lights on just long enough for the story to change shape. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-02-girls-camp-x&to=album",
+      "post_type": "video",
+      "text": "What is the rush to the same place? Slow Walk keeps its own time. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1416,18 +1147,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-02-GIRLS-CAMP-FACEBOOK",
+      "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-13T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 2: Girls Camp leaves the old cabin lights on just long enough for the story to change shape.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
+      "post_type": "video",
+      "text": "What is the rush to the same place? Slow Walk keeps its own time.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1443,13 +1174,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-03-ANALOG-MYTH-X",
+      "id": "FP-GROWTH-RESET-VOICE-01-X",
       "platform": "X",
-      "scheduled_at": "2026-07-14T10:15:00-04:00",
+      "scheduled_at": "2026-07-13T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth keeps the clocks unreliable and the tape warm. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-03-analog-myth-x&to=album",
+      "post_type": "text",
+      "text": "Pace is not a race result. Slow Walk knows the room will catch up.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1465,35 +1196,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-03-ANALOG-MYTH-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-14T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 3: Analog Myth keeps the clocks unreliable and the tape warm.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W2-04-SPILLING-THE-TEA-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-15T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Spilling the Tea turns the receipt drawer into a tiny movie set. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-04-spilling-the-tea-x&to=album",
+      "post_type": "video",
+      "text": "When everyone says you are behind, but you are the only one still arriving. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1504,18 +1213,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-04-SPILLING-THE-TEA-FACEBOOK",
+      "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-15T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 4: Spilling the Tea turns the receipt drawer into a tiny movie set.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
+      "post_type": "video",
+      "text": "When everyone says you are behind, but you are the only one still arriving.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1531,57 +1240,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-05-NO-MORTGAGE-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-16T10:15:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "No Mortgage puts the escape plan on the table and lets it glow. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-05-no-mortgage-x&to=album",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W2-05-NO-MORTGAGE-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-16T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 5: No Mortgage puts the escape plan on the table and lets it glow.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W2-06-GUARDS-DOWN-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-17T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Guards Down is the sound of armor deciding it has had enough. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-06-guards-down-x&to=album",
+      "post_type": "video",
+      "text": "A quiet walk through the pressure until the pressure learns your pace. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1592,18 +1257,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-06-GUARDS-DOWN-FACEBOOK",
+      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-17T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 6: Guards Down is the sound of armor deciding it has had enough.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
+      "post_type": "video",
+      "text": "A quiet walk through the pressure until the pressure learns your pace.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1619,13 +1284,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-07-SLOW-WALK-X",
+      "id": "FP-GROWTH-RESET-VOICE-02-X",
       "platform": "X",
-      "scheduled_at": "2026-07-18T10:15:00-04:00",
+      "scheduled_at": "2026-07-17T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Slow Walk keeps its own pace and lets the room adjust. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-07-slow-walk-x&to=album",
+      "post_type": "text",
+      "text": "A receipt drawer is just an archive with better timing.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1641,35 +1306,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-07-SLOW-WALK-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-18T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 7: Slow Walk keeps its own pace and lets the room adjust.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-19T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "The Power of Light ends like a switch, a dare, and a little weather system. Analog Myth keeps humming.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w2-08-the-power-of-light-x&to=album",
+      "post_type": "video",
+      "text": "What did you stop rushing? Slow Walk answers without speeding up. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1680,18 +1323,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-FACEBOOK",
+      "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-19T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth afterglow, track 8: The Power of Light ends like a switch, a dare, and a little weather system.\n\nThe album page, Echo Thread play-through, and full playlist are live.",
+      "post_type": "video",
+      "text": "What did you stop rushing? Slow Walk answers without speeding up.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1707,13 +1350,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-01-13-X",
+      "id": "FP-GROWTH-RESET-VOICE-03-X",
       "platform": "X",
-      "scheduled_at": "2026-07-20T10:15:00-04:00",
+      "scheduled_at": "2026-07-20T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: 13 still feels like the first page you probably should not have opened.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-01-13-x&to=album",
+      "post_type": "text",
+      "text": "The fantasy is not the house. It is finally hearing yourself think.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1729,35 +1372,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-01-13-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-20T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 1: 13 still feels like the first page you probably should not have opened.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W3-02-GIRLS-CAMP-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-21T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: Girls Camp keeps the flashlight on under the bunk.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-02-girls-camp-x&to=album",
+      "post_type": "video",
+      "text": "Some truths arrive with a little steam. Spilling the Tea is already in the room. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1768,18 +1389,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-02-GIRLS-CAMP-FACEBOOK",
+      "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-21T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 2: Girls Camp keeps the flashlight on under the bunk.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "Some truths arrive with a little steam. Spilling the Tea is already in the room.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1795,57 +1416,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-03-ANALOG-MYTH-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-22T10:15:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: Analog Myth is the title track for anyone who likes their clocks a little unreliable.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-03-analog-myth-x&to=album",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W3-03-ANALOG-MYTH-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-22T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 3: Analog Myth is the title track for anyone who likes their clocks a little unreliable.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W3-04-SPILLING-THE-TEA-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-23T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: Spilling the Tea keeps the story bright, crooked, and a little too well documented.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-04-spilling-the-tea-x&to=album",
+      "post_type": "video",
+      "text": "When the group chat says we need to talk and you already know. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1856,18 +1433,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-04-SPILLING-THE-TEA-FACEBOOK",
+      "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-23T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 4: Spilling the Tea keeps the story bright, crooked, and a little too well documented.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "When the group chat says we need to talk and you already know.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1883,13 +1460,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-05-NO-MORTGAGE-X",
+      "id": "FP-GROWTH-RESET-VOICE-04-X",
       "platform": "X",
-      "scheduled_at": "2026-07-24T10:15:00-04:00",
+      "scheduled_at": "2026-07-24T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: No Mortgage turns the escape fantasy into something you can hum.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-05-no-mortgage-x&to=album",
+      "post_type": "text",
+      "text": "Some songs arrive late on purpose and still get there first.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1905,35 +1482,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-05-NO-MORTGAGE-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-24T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 5: No Mortgage turns the escape fantasy into something you can hum.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W3-06-GUARDS-DOWN-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-25T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: Guards Down lets the soft part have the microphone.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-06-guards-down-x&to=album",
+      "post_type": "video",
+      "text": "One cup. One secret. A whole room changing temperature. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1944,18 +1499,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-06-GUARDS-DOWN-FACEBOOK",
+      "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-25T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 6: Guards Down lets the soft part have the microphone.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "One cup. One secret. A whole room changing temperature.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -1971,57 +1526,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-07-SLOW-WALK-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-26T10:15:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: Slow Walk is a reminder that pace can be its own kind of power.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-07-slow-walk-x&to=album",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W3-07-SLOW-WALK-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-26T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 7: Slow Walk is a reminder that pace can be its own kind of power.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-27T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Room note from Analog Myth: The Power of Light leaves the room glowing after the last switch clicks.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w3-08-the-power-of-light-x&to=album",
+      "post_type": "video",
+      "text": "What truth are you ready to say out loud? Spilling the Tea lets it pour. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2032,18 +1543,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK",
+      "id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-27T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth room note, track 8: The Power of Light leaves the room glowing after the last switch clicks.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "What truth are you ready to say out loud? Spilling the Tea lets it pour.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2059,13 +1570,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-01-13-X",
+      "id": "FP-GROWTH-RESET-VOICE-05-X",
       "platform": "X",
-      "scheduled_at": "2026-07-28T10:15:00-04:00",
+      "scheduled_at": "2026-07-27T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: 13 starts with the kind of number that turns into weather.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-01-13-x&to=album",
+      "post_type": "text",
+      "text": "Side-eye becomes cinema when the soundtrack keeps the receipts.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2081,35 +1592,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-01-13-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-28T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 1: 13 starts with the kind of number that turns into weather.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W4-02-GIRLS-CAMP-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-29T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: Girls Camp keeps the ghost story bright enough to see the fingerprints.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-02-girls-camp-x&to=album",
+      "post_type": "video",
+      "text": "Tiny house. One light. No Mortgage. That is the whole escape plan. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2120,18 +1609,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK",
+      "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-29T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 2: Girls Camp keeps the ghost story bright enough to see the fingerprints.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "Tiny house. One light. No Mortgage. That is the whole escape plan.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2147,57 +1636,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-03-ANALOG-MYTH-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-30T10:15:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: Analog Myth lets the tape hiss become part of the truth.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-03-analog-myth-x&to=album",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-30T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 3: Analog Myth lets the tape hiss become part of the truth.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-07-31T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: Spilling the Tea makes the side-eye cinematic without losing the grin.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-04-spilling-the-tea-x&to=album",
+      "post_type": "video",
+      "text": "When your dream home is mostly somewhere nobody can find you. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2208,18 +1653,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK",
+      "id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-07-31T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 4: Spilling the Tea makes the side-eye cinematic without losing the grin.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "When your dream home is mostly somewhere nobody can find you.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2235,13 +1680,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-05-NO-MORTGAGE-X",
+      "id": "FP-GROWTH-RESET-VOICE-06-X",
       "platform": "X",
-      "scheduled_at": "2026-08-01T10:15:00-04:00",
+      "scheduled_at": "2026-07-31T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: No Mortgage sounds like a house key landing on the table.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-05-no-mortgage-x&to=album",
+      "post_type": "text",
+      "text": "Put the keys down. Keep the wide sky.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2257,35 +1702,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-08-01T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 5: No Mortgage sounds like a house key landing on the table.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W4-06-GUARDS-DOWN-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-08-02T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: Guards Down catches the exact second the brave face slips.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-06-guards-down-x&to=album",
+      "post_type": "video",
+      "text": "Trade the noise for a wide sky. Keep the signal. Lose the debt. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2296,18 +1719,18 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK",
+      "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-08-02T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 6: Guards Down catches the exact second the brave face slips.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "Trade the noise for a wide sky. Keep the signal. Lose the debt.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2323,13 +1746,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-07-SLOW-WALK-X",
+      "id": "FP-GROWTH-RESET-VOICE-07-X",
       "platform": "X",
-      "scheduled_at": "2026-08-03T10:15:00-04:00",
+      "scheduled_at": "2026-08-03T14:05:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: Slow Walk moves like it knows the shortcut is a trap.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-07-slow-walk-x&to=album",
+      "post_type": "text",
+      "text": "The shortcut looked suspicious, so the song kept walking.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2345,35 +1768,13 @@
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-08-03T11:20:00-04:00",
-      "approved": "yes",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 7: Slow Walk moves like it knows the shortcut is a trap.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
-      "imported_result_fields": [],
-      "captured_api_fields": [],
-      "public_visibility_status": "",
-      "public_visibility_ok": null,
-      "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
-      "visible_in_future_queue": true
-    },
-    {
-      "id": "FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X",
-      "platform": "X",
+      "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
       "scheduled_at": "2026-08-04T10:15:00-04:00",
-      "approved": "yes",
+      "approved": "no",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace: The Power of Light turns the last switch into a little revelation.\n\nAlbum room: https://www.lilyroo.com/go/am.html?p=fp-brand-am-w4-08-the-power-of-light-x&to=album",
+      "post_type": "video",
+      "text": "What would you keep if you needed less? No Mortgage has a short list. #Shorts",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",
@@ -2384,18 +1785,40 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "waiting_platform_readiness",
+      "next_action": "Keep YouTube inactive until its automated posting and analytics credentials are ready.",
       "visible_in_future_queue": true
     },
     {
-      "id": "FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK",
+      "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "platform": "Facebook",
       "scheduled_at": "2026-08-04T11:20:00-04:00",
       "approved": "yes",
       "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Analog Myth signal trace, track 8: The Power of Light turns the last switch into a little revelation.\n\nAlbum page, Echo Thread play-through, and the full playlist are live.",
+      "post_type": "video",
+      "text": "What would you keep if you needed less? No Mortgage has a short list.",
+      "post_url": "",
+      "published_log_row": "",
+      "execution_status": "",
+      "execution_reason": "",
+      "measurement_due_at": "",
+      "imported_result_fields": [],
+      "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
+      "status": "scheduled_future",
+      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "visible_in_future_queue": true
+    },
+    {
+      "id": "FP-GROWTH-RESET-VOICE-08-X",
+      "platform": "X",
+      "scheduled_at": "2026-08-07T14:05:00-04:00",
+      "approved": "yes",
+      "execution_mode": "auto",
+      "post_type": "text",
+      "text": "Truth sounds different after the cup hits the table.",
       "post_url": "",
       "published_log_row": "",
       "execution_status": "",

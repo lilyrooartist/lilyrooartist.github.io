@@ -345,6 +345,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_growth_reset_outcomes",
+        "command": ["python3", "scripts/build_growth_reset_outcomes.py"],
+        "required": True,
+    },
+    {
         "name": "build_experiment_publish_runway",
         "command": ["python3", "scripts/build_experiment_publish_runway.py"],
         "required": True,

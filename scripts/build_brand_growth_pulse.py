@@ -111,11 +111,11 @@ def title_from_campaign_id(value: str | None) -> str:
     if not raw:
         return "Analog Myth post"
     slug = raw
-    for prefix in ("FP-BRAND-AM-", "FP-LAUNCH-ANALOG-MYTH-", "PODCAST-ANALOG-MYTH-"):
+    for prefix in ("FP-GROWTH-RESET-", "FP-BRAND-AM-", "FP-LAUNCH-ANALOG-MYTH-", "PODCAST-ANALOG-MYTH-"):
         if slug.upper().startswith(prefix):
             slug = slug[len(prefix):]
             break
-    for suffix in ("-FACEBOOK", "-X"):
+    for suffix in ("-YOUTUBE", "-FACEBOOK", "-X"):
         if slug.upper().endswith(suffix):
             slug = slug[: -len(suffix)]
             break
@@ -276,7 +276,7 @@ def build_learning_plan(
             )
             if command
         ],
-        "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
+        "automation_note": "No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.",
         "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them." if missing_metrics else "",
         "rows": selected,
         "hours_until_next_learning_due": hours_until(next_due, now),
@@ -356,7 +356,7 @@ def pick_primary_action(
         return {
             "state": "campaign_running",
             "label": "Let the next automated posts run",
-            "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
+            "why": "The active automated Analog Myth growth reset is queued and ready; proof capture starts after the next window.",
             "command": "python3 scripts/refresh_promo_admin.py",
             "due_at": proof_due_at,
         }
@@ -371,7 +371,7 @@ def pick_primary_action(
     return {
         "state": "campaign_running",
         "label": "Let the next automated posts run",
-        "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
+        "why": "The active automated Analog Myth growth reset is queued and ready; proof capture starts after the next window.",
         "command": "python3 scripts/refresh_promo_admin.py",
         "due_at": proof_due_at or "",
     }
@@ -445,7 +445,7 @@ def build_payload() -> dict:
         },
         {
             "label": "Preserve the no-manual-posting lane",
-            "detail": "Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.",
+            "detail": "Keep only API-backed platforms active; unsupported surfaces stay unapproved until their automated path is verified.",
             "command": "python3 scripts/build_posting_automation_status.py",
         },
     ]
