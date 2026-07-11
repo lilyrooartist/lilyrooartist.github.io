@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T23:36:25.599292Z",
+  "generated_at": "2026-07-11T23:39:25.231951Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -20,150 +20,43 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "next_action": {
-    "label": "Connect automated brand metrics capture",
-    "kind": "brand_growth_metrics",
-    "priority": 3,
-    "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
+    "label": "Watch active Analog Myth proof window",
+    "kind": "brand_growth_proof",
+    "priority": 0,
+    "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
     "context": {
-      "status": "missing_metric_credentials",
-      "ready_post_count": 14,
-      "ready_post_ids": [
-        "FP-BRAND-AM-01-13-X",
-        "FP-BRAND-AM-01-13-FACEBOOK",
-        "FP-BRAND-AM-02-GIRLS-CAMP-X",
-        "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-        "FP-BRAND-AM-03-ANALOG-MYTH-X",
-        "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-        "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-        "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-        "FP-BRAND-AM-05-NO-MORTGAGE-X",
-        "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-        "FP-BRAND-AM-06-GUARDS-DOWN-X",
-        "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
-        "FP-BRAND-AM-07-SLOW-WALK-X",
-        "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
+      "status": "ready_active_campaign",
+      "platforms": [
+        "Facebook",
+        "X",
+        "YouTube"
       ],
-      "ready_x_post_ids": [
-        "FP-BRAND-AM-01-13-X",
-        "FP-BRAND-AM-02-GIRLS-CAMP-X",
-        "FP-BRAND-AM-03-ANALOG-MYTH-X",
-        "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-        "FP-BRAND-AM-05-NO-MORTGAGE-X",
-        "FP-BRAND-AM-06-GUARDS-DOWN-X",
-        "FP-BRAND-AM-07-SLOW-WALK-X"
+      "expected_post_ids": [
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "FP-GROWTH-RESET-VOICE-01-X"
       ],
-      "ready_facebook_post_ids": [
-        "FP-BRAND-AM-01-13-FACEBOOK",
-        "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-        "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-        "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-        "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-        "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
-        "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
-      ],
-      "missing_secret_names": [
-        "FB_PAGE_ID",
-        "META_LONG_LIVED_TOKEN",
-        "X_ACCESS_TOKEN",
-        "X_ACCESS_TOKEN_SECRET",
-        "X_API_KEY",
-        "X_API_SECRET"
-      ],
-      "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X",
-      "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-      "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-      "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
-      "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET --apply",
-      "local_secret_source": "secrets/social_api.env",
-      "secret_template": "data/social_blocker_secret_template.env",
-      "github_actions_secret_presence": "data/github_actions_secret_presence.json",
+      "next_proof_due_at": "2026-07-13T18:06:00Z",
+      "next_measurement_due_at": "2026-07-14T18:05:00Z",
+      "scheduler_http_status": 200,
+      "scheduler_would_post_count": 3,
+      "scheduler_blocked_count": 0,
+      "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
       "report_path": "admin/reports/brand-growth-readout.md",
-      "post_urls": [
-        {
-          "post_id": "FP-BRAND-AM-01-13-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2073410401006751908"
-        },
-        {
-          "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470"
-        },
-        {
-          "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2073772787177861205"
-        },
-        {
-          "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470"
-        },
-        {
-          "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2074135149185266159"
-        },
-        {
-          "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470"
-        },
-        {
-          "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2074497538409779510"
-        },
-        {
-          "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470"
-        },
-        {
-          "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2074859954704441417"
-        },
-        {
-          "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121305865249470"
-        },
-        {
-          "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2075222310240535024"
-        },
-        {
-          "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121402309249470"
-        },
-        {
-          "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
-          "platform": "X",
-          "url": "https://x.com/i/web/status/2075584699003740283"
-        },
-        {
-          "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-          "platform": "Facebook",
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470"
-        }
-      ],
-      "note": "Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. Add the missing names to ../secrets/social_api.env, use the scoped GitHub Actions secret push, then rerun the capture commands."
+      "note": "After 2026-07-13T18:06:00Z, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X and export confirmed URLs."
     },
-    "phase": "Measure active brand campaign",
+    "phase": "Automated brand campaign",
     "urgency": "high",
-    "urgency_reason": "14 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.",
-    "status": "waiting_for_credentials",
+    "urgency_reason": "The active Analog Myth proof window is coming up within 48 hours.",
+    "status": "ready",
     "sort_key": [
       1,
-      3,
+      0,
       0
     ]
   },
   "summary": {
-    "action_count": 8,
+    "action_count": 9,
     "user_review": 0,
     "platform_fixes": 0,
     "scheduled_approval_batches": 0,
@@ -171,7 +64,7 @@
     "manual_metric_updates": 2,
     "manual_distribution_actions": 0,
     "manual_lane_cleanup_actions": 0,
-    "brand_growth_proof_actions": 0,
+    "brand_growth_proof_actions": 1,
     "brand_growth_metric_actions": 1,
     "brand_growth_visibility_actions": 0,
     "experiment_result_actions": 1,
@@ -180,161 +73,91 @@
     "blocked_review_items": 0,
     "manual_only_review_items": 0,
     "phases": {
+      "Automated brand campaign": 1,
       "Collect experiment results": 1,
       "Fill manual metrics": 2,
       "Measure active brand campaign": 1,
       "Verify music sites": 4
     },
     "urgencies": {
-      "high": 2,
+      "high": 3,
       "low": 2,
       "medium": 4
     },
     "next_action": {
-      "label": "Connect automated brand metrics capture",
-      "kind": "brand_growth_metrics",
-      "priority": 3,
-      "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
+      "label": "Watch active Analog Myth proof window",
+      "kind": "brand_growth_proof",
+      "priority": 0,
+      "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
       "context": {
-        "status": "missing_metric_credentials",
-        "ready_post_count": 14,
-        "ready_post_ids": [
-          "FP-BRAND-AM-01-13-X",
-          "FP-BRAND-AM-01-13-FACEBOOK",
-          "FP-BRAND-AM-02-GIRLS-CAMP-X",
-          "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-          "FP-BRAND-AM-03-ANALOG-MYTH-X",
-          "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-          "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-          "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-          "FP-BRAND-AM-05-NO-MORTGAGE-X",
-          "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-          "FP-BRAND-AM-06-GUARDS-DOWN-X",
-          "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
-          "FP-BRAND-AM-07-SLOW-WALK-X",
-          "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
+        "status": "ready_active_campaign",
+        "platforms": [
+          "Facebook",
+          "X",
+          "YouTube"
         ],
-        "ready_x_post_ids": [
-          "FP-BRAND-AM-01-13-X",
-          "FP-BRAND-AM-02-GIRLS-CAMP-X",
-          "FP-BRAND-AM-03-ANALOG-MYTH-X",
-          "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-          "FP-BRAND-AM-05-NO-MORTGAGE-X",
-          "FP-BRAND-AM-06-GUARDS-DOWN-X",
-          "FP-BRAND-AM-07-SLOW-WALK-X"
+        "expected_post_ids": [
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-01-X"
         ],
-        "ready_facebook_post_ids": [
-          "FP-BRAND-AM-01-13-FACEBOOK",
-          "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-          "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-          "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-          "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-          "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
-          "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
-        ],
-        "missing_secret_names": [
-          "FB_PAGE_ID",
-          "META_LONG_LIVED_TOKEN",
-          "X_ACCESS_TOKEN",
-          "X_ACCESS_TOKEN_SECRET",
-          "X_API_KEY",
-          "X_API_SECRET"
-        ],
-        "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X",
-        "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-        "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-        "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
-        "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET --apply",
-        "local_secret_source": "secrets/social_api.env",
-        "secret_template": "data/social_blocker_secret_template.env",
-        "github_actions_secret_presence": "data/github_actions_secret_presence.json",
+        "next_proof_due_at": "2026-07-13T18:06:00Z",
+        "next_measurement_due_at": "2026-07-14T18:05:00Z",
+        "scheduler_http_status": 200,
+        "scheduler_would_post_count": 3,
+        "scheduler_blocked_count": 0,
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "report_path": "admin/reports/brand-growth-readout.md",
-        "post_urls": [
-          {
-            "post_id": "FP-BRAND-AM-01-13-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2073410401006751908"
-          },
-          {
-            "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470"
-          },
-          {
-            "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2073772787177861205"
-          },
-          {
-            "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470"
-          },
-          {
-            "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2074135149185266159"
-          },
-          {
-            "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470"
-          },
-          {
-            "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2074497538409779510"
-          },
-          {
-            "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470"
-          },
-          {
-            "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2074859954704441417"
-          },
-          {
-            "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122121305865249470"
-          },
-          {
-            "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2075222310240535024"
-          },
-          {
-            "post_id": "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122121402309249470"
-          },
-          {
-            "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
-            "platform": "X",
-            "url": "https://x.com/i/web/status/2075584699003740283"
-          },
-          {
-            "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-            "platform": "Facebook",
-            "url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470"
-          }
-        ],
-        "note": "Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. Add the missing names to ../secrets/social_api.env, use the scoped GitHub Actions secret push, then rerun the capture commands."
+        "note": "After 2026-07-13T18:06:00Z, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X and export confirmed URLs."
       },
-      "phase": "Measure active brand campaign",
+      "phase": "Automated brand campaign",
       "urgency": "high",
-      "urgency_reason": "14 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.",
-      "status": "waiting_for_credentials",
+      "urgency_reason": "The active Analog Myth proof window is coming up within 48 hours.",
+      "status": "ready",
       "sort_key": [
         1,
-        3,
+        0,
         0
       ]
     }
   },
   "actions": [
+    {
+      "label": "Watch active Analog Myth proof window",
+      "kind": "brand_growth_proof",
+      "priority": 0,
+      "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+      "context": {
+        "status": "ready_active_campaign",
+        "platforms": [
+          "Facebook",
+          "X",
+          "YouTube"
+        ],
+        "expected_post_ids": [
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-01-X"
+        ],
+        "next_proof_due_at": "2026-07-13T18:06:00Z",
+        "next_measurement_due_at": "2026-07-14T18:05:00Z",
+        "scheduler_http_status": 200,
+        "scheduler_would_post_count": 3,
+        "scheduler_blocked_count": 0,
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "report_path": "admin/reports/brand-growth-readout.md",
+        "note": "After 2026-07-13T18:06:00Z, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X and export confirmed URLs."
+      },
+      "phase": "Automated brand campaign",
+      "urgency": "high",
+      "urgency_reason": "The active Analog Myth proof window is coming up within 48 hours.",
+      "status": "ready",
+      "sort_key": [
+        1,
+        0,
+        0
+      ]
+    },
     {
       "label": "Connect automated brand metrics capture",
       "kind": "brand_growth_metrics",
@@ -475,7 +298,7 @@
       "sort_key": [
         1,
         3,
-        0
+        1
       ]
     },
     {
@@ -545,7 +368,7 @@
       "sort_key": [
         1,
         5,
-        1
+        2
       ]
     },
     {
@@ -556,63 +379,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-07-11T23:36:00.940273+00:00",
+        "checked_at": "2026-07-11T23:39:03.551726+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-12T23:36:00.940273+00:00",
+        "next_recheck_at": "2026-07-12T23:39:03.551726+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-11T23:36:00.940273Z",
+          "updated_at": "2026-07-11T23:39:03.551726Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-11T23:36:00.940273+00:00",
+          "checked_at": "2026-07-11T23:39:03.551726+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-12T23:36:00.940273+00:00",
+          "next_recheck_at": "2026-07-12T23:39:03.551726+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:36:00.940273+00:00. Status: waiting_for_release_propagation."
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        2
-      ]
-    },
-    {
-      "label": "Re-check Twelve Dollars on Apple Music",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
-      "context": {
-        "release": "Twelve Dollars",
-        "service": "Apple Music",
-        "checked_at": "2026-07-11T23:36:02.249100+00:00",
-        "checked_age_hours": 0.0,
-        "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-12T23:36:02.249100+00:00",
-        "recheck_due": false,
-        "recheck_status": "waiting_for_release_propagation",
-        "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-07-11T23:36:02.249100Z",
-          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-11T23:36:02.249100+00:00",
-          "checked_age_hours": 0.0,
-          "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-12T23:36:02.249100+00:00",
-          "recheck_due": false,
-          "recheck_status": "waiting_for_release_propagation"
-        },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:36:02.249100+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:39:03.551726+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -625,32 +410,32 @@
       ]
     },
     {
-      "label": "Re-check Twelve Dollars on HyperFollow",
+      "label": "Re-check Twelve Dollars on Apple Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
       "context": {
         "release": "Twelve Dollars",
-        "service": "HyperFollow",
-        "checked_at": "2026-07-11T23:36:02.729418+00:00",
+        "service": "Apple Music",
+        "checked_at": "2026-07-11T23:39:04.846095+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-12T23:36:02.729418+00:00",
+        "next_recheck_at": "2026-07-12T23:39:04.846095+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-11T23:36:02.729418Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-11T23:36:02.729418+00:00",
+          "updated_at": "2026-07-11T23:39:04.846095Z",
+          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-07-11T23:39:04.846095+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-12T23:36:02.729418+00:00",
+          "next_recheck_at": "2026-07-12T23:39:04.846095+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:36:02.729418+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:39:04.846095+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -663,6 +448,44 @@
       ]
     },
     {
+      "label": "Re-check Twelve Dollars on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "HyperFollow",
+        "checked_at": "2026-07-11T23:39:05.244188+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-07-12T23:39:05.244188+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-07-11T23:39:05.244188Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-07-11T23:39:05.244188+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-07-12T23:39:05.244188+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:39:05.244188+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        5
+      ]
+    },
+    {
       "label": "Re-check Analog Myth on YouTube Music",
       "kind": "store_verification",
       "priority": 20,
@@ -670,25 +493,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-07-11T23:36:02.786836+00:00",
+        "checked_at": "2026-07-11T23:39:05.309516+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-12T23:36:02.786836+00:00",
+        "next_recheck_at": "2026-07-12T23:39:05.309516+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-11T23:36:02.786836Z",
+          "updated_at": "2026-07-11T23:39:05.309516Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-07-11T23:36:02.786836+00:00",
+          "checked_at": "2026-07-11T23:39:05.309516+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-12T23:36:02.786836+00:00",
+          "next_recheck_at": "2026-07-12T23:39:05.309516+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:36:02.786836+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-12T23:39:05.309516+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -697,7 +520,7 @@
       "sort_key": [
         2,
         20,
-        5
+        6
       ]
     },
     {
@@ -844,7 +667,7 @@
       "sort_key": [
         3,
         32,
-        6
+        7
       ]
     },
     {
@@ -982,7 +805,7 @@
       "sort_key": [
         3,
         33,
-        7
+        8
       ]
     }
   ]

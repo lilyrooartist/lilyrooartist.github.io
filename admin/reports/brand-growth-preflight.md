@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-11T23:36:24.302289Z
+Generated: 2026-07-11T23:39:23.973792Z
 
 ## Summary
-- Status: **needs_attention**
+- Status: **ready**
 - Next window: **2026-07-13** at `2026-07-13T18:06:00Z`
 - Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-13T18:06:00Z`, due **3**, satisfied **2**, would post **2**, posted **0**, blocked **1**
-- Current scheduler snapshot: checked `2026-07-11T23:36:19.148138Z`, requested `2026-07-11T23:36:18.810765Z`, due **0**, would post **0**, posted **0**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-13T18:06:00Z`, due **3**, satisfied **3**, would post **3**, posted **0**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-11T23:39:18.565037Z`, requested `2026-07-11T23:39:18.420851Z`, due **0**, would post **0**, posted **0**, blocked **0**
 - Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **3 / 3 checked ok**
 - Redirect targets: **3 / 3 checked**, **3 ok**, **0 warning**, **0 blocking failed**
@@ -18,12 +18,6 @@ Generated: 2026-07-11T23:36:24.302289Z
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube at `2026-07-13T10:15:00-04:00`
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook at `2026-07-13T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-01-X` X at `2026-07-13T14:05:00-04:00`
-
-## Missing From Dry Run
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE`
-
-## Blocked Rows
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE`
 
 ## Link Checks
 - **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE clip_url` 200 video/mp4

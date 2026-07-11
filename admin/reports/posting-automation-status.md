@@ -1,34 +1,33 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-11T23:36:23.232423Z
+Generated: 2026-07-11T23:39:22.938628Z
 
 ## Summary
-- Status: **blocked**
-- Active campaign ready: **False**
-- Lanes ready: **5 / 10**
-- Blocked lanes: **2**
-- Deferred optional lanes: **1**
-- Needs attention: **2**
+- Status: **ready_active_campaign**
+- Active campaign ready: **True**
+- Lanes ready: **7 / 10**
+- Blocked lanes: **0**
+- Deferred optional lanes: **3**
+- Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Proof refresh: **slow** at `2026-07-14T15:25:00Z` (1279 min)
-- Proof export: **needs_attention** via `python3 scripts/export_social_executions.py`
-- Next action: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
+- Proof refresh: **ready** at `2026-07-13T18:20:00Z` (14 min)
+- Proof export: **ready** via `python3 scripts/export_social_executions.py`
+- Next action: Automatic proof/export is scheduled at 2026-07-13T18:20:00Z; verify the active posts in Published_Log after that run.
 
 ## Automation Lanes
-- **Active Analog Myth brand campaign** - `needs_attention`
-  - Detail: 36 approved auto posts; next=FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK at 2026-07-13T11:20:00-04:00; preflight=needs_attention
+- **Active Analog Myth brand campaign** - `ready`
+  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE at 2026-07-13T10:15:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
-  - Next: Refresh brand growth readout and preflight.
+  - Next: Automatic proof/export is scheduled at 2026-07-13T18:20:00Z; verify the active posts in Published_Log after that run.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh is 1279 minute(s) after proof due
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run completed / success; proof refresh next fixed refresh 14 minute(s) after proof due
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29165440374
-- **Published URL export** - `needs_attention`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-14T15:25:00Z
+- **Published URL export** - `ready`
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-13T18:20:00Z
   - Evidence: data/promo_admin_refresh_run.json
-  - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-11T23:36:20.939565Z
+  - Detail: 19 refresh commands captured at 2026-07-11T23:39:20.541302Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -40,14 +39,14 @@ Generated: 2026-07-11T23:36:23.232423Z
   - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Optional expansion only; unsupported platforms stay inactive until their automated lane is ready.
-- **TikTok API lane** - `blocked`
+- **TikTok API lane** - `deferred`
   - Detail: blocked; upload_ready=False; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
-- **Blocker input readiness** - `blocked`
+- **Blocker input readiness** - `deferred`
   - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env.
+  - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

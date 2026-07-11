@@ -7,6 +7,8 @@ on:
     # Refresh shortly after both slots so posted URLs and readouts update faster.
     - cron: "25 15 * * *"
     - cron: "05 16 * * *"
+    # The reset's X brand-voice slot is 2:05 PM America/New_York.
+    - cron: "20 18 * * *"
   workflow_dispatch:
 
 permissions:
