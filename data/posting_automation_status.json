@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T13:56:15.217486Z",
+  "generated_at": "2026-07-11T16:23:53.365131Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -42,12 +42,12 @@
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 0,
+    "active_campaign_proof_export_added_last_run": 2,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
-    "posted_count": 44,
+    "posted_count": 46,
     "attention_count": 0,
     "platform_fix_needed_count": 0,
     "story_post_count": 6,
@@ -78,35 +78,35 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29155162585",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29159695772",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "ready",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-11T15:25:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=2 dry_run=False; next proof refresh=2026-07-11T15:25:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-11T13:56:12.345517Z",
+      "detail": "19 refresh commands captured at 2026-07-11T16:23:51.546662Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=0 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=2 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=44 attention=0 platform_fix_needed=0",
+      "detail": "posted=46 attention=0 platform_fix_needed=0",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },

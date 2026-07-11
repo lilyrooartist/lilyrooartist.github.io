@@ -1,33 +1,33 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-11T13:56:17.573163Z
+Generated: 2026-07-11T16:23:54.354102Z
 
 ## Current Pulse
-- Status: **learn_from_clicks**
-- Primary action: **Review first-party click response**
-- Why: Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.
-- Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- Status: **posting_needs_check**
+- Primary action: **Refresh the next posting window**
+- Why: The next Analog Myth scheduler check is not clean.
+- Command: `python3 scripts/build_brand_growth_preflight.py`
 - Active campaign ready: **True**
-- Posting preflight ready: **True**
+- Posting preflight ready: **False**
 - Future queued posts: **34**
-- Posted or measured rows: **14**
-- Ready for result capture: **12**
+- Posted or measured rows: **16**
+- Ready for result capture: **14**
 - First-party clicks: **3** across **1** post(s)
-- Click snapshot: `2026-07-11T13:56:12.336674Z` (covers current due posts)
-- Next post at: `2026-07-11T10:15:00-04:00`
-- Proof due at: `2026-07-11T15:21:00Z`
-- Hours until next post: `0.31`
-- Hours until proof due: `1.41`
+- Click snapshot: `2026-07-11T16:23:51.537621Z` (covers current due posts)
+- Next post at: `2026-07-13T11:20:00-04:00`
+- Proof due at: `2026-07-13T18:06:00Z`
+- Hours until next post: `46.93`
+- Hours until proof due: `49.7`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
 - Headline: **Click response is ready to review**
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
-- Measurement due rows: **12**
+- Measurement due rows: **14**
 - Waiting measurement rows: **2**
 - Future scheduled rows: **34**
-- Next learning due at: `2026-07-11T14:15:30.211000Z`
+- Next learning due at: `2026-07-12T14:15:44.632000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
@@ -37,14 +37,14 @@ Generated: 2026-07-11T13:56:17.573163Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-BRAND-AM-07-SLOW-WALK-X` (X): Slow Walk - Waiting for first useful result check
-  - `FP-BRAND-AM-07-SLOW-WALK-FACEBOOK` (Facebook): Slow Walk - Waiting for first useful result check
-  - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` (X): The Power Of Light - Next queued learning input
-  - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` (Facebook): The Power Of Light - Next queued learning input
+  - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` (X): The Power Of Light - Waiting for first useful result check
+  - `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` (Facebook): The Power Of Light - Waiting for first useful result check
+  - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): Slow Walk Lyric Punch Line - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-01-X` (X): Voice 01 - Next queued learning input
 
 ## Recommendations
-- **Review first-party click response**: Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.
-  - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.
+  - Command: `python3 scripts/build_brand_growth_preflight.py`
 - **Click response is ready to review**: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
   - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
 - **Preserve the no-manual-posting lane**: Keep only API-backed platforms active; unsupported surfaces stay unapproved until their automated path is verified.
@@ -53,7 +53,7 @@ Generated: 2026-07-11T13:56:17.573163Z
   - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
 
 ## Blockers
-- No active posting blockers.
+- **Next scheduler window**: The next scheduler dry-run has blocked rows.
 
 ## Guardrails
 - No manual posting is introduced by this pulse.

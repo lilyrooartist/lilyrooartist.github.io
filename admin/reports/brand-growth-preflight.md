@@ -1,40 +1,34 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-11T13:56:15.867151Z
+Generated: 2026-07-11T16:23:53.868550Z
 
 ## Summary
-- Status: **ready**
-- Next window: **2026-07-11** at `2026-07-11T15:21:00Z`
+- Status: **needs_attention**
+- Next window: **2026-07-13** at `2026-07-13T18:06:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-11T15:21:00Z`, due **2**, satisfied **2**, would post **2**, posted **0**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-11T13:56:10.525257Z`, requested `2026-07-11T13:56:10.065259Z`, due **0**, would post **0**, posted **0**, blocked **0**
-- Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **6 / 6 checked ok**
-- Redirect targets: **6 / 6 checked**, **4 ok**, **2 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-11T15:21:00Z`
-- Current window measurement due: `2026-07-12T15:20:00Z`
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-13T18:06:00Z`, due **5**, satisfied **2**, would post **2**, posted **2**, blocked **1**
+- Current scheduler snapshot: checked `2026-07-11T16:23:49.905591Z`, requested `2026-07-11T16:23:49.533265Z`, due **2**, would post **0**, posted **2**, blocked **0**
+- Link checks: **3 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **2 / 2 checked ok**
+- Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
+- Current window proof due: `2026-07-13T18:06:00Z`
+- Current window measurement due: `2026-07-14T18:05:00Z`
 
 ## Expected Posts
-- `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` X at `2026-07-11T10:15:00-04:00`
-- `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook at `2026-07-11T11:20:00-04:00`
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook at `2026-07-13T11:20:00-04:00`
+- `FP-GROWTH-RESET-VOICE-01-X` X at `2026-07-13T14:05:00-04:00`
+
+## Blocked Rows
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE`
 
 ## Link Checks
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X imagery_url` 200 image/png
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK imagery_url` 200 image/png
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video` 200 text/html
+- **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Hear the song` 200 text/html
+- **ok** `FP-GROWTH-RESET-VOICE-01-X Enter the album room` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Album target album` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Echo target echo` 200 text/html
-- **warning** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X Video target video` 429 HTTP 429: Too Many Requests
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Analog Myth target album` 200 text/html
-- **ok** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Echo Thread target echo` 200 text/html
-- **warning** `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK Track video target video` 429 HTTP 429: Too Many Requests
+- **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Hear the song target spotify` 200 text/html; charset=utf-8
+- **ok** `FP-GROWTH-RESET-VOICE-01-X Enter the album room target album` 200 text/html
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

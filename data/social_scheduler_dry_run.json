@@ -1,34 +1,61 @@
 {
   "ok": true,
-  "updated_at": "2026-07-11T13:56:10.525257Z",
+  "updated_at": "2026-07-11T16:23:49.905591Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-11T13:56:10.065259Z",
-  "queue_url": "",
-  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/68850d247f5555ebd151c9ef52de6cc5aee0c69e/admin/future-posts.json",
-  "queue_source": "live_queue_fallback",
-  "fallback_reason": "Commit queue probe returned HTTP 500: HTTP 500: Internal Server Error",
+  "requested_scheduled_time": "2026-07-11T16:23:49.533265Z",
+  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/94d1f0c6e41f5ab6c1a362f904ac7bfad2c8894a/admin/future-posts.json",
+  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/94d1f0c6e41f5ab6c1a362f904ac7bfad2c8894a/admin/future-posts.json",
+  "queue_source": "commit_queue_url",
+  "fallback_reason": "",
   "dry_run": true,
-  "checked_at": "2026-07-11T13:56:10.065Z",
+  "checked_at": "2026-07-11T16:23:49.533Z",
   "summary": {
-    "due_count": 0,
-    "result_count": 0,
+    "due_count": 2,
+    "result_count": 2,
     "would_post_count": 0,
-    "posted_count": 0,
+    "posted_count": 2,
     "blocked_count": 0,
-    "status_counts": {},
-    "platform_counts": {},
+    "status_counts": {
+      "posted": 2
+    },
+    "platform_counts": {
+      "Unknown": 2
+    },
     "would_post": [],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": []
   },
   "payload": {
     "ok": true,
-    "due_count": 0,
-    "result_count": 0
+    "due_count": 2,
+    "result_count": 2
   },
   "action_needed": ""
 }

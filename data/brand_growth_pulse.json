@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-11T13:56:17.573163Z",
+  "generated_at": "2026-07-11T16:23:54.354102Z",
   "safe_mode": true,
-  "status": "learn_from_clicks",
+  "status": "posting_needs_check",
   "source": {
     "brand_growth_readout": "data/brand_growth_readout.json",
     "brand_growth_preflight": "data/brand_growth_preflight.json",
@@ -11,19 +11,19 @@
     "facebook_post_results": "data/facebook_post_results.json"
   },
   "summary": {
-    "status": "learn_from_clicks",
+    "status": "posting_needs_check",
     "primary_action": {
-      "state": "learn_from_clicks",
-      "label": "Review first-party click response",
-      "why": "Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.",
-      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
-      "due_at": "2026-07-11T14:15:30.211000Z"
+      "state": "posting_needs_check",
+      "label": "Refresh the next posting window",
+      "why": "The next Analog Myth scheduler check is not clean.",
+      "command": "python3 scripts/build_brand_growth_preflight.py",
+      "due_at": ""
     },
     "active_campaign_ready": true,
-    "posting_preflight_ready": true,
+    "posting_preflight_ready": false,
     "queued_future_posts": 34,
-    "posted_or_measured_rows": 14,
-    "ready_for_metric_capture_rows": 12,
+    "posted_or_measured_rows": 16,
+    "ready_for_metric_capture_rows": 14,
     "click_count": 3,
     "click_post_count": 1,
     "clicks_by_platform": {
@@ -34,13 +34,13 @@
       "echo": 1,
       "video": 1
     },
-    "click_snapshot_updated_at": "2026-07-11T13:56:12.336674Z",
+    "click_snapshot_updated_at": "2026-07-11T16:23:51.537621Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
-    "next_post_at": "2026-07-11T10:15:00-04:00",
-    "proof_due_at": "2026-07-11T15:21:00Z",
-    "hours_until_next_post": 0.31,
-    "hours_until_proof_due": 1.41,
+    "next_post_at": "2026-07-13T11:20:00-04:00",
+    "proof_due_at": "2026-07-13T18:06:00Z",
+    "hours_until_next_post": 46.93,
+    "hours_until_proof_due": 49.7,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -52,9 +52,9 @@
     "learning_status": "learn_from_clicks",
     "learning_headline": "Click response is ready to review",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_rows": 12,
+    "measurement_due_rows": 14,
     "waiting_measurement_rows": 2,
-    "next_learning_due_at": "2026-07-11T14:15:30.211000Z",
+    "next_learning_due_at": "2026-07-12T14:15:44.632000Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
@@ -65,11 +65,11 @@
     "headline": "Click response is ready to review",
     "note": "Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_count": 12,
+    "measurement_due_count": 14,
     "waiting_measurement_count": 2,
     "scheduled_future_count": 34,
-    "next_learning_due_at": "2026-07-11T14:15:30.211000Z",
-    "click_snapshot_updated_at": "2026-07-11T13:56:12.336674Z",
+    "next_learning_due_at": "2026-07-12T14:15:44.632000Z",
+    "click_snapshot_updated_at": "2026-07-11T16:23:51.537621Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -77,15 +77,15 @@
       "FP-BRAND-AM-01-13-FACEBOOK"
     ],
     "next_proof_post_ids": [
-      "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
-      "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK"
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-VOICE-01-X"
     ],
     "click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
     "pulse_refresh_command": "python3 scripts/build_brand_growth_pulse.py",
     "proof_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
     "metric_capture_commands": [
-      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X",
-      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
+      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X",
+      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
     ],
     "automation_note": "No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.",
     "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.",
@@ -135,57 +135,57 @@
         "learning_use": "Ready for post-window comparison"
       },
       {
-        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
-        "platform": "X",
-        "title": "Slow Walk",
-        "status": "posted_waiting_measurement_window",
-        "scheduled_at": "2026-07-10T10:15:00-04:00",
-        "measurement_due_at": "2026-07-11T14:15:30.211000+00:00",
-        "post_url": "https://x.com/i/web/status/2075584699003740283",
-        "public_visibility_ok": true,
-        "learning_use": "Waiting for first useful result check"
-      },
-      {
-        "post_id": "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK",
-        "platform": "Facebook",
-        "title": "Slow Walk",
-        "status": "posted_waiting_measurement_window",
-        "scheduled_at": "2026-07-10T11:20:00-04:00",
-        "measurement_due_at": "2026-07-11T15:30:34.013000+00:00",
-        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121496545249470",
-        "public_visibility_ok": true,
-        "learning_use": "Waiting for first useful result check"
-      },
-      {
         "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
         "platform": "X",
         "title": "The Power Of Light",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement_window",
         "scheduled_at": "2026-07-11T10:15:00-04:00",
+        "measurement_due_at": "2026-07-12T14:15:44.632000+00:00",
+        "post_url": "https://x.com/i/web/status/2075947147338391981",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
+        "platform": "Facebook",
+        "title": "The Power Of Light",
+        "status": "posted_waiting_measurement_window",
+        "scheduled_at": "2026-07-11T11:20:00-04:00",
+        "measurement_due_at": "2026-07-12T15:30:56.380000+00:00",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121593013249470",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "title": "Slow Walk Lyric Punch Line",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-13T11:20:00-04:00",
         "measurement_due_at": "",
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
       },
       {
-        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
-        "platform": "Facebook",
-        "title": "The Power Of Light",
+        "post_id": "FP-GROWTH-RESET-VOICE-01-X",
+        "platform": "X",
+        "title": "Voice 01",
         "status": "scheduled_future",
-        "scheduled_at": "2026-07-11T11:20:00-04:00",
+        "scheduled_at": "2026-07-13T14:05:00-04:00",
         "measurement_due_at": "",
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": 0.32
+    "hours_until_next_learning_due": 21.86
   },
   "recommendations": [
     {
-      "label": "Review first-party click response",
-      "detail": "Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.",
-      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
+      "label": "Refresh the next posting window",
+      "detail": "The next Analog Myth scheduler check is not clean.",
+      "command": "python3 scripts/build_brand_growth_preflight.py"
     },
     {
       "label": "Click response is ready to review",
@@ -203,7 +203,15 @@
       "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET"
     }
   ],
-  "blockers": [],
+  "blockers": [
+    {
+      "kind": "scheduler",
+      "label": "Next scheduler window",
+      "detail": "The next scheduler dry-run has blocked rows.",
+      "missing_names": [],
+      "help_needed": ""
+    }
+  ],
   "optional_inputs": [
     {
       "kind": "credential",

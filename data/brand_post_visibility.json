@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T13:56:09.786055Z",
+  "generated_at": "2026-07-11T16:23:48.738777Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -18,49 +18,6 @@
     "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
   },
   "rows": [
-    {
-      "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-      "platform": "X",
-      "published_date": "2026-07-07",
-      "source_row": 56,
-      "logged_url": "https://x.com/i/web/status/2074497538409779510",
-      "checked_url": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074497538409779510",
-      "final_url": "https://x.com/lilyrooartist/status/2074497538409779510",
-      "http_status": 200,
-      "content_type": "application/json; charset=utf-8",
-      "visibility_status": "visible_copy_confirmed",
-      "public_visibility_ok": true,
-      "copy_matched": true,
-      "note": "X public oEmbed returned Lily Roo post copy.",
-      "attempts": []
-    },
-    {
-      "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
-      "platform": "Facebook",
-      "published_date": "2026-07-07",
-      "source_row": 57,
-      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470",
-      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470",
-      "final_url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470",
-      "http_status": 200,
-      "content_type": "text/html; charset=\"utf-8\"",
-      "visibility_status": "page_loaded_no_unavailable_marker",
-      "public_visibility_ok": true,
-      "copy_matched": false,
-      "note": "Facebook public page loaded without the common unavailable-content marker.",
-      "attempts": [
-        {
-          "url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/lilyrooartist/posts/122121211923249470",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": false,
-          "copy_matched": false
-        }
-      ]
-    },
     {
       "post_id": "FP-BRAND-AM-05-NO-MORTGAGE-X",
       "platform": "X",
@@ -189,6 +146,49 @@
           "copy_matched": false
         }
       ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
+      "platform": "Facebook",
+      "published_date": "2026-07-11",
+      "source_row": 64,
+      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122121593013249470",
+      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122121593013249470",
+      "final_url": "https://www.facebook.com/lilyrooartist/posts/122121593013249470",
+      "http_status": 200,
+      "content_type": "text/html; charset=\"utf-8\"",
+      "visibility_status": "page_loaded_no_unavailable_marker",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "Facebook public page loaded without the common unavailable-content marker.",
+      "attempts": [
+        {
+          "url": "https://www.facebook.com/lilyrooartist/posts/122121593013249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/lilyrooartist/posts/122121593013249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": false,
+          "copy_matched": true
+        }
+      ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
+      "platform": "X",
+      "published_date": "2026-07-11",
+      "source_row": 65,
+      "logged_url": "https://x.com/i/web/status/2075947147338391981",
+      "checked_url": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2075947147338391981",
+      "final_url": "https://x.com/lilyrooartist/status/2075947147338391981",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "X public oEmbed returned Lily Roo post copy.",
+      "attempts": []
     }
   ],
   "guardrails": [

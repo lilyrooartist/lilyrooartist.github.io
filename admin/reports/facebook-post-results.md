@@ -1,10 +1,10 @@
 # Facebook Post Results - Lily Roo
 
-Generated: 2026-07-11T13:56:09.949337Z
+Generated: 2026-07-11T16:23:49.247428Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
-- Captured posts: **21**
+- Captured posts: **22**
 - Fillable posts: **0**
 - Fillable result fields: **0**
 - Apply command: `python3 scripts/capture_facebook_post_results.py --apply-results --refresh-admin`
@@ -154,6 +154,13 @@ Generated: 2026-07-11T13:56:09.949337Z
   - Evidence: Facebook metric capture skipped 2026-07-11: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK** row `60`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121402309249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-11: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-BRAND-AM-07-SLOW-WALK-FACEBOOK** row `63`
+  - URL: https://www.facebook.com/lilyrooartist/posts/122121496545249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`

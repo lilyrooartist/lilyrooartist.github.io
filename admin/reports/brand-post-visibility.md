@@ -1,6 +1,6 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-11T13:56:09.786055Z
+Generated: 2026-07-11T16:23:48.738777Z
 
 ## Summary
 - Status: **verified**
@@ -11,16 +11,6 @@ Generated: 2026-07-11T13:56:09.786055Z
 - Facebook pages loaded: **4**
 
 ## Rows
-- **FP-BRAND-AM-04-SPILLING-THE-TEA-X** X - `visible_copy_confirmed`
-  - Logged URL: https://x.com/i/web/status/2074497538409779510
-  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074497538409779510
-  - HTTP: `200`; copy matched: `True`
-  - Note: X public oEmbed returned Lily Roo post copy.
-- **FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
-  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121211923249470
-  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121211923249470
-  - HTTP: `200`; copy matched: `False`
-  - Note: Facebook public page loaded without the common unavailable-content marker.
 - **FP-BRAND-AM-05-NO-MORTGAGE-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2074859954704441417
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074859954704441417
@@ -51,6 +41,16 @@ Generated: 2026-07-11T13:56:09.786055Z
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121496545249470
   - HTTP: `200`; copy matched: `False`
   - Note: Facebook public page loaded without the common unavailable-content marker.
+- **FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
+  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121593013249470
+  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121593013249470
+  - HTTP: `200`; copy matched: `True`
+  - Note: Facebook public page loaded without the common unavailable-content marker.
+- **FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X** X - `visible_copy_confirmed`
+  - Logged URL: https://x.com/i/web/status/2075947147338391981
+  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2075947147338391981
+  - HTTP: `200`; copy matched: `True`
+  - Note: X public oEmbed returned Lily Roo post copy.
 
 ## Guardrails
 - Read-only public URL probe; it does not publish, edit, or collect private analytics.
