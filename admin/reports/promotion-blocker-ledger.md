@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-11T03:04:38.937910Z
+Generated: 2026-07-11T03:44:02.068393Z
 
 ## Summary
 - Open blockers: **0**
@@ -24,8 +24,8 @@ Generated: 2026-07-11T03:04:38.937910Z
 - **Reschedule approved past-due backlog** (`clear`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - **Optional: fill private metric worksheet** (`optional_input`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Optional measurement fields: **6**
