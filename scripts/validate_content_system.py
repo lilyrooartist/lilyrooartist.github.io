@@ -549,6 +549,8 @@ def validate_generated_outputs(failures):
         rows = campaign.get("posts") or campaign.get("rows") or []
         active_rows = [row for row in rows if str(row.get("approved") or "").lower() == "yes"]
         inactive_rows = [row for row in rows if str(row.get("approved") or "").lower() != "yes"]
+        youtube_ready = bool(((read_json_if_exists(EXECUTOR_READINESS).get("summary") or {}).get("platforms") or {}).get("YouTube"))
+        expected_active_count = 32 if youtube_ready else 20
         if (
             len(clips) == len(real_video_files) == 12
             and campaign_summary.get("creative_count") == 12
@@ -556,10 +558,16 @@ def validate_generated_outputs(failures):
             and campaign_summary.get("video_post_count") == 24
             and campaign_summary.get("x_post_count") == 8
             and campaign_summary.get("manual_post_count") == 0
-            and campaign_summary.get("retired_static_count") == 48
-            and len(active_rows) == campaign_summary.get("approved_post_count") == 20
-            and all(row.get("platform") in {"Facebook", "X"} for row in active_rows)
-            and all(row.get("platform") == "YouTube" for row in inactive_rows)
+            and campaign_summary.get("retired_static_count") in {0, 48}
+            and len(active_rows) == campaign_summary.get("approved_post_count") == expected_active_count
+            and (
+                (youtube_ready and not inactive_rows and {row.get("platform") for row in active_rows} == {"Facebook", "X", "YouTube"})
+                or (
+                    not youtube_ready
+                    and all(row.get("platform") in {"Facebook", "X"} for row in active_rows)
+                    and all(row.get("platform") == "YouTube" for row in inactive_rows)
+                )
+            )
             and outcome_summary.get("creative_count") == 12
             and outcome_summary.get("manual_post_count") == 0
             and targets.get("native_video_plays") == 5000

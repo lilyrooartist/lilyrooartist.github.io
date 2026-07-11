@@ -5,6 +5,7 @@ import html
 import json
 import base64
 import hashlib
+import os
 import secrets
 import urllib.error
 import urllib.parse
@@ -13,7 +14,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SECRETS_DIR = REPO_ROOT.parent / "secrets"
+SECRETS_DIR = Path(os.environ.get("LILYROO_YOUTUBE_SECRETS_DIR", REPO_ROOT.parent / "secrets")).expanduser()
 YOUTUBE_ENV = SECRETS_DIR / "youtube-api.env"
 HOST = "127.0.0.1"
 PORT = 8766
