@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-11T03:44:43.101382Z
+Generated: 2026-07-11T04:31:20.382622Z
 
 ## Current Pulse
 - Status: **learn_from_clicks**
@@ -9,15 +9,15 @@ Generated: 2026-07-11T03:44:43.101382Z
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
 - Active campaign ready: **True**
 - Posting preflight ready: **True**
-- Future queued posts: **50**
+- Future queued posts: **34**
 - Posted or measured rows: **14**
 - Ready for result capture: **12**
 - First-party clicks: **3** across **1** post(s)
-- Click snapshot: `2026-07-11T03:44:37.906722Z` (covers current due posts)
+- Click snapshot: `2026-07-11T04:31:15.009705Z` (covers current due posts)
 - Next post at: `2026-07-11T10:15:00-04:00`
 - Proof due at: `2026-07-11T15:21:00Z`
-- Hours until next post: `10.5`
-- Hours until proof due: `11.6`
+- Hours until next post: `9.73`
+- Hours until proof due: `10.83`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -26,11 +26,11 @@ Generated: 2026-07-11T03:44:43.101382Z
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **12**
 - Waiting measurement rows: **2**
-- Future scheduled rows: **50**
+- Future scheduled rows: **34**
 - Next learning due at: `2026-07-11T14:15:30.211000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
-- Automation note: No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.
+- Automation note: No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
 - Credential note: X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.
 - Rows:
   - `FP-BRAND-AM-01-13-X` (X): 13 - Ready for post-window comparison
@@ -45,9 +45,9 @@ Generated: 2026-07-11T03:44:43.101382Z
 ## Recommendations
 - **Review first-party click response**: Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.
   - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
-- **Click response is ready to review**: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.
+- **Click response is ready to review**: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
   - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
-- **Preserve the no-manual-posting lane**: Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.
+- **Preserve the no-manual-posting lane**: Keep only API-backed platforms active; unsupported surfaces stay unapproved until their automated path is verified.
   - Command: `python3 scripts/build_posting_automation_status.py`
 - **Optional: connect X/Meta result capture**: This is the only current measurement setup needing help; do it only after explicit approval for secret handling.
   - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`

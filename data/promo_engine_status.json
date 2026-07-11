@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T03:44:43.789929+00:00",
+  "generated_at": "2026-07-11T04:31:20.938336+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -268,7 +268,7 @@
           "format": "Release-art image + story hook",
           "format_basis": "experiment_format",
           "published_count": 36,
-          "scheduled_count": 93,
+          "scheduled_count": 53,
           "planned_count": 0,
           "measured_result_total": 10,
           "measured_post_count": 3,
@@ -289,14 +289,14 @@
           "evidence_status": "winner_ready",
           "average_result_per_measured_post": 3.33,
           "decision_note": "Enough measured posts to compare as a repeatable format.",
-          "score": 394,
+          "score": 314,
           "decision_unblock": {
             "status": "winner_ready",
             "next_action": "Collect result metrics for logged posts.",
             "first_action": "collect_metrics",
             "first_post_id": "FP-BRAND-AM-01-13-FACEBOOK",
             "first_platform": "Facebook",
-            "measurement_ready_count": 12,
+            "measurement_ready_count": 11,
             "post_and_log_count": 0,
             "await_scheduled_count": 0,
             "log_url_count": 0,
@@ -313,11 +313,56 @@
               "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
               "FP-BRAND-AM-01-13-X",
               "FP-BRAND-AM-02-GIRLS-CAMP-X",
-              "FP-BRAND-AM-03-ANALOG-MYTH-X",
-              "FP-BRAND-AM-04-SPILLING-THE-TEA-X"
+              "FP-BRAND-AM-03-ANALOG-MYTH-X"
             ],
             "preview_command": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
             "apply_command": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+            "report_path": "admin/reports/experiment-result-clipboard.md"
+          }
+        },
+        {
+          "format": "Short video clip + platform-native CTA",
+          "format_basis": "experiment_format",
+          "published_count": 2,
+          "scheduled_count": 32,
+          "planned_count": 0,
+          "measured_result_total": 0,
+          "measured_post_count": 2,
+          "unmeasured_published_count": 0,
+          "mapped_active_post_ids": [
+            "FP-AUTO-259",
+            "FP-AUTO-264",
+            "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+            "FP-AUTO-269",
+            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA"
+          ],
+          "example_hooks": [
+            "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
+            "Swipe away before the pain sets in. Cute system we built. Streaming now."
+          ],
+          "minimum_measured_posts": 2,
+          "needed_measured_posts": 0,
+          "evidence_status": "winner_ready",
+          "average_result_per_measured_post": 0.0,
+          "decision_note": "Enough measured posts to compare as a repeatable format.",
+          "score": 70,
+          "decision_unblock": {
+            "status": "winner_ready",
+            "next_action": "Await scheduled auto posts, then log public URLs and measure results.",
+            "first_action": "await_scheduled_auto_post",
+            "first_post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+            "first_platform": "Facebook",
+            "measurement_ready_count": 0,
+            "post_and_log_count": 0,
+            "await_scheduled_count": 1,
+            "log_url_count": 0,
+            "blocked_count": 0,
+            "post_log_handoff_count": 0,
+            "candidate_post_ids": [
+              "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK"
+            ],
+            "preview_command": "",
+            "apply_command": "",
             "report_path": "admin/reports/experiment-result-clipboard.md"
           }
         },
@@ -362,50 +407,6 @@
             "apply_command": "",
             "report_path": "admin/reports/experiment-result-clipboard.md"
           }
-        },
-        {
-          "format": "Short video clip + platform-native CTA",
-          "format_basis": "experiment_format",
-          "published_count": 2,
-          "scheduled_count": 8,
-          "planned_count": 0,
-          "measured_result_total": 0,
-          "measured_post_count": 2,
-          "unmeasured_published_count": 0,
-          "mapped_active_post_ids": [
-            "FP-AUTO-259",
-            "FP-AUTO-264",
-            "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-            "FP-AUTO-269",
-            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA"
-          ],
-          "example_hooks": [
-            "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
-            "Swipe away before the pain sets in. Cute system we built. Streaming now."
-          ],
-          "minimum_measured_posts": 2,
-          "needed_measured_posts": 0,
-          "evidence_status": "winner_ready",
-          "average_result_per_measured_post": 0.0,
-          "decision_note": "Enough measured posts to compare as a repeatable format.",
-          "score": 22,
-          "decision_unblock": {
-            "status": "winner_ready",
-            "next_action": "Keep publishing and refresh result collection.",
-            "first_action": "",
-            "first_post_id": "",
-            "first_platform": "",
-            "measurement_ready_count": 0,
-            "post_and_log_count": 0,
-            "await_scheduled_count": 0,
-            "log_url_count": 0,
-            "blocked_count": 0,
-            "post_log_handoff_count": 0,
-            "candidate_post_ids": [],
-            "preview_command": "",
-            "apply_command": "",
-            "report_path": "admin/reports/experiment-result-clipboard.md"
-          }
         }
       ],
       "format_winner_readiness": {
@@ -415,19 +416,20 @@
         "ready_candidate_count": 3,
         "ready_candidates": [
           "Release-art image + story hook",
-          "YouTube archive video CTA",
-          "Short video clip + platform-native CTA"
+          "Short video clip + platform-native CTA",
+          "YouTube archive video CTA"
         ],
         "named_winner_formats": [
           "Release-art image + story hook",
-          "YouTube archive video CTA",
-          "Short video clip + platform-native CTA"
+          "Short video clip + platform-native CTA",
+          "YouTube archive video CTA"
         ],
         "pending_result_field_count": 96,
         "ready_to_import_count": 0,
-        "missing_published_log_count": 0,
+        "missing_published_log_count": 15,
         "blockers": [
-          "96 post-result field(s) still need collected values."
+          "96 post-result field(s) still need collected values.",
+          "15 experiment post(s) still need public URLs in Published_Log.csv."
         ],
         "next_action": "Scale the named repeatable formats in the automated campaign and monitor each post window."
       },
@@ -438,13 +440,13 @@
         "winner_count_target": 3,
         "ready_candidates": [
           "Release-art image + story hook",
-          "YouTube archive video CTA",
-          "Short video clip + platform-native CTA"
+          "Short video clip + platform-native CTA",
+          "YouTube archive video CTA"
         ],
         "named_winner_formats": [
           "Release-art image + story hook",
-          "YouTube archive video CTA",
-          "Short video clip + platform-native CTA"
+          "Short video clip + platform-native CTA",
+          "YouTube archive video CTA"
         ],
         "guardrail": "Use measured result evidence only; do not rank formats from scheduled volume alone."
       },
@@ -466,7 +468,7 @@
             "first_action": "collect_metrics",
             "first_post_id": "FP-BRAND-AM-01-13-FACEBOOK",
             "first_platform": "Facebook",
-            "measurement_ready_count": 12,
+            "measurement_ready_count": 11,
             "post_and_log_count": 0,
             "await_scheduled_count": 0,
             "blocked_count": 0,
@@ -477,18 +479,18 @@
           },
           {
             "rank": 2,
-            "format": "YouTube archive video CTA",
+            "format": "Short video clip + platform-native CTA",
             "status": "winner_ready",
             "evidence_status": "winner_ready",
-            "measured_post_count": 3,
+            "measured_post_count": 2,
             "minimum_measured_posts": 2,
             "needed_measured_posts": 0,
-            "first_action": "",
-            "first_post_id": "",
-            "first_platform": "",
+            "first_action": "await_scheduled_auto_post",
+            "first_post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+            "first_platform": "Facebook",
             "measurement_ready_count": 0,
             "post_and_log_count": 0,
-            "await_scheduled_count": 0,
+            "await_scheduled_count": 1,
             "blocked_count": 0,
             "report_path": "admin/reports/experiment-result-clipboard.md",
             "preview_command": "",
@@ -497,10 +499,10 @@
           },
           {
             "rank": 3,
-            "format": "Short video clip + platform-native CTA",
+            "format": "YouTube archive video CTA",
             "status": "winner_ready",
             "evidence_status": "winner_ready",
-            "measured_post_count": 2,
+            "measured_post_count": 3,
             "minimum_measured_posts": 2,
             "needed_measured_posts": 0,
             "first_action": "",
@@ -524,9 +526,9 @@
           "format": "Release-art image + story hook",
           "hypothesis": "Release-art image + story hook can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
           "status": "ready_to_measure",
-          "scheduled_count": 72,
+          "scheduled_count": 32,
           "planned_count": 0,
-          "approved_count": 72,
+          "approved_count": 32,
           "blocked_count": 0,
           "platforms": [
             "Facebook",
@@ -756,17 +758,18 @@
           "measurement_window_days": 7,
           "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
           "next_action": "Publish or confirm the scheduled row, then log public URL and 7-day result metrics.",
-          "score": 576
+          "score": 256
         },
         {
           "format": "Short video clip + platform-native CTA",
           "hypothesis": "Short video clip + platform-native CTA can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
-          "status": "ready_to_measure",
-          "scheduled_count": 1,
+          "status": "partially_ready",
+          "scheduled_count": 25,
           "planned_count": 0,
-          "approved_count": 1,
-          "blocked_count": 0,
+          "approved_count": 13,
+          "blocked_count": 12,
           "platforms": [
+            "Facebook",
             "YouTube"
           ],
           "known_blockers": [],
@@ -783,10 +786,207 @@
               "clip_url": "https://www.lilyroo.com/assets/media/analog-myth-youtube-remaster-public.mp4",
               "copy": "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is live. #Shorts",
               "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-13T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-lyric-punch-line.mp4",
+              "copy": "What is the rush to the same place? Slow Walk keeps its own time. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-13T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-lyric-punch-line.mp4",
+              "copy": "What is the rush to the same place? Slow Walk keeps its own time.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-15T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+              "copy": "When everyone says you are behind, but you are the only one still arriving. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-15T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+              "copy": "When everyone says you are behind, but you are the only one still arriving.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-17T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
+              "copy": "A quiet walk through the pressure until the pressure learns your pace. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-17T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
+              "copy": "A quiet walk through the pressure until the pressure learns your pace.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-19T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
+              "copy": "What did you stop rushing? Slow Walk answers without speeding up. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Slow Walk",
+              "post_type": "video",
+              "scheduled_at": "2026-07-19T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
+              "copy": "What did you stop rushing? Slow Walk answers without speeding up.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-21T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-lyric-punch-line.mp4",
+              "copy": "Some truths arrive with a little steam. Spilling the Tea is already in the room. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-21T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-lyric-punch-line.mp4",
+              "copy": "Some truths arrive with a little steam. Spilling the Tea is already in the room.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-23T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-relatable-situation.mp4",
+              "copy": "When the group chat says we need to talk and you already know. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-23T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-relatable-situation.mp4",
+              "copy": "When the group chat says we need to talk and you already know.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-25T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-visual-story.mp4",
+              "copy": "One cup. One secret. A whole room changing temperature. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-25T11:20:00-04:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-visual-story.mp4",
+              "copy": "One cup. One secret. A whole room changing temperature.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Spilling the Tea",
+              "post_type": "video",
+              "scheduled_at": "2026-07-27T10:15:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "",
+              "clip_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/spilling-the-tea-echo-thread.mp4",
+              "copy": "What truth are you ready to say out loud? Spilling the Tea lets it pour. #Shorts",
+              "approval_command": ""
             }
           ],
           "tracking_fields": [
             "comments",
+            "facebook.followers",
+            "facebook.reach_7d",
             "likes",
             "shares",
             "subs_delta",
@@ -796,8 +996,8 @@
           ],
           "measurement_window_days": 7,
           "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
-          "next_action": "Publish or confirm the scheduled row, then log public URL and 7-day result metrics.",
-          "score": 8
+          "next_action": "Measure approved rows now; keep blocked variants visible until their approval/platform gate clears.",
+          "score": 128
         },
         {
           "format": "YouTube archive video CTA",
@@ -846,7 +1046,7 @@
         "pending_manual_metric_fields": 6,
         "pending_public_metric_fields": 0,
         "pending_private_metric_fields": 6,
-        "stale_source_count": 0,
+        "stale_source_count": 1,
         "gated_manual_source_count": 0,
         "live_platform_count": 5,
         "manual_metric_collection_report": "admin/reports/manual-metric-collection.md",
@@ -886,11 +1086,11 @@
         "audience_signal_per_week": 0.22,
         "action_needed": "Maintain release-forward distribution and compare measured post formats after each proof window."
       },
-      "approved_upcoming_posts": 50,
+      "approved_upcoming_posts": 22,
       "approved_backlog_posts": 0,
       "manual_handoff_backlog_posts": 0,
       "actionable_backlog_posts": 0,
-      "review_upcoming_posts": 0,
+      "review_upcoming_posts": 12,
       "review_backlog_posts": 0,
       "draft_review_posts": 0,
       "draft_posts": 0,
@@ -898,8 +1098,8 @@
       "ready_to_apply_posts": 0,
       "approval_blockers": 0,
       "platform_fix_blockers": 0,
-      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
-      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": []
     },
     "live_platform_count": 5,
@@ -1240,15 +1440,15 @@
         "Import only nonnegative numeric new_value cells from the named analytics source."
       ]
     },
-    "live_metrics_updated_at": "2026-07-11T03:44:27.074Z",
+    "live_metrics_updated_at": "2026-07-11T04:30:58.198Z",
     "metrics_history": {
       "snapshot_count": 27,
-      "updated_at": "2026-07-11T03:44:36.913266Z",
+      "updated_at": "2026-07-11T04:31:13.315456Z",
       "latest_date": "2026-07-11",
       "latest": {
         "date": "2026-07-11",
-        "captured_at": "2026-07-11T03:44:36.913266Z",
-        "live_metrics_updated_at": "2026-07-11T03:44:27.074Z",
+        "captured_at": "2026-07-11T04:31:13.315456Z",
+        "live_metrics_updated_at": "2026-07-11T04:30:58.198Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 487,
@@ -1282,9 +1482,9 @@
           "published_total": 62
         },
         "queue": {
-          "approved_upcoming": 50,
-          "approved_total": 76,
-          "scheduled_total": 110
+          "approved_upcoming": 22,
+          "approved_total": 48,
+          "scheduled_total": 94
         },
         "preserved_from_same_day_snapshot": [
           "youtube.total_views",
@@ -1301,9 +1501,9 @@
           "x.followers": 0,
           "publishing.published_30d": 0,
           "publishing.published_total": 0,
-          "queue.approved_upcoming": 0,
-          "queue.approved_total": 0,
-          "queue.scheduled_total": 0
+          "queue.approved_upcoming": -28,
+          "queue.approved_total": -28,
+          "queue.scheduled_total": -16
         }
       },
       "previous_date": "2026-07-10",
@@ -1318,9 +1518,9 @@
         "x.followers": 0,
         "publishing.published_30d": 0,
         "publishing.published_total": 0,
-        "queue.approved_upcoming": 0,
-        "queue.approved_total": 0,
-        "queue.scheduled_total": 0
+        "queue.approved_upcoming": -28,
+        "queue.approved_total": -28,
+        "queue.scheduled_total": -16
       }
     },
     "experiment_results": {
@@ -1329,7 +1529,7 @@
       "summary": {
         "experiment_count": 3,
         "published_experiment_post_count": 18,
-        "missing_published_log_count": 0,
+        "missing_published_log_count": 15,
         "pending_result_field_count": 96,
         "ready_to_import_count": 0,
         "wide_ready_to_import_count": 0,
@@ -1351,7 +1551,7 @@
       },
       "pending_result_field_count": 96,
       "ready_to_import_count": 0,
-      "missing_published_log_count": 0,
+      "missing_published_log_count": 15,
       "entry_csv_path": "data/experiment_result_entry_template.csv",
       "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
       "result_import_preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
@@ -1365,7 +1565,7 @@
       "summary": {
         "status": "needs_values",
         "metric_card_count": 16,
-        "missing_public_url_count": 0,
+        "missing_public_url_count": 15,
         "measurement_priority_count": 12,
         "post_log_measurement_handoff_count": 0,
         "pending_result_field_count": 96,
@@ -2918,7 +3118,128 @@
           ]
         }
       ],
-      "missing_public_url_cards": [],
+      "missing_public_url_cards": [
+        {
+          "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Slow Walk",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "Facebook",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Spilling the Tea",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        }
+      ],
       "measurement_priority_cards": [
         {
           "action": "collect_metrics",
@@ -3152,25 +3473,26 @@
           "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 16 logged post(s), 0 missing URL(s) in this format."
         },
         {
-          "action": "collect_metrics",
-          "priority": 1,
-          "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
-          "platform": "X",
-          "song": "Analog Myth",
-          "experiment_format": "Release-art image + story hook",
-          "post_url": "https://x.com/i/web/status/2074497538409779510",
-          "source_row": "56",
-          "pending_fields": [
-            "views",
-            "likes",
-            "comments",
-            "shares",
-            "saves",
-            "subs_delta"
-          ],
-          "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --source-row 56 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-          "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --source-row 56 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-          "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 16 logged post(s), 0 missing URL(s) in this format."
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
+          "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+          "platform": "Facebook",
+          "song": "Slow Walk",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "post_url": "",
+          "source_row": "",
+          "pending_fields": [],
+          "direct_preview_command_template": "",
+          "direct_apply_command_template": "",
+          "manual_posting_report": "",
+          "public_community_url": "",
+          "paste_text_path": "",
+          "log_preview_command": "",
+          "log_apply_command": "",
+          "scheduled_at": "2026-07-13T11:20:00-04:00",
+          "scheduled_at_utc": "2026-07-13T15:20:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-07-13T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 15 missing URL(s) in this format."
         }
       ],
       "first_measurement_runbook": {
@@ -3305,7 +3627,7 @@
       "next_learning_due_at": "2026-07-11T14:15:30.211000Z",
       "click_count": 3,
       "click_post_count": 1,
-      "click_snapshot_updated_at": "2026-07-11T03:44:37.906722Z",
+      "click_snapshot_updated_at": "2026-07-11T04:31:15.009705Z",
       "click_snapshot_covers_ready_measurements": true,
       "manual_posting_required": false,
       "next_action": "Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run."
@@ -3341,7 +3663,7 @@
       "recheck_due": 0,
       "waiting_for_next_recheck": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-12T03:44:27.213738+00:00"
+      "next_recheck_at": "2026-07-12T04:30:58.346592+00:00"
     },
     "store_verification": {
       "source_path": "data/store_verification_history.json",
@@ -3362,12 +3684,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3381,12 +3703,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3400,12 +3722,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3419,12 +3741,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3441,12 +3763,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3459,12 +3781,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3477,12 +3799,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3495,12 +3817,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3512,7 +3834,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+      "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -3523,12 +3845,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3542,12 +3864,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3561,12 +3883,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3580,12 +3902,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3595,7 +3917,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-07-11T03:44:30.508575Z",
+        "updated_at": "2026-07-11T04:31:01.662344Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -3611,7 +3933,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-07-11T03:44:33.688469Z",
+      "updated_at": "2026-07-11T04:31:09.056294Z",
       "http_status": 200,
       "execution_count": 59,
       "current_execution_count": 44,
@@ -3638,11 +3960,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-07-11T03:44:36.818378Z",
+      "updated_at": "2026-07-11T04:31:13.229117Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-07-11T03:44:36.669559Z",
-      "checked_at": "2026-07-11T03:44:36.669Z",
+      "requested_scheduled_time": "2026-07-11T04:31:13.086929Z",
+      "checked_at": "2026-07-11T04:31:13.086Z",
       "dry_run": true,
       "due_count": 0,
       "result_count": 0,
@@ -3660,16 +3982,16 @@
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "a045fa77e616eadb9fc0a809b687ffb0223298e6",
-        "short_commit": "a045fa77",
+        "commit": "8ea2980f7b05d8526b6d98c3355f01d8c498a17b",
+        "short_commit": "8ea2980f",
         "branch": "main",
-        "committed_at": "2026-07-11T03:44:05Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/a045fa77e616eadb9fc0a809b687ffb0223298e6"
+        "committed_at": "2026-07-11T00:27:11-04:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/8ea2980f7b05d8526b6d98c3355f01d8c498a17b"
       },
-      "finished_at": "2026-07-11T03:44:43.727817Z",
-      "duration_seconds": 18.61,
-      "command_count": 62,
-      "passed": 62,
+      "finished_at": "2026-07-11T04:31:20.893481Z",
+      "duration_seconds": 25.23,
+      "command_count": 63,
+      "passed": 63,
       "failed": 0,
       "allowed_failures": 0,
       "failed_commands": [],
@@ -3685,15 +4007,16 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "a045fa77e616eadb9fc0a809b687ffb0223298e6",
-        "short_commit": "a045fa77",
+        "commit": "8ea2980f7b05d8526b6d98c3355f01d8c498a17b",
+        "short_commit": "8ea2980f",
         "branch": "main",
-        "committed_at": "2026-07-11T03:44:05Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/a045fa77e616eadb9fc0a809b687ffb0223298e6"
+        "committed_at": "2026-07-11T00:27:11-04:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/8ea2980f7b05d8526b6d98c3355f01d8c498a17b"
       },
-      "latest_run_covers_source_commit": true,
-      "latest_run_coverage_basis": "generated_snapshot_changed_after_latest_run",
+      "latest_run_covers_source_commit": false,
+      "latest_run_coverage_basis": "source_changed_after_latest_run",
       "changed_paths_since_latest_run": [
+        ".gitattributes",
         "admin/future-posts.json",
         "admin/index.html",
         "admin/reports/approval-runway.md",
@@ -3708,6 +4031,9 @@
         "admin/reports/experiment-result-clipboard.md",
         "admin/reports/experiment-result-collection.md",
         "admin/reports/facebook-post-results.md",
+        "admin/reports/growth-reset-campaign.md",
+        "admin/reports/growth-reset-clips.md",
+        "admin/reports/growth-reset-outcomes.md",
         "admin/reports/human-handoff-packet.md",
         "admin/reports/human-handoff-resolution-preview.md",
         "admin/reports/manual-distribution-packet.md",
@@ -3729,13 +4055,30 @@
         "admin/reports/tiktok-setup-preflight.md",
         "admin/reports/weekly-social-report.md",
         "admin/reports/x-post-results.md",
-        "admin/reports/youtube-community-url-reconciliation.md",
-        "admin/reports/youtube-experiment-public-metrics.md",
-        "admin/reports/youtube-post-results.md",
-        "data/approval_runway.json",
-        "data/backlog_reschedule_preview.json"
+        "admin/reports/youtube-community-url-reconciliation.md"
       ],
-      "uncovered_paths_since_latest_run": [],
+      "uncovered_paths_since_latest_run": [
+        ".gitattributes",
+        "assets/campaigns/analog-myth-growth-reset/no-mortgage-echo-thread.mp4",
+        "assets/campaigns/analog-myth-growth-reset/no-mortgage-lyric-punch-line.mp4",
+        "assets/campaigns/analog-myth-growth-reset/no-mortgage-relatable-situation.mp4",
+        "assets/campaigns/analog-myth-growth-reset/no-mortgage-visual-story.mp4",
+        "assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
+        "assets/campaigns/analog-myth-growth-reset/slow-walk-lyric-punch-line.mp4",
+        "assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+        "assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
+        "assets/campaigns/analog-myth-growth-reset/spilling-the-tea-echo-thread.mp4",
+        "assets/campaigns/analog-myth-growth-reset/spilling-the-tea-lyric-punch-line.mp4",
+        "assets/campaigns/analog-myth-growth-reset/spilling-the-tea-relatable-situation.mp4",
+        "assets/campaigns/analog-myth-growth-reset/spilling-the-tea-visual-story.mp4",
+        "data/growth_reset_campaign.json",
+        "data/growth_reset_clips.json",
+        "data/retired_growth_static_posts.csv",
+        "data/scheduled_posts.csv",
+        "go/am.html",
+        "scripts/build_brand_click_tracking_health.py",
+        "scripts/build_brand_growth_preflight.py"
+      ],
       "current_run_capture_in_progress": false,
       "current_run_capture_note": "",
       "action_needed": "",
@@ -3864,8 +4207,8 @@
           "owner": "tod",
           "blockers_resolved": 0,
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -4252,7 +4595,7 @@
           "safety_reason": "dry_run_command",
           "returncode": 0,
           "preview_status": "preview_ok",
-          "output_excerpt": "{\"ok\": true, \"platform\": \"TikTok\", \"dry_run\": true, \"mode\": \"direct\", \"endpoint\": \"https://open.tiktokapis.com/v2/post/publish/video/init/\", \"required_scope\": \"video.publish\", \"media_key\": \"i-learned-60s\", \"media_ready\": true, \"public_video_url\": \"https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2\", \"media_path\": \"\", \"token_path_ready\": false, \"token_source\": \"\", \"missing_refresh_credentials\": [\"TIKTOK_CLIENT_KEY\", \"TIKTOK_CLIENT_SECRET\", \"TIKTOK_REFRESH_TOKEN\"], \"public_posting_approved\": false, \"default_privacy\": \"PUBLIC_TO_EVERYONE\", \"brand_content_toggle\": false, \"brand_organic_toggle\": true, \"aigc_label_enabled\": true, \"title\": \"Swipe away before the pain sets in. Cute system we built. Streaming now.\"}",
+          "output_excerpt": "{\"ok\": true, \"platform\": \"TikTok\", \"dry_run\": true, \"mode\": \"direct\", \"endpoint\": \"https://open.tiktokapis.com/v2/post/publish/video/init/\", \"required_scope\": \"video.publish\", \"media_key\": \"i-learned-60s\", \"media_ready\": true, \"public_video_url\": \"https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2\", \"media_path\": \"\", \"token_path_ready\": true, \"token_source\": \"access_token\", \"missing_refresh_credentials\": [], \"public_posting_approved\": false, \"default_privacy\": \"PUBLIC_TO_EVERYONE\", \"brand_content_toggle\": false, \"brand_organic_toggle\": true, \"aigc_label_enabled\": true, \"title\": \"Swipe away before the pain sets in. Cute system we built. Streaming now.\"}",
           "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
           "guardrail": "Keep TikTok upload-draft/manual-finish posting out of the active plan; only direct public API publishing can become an automated TikTok lane."
         }
@@ -4624,10 +4967,10 @@
         "clear_to_apply_count": 0,
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
-        "start_at": "2026-07-12T10:00:00+00:00",
+        "start_at": "2026-07-12T10:00:00-04:00",
         "spacing_hours": 24,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "apply_blocked_reason": "",
@@ -4648,8 +4991,8 @@
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
         "blocked_ids": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
-        "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+        "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "apply_allowed_without_override": true,
@@ -4703,7 +5046,7 @@
         ]
       }
     },
-    "stale_source_count": 0,
+    "stale_source_count": 1,
     "missing_source_count": 0
   },
   "health": {
@@ -4711,9 +5054,9 @@
     "healthy_releases": 2,
     "tracked_releases": 3,
     "open_action_count": 9,
-    "status_queue_count": 7,
-    "fresh_sources": 14,
-    "stale_sources": 0,
+    "status_queue_count": 9,
+    "fresh_sources": 13,
+    "stale_sources": 1,
     "missing_sources": 0,
     "operational_next_action": {
       "label": "Verify automatic Analog Myth proof export",
@@ -4822,8 +5165,8 @@
           "owner": "tod",
           "blockers_resolved": 0,
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -5210,7 +5553,7 @@
           "safety_reason": "dry_run_command",
           "returncode": 0,
           "preview_status": "preview_ok",
-          "output_excerpt": "{\"ok\": true, \"platform\": \"TikTok\", \"dry_run\": true, \"mode\": \"direct\", \"endpoint\": \"https://open.tiktokapis.com/v2/post/publish/video/init/\", \"required_scope\": \"video.publish\", \"media_key\": \"i-learned-60s\", \"media_ready\": true, \"public_video_url\": \"https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2\", \"media_path\": \"\", \"token_path_ready\": false, \"token_source\": \"\", \"missing_refresh_credentials\": [\"TIKTOK_CLIENT_KEY\", \"TIKTOK_CLIENT_SECRET\", \"TIKTOK_REFRESH_TOKEN\"], \"public_posting_approved\": false, \"default_privacy\": \"PUBLIC_TO_EVERYONE\", \"brand_content_toggle\": false, \"brand_organic_toggle\": true, \"aigc_label_enabled\": true, \"title\": \"Swipe away before the pain sets in. Cute system we built. Streaming now.\"}",
+          "output_excerpt": "{\"ok\": true, \"platform\": \"TikTok\", \"dry_run\": true, \"mode\": \"direct\", \"endpoint\": \"https://open.tiktokapis.com/v2/post/publish/video/init/\", \"required_scope\": \"video.publish\", \"media_key\": \"i-learned-60s\", \"media_ready\": true, \"public_video_url\": \"https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2\", \"media_path\": \"\", \"token_path_ready\": true, \"token_source\": \"access_token\", \"missing_refresh_credentials\": [], \"public_posting_approved\": false, \"default_privacy\": \"PUBLIC_TO_EVERYONE\", \"brand_content_toggle\": false, \"brand_organic_toggle\": true, \"aigc_label_enabled\": true, \"title\": \"Swipe away before the pain sets in. Cute system we built. Streaming now.\"}",
           "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
           "guardrail": "Keep TikTok upload-draft/manual-finish posting out of the active plan; only direct public API publishing can become an automated TikTok lane."
         }
@@ -5399,12 +5742,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5418,12 +5761,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5437,12 +5780,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5456,12 +5799,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5478,12 +5821,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5496,12 +5839,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5514,12 +5857,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5532,12 +5875,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5549,7 +5892,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+      "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -5560,12 +5903,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5579,12 +5922,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5598,12 +5941,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5617,12 +5960,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -5632,7 +5975,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-07-11T03:44:30.508575Z",
+        "updated_at": "2026-07-11T04:31:01.662344Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -5649,23 +5992,23 @@
   },
   "freshness": {
     "summary": {
-      "fresh": 14,
-      "stale": 0,
+      "fresh": 13,
+      "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-07-11T03:44:43.789929+00:00"
+      "checked_at": "2026-07-11T04:31:20.938336+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 184.6,
+        "age_hours": 185.3,
         "max_age_hours": 72,
         "timestamp": "2026-07-03T11:10:52.058673+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-07-11T03:44:43.789929+00:00",
+        "checked_at": "2026-07-11T04:31:20.938336+00:00",
         "checked_age_hours": 0.0,
         "evidence": "4 pending store links checked; no new public URLs found."
       },
@@ -5675,7 +6018,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-07-11T03:44:31.219298+00:00",
+        "timestamp": "2026-07-11T04:31:02.615166+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -5684,16 +6027,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:36.865871+00:00",
+        "timestamp": "2026-07-11T04:31:13.277424+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 7.9,
         "max_age_hours": 168,
-        "timestamp": "2026-07-11T03:44:24.138407+00:00",
+        "timestamp": "2026-07-10T20:39:25.779404+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "row_count": 62,
         "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
@@ -5708,10 +6051,10 @@
       {
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
-        "status": "fresh",
-        "age_hours": 0.0,
+        "status": "stale",
+        "age_hours": 501.6,
         "max_age_hours": 72,
-        "timestamp": "2026-07-11T03:44:24.566195+00:00",
+        "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -5720,7 +6063,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:27.074000+00:00",
+        "timestamp": "2026-07-11T04:30:58.198000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -5729,7 +6072,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:36.913266+00:00",
+        "timestamp": "2026-07-11T04:31:13.315456+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -5738,7 +6081,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:31.143142+00:00",
+        "timestamp": "2026-07-11T04:31:02.516704+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5747,7 +6090,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:43.789929+00:00",
+        "timestamp": "2026-07-11T04:31:20.938336+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -5756,7 +6099,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:33.688469+00:00",
+        "timestamp": "2026-07-11T04:31:09.056294+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5765,7 +6108,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:36.818378+00:00",
+        "timestamp": "2026-07-11T04:31:13.229117+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5774,7 +6117,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:41.737305+00:00",
+        "timestamp": "2026-07-11T04:31:17.726252+00:00",
         "refresh_command": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5783,7 +6126,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:43.729850+00:00",
+        "timestamp": "2026-07-11T04:31:20.894542+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -5792,7 +6135,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:37.281567+00:00",
+        "timestamp": "2026-07-11T04:31:13.935596+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5801,11 +6144,13 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-11T03:44:43.101382+00:00",
+        "timestamp": "2026-07-11T04:31:20.382622+00:00",
         "refresh_command": "python3 scripts/build_brand_growth_pulse.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
-    "actions": []
+    "actions": [
+      "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this."
+    ]
   },
   "releases": [
     {
@@ -5943,12 +6288,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:27.213738Z",
+            "updated_at": "2026-07-11T04:30:58.346592Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:27.213738+00:00",
+            "checked_at": "2026-07-11T04:30:58.346592+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:27.213738+00:00",
+            "next_recheck_at": "2026-07-12T04:30:58.346592+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -5960,12 +6305,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:28.814189Z",
+            "updated_at": "2026-07-11T04:30:59.658787Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-11T03:44:28.814189+00:00",
+            "checked_at": "2026-07-11T04:30:59.658787+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:28.814189+00:00",
+            "next_recheck_at": "2026-07-12T04:30:59.658787+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -5977,12 +6322,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.018607Z",
+            "updated_at": "2026-07-11T04:31:00.055174Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-11T03:44:29.018607+00:00",
+            "checked_at": "2026-07-11T04:31:00.055174+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.018607+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.055174+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6076,18 +6421,18 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-11T03:44:29.085570Z",
+            "updated_at": "2026-07-11T04:31:00.120273Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-11T03:44:29.085570+00:00",
+            "checked_at": "2026-07-11T04:31:00.120273+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-12T03:44:29.085570+00:00",
+            "next_recheck_at": "2026-07-12T04:31:00.120273+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
         }
       ],
-      "queued_posts": 76,
+      "queued_posts": 60,
       "planned_posts": 0,
       "published_posts": 40,
       "latest_published": "2026-07-10",
@@ -6125,9 +6470,11 @@
     "Next operational action: Verify automatic Analog Myth proof export — python3 scripts/refresh_promo_admin.py",
     "Current unlock gate: Approve checked scheduled rows (clear); 0 ready, 0 waiting/warning; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
-    "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
+    "Refresh automation coverage: latest scheduled run has not covered the current source snapshot; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
     "Collect experiment results: 96 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-12T03:44:27.213738+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then."
+    "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-12T04:30:58.346592+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
   ]
 }

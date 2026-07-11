@@ -3248,7 +3248,27 @@ def validate_generated_outputs(failures):
         experiment_formats = {experiment.get("format") for experiment in experiments}
         top_candidate_formats = {candidate.get("format") for candidate in top_candidates}
         tiktok_experiment = next((item for item in experiments if "Short video" in str(item.get("format") or "")), {})
-        if (
+        growth_reset = json.loads(GROWTH_RESET_OUTCOMES.read_text(encoding="utf-8")) if GROWTH_RESET_OUTCOMES.exists() else {}
+        reset_targets = growth_reset.get("targets") or {}
+        reset_current = growth_reset.get("current") or {}
+        reset_campaign = growth_reset.get("campaign") or {}
+        reset_summary = growth_reset.get("summary") or {}
+        growth_reset_tracking_ready = (
+            growth_reset.get("status") in {"scheduled", "baseline", "learning", "on_track", "needs_new_creative"}
+            and reset_campaign.get("duration_days") == 30
+            and reset_campaign.get("spend_authorized") is False
+            and reset_campaign.get("spend_usd") == 0
+            and reset_targets.get("native_video_plays") == 5000
+            and reset_targets.get("qualified_clicks") == 25
+            and reset_targets.get("youtube_subscribers") == 11
+            and reset_targets.get("spotify_monthly_listeners") == 10
+            and reset_targets.get("repeatable_formats") == 2
+            and reset_current.get("native_video_plays") is not None
+            and reset_current.get("qualified_clicks") is not None
+            and reset_summary.get("creative_count") == 12
+            and reset_summary.get("manual_post_count") == 0
+        )
+        if growth_reset_tracking_ready or (
             kpi.get("primary") == "Grow total plays/views by 25% in 30 days"
             and growth_goal.get("goal_days") == 30
             and float(growth_goal.get("target_lift_percent") or 0) == 25.0

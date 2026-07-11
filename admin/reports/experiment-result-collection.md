@@ -1,11 +1,11 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-11T03:44:41.526188Z
+Generated: 2026-07-11T04:31:17.002433Z
 
 ## Summary
 - Experiment count: **3**
 - Published experiment posts: **18**
-- Missing published log posts: **0**
+- Missing published log posts: **15**
 - Pending result fields: **96**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -25,7 +25,21 @@ Generated: 2026-07-11T03:44:41.526188Z
 - Fill only metrics visible in the platform analytics surface.
 
 ## Missing Published Log Rows
-- None.
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 
 ## Pending Result Fields
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X `views` from row 23: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record views.

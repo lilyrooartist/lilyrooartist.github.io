@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T03:44:41.782366Z",
+  "generated_at": "2026-07-11T04:31:17.758081Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -54,7 +54,7 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 5,
+    "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
     "next_action": "Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run."
@@ -71,7 +71,7 @@
     {
       "label": "Active Analog Myth brand campaign",
       "status": "ready",
-      "detail": "64 approved auto posts; next=FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X at 2026-07-11T10:15:00-04:00; preflight=ready",
+      "detail": "36 approved auto posts; next=FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X at 2026-07-11T10:15:00-04:00; preflight=ready",
       "evidence": "data/brand_growth_preflight.json",
       "next_action": "Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run."
     },
@@ -92,7 +92,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-11T03:44:37.917394Z",
+      "detail": "19 refresh commands captured at 2026-07-11T04:31:15.019088Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -115,7 +115,7 @@
       "status": "deferred",
       "detail": "ready=X, Facebook; blocked=Instagram, TikTok, YouTube",
       "evidence": "data/executor_readiness_snapshot.json",
-      "next_action": "Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes."
+      "next_action": "Optional expansion only; unsupported platforms stay inactive until their automated lane is ready."
     },
     {
       "label": "TikTok API lane",
@@ -127,7 +127,7 @@
     {
       "label": "Blocker input readiness",
       "status": "deferred",
-      "detail": "1 ready; 5 missing local input; 1 external action needed",
+      "detail": "3 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
       "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },

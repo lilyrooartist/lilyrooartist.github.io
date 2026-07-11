@@ -18,7 +18,8 @@ ADMIN_INDEX = ROOT / "admin" / "index.html"
 SOLICITATION_TERMS = ("subscribe", "subscribers", "1,000", "1000", "help us", "help lily roo")
 YOUTUBE_TERMS = ("youtube", "youtu.be", "youtube.com")
 RELEASE_LINK_TERMS = ("album room", "album page", "playlist", "stream", "listen", "echo", "video")
-ACTIVE_CAMPAIGN_PREFIX = "FP-BRAND-AM"
+ACTIVE_CAMPAIGN_PREFIXES = ("FP-BRAND-AM", "FP-GROWTH-RESET-")
+ANALOG_MYTH_FOCUS_SONGS = {"slow walk", "spilling the tea", "no mortgage"}
 
 
 def read_json(path: Path, fallback):
@@ -124,12 +125,16 @@ def is_release_forward_future(row: dict) -> bool:
         str(row.get(key) or "")
         for key in ("song", "text", "hook", "reply_text", "imagery", "notes")
     ).lower()
-    return post_id.startswith(ACTIVE_CAMPAIGN_PREFIX) and "analog myth" in haystack
+    is_campaign = post_id.startswith(ACTIVE_CAMPAIGN_PREFIXES)
+    is_release_forward = "analog myth" in haystack or str(row.get("song") or "").strip().lower() in ANALOG_MYTH_FOCUS_SONGS
+    return is_campaign and is_release_forward
 
 
 def build_future_rows(payload) -> list[dict]:
     rows = []
     for post in future_posts(payload):
+        if str(post.get("approved") or "").lower() != "yes":
+            continue
         selected = post.get("text") or post.get("hook") or ""
         full_text = " ".join(
             str(value or "")

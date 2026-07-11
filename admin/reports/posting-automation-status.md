@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-11T03:44:41.782366Z
+Generated: 2026-07-11T04:31:17.758081Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -17,7 +17,7 @@ Generated: 2026-07-11T03:44:41.782366Z
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `ready`
-  - Detail: 64 approved auto posts; next=FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X at 2026-07-11T10:15:00-04:00; preflight=ready
+  - Detail: 36 approved auto posts; next=FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X at 2026-07-11T10:15:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
   - Next: Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run.
 - **Scheduled refresh workflow** - `ready`
@@ -27,7 +27,7 @@ Generated: 2026-07-11T03:44:41.782366Z
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-11T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-11T03:44:37.917394Z
+  - Detail: 19 refresh commands captured at 2026-07-11T04:31:15.019088Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -38,13 +38,13 @@ Generated: 2026-07-11T03:44:41.782366Z
 - **Platform readiness** - `deferred`
   - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube
   - Evidence: data/executor_readiness_snapshot.json
-  - Next: Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes.
+  - Next: Optional expansion only; unsupported platforms stay inactive until their automated lane is ready.
 - **TikTok API lane** - `deferred`
   - Detail: blocked; upload_ready=False; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 - **Blocker input readiness** - `deferred`
-  - Detail: 1 ready; 5 missing local input; 1 external action needed
+  - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
   - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
 - **Story throughput** - `ready`

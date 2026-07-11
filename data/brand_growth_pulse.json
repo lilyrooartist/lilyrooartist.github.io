@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T03:44:43.101382Z",
+  "generated_at": "2026-07-11T04:31:20.382622Z",
   "safe_mode": true,
   "status": "learn_from_clicks",
   "source": {
@@ -21,7 +21,7 @@
     },
     "active_campaign_ready": true,
     "posting_preflight_ready": true,
-    "queued_future_posts": 50,
+    "queued_future_posts": 34,
     "posted_or_measured_rows": 14,
     "ready_for_metric_capture_rows": 12,
     "click_count": 3,
@@ -34,13 +34,13 @@
       "echo": 1,
       "video": 1
     },
-    "click_snapshot_updated_at": "2026-07-11T03:44:37.906722Z",
+    "click_snapshot_updated_at": "2026-07-11T04:31:15.009705Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_post_at": "2026-07-11T10:15:00-04:00",
     "proof_due_at": "2026-07-11T15:21:00Z",
-    "hours_until_next_post": 10.5,
-    "hours_until_proof_due": 11.6,
+    "hours_until_next_post": 9.73,
+    "hours_until_proof_due": 10.83,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -67,9 +67,9 @@
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_count": 12,
     "waiting_measurement_count": 2,
-    "scheduled_future_count": 50,
+    "scheduled_future_count": 34,
     "next_learning_due_at": "2026-07-11T14:15:30.211000Z",
-    "click_snapshot_updated_at": "2026-07-11T03:44:37.906722Z",
+    "click_snapshot_updated_at": "2026-07-11T04:31:15.009705Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -87,7 +87,7 @@
       "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X",
       "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
     ],
-    "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
+    "automation_note": "No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.",
     "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.",
     "rows": [
       {
@@ -179,7 +179,7 @@
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": 10.51
+    "hours_until_next_learning_due": 9.74
   },
   "recommendations": [
     {
@@ -189,12 +189,12 @@
     },
     {
       "label": "Click response is ready to review",
-      "detail": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
+      "detail": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.",
       "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
     },
     {
       "label": "Preserve the no-manual-posting lane",
-      "detail": "Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.",
+      "detail": "Keep only API-backed platforms active; unsupported surfaces stay unapproved until their automated path is verified.",
       "command": "python3 scripts/build_posting_automation_status.py"
     },
     {

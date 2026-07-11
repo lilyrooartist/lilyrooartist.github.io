@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T03:44:41.737305Z",
+  "generated_at": "2026-07-11T04:31:17.726252Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
@@ -11,12 +11,12 @@
   "summary": {
     "status": "missing_local_input",
     "group_count": 7,
-    "ready_count": 1,
-    "missing_local_input_count": 5,
+    "ready_count": 3,
+    "missing_local_input_count": 3,
     "external_action_needed_count": 1,
     "github_actions_missing_secret_count": 6,
     "github_actions_secret_presence_status": "ready",
-    "local_secret_env_exists": false,
+    "local_secret_env_exists": true,
     "template_path": "data/social_blocker_secret_template.env",
     "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env."
   },
@@ -53,9 +53,9 @@
       "credential_resolution_status": {},
       "presence": {
         "ADMIN_PASSWORD": false,
-        "EXECUTOR_BEARER_TOKEN": false,
+        "EXECUTOR_BEARER_TOKEN": true,
         "LILYROO_ADMIN_PASSWORD": false,
-        "LILYROO_EXECUTOR_BEARER_TOKEN": true
+        "LILYROO_EXECUTOR_BEARER_TOKEN": false
       },
       "missing_all": [],
       "any_present": true,
@@ -310,7 +310,7 @@
     {
       "id": "tiktok_oauth_base",
       "label": "TikTok OAuth app values",
-      "status": "missing_local_input",
+      "status": "ready",
       "required_all": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -329,20 +329,16 @@
       "credential_resolution_apply": "",
       "credential_resolution_status": {},
       "presence": {
-        "TIKTOK_CLIENT_KEY": false,
-        "TIKTOK_CLIENT_SECRET": false,
-        "TIKTOK_REDIRECT_URI": false
+        "TIKTOK_CLIENT_KEY": true,
+        "TIKTOK_CLIENT_SECRET": true,
+        "TIKTOK_REDIRECT_URI": true
       },
-      "missing_all": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REDIRECT_URI"
-      ],
+      "missing_all": [],
       "any_present": true,
       "external_only": false,
       "unblocks": "TikTok OAuth authorization URL generation and authorization-code exchange.",
       "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
-      "next_action": "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI to secrets/social_api.env.",
+      "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "second",
         "operator_summary": "Collect TikTok app OAuth values so the helper can generate the Lily Roo authorization URL.",
@@ -374,7 +370,7 @@
     {
       "id": "tiktok_direct_public_tokens",
       "label": "TikTok direct-public worker secrets",
-      "status": "missing_local_input",
+      "status": "ready",
       "required_all": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -393,20 +389,16 @@
       "credential_resolution_apply": "",
       "credential_resolution_status": {},
       "presence": {
-        "TIKTOK_CLIENT_KEY": false,
-        "TIKTOK_CLIENT_SECRET": false,
-        "TIKTOK_REFRESH_TOKEN": false
+        "TIKTOK_CLIENT_KEY": true,
+        "TIKTOK_CLIENT_SECRET": true,
+        "TIKTOK_REFRESH_TOKEN": true
       },
-      "missing_all": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
+      "missing_all": [],
       "any_present": true,
       "external_only": false,
       "unblocks": "TikTok direct public automation only after public posting approval is explicit.",
       "verification_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "next_action": "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN to secrets/social_api.env.",
+      "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "after_oauth",
         "operator_summary": "After TikTok public posting approval is explicit, authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push direct-public Worker secrets.",
