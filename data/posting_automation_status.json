@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T16:23:53.365131Z",
+  "generated_at": "2026-07-11T16:59:38.908231Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -16,33 +16,33 @@
     "brand_growth_preflight": "data/brand_growth_preflight.json"
   },
   "summary": {
-    "status": "ready_active_campaign",
-    "active_campaign_ready": true,
+    "status": "blocked",
+    "active_campaign_ready": false,
     "active_campaign_platforms": [
       "Facebook",
       "X"
     ],
-    "active_campaign_next_proof_due_at": "2026-07-11T15:21:00Z",
-    "active_campaign_next_measurement_due_at": "2026-07-12T15:20:00Z",
-    "ready_lane_count": 7,
-    "blocked_lane_count": 0,
-    "deferred_lane_count": 3,
-    "attention_lane_count": 0,
+    "active_campaign_next_proof_due_at": "2026-07-13T18:06:00Z",
+    "active_campaign_next_measurement_due_at": "2026-07-14T18:05:00Z",
+    "ready_lane_count": 5,
+    "blocked_lane_count": 2,
+    "deferred_lane_count": 1,
+    "attention_lane_count": 2,
     "lane_count": 10,
     "workflow_crons": [
       "17 */6 * * *",
       "25 15 * * *",
       "05 16 * * *"
     ],
-    "active_campaign_proof_refresh_status": "ready",
-    "active_campaign_next_proof_refresh_at": "2026-07-11T15:25:00Z",
-    "active_campaign_proof_refresh_lag_minutes": 4,
+    "active_campaign_proof_refresh_status": "slow",
+    "active_campaign_next_proof_refresh_at": "2026-07-14T15:25:00Z",
+    "active_campaign_proof_refresh_lag_minutes": 1279,
     "active_campaign_proof_refresh_cron": "25 15 * * *",
-    "active_campaign_proof_export_status": "ready",
+    "active_campaign_proof_export_status": "needs_attention",
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 2,
+    "active_campaign_proof_export_added_last_run": 0,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
@@ -57,42 +57,42 @@
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run."
+    "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
   },
   "proof_refresh": {
-    "status": "ready",
-    "proof_due_at": "2026-07-11T15:21:00Z",
-    "next_refresh_at": "2026-07-11T15:25:00Z",
-    "lag_minutes": 4,
+    "status": "slow",
+    "proof_due_at": "2026-07-13T18:06:00Z",
+    "next_refresh_at": "2026-07-14T15:25:00Z",
+    "lag_minutes": 1279,
     "cron": "25 15 * * *",
-    "detail": "next fixed refresh 4 minute(s) after proof due"
+    "detail": "next fixed refresh is 1279 minute(s) after proof due"
   },
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
-      "status": "ready",
-      "detail": "36 approved auto posts; next=FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X at 2026-07-11T10:15:00-04:00; preflight=ready",
+      "status": "needs_attention",
+      "detail": "36 approved auto posts; next=FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK at 2026-07-13T11:20:00-04:00; preflight=needs_attention",
       "evidence": "data/brand_growth_preflight.json",
-      "next_action": "Automatic proof/export is scheduled at 2026-07-11T15:25:00Z; verify the active posts in Published_Log after that run."
+      "next_action": "Refresh brand growth readout and preflight."
     },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29159695772",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh is 1279 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29160771426",
       "next_action": ""
     },
     {
       "label": "Published URL export",
-      "status": "ready",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=2 dry_run=False; next proof refresh=2026-07-11T15:25:00Z",
+      "status": "needs_attention",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-14T15:25:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
-      "next_action": ""
+      "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-11T16:23:51.546662Z",
+      "detail": "19 refresh commands captured at 2026-07-11T16:59:36.382500Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -119,17 +119,17 @@
     },
     {
       "label": "TikTok API lane",
-      "status": "deferred",
+      "status": "blocked",
       "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
       "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
     },
     {
       "label": "Blocker input readiness",
-      "status": "deferred",
+      "status": "blocked",
       "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
+      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env."
     },
     {
       "label": "Story throughput",

@@ -1,17 +1,17 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-11T16:23:53.797843Z
+Generated: 2026-07-11T16:59:39.567481Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **36**
-- Visible in future queue: **34**
+- Visible in future queue: **32**
 - Posted or measured rows: **16**
 - Measured rows: **0**
 - Ready for metric capture: **14**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **3** across **1** post(s); last click `2026-07-10T15:30:43.299Z`
-- Click tracking links: **ready** (22 / 22 future rows; 26 / 26 URLs)
+- Click tracking links: **ready** (20 / 20 future rows; 20 / 20 URLs)
 - Post-slot watch windows: **24**
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 14, scheduled_future: 20, waiting_platform_readiness: 12**
 - Next scheduled: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` at `2026-07-13T11:20:00-04:00`

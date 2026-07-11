@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-11T16:23:53.428740Z
+Generated: 2026-07-11T16:59:38.972208Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **22 / 22**
-- Tracking URLs checked: **26 / 26**
-- X main-post album links: **1 / 1**
-- Visible album click paths: **7 / 22**
-- Visible full destination sets: **22 / 22**
+- Future campaign rows ready: **20 / 20**
+- Tracking URLs checked: **20 / 20**
+- X main-post album links: **0 / 0**
+- Visible album click paths: **5 / 20**
+- Visible full destination sets: **20 / 20**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,15 +24,15 @@ Generated: 2026-07-11T16:23:53.428740Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 7, echo: 7, spotify: 5, video: 7**
+- Destinations: **album: 5, echo: 5, spotify: 5, video: 5**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-brand-am-08-the-power-of-light-x`
-- Event: **x / album / track 08**
+- Probe campaign id: `fp-growth-reset-voice-01-x`
+- Event: **x / album / track unknown**
 
 ## Redirect Checks
 - exists: **ok**
@@ -194,13 +194,6 @@ Generated: 2026-07-11T16:23:53.428740Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X` X 2026-07-11T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
-- `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-07-11T11:20:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)

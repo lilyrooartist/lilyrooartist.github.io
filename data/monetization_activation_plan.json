@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T16:23:54.616599Z",
+  "generated_at": "2026-07-11T16:59:40.632180Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -27,14 +27,14 @@
   },
   "actions": [
     {
-      "label": "Current operations next action: Watch active Analog Myth proof window",
+      "label": "Current operations next action: Connect automated brand metrics capture",
       "phase": "Operations packet",
-      "status": "ready",
-      "detail": "The active Analog Myth proof window is due; capture executor proof and export confirmed URLs.",
-      "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+      "status": "waiting_for_credentials",
+      "detail": "14 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.",
+      "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
       "after_review_command": "",
       "context": {
-        "kind": "brand_growth_proof",
+        "kind": "brand_growth_metrics",
         "urgency": "high"
       }
     }
