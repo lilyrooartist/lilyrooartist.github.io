@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-11T23:39:03.425Z",
+  "updated_at": "2026-07-12T03:58:35.474Z",
   "platforms": {
     "youtube": {
       "ok": true,
@@ -12,8 +12,8 @@
       },
       "channel_title": "Lily Roo",
       "period_28d": {
-        "startDate": "2026-06-13",
-        "endDate": "2026-07-10"
+        "startDate": "2026-06-14",
+        "endDate": "2026-07-11"
       },
       "analytics_status": "Request had insufficient authentication scopes."
     },
@@ -63,9 +63,11 @@
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
-      "http_status": 200,
-      "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-      "public_capture_status": "ok"
+      "http_status": 429,
+      "description": "",
+      "public_capture_status": "ok",
+      "preserved_previous_public_metrics": true,
+      "latest_capture_status": "HTTP Error 429: Too Many Requests"
     },
     "facebook": {
       "ok": true,
@@ -76,7 +78,7 @@
       },
       "page_name": "Lily Roo",
       "profile_url": "https://www.facebook.com/903693509504290",
-      "insights_period": "2026-07-04..2026-07-10",
+      "insights_period": "2026-07-05..2026-07-11",
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
@@ -91,7 +93,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 91704,
+      "html_bytes": 91345,
       "public_capture_status": "ok"
     }
   },
@@ -129,9 +131,11 @@
           "followers": 0
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
-        "http_status": 200,
-        "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-        "public_capture_status": "ok"
+        "http_status": 429,
+        "description": "",
+        "public_capture_status": "ok",
+        "preserved_previous_public_metrics": true,
+        "latest_capture_status": "HTTP Error 429: Too Many Requests"
       },
       "x": {
         "ok": true,
@@ -141,7 +145,7 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 91704,
+        "html_bytes": 91345,
         "public_capture_status": "ok"
       }
     }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T23:39:22.061864Z",
+  "generated_at": "2026-07-12T03:58:55.623282Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 0,
@@ -79,8 +79,8 @@
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
         "blocked_by": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "source_path": "data/backlog_reschedule_preview.json"
       },
       {
