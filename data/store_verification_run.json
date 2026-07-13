@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-13T04:03:24.603372Z",
+  "updated_at": "2026-07-13T09:48:34.054860Z",
   "source": "public-store-link-verification-run",
   "step_timeout_seconds": 25,
   "summary": {
@@ -28,7 +28,7 @@
       "command": "python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 1.52,
+      "duration_seconds": 0.38,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"title\": \"\",\n  \"album_id\": \"\",\n  \"release_url\": \"\",\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n}",
       "stderr": "",
@@ -46,7 +46,7 @@
       "command": "python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.22,
+      "duration_seconds": 0.21,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"collection_name\": \"\",\n  \"collection_id\": null,\n  \"release_url\": \"\",\n  \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n}",
       "stderr": "",
@@ -82,7 +82,7 @@
       "command": "python3 scripts/search_youtube_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/youtube_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.62,
+      "duration_seconds": 0.5,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"release_url\": \"\",\n  \"public_title\": \"\",\n  \"title_matches_official\": false,\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/analog-myth/youtube_music_release_snapshot.json\"\n}",
       "stderr": "",
@@ -100,7 +100,7 @@
       "command": "python3 scripts/update_promo_engine_status.py",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.15,
+      "duration_seconds": 0.83,
       "returncode": 0,
       "stdout": "Wrote <repo>/data/promo_engine_status.json with 3 releases",
       "stderr": ""
