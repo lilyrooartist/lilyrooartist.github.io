@@ -10,7 +10,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: promo-admin-refresh-status-settle
+  # This job writes the same generated admin/data files as the primary refresh.
+  # Share its queue so a scheduled refresh cannot rebase against this commit.
+  group: promo-admin-refresh
   cancel-in-progress: false
 
 jobs:
