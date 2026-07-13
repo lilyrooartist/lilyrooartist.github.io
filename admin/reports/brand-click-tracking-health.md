@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-13T15:12:59.429789Z
+Generated: 2026-07-13T17:28:14.424012Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **32 / 32**
-- Tracking URLs checked: **32 / 32**
+- Future campaign rows ready: **31 / 31**
+- Tracking URLs checked: **31 / 31**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **8 / 32**
-- Visible full destination sets: **32 / 32**
+- Visible album click paths: **8 / 31**
+- Visible full destination sets: **31 / 31**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,7 +24,7 @@ Generated: 2026-07-13T15:12:59.429789Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 8, echo: 8, spotify: 8, video: 8**
+- Destinations: **album: 8, echo: 8, spotify: 7, video: 8**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
@@ -194,9 +194,6 @@ Generated: 2026-07-13T15:12:59.429789Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-13T10:15:00-04:00 - **ready** (1 link)
-  - Destinations: `spotify`
-  - Visible surface: **attention** (`spotify`)
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)

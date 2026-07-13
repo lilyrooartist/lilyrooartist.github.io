@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T15:13:01.455893Z",
+  "generated_at": "2026-07-13T17:28:15.731392Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -22,10 +22,46 @@
     "manual_release_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "solicitation_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 0,
-    "action_count": 1
+    "platform_fix_count": 1,
+    "action_count": 3
   },
   "actions": [
+    {
+      "label": "Preview approved backlog reschedule",
+      "phase": "Recover stalled approved backlog",
+      "status": "preview_first",
+      "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24",
+      "after_review_command": "",
+      "context": {
+        "approved_backlog_posts": 1,
+        "raw_approved_backlog_posts": 1,
+        "manual_handoff_backlog_posts": 0,
+        "approved_upcoming_posts": 30,
+        "blocked_backlog_count": 1,
+        "apply_allowed_without_override": false,
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+      }
+    },
+    {
+      "label": "Repair Facebook executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "reason": "max_attempts_exceeded",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "local_secret_source": "",
+        "local_secret_ready": null,
+        "public_posting_approved": null
+      }
+    },
     {
       "label": "Current operations next action: Watch active Analog Myth proof window",
       "phase": "Operations packet",

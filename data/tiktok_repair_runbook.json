@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T15:12:58.525684Z",
+  "generated_at": "2026-07-13T17:28:13.479676Z",
   "safe_mode": true,
   "status": "ready_for_backlog_clearance",
   "source": {
@@ -114,8 +114,8 @@
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
     "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24",
-    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "backlog_normal_apply_gate": "clear"
+    "backlog_apply_command": "",
+    "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
   "steps": [
     {

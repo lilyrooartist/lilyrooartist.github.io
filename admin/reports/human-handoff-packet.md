@@ -1,20 +1,20 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-13T15:12:58.669509Z
+Generated: 2026-07-13T17:28:13.622891Z
 
 ## Summary
-- Open handoff tasks: **3**
-- Tod-owned tasks: **3**
-- External/platform-gated tasks: **0**
-- High urgency tasks: **1**
+- Open handoff tasks: **5**
+- Tod-owned tasks: **4**
+- External/platform-gated tasks: **1**
+- High urgency tasks: **3**
 - Low urgency tasks: **2**
 
 ## Action Docket
 - Ready steps: **0**
-- Blocked steps: **1**
+- Blocked steps: **2**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (3 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (5 row(s))
 
 - **Review checked approval batch** (`not_available`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
@@ -30,9 +30,9 @@ Generated: 2026-07-13T15:12:58.669509Z
   - Next after apply: Remove or convert each approved manual-only YouTube Community row; only log URLs for historical rows that already have real public post URLs.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Manual posting is not in the active plan; log only real historical public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run`
-  - Sequence preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run`
+  - Owner: `tod`; tasks: **2**; blockers resolved: **2**
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+  - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows that can publish automatically.
@@ -51,19 +51,31 @@ Generated: 2026-07-13T15:12:58.669509Z
   - Completion evidence: data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows the optional metric count decreased.
   - Guardrail: Optional reporting input only; automated promotion is not blocked. Import only collected numeric values and leave unknown cells blank.
-- **Reschedule approved backlog after blockers clear** (`clear`)
-  - Owner: `tod`; tasks: **0**; blockers resolved: **0**
+- **Reschedule approved backlog after blockers clear** (`blocked`)
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **1**
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
-  - Guardrail: Do not apply blocked backlog reschedules without clearing platform readiness.
+  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
+- **Repair Facebook executor** (`platform-setup-FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Review TikTok upload-mode preflight** (`platform-setup-tiktok-preflight`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
   - Detail: Review the TikTok upload-mode/direct-public split before treating TikTok as ready.
   - Preview/check: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run`
   - Guardrail: Keep TikTok upload-draft/manual-finish posting out of the active plan; only direct public API publishing can become an automated TikTok lane.
+- **Preview approved backlog reschedule** (`backlog-reschedule`)
+  - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
+  - Detail: Known executor/platform blockers must clear before normal apply.
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
+  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.

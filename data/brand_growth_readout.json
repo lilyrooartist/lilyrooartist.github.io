@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T15:13:00.227040Z",
+  "generated_at": "2026-07-13T17:28:14.878983Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -28,12 +28,13 @@
       "YouTube": 12
     },
     "status_counts": {
+      "execution_attention": 1,
       "posted_waiting_measurement_window": 1,
       "ready_for_metric_capture": 16,
-      "scheduled_future": 31
+      "scheduled_future": 30
     },
     "approved_auto_rows": 48,
-    "future_queue_visible_rows": 32,
+    "future_queue_visible_rows": 31,
     "posted_or_measured_rows": 17,
     "measured_rows": 0,
     "ready_for_metric_capture_rows": 16,
@@ -49,14 +50,14 @@
     "campaign_click_report_path": "admin/reports/brand-campaign-clicks.md",
     "campaign_click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
     "campaign_click_tracking_status": "ready",
-    "campaign_click_tracking_ready_rows": 32,
-    "campaign_click_tracking_future_rows": 32,
-    "campaign_click_tracking_url_count": 32,
-    "campaign_click_tracking_expected_url_count": 32,
+    "campaign_click_tracking_ready_rows": 31,
+    "campaign_click_tracking_future_rows": 31,
+    "campaign_click_tracking_url_count": 31,
+    "campaign_click_tracking_expected_url_count": 31,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 16,
-    "next_scheduled_post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
-    "next_scheduled_at": "2026-07-13T11:20:00-04:00",
+    "attention_rows": 17,
+    "next_scheduled_post_id": "FP-GROWTH-RESET-VOICE-01-X",
+    "next_scheduled_at": "2026-07-13T14:05:00-04:00",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
@@ -81,8 +82,8 @@
     ],
     "post_slot_watch_window_count": 24,
     "post_slot_watch_status_counts": {
+      "attention": 1,
       "measurement_due": 8,
-      "posted_waiting_measurement": 1,
       "scheduled_future": 15
     },
     "next_action_window_date": "2026-07-04",
@@ -92,15 +93,16 @@
       "FP-BRAND-AM-01-13-X",
       "FP-BRAND-AM-01-13-FACEBOOK"
     ],
-    "next_proof_window_date": "2026-07-15",
-    "next_proof_window_status": "scheduled_future",
-    "next_proof_due_at": "2026-07-15T15:21:00Z",
+    "next_proof_window_date": "2026-07-13",
+    "next_proof_window_status": "attention",
+    "next_proof_due_at": "2026-07-13T18:06:00Z",
     "next_measurement_window_date": "2026-07-04",
     "next_measurement_window_status": "measurement_due",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "next_proof_post_ids": [
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-VOICE-01-X"
     ],
     "next_metric_post_ids": [
       "FP-BRAND-AM-01-13-X",
@@ -118,8 +120,8 @@
     "summary": {
       "window_count": 24,
       "status_counts": {
+        "attention": 1,
         "measurement_due": 8,
-        "posted_waiting_measurement": 1,
         "scheduled_future": 15
       },
       "next_window_date": "2026-07-04",
@@ -136,12 +138,13 @@
         "FP-BRAND-AM-01-13-X",
         "FP-BRAND-AM-01-13-FACEBOOK"
       ],
-      "next_post_proof_window_date": "2026-07-15",
-      "next_post_proof_window_status": "scheduled_future",
-      "next_post_proof_due_at": "2026-07-15T15:21:00Z",
+      "next_post_proof_window_date": "2026-07-13",
+      "next_post_proof_window_status": "attention",
+      "next_post_proof_due_at": "2026-07-13T18:06:00Z",
       "next_post_proof_post_ids": [
-        "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
-        "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "FP-GROWTH-RESET-VOICE-01-X"
       ],
       "next_metric_window_date": "2026-07-04",
       "next_metric_window_status": "measurement_due",
@@ -390,7 +393,7 @@
       },
       {
         "date": "2026-07-13",
-        "status": "posted_waiting_measurement",
+        "status": "attention",
         "post_ids": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -406,16 +409,19 @@
         "proof_due_at": "2026-07-13T18:06:00Z",
         "measurement_due_at": "2026-07-14T18:05:00Z",
         "status_counts": {
+          "execution_attention": 1,
           "posted_waiting_measurement_window": 1,
-          "scheduled_future": 2
+          "scheduled_future": 1
         },
-        "rows_needing_proof": [],
+        "rows_needing_proof": [
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK"
+        ],
         "rows_ready_for_metrics": [],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the first measurement window before capturing result metrics."
+        "next_action": "Inspect executor state, then refresh and export posted URLs after the issue is resolved."
       },
       {
         "date": "2026-07-15",
@@ -1180,7 +1186,7 @@
       "public_visibility_note": "",
       "status": "posted_waiting_measurement_window",
       "next_action": "Wait until 2026-07-14T14:15:53.805000+00:00 before capturing metrics.",
-      "visible_in_future_queue": true
+      "visible_in_future_queue": false
     },
     {
       "id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -1192,16 +1198,16 @@
       "text": "What is the rush to the same place? Slow Walk keeps its own time.",
       "post_url": "",
       "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
+      "execution_status": "failed",
+      "execution_reason": "max_attempts_exceeded",
+      "measurement_due_at": "2026-07-14T17:15:51.724000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "execution_attention",
+      "next_action": "Inspect executor state for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "visible_in_future_queue": true
     },
     {
@@ -1896,13 +1902,14 @@
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE"
     ],
     "next_proof_post_ids": [
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-VOICE-01-X"
     ]
   },
   "next_actions": [
     "Review the tracks, platforms, and destinations with click response before changing the next copy wave.",
-    "After `2026-07-15T15:21:00Z`, capture executor proof for FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK.",
+    "After `2026-07-13T18:06:00Z`, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X.",
     "Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting."
   ],
   "guardrails": [

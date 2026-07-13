@@ -1,27 +1,44 @@
 {
-  "generated_at": "2026-07-13T15:12:58.854079Z",
+  "generated_at": "2026-07-13T17:28:13.846151Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 3,
-    "preview_count": 3,
-    "executed_preview_count": 3,
-    "skipped_preview_count": 0,
+    "worksheet_row_count": 5,
+    "preview_count": 5,
+    "executed_preview_count": 4,
+    "skipped_preview_count": 1,
     "status_counts": {
       "input_missing": 2,
-      "preview_ok": 1
+      "preview_ok": 1,
+      "preview_ok_with_warning": 1,
+      "skipped": 1
     },
     "phase_counts": {
+      "Backlog recovery": 1,
       "Manual metrics": 2,
-      "Platform setup": 1
+      "Platform setup": 2
     },
     "safe_command_policy": "Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.",
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
   },
   "previews": [
+    {
+      "task_id": "platform-setup-FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
     {
       "task_id": "platform-setup-tiktok-preflight",
       "phase": "Platform setup",
@@ -35,6 +52,20 @@
       "output_excerpt": "{\"ok\": true, \"platform\": \"TikTok\", \"dry_run\": true, \"mode\": \"direct\", \"endpoint\": \"https://open.tiktokapis.com/v2/post/publish/video/init/\", \"required_scope\": \"video.publish\", \"media_key\": \"i-learned-60s\", \"media_ready\": true, \"public_video_url\": \"https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2\", \"media_path\": \"\", \"token_path_ready\": false, \"token_source\": \"\", \"missing_refresh_credentials\": [\"TIKTOK_CLIENT_KEY\", \"TIKTOK_CLIENT_SECRET\", \"TIKTOK_REFRESH_TOKEN\"], \"public_posting_approved\": false, \"default_privacy\": \"PUBLIC_TO_EVERYONE\", \"brand_content_toggle\": false, \"brand_organic_toggle\": true, \"aigc_label_enabled\": true, \"title\": \"Swipe away before the pain sets in. Cute system we built. Streaming now.\"}",
       "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
       "guardrail": "Keep TikTok upload-draft/manual-finish posting out of the active plan; only direct public API publishing can become an automated TikTok lane."
+    },
+    {
+      "task_id": "backlog-reschedule",
+      "phase": "Backlog recovery",
+      "status": "blocked",
+      "input_needed": "clearance_confirmation",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24",
+      "safety": "safe_preview",
+      "safety_reason": "reschedule_preview_command",
+      "returncode": 0,
+      "preview_status": "preview_ok_with_warning",
+      "output_excerpt": "Rows selected: 1\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-14T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\nDry run only. Re-run with --apply to write the schedule.",
+      "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
+      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },
     {
       "task_id": "manual-metrics-priority-2",
@@ -67,7 +98,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 3,
+    "row_count": 5,
     "fieldnames": [
       "task_id",
       "phase",

@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-13T15:12:49.202450Z",
+  "updated_at": "2026-07-13T17:28:04.554709Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,11 +8,24 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 62,
-    "current_execution_count": 47,
+    "execution_count": 63,
+    "current_execution_count": 48,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-07-13T17:15:51.724Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
@@ -1241,15 +1254,16 @@
     "draft_uploaded": [],
     "posted_count": 47,
     "draft_uploaded_count": 0,
-    "attention_count": 0,
+    "attention_count": 1,
     "approval_needed_count": 0,
-    "platform_fix_needed_count": 0,
+    "platform_fix_needed_count": 1,
     "manual_handoff_needed_count": 0,
     "status_counts": {
+      "failed": 1,
       "posted": 47
     },
     "platform_counts": {
-      "Facebook": 21,
+      "Facebook": 22,
       "X": 20,
       "YouTube": 6
     },
@@ -1322,16 +1336,44 @@
     ],
     "latest_draft_uploaded": [],
     "approval_needed": [],
-    "platform_fix_needed": [],
+    "platform_fix_needed": [
+      {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-07-13T17:15:51.724Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      }
+    ],
     "manual_handoff_needed": [],
-    "latest_attention": []
+    "latest_attention": [
+      {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-07-13T17:15:51.724Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      }
+    ]
   },
   "payload": {
     "ok": true,
-    "execution_count": 62
+    "execution_count": 63
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-13T15:12:49.247196Z",
+  "reconciled_at": "2026-07-13T17:28:04.600130Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

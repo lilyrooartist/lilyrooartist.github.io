@@ -1,17 +1,27 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-13T15:13:01.455893Z
+Generated: 2026-07-13T17:28:15.731392Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
 - Runway status: **stalled**
 - Ready release-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **0**
-- Activation actions: **1**
+- Platform fixes: **1**
+- Activation actions: **3**
 
 ## Activation Sequence
-1. **Current operations next action: Watch active Analog Myth proof window**
+1. **Preview approved backlog reschedule**
+   - Phase: `Recover stalled approved backlog`; status: `preview_first`
+   - Detail: Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.
+   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
+2. **Repair Facebook executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+3. **Current operations next action: Watch active Analog Myth proof window**
    - Phase: `Operations packet`; status: `ready`
    - Detail: The active Analog Myth proof window is coming up within 48 hours.
    - Preview/check: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`

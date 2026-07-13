@@ -1,23 +1,23 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-13T15:13:01.151823Z
+Generated: 2026-07-13T17:28:15.402479Z
 
 ## Current Pulse
-- Status: **learn_from_clicks**
-- Primary action: **Review first-party click response**
-- Why: Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.
-- Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- Status: **posting_needs_check**
+- Primary action: **Refresh the next posting window**
+- Why: The next Analog Myth scheduler check is not clean.
+- Command: `python3 scripts/build_brand_growth_preflight.py`
 - Active campaign ready: **True**
-- Posting preflight ready: **True**
-- Future queued posts: **32**
+- Posting preflight ready: **False**
+- Future queued posts: **31**
 - Posted or measured rows: **17**
 - Ready for result capture: **16**
 - First-party clicks: **5** across **2** post(s)
-- Click snapshot: `2026-07-13T15:12:57.276832Z` (covers current due posts)
-- Next post at: `2026-07-13T11:20:00-04:00`
-- Proof due at: `2026-07-15T15:21:00Z`
-- Hours until next post: `0.12`
-- Hours until proof due: `48.13`
+- Click snapshot: `2026-07-13T17:28:10.411854Z` (covers current due posts)
+- Next post at: `2026-07-13T14:05:00-04:00`
+- Proof due at: `2026-07-13T18:06:00Z`
+- Hours until next post: `0.61`
+- Hours until proof due: `0.63`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -26,7 +26,7 @@ Generated: 2026-07-13T15:13:01.151823Z
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **16**
 - Waiting measurement rows: **1**
-- Future scheduled rows: **32**
+- Future scheduled rows: **31**
 - Next learning due at: `2026-07-14T14:15:53.805000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
@@ -38,12 +38,12 @@ Generated: 2026-07-13T15:13:01.151823Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` (YouTube): Slow Walk Lyric Punch Line - Waiting for first useful result check
-  - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): Slow Walk Lyric Punch Line - Next queued learning input
   - `FP-GROWTH-RESET-VOICE-01-X` (X): Voice 01 - Next queued learning input
+  - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` (YouTube): Slow Walk Relatable Situation - Next queued learning input
 
 ## Recommendations
-- **Review first-party click response**: Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.
-  - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.
+  - Command: `python3 scripts/build_brand_growth_preflight.py`
 - **Click response is ready to review**: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
   - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
 - **Preserve the no-manual-posting lane**: Keep only API-backed platforms active; unsupported surfaces stay unapproved until their automated path is verified.
@@ -52,7 +52,7 @@ Generated: 2026-07-13T15:13:01.151823Z
   - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
 
 ## Blockers
-- No active posting blockers.
+- **Next scheduler window**: The next scheduler dry-run has blocked rows.
 
 ## Guardrails
 - No manual posting is introduced by this pulse.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T15:13:01.852722Z",
+  "generated_at": "2026-07-13T17:28:16.131648Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -15,24 +15,24 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 0,
-      "actual": 0
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 0,
-      "actual": 0
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 9,
-      "actual": 9
+      "expected": 11,
+      "actual": 11
     },
     {
       "name": "approval_counts_match",
@@ -55,16 +55,16 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Platform repair packet should match platform repair blockers in the ledger.",
-      "expected": 0,
-      "actual": 0
+      "expected": 1,
+      "actual": 1
     },
     {
       "name": "executor_platform_fix_count_matches_platform_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Executor platform-fix count plus preflight-only setup repairs should match the platform repair packet.",
-      "expected": 0,
-      "actual": 0
+      "expected": 1,
+      "actual": 1
     },
     {
       "name": "tiktok_preflight_status_matches_platform_repair",
@@ -95,8 +95,12 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.",
-      "expected": [],
-      "actual": []
+      "expected": [
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK"
+      ],
+      "actual": [
+        "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK"
+      ]
     },
     {
       "name": "manual_distribution_count_matches_ledger",
@@ -143,8 +147,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 0,
-      "actual": 0
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -188,13 +192,17 @@
       "severity": "ok",
       "detail": "Human handoff preview should include one preview row for every handoff task.",
       "expected": [
+        "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
+        "platform-setup-FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
         "platform-setup-tiktok-preflight"
       ],
       "actual": [
+        "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
+        "platform-setup-FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
         "platform-setup-tiktok-preflight"
       ]
     },
@@ -203,8 +211,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff preview worksheet row count should match the handoff packet worksheet summary.",
-      "expected": 3,
-      "actual": 3
+      "expected": 5,
+      "actual": 5
     },
     {
       "name": "handoff_preview_status_matches_status_kpi",
@@ -213,11 +221,15 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 2,
-        "preview_ok": 1
+        "preview_ok": 1,
+        "preview_ok_with_warning": 1,
+        "skipped": 1
       },
       "actual": {
         "input_missing": 2,
-        "preview_ok": 1
+        "preview_ok": 1,
+        "preview_ok_with_warning": 1,
+        "skipped": 1
       }
     },
     {
@@ -226,16 +238,16 @@
       "severity": "ok",
       "detail": "Promo status handoff preview KPI should mirror preview summary counts.",
       "expected": {
-        "worksheet_row_count": 3,
-        "preview_count": 3,
-        "executed_preview_count": 3,
-        "skipped_preview_count": 0
+        "worksheet_row_count": 5,
+        "preview_count": 5,
+        "executed_preview_count": 4,
+        "skipped_preview_count": 1
       },
       "actual": {
-        "worksheet_row_count": 3,
-        "preview_count": 3,
-        "executed_preview_count": 3,
-        "skipped_preview_count": 0
+        "worksheet_row_count": 5,
+        "preview_count": 5,
+        "executed_preview_count": 4,
+        "skipped_preview_count": 1
       }
     },
     {
@@ -243,18 +255,20 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 1 preview-clean, 2 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
       "actual": [
         "Next operational action: Verify automatic Analog Myth proof export — python3 scripts/refresh_promo_admin.py",
-        "Current unlock gate: Approve checked scheduled rows (clear); 0 ready, 0 waiting/warning; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+        "Current unlock gate: Reschedule approved past-due backlog (preview_ready_with_blocker_warning); 0 ready, 1 waiting/warning; preview python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 1 preview-clean, 2 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
         "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24",
         "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
         "Collect experiment results: 99 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
         "1 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-14T15:12:33.837909+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-14T17:27:53.339531+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "1 executor records need platform repair before they can publish.",
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
-        "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
+        "Resolve social executor attention states: 1 failed.",
+        "Fix social executor platform failures for Facebook."
       ]
     },
     {
@@ -290,8 +304,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo unlock sequence should mirror the blocker ledger open blocker count.",
-      "expected": 0,
-      "actual": 0
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "unlock_sequence_current_step_is_preview_ready",
@@ -299,12 +313,12 @@
       "severity": "ok",
       "detail": "Promo unlock sequence should lead with the first currently actionable gate, skipping any completed evidence-only gate.",
       "expected": {
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "clear"
+        "current_step_id": "unlock-backlog-reschedule",
+        "current_gate_state": "preview_ready_with_blocker_warning"
       },
       "actual": {
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "clear"
+        "current_step_id": "unlock-backlog-reschedule",
+        "current_gate_state": "preview_ready_with_blocker_warning"
       }
     },
     {
@@ -315,18 +329,18 @@
       "expected": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 0,
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "clear",
-        "open_blocker_count": 0
+        "blocked_or_warning_count": 1,
+        "current_step_id": "unlock-backlog-reschedule",
+        "current_gate_state": "preview_ready_with_blocker_warning",
+        "open_blocker_count": 2
       },
       "actual": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 0,
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "clear",
-        "open_blocker_count": 0
+        "blocked_or_warning_count": 1,
+        "current_step_id": "unlock-backlog-reschedule",
+        "current_gate_state": "preview_ready_with_blocker_warning",
+        "open_blocker_count": 2
       }
     },
     {
@@ -337,15 +351,17 @@
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
         "Next operational action: Verify automatic Analog Myth proof export — python3 scripts/refresh_promo_admin.py",
-        "Current unlock gate: Approve checked scheduled rows (clear); 0 ready, 0 waiting/warning; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+        "Current unlock gate: Reschedule approved past-due backlog (preview_ready_with_blocker_warning); 0 ready, 1 waiting/warning; preview python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 1 preview-clean, 2 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
         "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24",
         "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
         "Collect experiment results: 99 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
         "1 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-14T15:12:33.837909+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-14T17:27:53.339531+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "1 executor records need platform repair before they can publish.",
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
-        "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
+        "Resolve social executor attention states: 1 failed.",
+        "Fix social executor platform failures for Facebook."
       ]
     },
     {

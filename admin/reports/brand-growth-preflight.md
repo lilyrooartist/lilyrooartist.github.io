@@ -1,33 +1,35 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-13T15:13:00.312604Z
+Generated: 2026-07-13T17:28:14.965015Z
 
 ## Summary
-- Status: **ready**
+- Status: **needs_attention**
 - Next window: **2026-07-13** at `2026-07-13T18:06:00Z`
-- Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-13T18:06:00Z`, due **3**, satisfied **3**, would post **2**, posted **1**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-13T15:12:53.677724Z`, requested `2026-07-13T15:12:53.097440Z`, due **1**, would post **0**, posted **1**, blocked **0**
-- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **3 / 3 checked ok**
-- Redirect targets: **3 / 3 checked**, **3 ok**, **0 warning**, **0 blocking failed**
+- Expected posts: **2**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-13T18:06:00Z`, due **3**, satisfied **1**, would post **1**, posted **1**, blocked **1**
+- Current scheduler snapshot: checked `2026-07-13T17:28:08.727167Z`, requested `2026-07-13T17:28:08.367646Z`, due **2**, would post **0**, posted **1**, blocked **1**
+- Link checks: **3 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **2 / 2 checked ok**
+- Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
 - Current window proof due: `2026-07-13T18:06:00Z`
 - Current window measurement due: `2026-07-14T18:05:00Z`
 
 ## Expected Posts
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube at `2026-07-13T10:15:00-04:00`
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook at `2026-07-13T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-01-X` X at `2026-07-13T14:05:00-04:00`
 
+## Missing From Dry Run
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+
+## Blocked Rows
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+
 ## Link Checks
-- **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE Hear the song` 200 text/html
 - **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK clip_url` 200 video/mp4
 - **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Hear the song` 200 text/html
 - **ok** `FP-GROWTH-RESET-VOICE-01-X Enter the album room` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE Hear the song target spotify` 200 text/html; charset=utf-8
 - **ok** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Hear the song target spotify` 200 text/html; charset=utf-8
 - **ok** `FP-GROWTH-RESET-VOICE-01-X Enter the album room target album` 200 text/html
 

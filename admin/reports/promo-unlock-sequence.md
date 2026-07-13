@@ -1,14 +1,14 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-13T15:13:01.612084Z
+Generated: 2026-07-13T17:28:15.888329Z
 
 ## Summary
 - Steps: **5**
 - Ready for human review: **0**
-- Blocked or warning: **0**
-- Projected resolution units across sequence: **0**
-- Current step: `unlock-checked-scheduled-approval` (`clear`)
-- Open blockers still tracked: **0**
+- Blocked or warning: **1**
+- Projected resolution units across sequence: **1**
+- Current step: `unlock-backlog-reschedule` (`preview_ready_with_blocker_warning`)
+- Open blockers still tracked: **2**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
@@ -28,11 +28,12 @@ Generated: 2026-07-13T15:13:01.612084Z
    - Completion evidence: data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.
    - Guardrail: Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.
 4. **Reschedule approved past-due backlog** - `unlock-backlog-reschedule`
-   - State: `clear`; owner: `tod`
-   - Reason: No action is needed for this gate.
+   - State: `preview_ready_with_blocker_warning`; owner: `external_platform`
+   - Reason: Preview ran, but the output still names a known blocker.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
    - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
-   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
+   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 5. **Optional: fill private metric worksheet** - `unlock-manual-metrics`
    - State: `optional_input`; owner: `tod`
    - Reason: Private analytics are optional measurement inputs, not blockers for automated promotion.
