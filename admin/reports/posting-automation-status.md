@@ -1,14 +1,14 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-12T19:33:15.446347Z
+Generated: 2026-07-13T04:02:53.215167Z
 
 ## Summary
 - Status: **ready_active_campaign**
 - Active campaign ready: **True**
-- Lanes ready: **7 / 10**
+- Lanes ready: **6 / 10**
 - Blocked lanes: **0**
 - Deferred optional lanes: **3**
-- Needs attention: **0**
+- Needs attention: **1**
 - Story posts tracked: **6**
 - Help-needed items: **0**
 - Proof refresh: **ready** at `2026-07-13T18:20:00Z` (14 min)
@@ -20,14 +20,15 @@ Generated: 2026-07-12T19:33:15.446347Z
   - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE at 2026-07-13T10:15:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
   - Next: Automatic proof/export is scheduled at 2026-07-13T18:20:00Z; verify the active posts in Published_Log after that run.
-- **Scheduled refresh workflow** - `ready`
+- **Scheduled refresh workflow** - `needs_attention`
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29206012822
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29222912952
+  - Next: Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window.
 - **Published URL export** - `ready`
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-13T18:20:00Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-12T19:33:13.512912Z
+  - Detail: 19 refresh commands captured at 2026-07-13T04:02:51.182634Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0

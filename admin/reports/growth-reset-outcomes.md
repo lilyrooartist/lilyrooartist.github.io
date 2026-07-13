@@ -1,7 +1,7 @@
 # Lily Roo Growth Reset Outcomes
 
-Generated: 2026-07-12T19:33:17.475541Z
-Status: **scheduled**
+Generated: 2026-07-13T04:02:54.535049Z
+Status: **baseline**
 
 ## Scorecard
 - Native video plays: **0 / 5000**
