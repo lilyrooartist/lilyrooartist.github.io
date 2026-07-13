@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-13T17:56:02.888524Z",
+  "updated_at": "2026-07-13T19:50:19.259877Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,8 +8,8 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 63,
-    "current_execution_count": 48,
+    "execution_count": 64,
+    "current_execution_count": 49,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
@@ -19,12 +19,25 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-13T17:45:51.569Z",
+        "updated_at": "2026-07-13T19:45:11.705Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
         "next_action": "",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-VOICE-01-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-13T18:15:52.627Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2076732356363448431",
+        "external_id": "2076732356363448431",
+        "next_action": "",
+        "error_summary": ""
       },
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
@@ -640,6 +653,19 @@
     ],
     "posted": [
       {
+        "post_id": "FP-GROWTH-RESET-VOICE-01-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-13T18:15:52.627Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2076732356363448431",
+        "external_id": "2076732356363448431",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
         "status": "posted",
@@ -1252,7 +1278,7 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 47,
+    "posted_count": 48,
     "draft_uploaded_count": 0,
     "attention_count": 1,
     "approval_needed_count": 0,
@@ -1260,14 +1286,27 @@
     "manual_handoff_needed_count": 0,
     "status_counts": {
       "failed": 1,
-      "posted": 47
+      "posted": 48
     },
     "platform_counts": {
       "Facebook": 22,
-      "X": 20,
+      "X": 21,
       "YouTube": 6
     },
     "latest_posted": [
+      {
+        "post_id": "FP-GROWTH-RESET-VOICE-01-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-13T18:15:52.627Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2076732356363448431",
+        "external_id": "2076732356363448431",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
@@ -1319,19 +1358,6 @@
         "external_id": "903693509504290_122121496545249470",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-BRAND-AM-07-SLOW-WALK-X",
-        "platform": "X",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-10T14:15:30.211Z",
-        "source": "cron",
-        "post_url": "https://x.com/i/web/status/2075584699003740283",
-        "external_id": "2075584699003740283",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
@@ -1343,7 +1369,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-13T17:45:51.569Z",
+        "updated_at": "2026-07-13T19:45:11.705Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -1359,7 +1385,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-13T17:45:51.569Z",
+        "updated_at": "2026-07-13T19:45:11.705Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -1370,10 +1396,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 63
+    "execution_count": 64
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-13T17:56:02.933579Z",
+  "reconciled_at": "2026-07-13T19:50:19.306546Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

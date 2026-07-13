@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-13T17:56:12.896851Z
+Generated: 2026-07-13T19:50:29.279302Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -10,14 +10,14 @@ Generated: 2026-07-13T17:56:12.896851Z
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **31**
-- Posted or measured rows: **17**
+- Posted or measured rows: **18**
 - Ready for result capture: **16**
 - First-party clicks: **5** across **2** post(s)
-- Click snapshot: `2026-07-13T17:56:09.459071Z` (covers current due posts)
-- Next post at: `2026-07-13T14:05:00-04:00`
+- Click snapshot: `2026-07-13T19:50:25.757077Z` (covers current due posts)
+- Next post at: `2026-07-15T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.15`
-- Hours until proof due: `0.16`
+- Hours until next post: `42.41`
+- Hours until proof due: `-1.74`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25,7 +25,7 @@ Generated: 2026-07-13T17:56:12.896851Z
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **16**
-- Waiting measurement rows: **1**
+- Waiting measurement rows: **2**
 - Future scheduled rows: **31**
 - Next learning due at: `2026-07-14T14:15:53.805000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
@@ -38,8 +38,9 @@ Generated: 2026-07-13T17:56:12.896851Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` (YouTube): Slow Walk Lyric Punch Line - Waiting for first useful result check
-  - `FP-GROWTH-RESET-VOICE-01-X` (X): Voice 01 - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-01-X` (X): Voice 01 - Waiting for first useful result check
   - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` (YouTube): Slow Walk Relatable Situation - Next queued learning input
+  - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` (Facebook): Slow Walk Relatable Situation - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

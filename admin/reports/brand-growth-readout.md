@@ -1,20 +1,20 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-13T17:56:12.376394Z
+Generated: 2026-07-13T19:50:28.794630Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
 - Visible in future queue: **31**
-- Posted or measured rows: **17**
+- Posted or measured rows: **18**
 - Measured rows: **0**
 - Ready for metric capture: **16**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **5** across **2** post(s); last click `2026-07-13T14:15:55.357Z`
 - Click tracking links: **ready** (31 / 31 future rows; 31 / 31 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 1, posted_waiting_measurement_window: 1, ready_for_metric_capture: 16, scheduled_future: 30**
-- Next scheduled: `FP-GROWTH-RESET-VOICE-01-X` at `2026-07-13T14:05:00-04:00`
+- Status counts: **execution_attention: 1, posted_waiting_measurement_window: 2, ready_for_metric_capture: 16, scheduled_future: 29**
+- Next scheduled: `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` at `2026-07-15T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -31,7 +31,7 @@ Generated: 2026-07-13T17:56:12.376394Z
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Waiting posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE`
+- Waiting posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-VOICE-01-X`
 - Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
@@ -200,8 +200,9 @@ Generated: 2026-07-13T17:56:12.376394Z
   - Next: Wait until 2026-07-14T14:15:53.805000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **execution_attention**
   - Next: Inspect executor state for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
-- `FP-GROWTH-RESET-VOICE-01-X` X 2026-07-13T14:05:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-VOICE-01-X` X 2026-07-13T14:05:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://x.com/i/web/status/2076732356363448431
+  - Next: Wait until 2026-07-14T18:15:52.627000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-15T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **scheduled_future**

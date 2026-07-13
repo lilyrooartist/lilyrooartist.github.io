@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T17:56:11.614905Z",
+  "generated_at": "2026-07-13T19:50:28.045720Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -44,12 +44,12 @@
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 0,
+    "active_campaign_proof_export_added_last_run": 1,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
-    "posted_count": 47,
+    "posted_count": 48,
     "attention_count": 1,
     "platform_fix_needed_count": 1,
     "story_post_count": 6,
@@ -81,34 +81,34 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29272378887",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29279964323",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-13T18:20:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-13T18:20:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-13T17:56:09.468990Z",
+      "detail": "19 refresh commands captured at 2026-07-13T19:50:25.767669Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=1 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=2 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=47 attention=1 platform_fix_needed=1",
+      "detail": "posted=48 attention=1 platform_fix_needed=1",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
