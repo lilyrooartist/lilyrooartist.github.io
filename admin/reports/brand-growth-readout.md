@@ -1,22 +1,22 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-13T09:49:29.220388Z
+Generated: 2026-07-13T15:13:00.227040Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
 - Visible in future queue: **32**
-- Posted or measured rows: **16**
+- Posted or measured rows: **17**
 - Measured rows: **0**
 - Ready for metric capture: **16**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
-- Campaign clicks: **3** across **1** post(s); last click `2026-07-10T15:30:43.299Z`
+- Campaign clicks: **5** across **2** post(s); last click `2026-07-13T14:15:55.357Z`
 - Click tracking links: **ready** (32 / 32 future rows; 32 / 32 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **ready_for_metric_capture: 16, scheduled_future: 32**
-- Next scheduled: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` at `2026-07-13T10:15:00-04:00`
+- Status counts: **posted_waiting_measurement_window: 1, ready_for_metric_capture: 16, scheduled_future: 31**
+- Next scheduled: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` at `2026-07-13T11:20:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
-- Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
+- Next scheduled post proof: `2026-07-15` due `2026-07-15T15:21:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
 - YouTube total views: **489**
 - Spotify monthly listeners: **1**
@@ -24,14 +24,15 @@ Generated: 2026-07-13T09:49:29.220388Z
 ## Learning Now
 - Status: **click_response_ready**
 - Headline: **First-party click response is ready to review**
-- First-party clicks: **3** across **1** post(s)
+- First-party clicks: **5** across **2** post(s)
 - Public posts ready for learning: **16**
 - Next learning action: Review the tracks, platforms, and destinations with click response before changing the next copy wave.
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py`
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
+- Waiting posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE`
+- Next proof posts: `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
 
 ## Commands
 - Refresh state: `python3 scripts/refresh_promo_admin.py`
@@ -52,7 +53,7 @@ Generated: 2026-07-13T09:49:29.220388Z
 
 ## Next Actions
 - Review the tracks, platforms, and destinations with click response before changing the next copy wave.
-- After `2026-07-13T18:06:00Z`, capture executor proof for FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X.
+- After `2026-07-15T15:21:00Z`, capture executor proof for FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK.
 - Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting.
 
 ## Post-Slot Watch
@@ -88,8 +89,8 @@ Generated: 2026-07-13T09:49:29.220388Z
   - Next: Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
-- `2026-07-13` **scheduled_future** proof due `2026-07-13T18:06:00Z` for `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-07-13` **posted_waiting_measurement** proof due `2026-07-13T18:06:00Z` for `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
+  - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-15` **scheduled_future** proof due `2026-07-15T15:21:00Z` for `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -194,8 +195,9 @@ Generated: 2026-07-13T09:49:29.220388Z
   - URL: https://www.facebook.com/lilyrooartist/posts/122121593013249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
   - Next: Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-13T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-13T10:15:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://youtu.be/WQs8Xk9Mm8o
+  - Next: Wait until 2026-07-14T14:15:53.805000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-01-X` X 2026-07-13T14:05:00-04:00 - **scheduled_future**

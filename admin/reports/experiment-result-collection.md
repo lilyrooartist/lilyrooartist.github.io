@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-13T09:49:28.423343Z
+Generated: 2026-07-13T15:12:59.104043Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **18**
-- Missing published log posts: **15**
-- Pending result fields: **96**
+- Published experiment posts: **19**
+- Missing published log posts: **14**
+- Pending result fields: **99**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -25,7 +25,6 @@ Generated: 2026-07-13T09:49:28.423343Z
 - Fill only metrics visible in the platform analytics surface.
 
 ## Missing Published Log Rows
-- `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
@@ -67,4 +66,4 @@ Generated: 2026-07-13T09:49:28.423343Z
 - `FP-LAUNCH-ANALOG-MYTH-FACEBOOK` Facebook `saves` from row 39: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record saves.
 - `FP-LAUNCH-ANALOG-MYTH-FACEBOOK` Facebook `subs_delta` from row 39: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record subs_delta.
 - `FP-LAUNCH-ANALOG-MYTH-X-EVENING` X `views` from row 47: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record views.
-- ...and 71 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 74 more rows in `data/experiment_result_entry_template.csv`.

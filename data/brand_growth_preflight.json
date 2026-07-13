@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-13T09:49:29.308205Z",
+  "generated_at": "2026-07-13T15:13:00.312604Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/f70a02625dfb4d9a78c713e1f2ab4ba7601d6832/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/4a6c6cea085cc7aef3dee63f841634f4461e2b08/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -23,20 +23,20 @@
     "scheduler_fallback_reason": "",
     "scheduler_simulated_at": "2026-07-13T18:06:00Z",
     "scheduler_simulated_due_count": 3,
-    "scheduler_simulated_would_post_count": 3,
-    "scheduler_simulated_posted_count": 0,
+    "scheduler_simulated_would_post_count": 2,
+    "scheduler_simulated_posted_count": 1,
     "scheduler_simulated_satisfied_count": 3,
     "scheduler_simulated_blocked_count": 0,
     "scheduler_due_count": 3,
-    "scheduler_would_post_count": 3,
-    "scheduler_posted_count": 0,
+    "scheduler_would_post_count": 2,
+    "scheduler_posted_count": 1,
     "scheduler_satisfied_count": 3,
     "scheduler_blocked_count": 0,
-    "current_scheduler_checked_at": "2026-07-13T09:49:23.108126Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-13T09:49:22.801480Z",
-    "current_scheduler_due_count": 0,
+    "current_scheduler_checked_at": "2026-07-13T15:12:53.677724Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-13T15:12:53.097440Z",
+    "current_scheduler_due_count": 1,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 0,
+    "current_scheduler_posted_count": 1,
     "current_scheduler_blocked_count": 0,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -57,36 +57,26 @@
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-13T18:06:00Z",
     "next_measurement_due_at": "2026-07-14T18:05:00Z",
-    "readout_next_proof_due_at": "2026-07-13T18:06:00Z",
+    "readout_next_proof_due_at": "2026-07-15T15:21:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
     "due_count": 3,
     "result_count": 3,
-    "would_post_count": 3,
-    "posted_count": 0,
+    "would_post_count": 2,
+    "posted_count": 1,
     "blocked_count": 0,
     "status_counts": {
-      "would_post": 3
+      "posted": 1,
+      "would_post": 2
     },
     "platform_counts": {
       "Facebook": 1,
-      "X": 1,
-      "YouTube": 1
+      "Unknown": 1,
+      "X": 1
     },
     "would_post": [
-      {
-        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
-        "platform": "YouTube",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "video",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
         "platform": "Facebook",
@@ -110,7 +100,19 @@
         "error_summary": ""
       }
     ],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": []
   },
   "link_checks": [

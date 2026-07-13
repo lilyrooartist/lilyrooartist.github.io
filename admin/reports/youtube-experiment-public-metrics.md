@@ -1,10 +1,10 @@
 # YouTube Experiment Public Metrics - Lily Roo
 
-Generated: 2026-07-13T09:49:28Z
+Generated: 2026-07-13T15:12:59Z
 
 ## Summary
 - Status: **blocked**
-- YouTube template rows: **0**
+- YouTube template rows: **1**
 - Importable posts: **0**
 - Importable fields: **0**
 - Output CSV: `data/youtube_experiment_public_metrics.csv`

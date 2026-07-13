@@ -1,34 +1,50 @@
 {
   "ok": true,
-  "updated_at": "2026-07-13T09:49:23.108126Z",
+  "updated_at": "2026-07-13T15:12:53.677724Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-13T09:49:22.801480Z",
-  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/f70a02625dfb4d9a78c713e1f2ab4ba7601d6832/admin/future-posts.json",
-  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/f70a02625dfb4d9a78c713e1f2ab4ba7601d6832/admin/future-posts.json",
-  "queue_source": "commit_queue_url",
-  "fallback_reason": "",
+  "requested_scheduled_time": "2026-07-13T15:12:53.097440Z",
+  "queue_url": "",
+  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/4a6c6cea085cc7aef3dee63f841634f4461e2b08/admin/future-posts.json",
+  "queue_source": "live_queue_fallback",
+  "fallback_reason": "Commit queue probe returned HTTP 500: HTTP 500: Internal Server Error",
   "dry_run": true,
-  "checked_at": "2026-07-13T09:49:22.801Z",
+  "checked_at": "2026-07-13T15:12:53.097Z",
   "summary": {
-    "due_count": 0,
-    "result_count": 0,
+    "due_count": 1,
+    "result_count": 1,
     "would_post_count": 0,
-    "posted_count": 0,
+    "posted_count": 1,
     "blocked_count": 0,
-    "status_counts": {},
-    "platform_counts": {},
+    "status_counts": {
+      "posted": 1
+    },
+    "platform_counts": {
+      "Unknown": 1
+    },
     "would_post": [],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": []
   },
   "payload": {
     "ok": true,
-    "due_count": 0,
-    "result_count": 0
+    "due_count": 1,
+    "result_count": 1
   },
   "action_needed": ""
 }

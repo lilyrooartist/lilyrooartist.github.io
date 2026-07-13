@@ -1,29 +1,41 @@
 {
   "ok": true,
-  "updated_at": "2026-07-13T09:49:24.280752Z",
+  "updated_at": "2026-07-13T15:12:57.276832Z",
   "source": "lilyroo-social-executor-clicks",
   "url": "https://www.lilyroo.com/api/social/clicks",
   "http_status": 200,
   "error": null,
   "retention_days": 180,
   "summary": {
-    "click_count": 3,
-    "post_count": 1,
+    "click_count": 5,
+    "post_count": 2,
     "first_click_at": "2026-07-10T15:30:43.264Z",
-    "last_click_at": "2026-07-10T15:30:43.299Z",
+    "last_click_at": "2026-07-13T14:15:55.357Z",
     "by_post_id": [
       {
         "key": "fp-brand-am-07-slow-walk-facebook",
         "count": 3
+      },
+      {
+        "key": "fp-growth-reset-01-slow-walk-lyric-punch-line-youtube",
+        "count": 2
       }
     ],
     "by_platform": [
       {
         "key": "facebook",
         "count": 3
+      },
+      {
+        "key": "youtube",
+        "count": 2
       }
     ],
     "by_destination": [
+      {
+        "key": "spotify",
+        "count": 2
+      },
       {
         "key": "album",
         "count": 1
@@ -41,16 +53,48 @@
       {
         "key": "track-moments",
         "count": 3
+      },
+      {
+        "key": "video-reset",
+        "count": 2
       }
     ],
     "by_track": [
       {
         "key": "slow-walk",
-        "count": 3
+        "count": 5
       }
     ]
   },
   "recent_clicks": [
+    {
+      "type": "brand_campaign_click",
+      "post_id": "fp-growth-reset-01-slow-walk-lyric-punch-line-youtube",
+      "platform": "youtube",
+      "wave": "video-reset",
+      "track": "07",
+      "track_slug": "slow-walk",
+      "destination": "spotify",
+      "target_url": "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL?utm_source=youtube&utm_medium=social&utm_campaign=analog_myth_growth_reset&utm_content=fp-growth-reset-01-slow-walk-lyric-punch-line-youtube&utm_wave=video-reset&utm_term=track_07_slow-walk",
+      "page_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-01-slow-walk-lyric-punch-line-youtube&to=spotify&utm_wave=video-reset&utm_term=slow-walk-lyric-punch-line",
+      "referer_host": "www.lilyroo.com",
+      "user_agent_family": "desktop",
+      "recorded_at": "2026-07-13T14:15:55.357Z"
+    },
+    {
+      "type": "brand_campaign_click",
+      "post_id": "fp-growth-reset-01-slow-walk-lyric-punch-line-youtube",
+      "platform": "youtube",
+      "wave": "video-reset",
+      "track": "07",
+      "track_slug": "slow-walk",
+      "destination": "spotify",
+      "target_url": "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL?utm_source=youtube&utm_medium=social&utm_campaign=analog_myth_growth_reset&utm_content=fp-growth-reset-01-slow-walk-lyric-punch-line-youtube&utm_wave=video-reset&utm_term=track_07_slow-walk",
+      "page_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-01-slow-walk-lyric-punch-line-youtube&to=spotify&utm_wave=video-reset&utm_term=slow-walk-lyric-punch-line",
+      "referer_host": "www.lilyroo.com",
+      "user_agent_family": "desktop",
+      "recorded_at": "2026-07-13T14:15:54.729Z"
+    },
     {
       "type": "brand_campaign_click",
       "post_id": "fp-brand-am-07-slow-walk-facebook",
