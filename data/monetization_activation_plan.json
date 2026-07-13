@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T17:28:15.731392Z",
+  "generated_at": "2026-07-13T17:56:13.196831Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -63,14 +63,14 @@
       }
     },
     {
-      "label": "Current operations next action: Watch active Analog Myth proof window",
+      "label": "Current operations next action: Fix Facebook executor",
       "phase": "Operations packet",
-      "status": "ready",
-      "detail": "The active Analog Myth proof window is coming up within 48 hours.",
-      "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+      "status": "needs_fix",
+      "detail": "Platform executor needs repair before queued auto posts can publish.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "after_review_command": "",
       "context": {
-        "kind": "brand_growth_proof",
+        "kind": "platform_fix",
         "urgency": "high"
       }
     }

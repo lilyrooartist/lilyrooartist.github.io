@@ -1,6 +1,6 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-13T17:28:15.731392Z
+Generated: 2026-07-13T17:56:13.196831Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
@@ -21,10 +21,10 @@ Generated: 2026-07-13T17:28:15.731392Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
-3. **Current operations next action: Watch active Analog Myth proof window**
-   - Phase: `Operations packet`; status: `ready`
-   - Detail: The active Analog Myth proof window is coming up within 48 hours.
-   - Preview/check: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+3. **Current operations next action: Fix Facebook executor**
+   - Phase: `Operations packet`; status: `needs_fix`
+   - Detail: Platform executor needs repair before queued auto posts can publish.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

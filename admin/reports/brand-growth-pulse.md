@@ -1,23 +1,23 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-13T17:28:15.402479Z
+Generated: 2026-07-13T17:56:12.896851Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
 - Primary action: **Refresh the next posting window**
 - Why: The next Analog Myth scheduler check is not clean.
 - Command: `python3 scripts/build_brand_growth_preflight.py`
-- Active campaign ready: **True**
+- Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **31**
 - Posted or measured rows: **17**
 - Ready for result capture: **16**
 - First-party clicks: **5** across **2** post(s)
-- Click snapshot: `2026-07-13T17:28:10.411854Z` (covers current due posts)
+- Click snapshot: `2026-07-13T17:56:09.459071Z` (covers current due posts)
 - Next post at: `2026-07-13T14:05:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.61`
-- Hours until proof due: `0.63`
+- Hours until next post: `0.15`
+- Hours until proof due: `0.16`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
