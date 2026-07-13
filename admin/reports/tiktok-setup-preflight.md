@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-07-13T19:51:47.309391Z
+Generated: 2026-07-13T21:28:35.903361Z
 
 ## Summary
 - Status: **blocked**
