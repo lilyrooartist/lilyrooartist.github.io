@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T14:15:05.948331Z",
+  "generated_at": "2026-07-14T14:16:01.821039Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -29,15 +29,15 @@
     },
     "status_counts": {
       "execution_attention": 1,
-      "posted_waiting_measurement_window": 2,
-      "ready_for_metric_capture": 16,
+      "posted_waiting_measurement_window": 1,
+      "ready_for_metric_capture": 17,
       "scheduled_future": 29
     },
     "approved_auto_rows": 48,
     "future_queue_visible_rows": 30,
     "posted_or_measured_rows": 18,
     "measured_rows": 0,
-    "ready_for_metric_capture_rows": 16,
+    "ready_for_metric_capture_rows": 17,
     "public_visibility_status": "verified",
     "public_visibility_checked_post_count": 8,
     "public_visibility_ok_count": 8,
@@ -55,7 +55,7 @@
     "campaign_click_tracking_url_count": 30,
     "campaign_click_tracking_expected_url_count": 30,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 17,
+    "attention_rows": 18,
     "next_scheduled_post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
     "next_scheduled_at": "2026-07-15T10:15:00-04:00",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
@@ -410,12 +410,15 @@
         "measurement_due_at": "2026-07-14T18:05:00Z",
         "status_counts": {
           "execution_attention": 1,
-          "posted_waiting_measurement_window": 2
+          "posted_waiting_measurement_window": 1,
+          "ready_for_metric_capture": 1
         },
         "rows_needing_proof": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK"
         ],
-        "rows_ready_for_metrics": [],
+        "rows_ready_for_metrics": [
+          "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE"
+        ],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
@@ -1183,8 +1186,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "posted_waiting_measurement_window",
-      "next_action": "Wait until 2026-07-14T14:15:53.805000+00:00 before capturing metrics.",
+      "status": "ready_for_metric_capture",
+      "next_action": "Use first-party click tracking for this post now; native YouTube result counts can join after analytics credentials are connected (GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN).",
       "visible_in_future_queue": false
     },
     {
@@ -1199,7 +1202,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-15T14:00:11.738000+00:00",
+      "measurement_due_at": "2026-07-15T14:15:11.697000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1879,7 +1882,7 @@
     "click_status": "ready",
     "click_count": 5,
     "click_post_count": 2,
-    "ready_for_learning_count": 16,
+    "ready_for_learning_count": 17,
     "native_metric_missing_secret_names": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -1898,7 +1901,6 @@
       "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
     ],
     "waiting_post_ids": [
-      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
       "FP-GROWTH-RESET-VOICE-01-X"
     ],
     "next_proof_post_ids": [
