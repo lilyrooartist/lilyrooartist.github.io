@@ -1,9 +1,8 @@
 name: Promo admin refresh status settle
 
 on:
-  workflow_run:
-    workflows: ["Promo admin refresh"]
-    types: [completed]
+  # The primary refresh is the only automatic writer. Run this manually only
+  # when a maintainer needs to regenerate its status snapshot.
   workflow_dispatch:
 
 permissions:
@@ -17,7 +16,6 @@ concurrency:
 
 jobs:
   settle:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:

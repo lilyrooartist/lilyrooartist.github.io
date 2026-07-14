@@ -4433,10 +4433,7 @@ def validate_generated_outputs(failures):
     if PROMO_REFRESH_SETTLE_WORKFLOW.exists():
         settle_text = PROMO_REFRESH_SETTLE_WORKFLOW.read_text(encoding="utf-8")
         required_bits = [
-            "workflow_run:",
-            "workflows: [\"Promo admin refresh\"]",
-            "types: [completed]",
-            "github.event.workflow_run.conclusion == 'success'",
+            "workflow_dispatch:",
             "python3 scripts/refresh_promo_admin.py",
             "python3 scripts/validate_content_system.py",
             "contents: write",

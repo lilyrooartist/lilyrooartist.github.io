@@ -98,6 +98,17 @@ jobs:
           else
             git add admin data
             git commit -m "Refresh promo admin snapshots"
-            git pull --rebase origin main
-            git push
+            set +e
+            push_output="$(git push origin HEAD:main 2>&1)"
+            push_status=$?
+            set -e
+            printf '%s\n' "$push_output"
+            if [ "$push_status" -ne 0 ]; then
+              if printf '%s\n' "$push_output" | grep -Eqi "fetch first|non-fast-forward"; then
+                echo "::warning::A newer refresh already published dashboard snapshots; this run was safely superseded."
+              else
+                echo "::error::Could not publish refreshed admin data."
+                exit "$push_status"
+              fi
+            fi
           fi
