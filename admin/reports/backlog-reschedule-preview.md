@@ -1,13 +1,13 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-13T21:28:34.928924+00:00
+Generated: 2026-07-14T03:35:31.593331+00:00
 
 ## Summary
 - Approved backlog rows: **1**
 - Rows with known blockers: **1**
 - Clear to apply without override: **0**
 - Manual handoff rows excluded from auto-reschedule: **0**
-- Start at: **2026-07-14T10:00:00+00:00**
+- Start at: **2026-07-15T10:00:00+00:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
 - Normal apply gate: **blocked_until_clearance_steps_complete**
@@ -15,7 +15,7 @@ Generated: 2026-07-13T21:28:34.928924+00:00
 ## Proposed Reschedule
 - **Facebook - Slow Walk** (`FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`)
   - Current: `2026-07-13T11:20:00-04:00`
-  - Proposed: `2026-07-14T10:00:00+00:00`
+  - Proposed: `2026-07-15T10:00:00+00:00`
   - Blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 
@@ -63,12 +63,12 @@ Generated: 2026-07-13T21:28:34.928924+00:00
 - A reschedule does not publish, approve, or repair platform credentials by itself.
 
 ## Commands
-- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
+- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-15T10:00:00+00:00' --spacing-hours 24`
 - Partial clear preview: `none`
 - Partial clear apply: `none`
 - Safe apply: none until blockers clear
-- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-15T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-15T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
 
 ## Guardrails
 - This preview does not write schedule changes, approve posts, publish posts, or push secrets.

@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-07-13T21:28:36.394453Z
+Generated: 2026-07-14T03:35:32.948555Z
 
 ## Summary
 - Worksheet rows: **5**
@@ -25,8 +25,8 @@ Generated: 2026-07-13T21:28:36.394453Z
 - **backlog-reschedule** (`preview_ok_with_warning`)
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 1 | - FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-14T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | Dry run only. Re-run with --apply to write the schedule.
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-15T10:00:00+00:00' --spacing-hours 24`
+  - Output: Rows selected: 1 | - FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-15T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | Dry run only. Re-run with --apply to write the schedule.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`
