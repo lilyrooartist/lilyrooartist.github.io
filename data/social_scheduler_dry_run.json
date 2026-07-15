@@ -1,46 +1,32 @@
 {
   "ok": true,
-  "updated_at": "2026-07-15T17:19:10.833038Z",
+  "updated_at": "2026-07-15T19:37:29.199635Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-15T17:19:10.665049Z",
-  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/93c2b94c887f3f99cfc0c9028af91f70a9bd0a3f/admin/future-posts.json",
-  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/93c2b94c887f3f99cfc0c9028af91f70a9bd0a3f/admin/future-posts.json",
+  "requested_scheduled_time": "2026-07-15T19:37:28.975025Z",
+  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/43b646466b2a801d874d595a68c82dbd424666d4/admin/future-posts.json",
+  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/43b646466b2a801d874d595a68c82dbd424666d4/admin/future-posts.json",
   "queue_source": "commit_queue_url",
   "fallback_reason": "",
   "dry_run": true,
-  "checked_at": "2026-07-15T17:19:10.665Z",
+  "checked_at": "2026-07-15T19:37:28.975Z",
   "summary": {
-    "due_count": 3,
-    "result_count": 3,
+    "due_count": 2,
+    "result_count": 2,
     "would_post_count": 0,
-    "posted_count": 1,
+    "posted_count": 0,
     "blocked_count": 2,
     "status_counts": {
-      "failed": 2,
-      "posted": 1
+      "failed": 2
     },
     "platform_counts": {
-      "Facebook": 2,
-      "Unknown": 1
+      "Facebook": 2
     },
     "would_post": [],
-    "posted": [
-      {
-        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
-        "platform": "",
-        "status": "posted",
-        "reason": "",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      }
-    ],
+    "posted": [],
     "blocked": [
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -49,7 +35,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-15T17:19:10.792Z",
+        "updated_at": "2026-07-15T19:37:29.171Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -60,7 +46,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-15T17:19:10.804Z",
+        "updated_at": "2026-07-15T19:37:29.176Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       }
@@ -68,8 +54,8 @@
   },
   "payload": {
     "ok": true,
-    "due_count": 3,
-    "result_count": 3
+    "due_count": 2,
+    "result_count": 2
   },
   "action_needed": ""
 }

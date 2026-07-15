@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-15T17:19:15.543684Z",
+  "generated_at": "2026-07-15T19:37:34.414979Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/93c2b94c887f3f99cfc0c9028af91f70a9bd0a3f/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/43b646466b2a801d874d595a68c82dbd424666d4/admin/future-posts.json"
   },
   "summary": {
     "status": "needs_attention",
@@ -22,21 +22,21 @@
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
     "scheduler_simulated_at": "2026-07-17T18:06:00Z",
-    "scheduler_simulated_due_count": 6,
+    "scheduler_simulated_due_count": 5,
     "scheduler_simulated_would_post_count": 3,
-    "scheduler_simulated_posted_count": 1,
+    "scheduler_simulated_posted_count": 0,
     "scheduler_simulated_satisfied_count": 3,
     "scheduler_simulated_blocked_count": 2,
-    "scheduler_due_count": 6,
+    "scheduler_due_count": 5,
     "scheduler_would_post_count": 3,
-    "scheduler_posted_count": 1,
+    "scheduler_posted_count": 0,
     "scheduler_satisfied_count": 3,
     "scheduler_blocked_count": 2,
-    "current_scheduler_checked_at": "2026-07-15T17:19:10.833038Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-15T17:19:10.665049Z",
-    "current_scheduler_due_count": 3,
+    "current_scheduler_checked_at": "2026-07-15T19:37:29.199635Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-15T19:37:28.975025Z",
+    "current_scheduler_due_count": 2,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 1,
+    "current_scheduler_posted_count": 0,
     "current_scheduler_blocked_count": 2,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -65,19 +65,17 @@
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 6,
-    "result_count": 6,
+    "due_count": 5,
+    "result_count": 5,
     "would_post_count": 3,
-    "posted_count": 1,
+    "posted_count": 0,
     "blocked_count": 2,
     "status_counts": {
       "failed": 2,
-      "posted": 1,
       "would_post": 3
     },
     "platform_counts": {
       "Facebook": 3,
-      "Unknown": 1,
       "X": 1,
       "YouTube": 1
     },
@@ -116,19 +114,7 @@
         "error_summary": ""
       }
     ],
-    "posted": [
-      {
-        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
-        "platform": "",
-        "status": "posted",
-        "reason": "",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      }
-    ],
+    "posted": [],
     "blocked": [
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -137,7 +123,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-15T17:19:15.648Z",
+        "updated_at": "2026-07-15T19:37:34.516Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -148,7 +134,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-15T17:19:15.662Z",
+        "updated_at": "2026-07-15T19:37:34.522Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       }
