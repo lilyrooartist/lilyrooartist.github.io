@@ -1,84 +1,89 @@
 {
-  "generated_at": "2026-07-15T14:10:52.769211Z",
+  "generated_at": "2026-07-15T16:50:18.454084Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/bccc691e5ca898683e8ff6eaaf83fb4adb141143/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/27be80d02902cb730353ffc3c7cff82fff6be62f/admin/future-posts.json"
   },
   "summary": {
     "status": "needs_attention",
-    "next_window_date": "2026-07-15",
-    "scheduled_time": "2026-07-15T15:21:00Z",
-    "expected_post_count": 2,
+    "next_window_date": "2026-07-17",
+    "scheduled_time": "2026-07-17T18:06:00Z",
+    "expected_post_count": 3,
     "expected_post_ids": [
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+      "FP-GROWTH-RESET-VOICE-02-X"
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
-    "scheduler_simulated_at": "2026-07-15T15:21:00Z",
-    "scheduler_simulated_due_count": 3,
-    "scheduler_simulated_would_post_count": 2,
-    "scheduler_simulated_posted_count": 0,
-    "scheduler_simulated_satisfied_count": 2,
-    "scheduler_simulated_blocked_count": 1,
-    "scheduler_due_count": 3,
-    "scheduler_would_post_count": 2,
-    "scheduler_posted_count": 0,
-    "scheduler_satisfied_count": 2,
-    "scheduler_blocked_count": 1,
-    "current_scheduler_checked_at": "2026-07-15T14:10:47.808298Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-15T14:10:47.499346Z",
-    "current_scheduler_due_count": 1,
+    "scheduler_simulated_at": "2026-07-17T18:06:00Z",
+    "scheduler_simulated_due_count": 6,
+    "scheduler_simulated_would_post_count": 3,
+    "scheduler_simulated_posted_count": 1,
+    "scheduler_simulated_satisfied_count": 3,
+    "scheduler_simulated_blocked_count": 2,
+    "scheduler_due_count": 6,
+    "scheduler_would_post_count": 3,
+    "scheduler_posted_count": 1,
+    "scheduler_satisfied_count": 3,
+    "scheduler_blocked_count": 2,
+    "current_scheduler_checked_at": "2026-07-15T16:50:12.937519Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-15T16:50:12.640424Z",
+    "current_scheduler_due_count": 3,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 0,
-    "current_scheduler_blocked_count": 1,
+    "current_scheduler_posted_count": 1,
+    "current_scheduler_blocked_count": 2,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
     "blocked_ids": [
-      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK"
+      "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
     ],
-    "link_check_count": 4,
-    "link_ok_count": 4,
+    "link_check_count": 5,
+    "link_ok_count": 5,
     "link_failed_count": 0,
-    "tracking_link_check_count": 2,
-    "tracking_link_ok_count": 2,
-    "expected_tracking_link_check_count": 2,
-    "target_link_check_count": 2,
+    "tracking_link_check_count": 3,
+    "tracking_link_ok_count": 3,
+    "expected_tracking_link_check_count": 3,
+    "target_link_check_count": 3,
     "target_link_ok_count": 2,
-    "target_link_failed_count": 0,
+    "target_link_failed_count": 1,
     "target_link_warning_count": 0,
-    "target_link_blocking_failed_count": 0,
-    "expected_target_link_check_count": 2,
+    "target_link_blocking_failed_count": 1,
+    "expected_target_link_check_count": 3,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
-    "next_proof_due_at": "2026-07-15T15:21:00Z",
-    "next_measurement_due_at": "2026-07-16T15:20:00Z",
+    "next_proof_due_at": "2026-07-17T18:06:00Z",
+    "next_measurement_due_at": "2026-07-18T18:05:00Z",
     "readout_next_proof_due_at": "2026-07-13T18:06:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 3,
-    "result_count": 3,
-    "would_post_count": 2,
-    "posted_count": 0,
-    "blocked_count": 1,
+    "due_count": 6,
+    "result_count": 6,
+    "would_post_count": 3,
+    "posted_count": 1,
+    "blocked_count": 2,
     "status_counts": {
-      "failed": 1,
-      "would_post": 2
+      "failed": 2,
+      "posted": 1,
+      "would_post": 3
     },
     "platform_counts": {
-      "Facebook": 2,
+      "Facebook": 3,
+      "Unknown": 1,
+      "X": 1,
       "YouTube": 1
     },
     "would_post": [
       {
-        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
         "platform": "YouTube",
         "status": "would_post",
         "reason": "",
@@ -89,7 +94,7 @@
         "error_summary": ""
       },
       {
-        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
         "platform": "Facebook",
         "status": "would_post",
         "reason": "",
@@ -98,9 +103,32 @@
         "updated_at": "",
         "source": "",
         "error_summary": ""
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-VOICE-02-X",
+        "platform": "X",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "text",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
       }
     ],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": [
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -109,7 +137,18 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-15T14:10:52.873Z",
+        "updated_at": "2026-07-15T16:50:18.589Z",
+        "source": "dry-run",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-07-15T16:50:18.606Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       }
@@ -117,44 +156,55 @@
   },
   "link_checks": [
     {
-      "label": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE clip_url",
-      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
       "content_type": "video/mp4",
-      "content_length": "2125173",
+      "content_length": "2364616",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE Enter the album room",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
+      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE Watch the full track",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK clip_url",
-      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-relatable-situation.mp4",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
       "content_type": "video/mp4",
-      "content_length": "2125173",
+      "content_length": "2364616",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Enter the album room",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-facebook&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
+      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Watch the full track",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-facebook&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
+      "content_type": "text/html",
+      "content_length": "13930",
+      "error": "",
+      "source": "local_static_file"
+    },
+    {
+      "label": "FP-GROWTH-RESET-VOICE-02-X Watch the full track",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-02-x&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-brand-voice",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-02-x&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-brand-voice",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
@@ -163,52 +213,71 @@
   ],
   "target_checks": [
     {
-      "label": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE Enter the album room target album",
-      "url": "https://www.lilyroo.com/analog-myth.html",
+      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE Watch the full track target video",
+      "url": "https://youtu.be/nPuGjQf7lKY",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/analog-myth.html",
-      "content_type": "text/html",
-      "content_length": "18355",
+      "final_url": "https://www.youtube.com/watch?v=nPuGjQf7lKY&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
       "error": "",
-      "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
-      "destination": "album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
+      "destination": "video",
       "track": "07",
-      "post_id": "fp-growth-reset-02-slow-walk-relatable-situation-youtube"
+      "post_id": "fp-growth-reset-03-slow-walk-visual-story-youtube"
     },
     {
-      "label": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Enter the album room target album",
-      "url": "https://www.lilyroo.com/analog-myth.html",
+      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Watch the full track target video",
+      "url": "https://youtu.be/nPuGjQf7lKY",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/analog-myth.html",
-      "content_type": "text/html",
-      "content_length": "18355",
+      "final_url": "https://www.youtube.com/watch?v=nPuGjQf7lKY&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
       "error": "",
-      "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-02-slow-walk-relatable-situation-facebook&to=album&utm_wave=video-reset&utm_term=slow-walk-relatable-situation",
-      "destination": "album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
+      "destination": "video",
       "track": "07",
-      "post_id": "fp-growth-reset-02-slow-walk-relatable-situation-facebook"
+      "post_id": "fp-growth-reset-03-slow-walk-visual-story-facebook"
+    },
+    {
+      "label": "FP-GROWTH-RESET-VOICE-02-X Watch the full track target video",
+      "url": "",
+      "ok": false,
+      "status": 0,
+      "content_type": "",
+      "content_length": "",
+      "error": "missing target URL",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-02-x&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-brand-voice",
+      "destination": "video",
+      "track": "",
+      "post_id": "fp-growth-reset-voice-02-x"
     }
   ],
   "next_window_posts": [
     {
-      "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
+      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
       "platform": "YouTube",
-      "scheduled_at": "2026-07-15T10:15:00-04:00",
+      "scheduled_at": "2026-07-17T10:15:00-04:00",
       "execution_mode": "auto",
       "post_type": "video",
-      "text": "When everyone says you are behind, but you are the only one still arriving. #Shorts"
+      "text": "A quiet walk through the pressure until the pressure learns your pace. #Shorts"
     },
     {
-      "id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
       "platform": "Facebook",
-      "scheduled_at": "2026-07-15T11:20:00-04:00",
+      "scheduled_at": "2026-07-17T11:20:00-04:00",
       "execution_mode": "auto",
       "post_type": "video",
-      "text": "When everyone says you are behind, but you are the only one still arriving."
+      "text": "A quiet walk through the pressure until the pressure learns your pace."
+    },
+    {
+      "id": "FP-GROWTH-RESET-VOICE-02-X",
+      "platform": "X",
+      "scheduled_at": "2026-07-17T14:05:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "text",
+      "text": "A receipt drawer is just an archive with better timing."
     }
   ],
   "guardrails": [

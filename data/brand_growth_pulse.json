@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T14:10:53.121278Z",
+  "generated_at": "2026-07-15T16:50:19.802925Z",
   "safe_mode": true,
   "status": "posting_needs_check",
   "source": {
@@ -22,27 +22,27 @@
     "active_campaign_ready": false,
     "posting_preflight_ready": false,
     "queued_future_posts": 30,
-    "posted_or_measured_rows": 18,
+    "posted_or_measured_rows": 19,
     "ready_for_metric_capture_rows": 18,
-    "click_count": 5,
-    "click_post_count": 2,
+    "click_count": 7,
+    "click_post_count": 3,
     "clicks_by_platform": {
-      "facebook": 3,
-      "youtube": 2
+      "youtube": 4,
+      "facebook": 3
     },
     "clicks_by_destination": {
+      "album": 3,
       "spotify": 2,
-      "album": 1,
       "echo": 1,
       "video": 1
     },
-    "click_snapshot_updated_at": "2026-07-15T14:10:49.698978Z",
+    "click_snapshot_updated_at": "2026-07-15T16:50:15.302871Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
-    "next_post_at": "2026-07-15T10:15:00-04:00",
+    "next_post_at": "2026-07-17T10:15:00-04:00",
     "proof_due_at": "2026-07-13T18:06:00Z",
-    "hours_until_next_post": 0.07,
-    "hours_until_proof_due": -44.08,
+    "hours_until_next_post": 45.41,
+    "hours_until_proof_due": -46.74,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -55,8 +55,8 @@
     "learning_headline": "Click response is ready to review",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_rows": 18,
-    "waiting_measurement_rows": 0,
-    "next_learning_due_at": "2026-07-13T18:06:00Z",
+    "waiting_measurement_rows": 1,
+    "next_learning_due_at": "2026-07-16T14:15:27.715000Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
@@ -68,10 +68,10 @@
     "note": "Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_count": 18,
-    "waiting_measurement_count": 0,
+    "waiting_measurement_count": 1,
     "scheduled_future_count": 30,
-    "next_learning_due_at": "2026-07-13T18:06:00Z",
-    "click_snapshot_updated_at": "2026-07-15T14:10:49.698978Z",
+    "next_learning_due_at": "2026-07-16T14:15:27.715000Z",
+    "click_snapshot_updated_at": "2026-07-15T16:50:15.302871Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -141,26 +141,37 @@
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
         "platform": "YouTube",
         "title": "Slow Walk Relatable Situation",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement_window",
         "scheduled_at": "2026-07-15T10:15:00-04:00",
+        "measurement_due_at": "2026-07-16T14:15:27.715000+00:00",
+        "post_url": "https://youtu.be/X1LIKda1ZOI",
+        "public_visibility_ok": null,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
+        "title": "Slow Walk Visual Story",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-17T10:15:00-04:00",
         "measurement_due_at": "",
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
       },
       {
-        "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
         "platform": "Facebook",
-        "title": "Slow Walk Relatable Situation",
+        "title": "Slow Walk Visual Story",
         "status": "scheduled_future",
-        "scheduled_at": "2026-07-15T11:20:00-04:00",
+        "scheduled_at": "2026-07-17T11:20:00-04:00",
         "measurement_due_at": "",
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": -44.08
+    "hours_until_next_learning_due": 21.42
   },
   "recommendations": [
     {

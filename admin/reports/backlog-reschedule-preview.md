@@ -1,10 +1,10 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-15T14:10:49.820466+00:00
+Generated: 2026-07-15T16:50:15.467000+00:00
 
 ## Summary
-- Approved backlog rows: **1**
-- Rows with known blockers: **1**
+- Approved backlog rows: **2**
+- Rows with known blockers: **2**
 - Clear to apply without override: **0**
 - Manual handoff rows excluded from auto-reschedule: **0**
 - Start at: **2026-07-16T10:00:00+00:00**
@@ -18,10 +18,15 @@ Generated: 2026-07-15T14:10:49.820466+00:00
   - Proposed: `2026-07-16T10:00:00+00:00`
   - Blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
+- **Facebook - Slow Walk** (`FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`)
+  - Current: `2026-07-15T11:20:00-04:00`
+  - Proposed: `2026-07-17T10:00:00+00:00`
+  - Blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
+  - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**
-- Blocked IDs: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+- Blocked IDs: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
 - Safe apply command: `blocked until clearance steps complete`
 - Partial clear apply available: **False**
 - Partial clear apply count: **0**
@@ -30,7 +35,7 @@ Generated: 2026-07-15T14:10:49.820466+00:00
 ## Partial Clear Apply
 - Status: **empty**
 - Clear IDs: `none`
-- Blocked IDs retained: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
+- Blocked IDs retained: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
 - Recommended preview: `none`
 - Recommended apply: `none`
 

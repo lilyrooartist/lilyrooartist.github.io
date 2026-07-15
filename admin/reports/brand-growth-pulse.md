@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-15T14:10:53.121278Z
+Generated: 2026-07-15T16:50:19.802925Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -10,14 +10,14 @@ Generated: 2026-07-15T14:10:53.121278Z
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **30**
-- Posted or measured rows: **18**
+- Posted or measured rows: **19**
 - Ready for result capture: **18**
-- First-party clicks: **5** across **2** post(s)
-- Click snapshot: `2026-07-15T14:10:49.698978Z` (covers current due posts)
-- Next post at: `2026-07-15T10:15:00-04:00`
+- First-party clicks: **7** across **3** post(s)
+- Click snapshot: `2026-07-15T16:50:15.302871Z` (covers current due posts)
+- Next post at: `2026-07-17T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.07`
-- Hours until proof due: `-44.08`
+- Hours until next post: `45.41`
+- Hours until proof due: `-46.74`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25,9 +25,9 @@ Generated: 2026-07-15T14:10:53.121278Z
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **18**
-- Waiting measurement rows: **0**
+- Waiting measurement rows: **1**
 - Future scheduled rows: **30**
-- Next learning due at: `2026-07-13T18:06:00Z`
+- Next learning due at: `2026-07-16T14:15:27.715000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
@@ -37,8 +37,9 @@ Generated: 2026-07-15T14:10:53.121278Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` (YouTube): Slow Walk Relatable Situation - Next queued learning input
-  - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` (Facebook): Slow Walk Relatable Situation - Next queued learning input
+  - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` (YouTube): Slow Walk Relatable Situation - Waiting for first useful result check
+  - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` (YouTube): Slow Walk Visual Story - Next queued learning input
+  - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` (Facebook): Slow Walk Visual Story - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

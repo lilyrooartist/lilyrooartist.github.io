@@ -1,34 +1,36 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-07-15T14:10:49.698978Z
+Generated: 2026-07-15T16:50:15.302871Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **5**
-- Posts with clicks: **2**
+- Clicks captured: **7**
+- Posts with clicks: **3**
 - First click: `2026-07-10T15:30:43.264Z`
-- Last click: `2026-07-13T14:15:55.357Z`
+- Last click: `2026-07-15T14:15:29.380Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
+- youtube: **4**
 - facebook: **3**
-- youtube: **2**
 
 ### Destination
+- album: **3**
 - spotify: **2**
-- album: **1**
 - echo: **1**
 - video: **1**
 
 ### Wave
+- video-reset: **4**
 - track-moments: **3**
-- video-reset: **2**
 
 ### Track
-- slow-walk: **5**
+- slow-walk: **7**
 
 ## Recent Clicks
+- `2026-07-15T14:15:29.380Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
+- `2026-07-15T14:15:28.966Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
 - `2026-07-13T14:15:55.357Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
 - `2026-07-13T14:15:54.729Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
 - `2026-07-10T15:30:43.299Z` facebook album `fp-brand-am-07-slow-walk-facebook`
