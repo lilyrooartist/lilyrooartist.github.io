@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-15T16:50:17.518504Z
+Generated: 2026-07-15T17:19:14.905526Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **30 / 30**
-- Tracking URLs checked: **30 / 30**
+- Future campaign rows ready: **29 / 29**
+- Tracking URLs checked: **29 / 29**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **7 / 30**
-- Visible full destination sets: **30 / 30**
+- Visible album click paths: **6 / 29**
+- Visible full destination sets: **29 / 29**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,7 +24,7 @@ Generated: 2026-07-15T16:50:17.518504Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 7, echo: 8, spotify: 7, video: 8**
+- Destinations: **album: 6, echo: 8, spotify: 7, video: 8**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
@@ -197,9 +197,6 @@ Generated: 2026-07-15T16:50:17.518504Z
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-13T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
-- `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-15T10:15:00-04:00 - **ready** (1 link)
-  - Destinations: `album`
-  - Visible surface: **ready** (`album`)
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
