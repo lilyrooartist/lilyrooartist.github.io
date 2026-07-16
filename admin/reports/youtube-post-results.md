@@ -1,10 +1,10 @@
 # YouTube Post Results - Lily Roo
 
-Generated: 2026-07-16T14:24:37.010028Z
+Generated: 2026-07-16T16:48:01.130370Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
-- Captured posts: **11**
+- Captured posts: **12**
 - Fillable posts: **0**
 - Fillable result fields: **0**
 - Apply command: `python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin`
@@ -85,6 +85,13 @@ Generated: 2026-07-16T14:24:37.010028Z
 - **FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE** row `66`
   - URL: https://youtu.be/WQs8Xk9Mm8o
   - Video ID: `WQs8Xk9Mm8o`
+  - Lookup: `skipped_missing_secrets`
+  - Views: `0`; likes: `0`; comments: `0`
+  - Fillable fields: `none`
+  - Evidence: YouTube metric capture skipped 2026-07-16: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+- **FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE** row `68`
+  - URL: https://youtu.be/X1LIKda1ZOI
+  - Video ID: `X1LIKda1ZOI`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
