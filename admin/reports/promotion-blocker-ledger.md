@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-15T19:38:12.465201Z
+Generated: 2026-07-16T03:38:58.167692Z
 
 ## Summary
 - Open blockers: **3**
@@ -25,7 +25,7 @@ Generated: 2026-07-15T19:38:12.465201Z
   - Owner: `external_platform`; projected blockers resolved: **2**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-16T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24`
 - **Optional: fill private metric worksheet** (`optional_input`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Optional measurement fields: **6**
@@ -38,9 +38,9 @@ Generated: 2026-07-15T19:38:12.465201Z
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
   - Evidence: 2 approved backlog row(s); 2 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-16T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
-  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-16T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - **[high] Repair Facebook executor** (`platform-FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
