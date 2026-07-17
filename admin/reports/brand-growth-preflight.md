@@ -1,21 +1,20 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-17T16:39:49.892843Z
+Generated: 2026-07-17T17:13:49.621609Z
 
 ## Summary
 - Status: **needs_attention**
 - Next window: **2026-07-17** at `2026-07-17T18:06:00Z`
-- Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-17T18:06:00Z`, due **5**, satisfied **2**, would post **1**, posted **1**, blocked **3**
-- Current scheduler snapshot: checked `2026-07-17T16:39:44.853035Z`, requested `2026-07-17T16:39:44.510741Z`, due **4**, would post **0**, posted **1**, blocked **3**
-- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **3 / 3 checked ok**
-- Redirect targets: **3 / 3 checked**, **2 ok**, **0 warning**, **1 blocking failed**
+- Expected posts: **2**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-17T18:06:00Z`, due **5**, satisfied **1**, would post **1**, posted **1**, blocked **3**
+- Current scheduler snapshot: checked `2026-07-17T17:13:43.796949Z`, requested `2026-07-17T17:13:43.432461Z`, due **4**, would post **0**, posted **1**, blocked **3**
+- Link checks: **3 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **2 / 2 checked ok**
+- Redirect targets: **2 / 2 checked**, **1 ok**, **0 warning**, **1 blocking failed**
 - Current window proof due: `2026-07-17T18:06:00Z`
 - Current window measurement due: `2026-07-18T18:05:00Z`
 
 ## Expected Posts
-- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube at `2026-07-17T10:15:00-04:00`
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook at `2026-07-17T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-02-X` X at `2026-07-17T14:05:00-04:00`
 
@@ -28,14 +27,11 @@ Generated: 2026-07-17T16:39:49.892843Z
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
 
 ## Link Checks
-- **ok** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE Watch the full track` 200 text/html
 - **ok** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK clip_url` 200 video/mp4
 - **ok** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Watch the full track` 200 text/html
 - **ok** `FP-GROWTH-RESET-VOICE-02-X Watch the full track` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE Watch the full track target video` 200 text/html; charset=utf-8
 - **ok** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Watch the full track target video` 200 text/html; charset=utf-8
 - **failed** `FP-GROWTH-RESET-VOICE-02-X Watch the full track target video` 0 missing target URL
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T16:39:49.231372Z",
+  "generated_at": "2026-07-17T17:13:48.590057Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -44,7 +44,7 @@
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 1,
+    "active_campaign_proof_export_added_last_run": 0,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
@@ -73,7 +73,7 @@
     {
       "label": "Active Analog Myth brand campaign",
       "status": "needs_attention",
-      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE at 2026-07-17T10:15:00-04:00; preflight=needs_attention",
+      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-VOICE-02-X at 2026-07-17T14:05:00-04:00; preflight=needs_attention",
       "evidence": "data/brand_growth_preflight.json",
       "next_action": "Refresh brand growth readout and preflight."
     },
@@ -81,20 +81,20 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29596990807",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29599182143",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-17T18:20:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-17T18:20:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-17T16:39:47.089474Z",
+      "detail": "19 refresh commands captured at 2026-07-17T17:13:46.415179Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
