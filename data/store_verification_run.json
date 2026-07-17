@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-17T03:38:47.362256Z",
+  "updated_at": "2026-07-17T08:29:04.097381Z",
   "source": "public-store-link-verification-run",
   "step_timeout_seconds": 25,
   "summary": {
@@ -28,7 +28,7 @@
       "command": "python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 1.56,
+      "duration_seconds": 1.46,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"title\": \"\",\n  \"album_id\": \"\",\n  \"release_url\": \"\",\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n}",
       "stderr": "",
@@ -46,7 +46,7 @@
       "command": "python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.23,
+      "duration_seconds": 0.18,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"collection_name\": \"\",\n  \"collection_id\": null,\n  \"release_url\": \"\",\n  \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n}",
       "stderr": "",
@@ -64,7 +64,7 @@
       "command": "python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.2,
+      "duration_seconds": 0.15,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"stores\": [],\n  \"amazon_music_available\": false,\n  \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n}",
       "stderr": "",
@@ -100,7 +100,7 @@
       "command": "python3 scripts/update_promo_engine_status.py",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.61,
+      "duration_seconds": 0.84,
       "returncode": 0,
       "stdout": "Wrote <repo>/data/promo_engine_status.json with 3 releases",
       "stderr": ""
