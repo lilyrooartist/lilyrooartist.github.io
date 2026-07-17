@@ -1,94 +1,103 @@
 {
-  "generated_at": "2026-07-17T17:13:49.621609Z",
+  "generated_at": "2026-07-17T19:34:28.793972Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/ea2548573b66292f52c7fb31396db9bf573e4c75/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/a4e9b821f32c4ec9a1134fde49dd072c796bf831/admin/future-posts.json"
   },
   "summary": {
     "status": "needs_attention",
-    "next_window_date": "2026-07-17",
-    "scheduled_time": "2026-07-17T18:06:00Z",
+    "next_window_date": "2026-07-19",
+    "scheduled_time": "2026-07-19T15:21:00Z",
     "expected_post_count": 2,
     "expected_post_ids": [
-      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
-      "FP-GROWTH-RESET-VOICE-02-X"
+      "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
-    "scheduler_simulated_at": "2026-07-17T18:06:00Z",
-    "scheduler_simulated_due_count": 5,
-    "scheduler_simulated_would_post_count": 1,
+    "scheduler_simulated_at": "2026-07-19T15:21:00Z",
+    "scheduler_simulated_due_count": 6,
+    "scheduler_simulated_would_post_count": 2,
     "scheduler_simulated_posted_count": 1,
-    "scheduler_simulated_satisfied_count": 1,
+    "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 3,
-    "scheduler_due_count": 5,
-    "scheduler_would_post_count": 1,
+    "scheduler_due_count": 6,
+    "scheduler_would_post_count": 2,
     "scheduler_posted_count": 1,
-    "scheduler_satisfied_count": 1,
+    "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 3,
-    "current_scheduler_checked_at": "2026-07-17T17:13:43.796949Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-17T17:13:43.432461Z",
+    "current_scheduler_checked_at": "2026-07-17T19:34:23.063697Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-17T19:34:22.770794Z",
     "current_scheduler_due_count": 4,
     "current_scheduler_would_post_count": 0,
     "current_scheduler_posted_count": 1,
     "current_scheduler_blocked_count": 3,
-    "missing_due_ids": [
-      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK"
-    ],
+    "missing_due_ids": [],
     "unexpected_due_ids": [],
     "blocked_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
       "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK"
     ],
-    "link_check_count": 3,
-    "link_ok_count": 3,
+    "link_check_count": 4,
+    "link_ok_count": 4,
     "link_failed_count": 0,
     "tracking_link_check_count": 2,
     "tracking_link_ok_count": 2,
     "expected_tracking_link_check_count": 2,
     "target_link_check_count": 2,
-    "target_link_ok_count": 1,
-    "target_link_failed_count": 1,
+    "target_link_ok_count": 2,
+    "target_link_failed_count": 0,
     "target_link_warning_count": 0,
-    "target_link_blocking_failed_count": 1,
+    "target_link_blocking_failed_count": 0,
     "expected_target_link_check_count": 2,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
-    "next_proof_due_at": "2026-07-17T18:06:00Z",
-    "next_measurement_due_at": "2026-07-18T18:05:00Z",
+    "next_proof_due_at": "2026-07-19T15:21:00Z",
+    "next_measurement_due_at": "2026-07-20T15:20:00Z",
     "readout_next_proof_due_at": "2026-07-13T18:06:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 5,
-    "result_count": 5,
-    "would_post_count": 1,
+    "due_count": 6,
+    "result_count": 6,
+    "would_post_count": 2,
     "posted_count": 1,
     "blocked_count": 3,
     "status_counts": {
       "failed": 3,
       "posted": 1,
-      "would_post": 1
+      "would_post": 2
     },
     "platform_counts": {
-      "Facebook": 3,
+      "Facebook": 4,
       "Unknown": 1,
-      "X": 1
+      "YouTube": 1
     },
     "would_post": [
       {
-        "post_id": "FP-GROWTH-RESET-VOICE-02-X",
-        "platform": "X",
+        "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+        "platform": "YouTube",
         "status": "would_post",
         "reason": "",
-        "post_type": "text",
+        "post_type": "video",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+        "platform": "Facebook",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "video",
         "attempts": 0,
         "updated_at": "",
         "source": "",
@@ -97,7 +106,7 @@
     ],
     "posted": [
       {
-        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+        "post_id": "FP-GROWTH-RESET-VOICE-02-X",
         "platform": "",
         "status": "posted",
         "reason": "",
@@ -116,7 +125,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-17T17:13:49.726Z",
+        "updated_at": "2026-07-17T19:34:28.937Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -127,7 +136,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-17T17:13:49.732Z",
+        "updated_at": "2026-07-17T19:34:28.942Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -138,7 +147,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-17T17:13:49.747Z",
+        "updated_at": "2026-07-17T19:34:28.948Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       }
@@ -146,33 +155,44 @@
   },
   "link_checks": [
     {
-      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK clip_url",
-      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
+      "label": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-visual-story.mp4",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
       "content_type": "video/mp4",
-      "content_length": "2364616",
+      "content_length": "1720142",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Watch the full track",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
+      "label": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-VOICE-02-X Watch the full track",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-02-x&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-brand-voice",
+      "label": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-02-x&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-brand-voice",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/slow-walk-echo-thread.mp4",
+      "content_type": "video/mp4",
+      "content_length": "1720142",
+      "error": "",
+      "source": "local_static_file"
+    },
+    {
+      "label": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-facebook&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-facebook&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
@@ -181,49 +201,52 @@
   ],
   "target_checks": [
     {
-      "label": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Watch the full track target video",
-      "url": "https://youtu.be/nPuGjQf7lKY",
+      "label": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread target echo",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=nPuGjQf7lKY&feature=youtu.be",
-      "content_type": "text/html; charset=utf-8",
-      "content_length": "",
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "9020",
       "error": "",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-03-slow-walk-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=slow-walk-visual-story",
-      "destination": "video",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
+      "destination": "echo",
       "track": "07",
-      "post_id": "fp-growth-reset-03-slow-walk-visual-story-facebook"
+      "post_id": "fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-youtube"
     },
     {
-      "label": "FP-GROWTH-RESET-VOICE-02-X Watch the full track target video",
-      "url": "",
-      "ok": false,
-      "status": 0,
-      "content_type": "",
-      "content_length": "",
-      "error": "missing target URL",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-02-x&to=video&utm_wave=video-reset&utm_term=spilling-the-tea-brand-voice",
-      "destination": "video",
-      "track": "",
-      "post_id": "fp-growth-reset-voice-02-x"
+      "label": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread target echo",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "9020",
+      "error": "",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-facebook&to=echo&utm_wave=video-reset&utm_term=slow-walk-echo-thread-setup-song-payoff",
+      "destination": "echo",
+      "track": "07",
+      "post_id": "fp-growth-reset-04-slow-walk-echo-thread-setup-song-payoff-facebook"
     }
   ],
   "next_window_posts": [
     {
-      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
-      "platform": "Facebook",
-      "scheduled_at": "2026-07-17T11:20:00-04:00",
+      "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-07-19T10:15:00-04:00",
       "execution_mode": "auto",
       "post_type": "video",
-      "text": "A quiet walk through the pressure until the pressure learns your pace."
+      "text": "What did you stop rushing? Slow Walk answers without speeding up. #Shorts"
     },
     {
-      "id": "FP-GROWTH-RESET-VOICE-02-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-17T14:05:00-04:00",
+      "id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "platform": "Facebook",
+      "scheduled_at": "2026-07-19T11:20:00-04:00",
       "execution_mode": "auto",
-      "post_type": "text",
-      "text": "A receipt drawer is just an archive with better timing."
+      "post_type": "video",
+      "text": "What did you stop rushing? Slow Walk answers without speeding up."
     }
   ],
   "guardrails": [
