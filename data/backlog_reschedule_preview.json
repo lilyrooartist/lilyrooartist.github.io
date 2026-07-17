@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T19:35:05.173747+00:00",
+  "generated_at": "2026-07-17T03:39:01.166006+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -15,12 +15,12 @@
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
-    "start_at": "2026-07-17T10:00:00+00:00",
+    "start_at": "2026-07-18T10:00:00+00:00",
     "spacing_hours": 24,
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24",
     "apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
     "apply_allowed_without_override": false,
     "blocked_ids": [
@@ -47,10 +47,10 @@
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
     ],
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24",
     "safe_apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_allowed_without_override": false,
     "apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
@@ -63,7 +63,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-17T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-18T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -74,7 +74,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-18T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-19T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -136,7 +136,7 @@
       "platform": "Facebook",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-13T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-17T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-18T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
@@ -153,7 +153,7 @@
       "platform": "Facebook",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-15T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-18T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-19T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",

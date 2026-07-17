@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-16T19:34:42.389Z",
+  "updated_at": "2026-07-17T03:38:44.029Z",
   "platforms": {
     "youtube": {
       "ok": true,
@@ -12,8 +12,8 @@
       },
       "channel_title": "Lily Roo",
       "period_28d": {
-        "startDate": "2026-06-18",
-        "endDate": "2026-07-15"
+        "startDate": "2026-06-19",
+        "endDate": "2026-07-16"
       },
       "analytics_status": "Request had insufficient authentication scopes."
     },
@@ -22,7 +22,7 @@
       "source": "spotify-public-artist-page",
       "metrics": {
         "release_verified": 1,
-        "monthly_listeners": 1,
+        "monthly_listeners": 0,
         "artist_followers": 1
       },
       "release_url": "https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI",
@@ -38,7 +38,7 @@
       "credential_ok": false,
       "profile_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
       "http_status": 200,
-      "description": "Artist · 1 monthly listeners.",
+      "description": "Artist · 0 monthly listeners.",
       "public_capture_status": "ok"
     },
     "tiktok": {
@@ -63,11 +63,11 @@
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
-      "http_status": 200,
-      "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
+      "http_status": 429,
+      "description": "",
       "public_capture_status": "ok",
       "preserved_previous_public_metrics": true,
-      "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+      "latest_capture_status": "HTTP Error 429: Too Many Requests"
     },
     "facebook": {
       "ok": true,
@@ -78,7 +78,7 @@
       },
       "page_name": "Lily Roo",
       "profile_url": "https://www.facebook.com/903693509504290",
-      "insights_period": "2026-07-09..2026-07-15",
+      "insights_period": "2026-07-10..2026-07-16",
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
@@ -93,7 +93,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 99208,
+      "html_bytes": 99377,
       "public_capture_status": "ok"
     }
   },
@@ -105,12 +105,12 @@
         "ok": true,
         "source": "spotify-public-artist-page",
         "metrics": {
-          "monthly_listeners": 1,
+          "monthly_listeners": 0,
           "artist_followers": 1
         },
         "profile_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
         "http_status": 200,
-        "description": "Artist · 1 monthly listeners.",
+        "description": "Artist · 0 monthly listeners.",
         "public_capture_status": "ok"
       },
       "tiktok": {
@@ -131,11 +131,11 @@
           "followers": 0
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
-        "http_status": 200,
-        "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
+        "http_status": 429,
+        "description": "",
         "public_capture_status": "ok",
         "preserved_previous_public_metrics": true,
-        "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+        "latest_capture_status": "HTTP Error 429: Too Many Requests"
       },
       "x": {
         "ok": true,
@@ -145,7 +145,7 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 99208,
+        "html_bytes": 99377,
         "public_capture_status": "ok"
       }
     }
