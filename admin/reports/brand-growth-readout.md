@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-17T08:29:21.071710Z
+Generated: 2026-07-17T14:04:43.216375Z
 
 ## Summary
 - Campaign rows: **48**
@@ -18,7 +18,7 @@ Generated: 2026-07-17T08:29:21.071710Z
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
-- YouTube total views: **490**
+- YouTube total views: **511**
 - Spotify monthly listeners: **0**
 
 ## Learning Now
