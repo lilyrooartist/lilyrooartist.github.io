@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-17T14:04:42.495383Z
+Generated: 2026-07-17T16:39:48.978655Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **20**
-- Missing published log posts: **13**
-- Pending result fields: **102**
+- Published experiment posts: **21**
+- Missing published log posts: **12**
+- Pending result fields: **105**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -27,7 +27,6 @@ Generated: 2026-07-17T14:04:42.495383Z
 ## Missing Published Log Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
@@ -65,4 +64,4 @@ Generated: 2026-07-17T14:04:42.495383Z
 - `FP-LAUNCH-ANALOG-MYTH-FACEBOOK` Facebook `saves` from row 39: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record saves.
 - `FP-LAUNCH-ANALOG-MYTH-FACEBOOK` Facebook `subs_delta` from row 39: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record subs_delta.
 - `FP-LAUNCH-ANALOG-MYTH-X-EVENING` X `views` from row 47: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record views.
-- ...and 77 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 80 more rows in `data/experiment_result_entry_template.csv`.

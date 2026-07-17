@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-17T14:04:42.607975Z
+Generated: 2026-07-17T16:39:49.091592Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **18**
-- Missing public URLs: **13**
+- Metric cards: **19**
+- Missing public URLs: **12**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **102**
+- Pending result fields: **105**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -455,6 +455,26 @@ Generated: 2026-07-17T14:04:42.607975Z
   - `views`: Open YouTube Studio analytics for https://youtu.be/X1LIKda1ZOI and record views.
   - `likes`: Open YouTube Studio analytics for https://youtu.be/X1LIKda1ZOI and record likes.
   - `comments`: Open YouTube Studio analytics for https://youtu.be/X1LIKda1ZOI and record comments.
+### YouTube - Slow Walk (`FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE`)
+- Format: Short video clip + platform-native CTA
+- URL: https://youtu.be/-gH_jEl5GLM
+- Published: 2026-07-17; Published_Log row: `69`
+- Pending fields: `views, likes, comments`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE`, source_row `69`, fill `views, likes, comments`.
+- Evidence sources:
+  - Logged public post: https://youtu.be/-gH_jEl5GLM - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open YouTube Studio analytics for https://youtu.be/-gH_jEl5GLM and record views.
+  - `likes`: Open YouTube Studio analytics for https://youtu.be/-gH_jEl5GLM and record likes.
+  - `comments`: Open YouTube Studio analytics for https://youtu.be/-gH_jEl5GLM and record comments.
 
 ## Measurement Priorities
 - **Collect metrics** `FP-BRAND-AM-01-13-FACEBOOK` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 16 logged post(s), 0 missing URL(s) in this format.
@@ -487,10 +507,10 @@ Generated: 2026-07-17T14:04:42.607975Z
 - **Collect metrics** `FP-BRAND-AM-02-GIRLS-CAMP-X` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 16 logged post(s), 0 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --source-row 53 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --source-row 53 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 13 missing URL(s) in this format.
+- **Collect metrics** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 3 logged post(s), 12 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE --source-row 66 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE --source-row 66 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Await scheduled auto post** `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-07-17T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 2 logged post(s), 13 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-07-19T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 12 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -518,7 +538,6 @@ Generated: 2026-07-17T14:04:42.607975Z
 ## Missing Public URLs
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.

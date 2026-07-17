@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T14:04:40.747404+00:00",
+  "generated_at": "2026-07-17T16:39:47.246719+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,8 +10,8 @@
     "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 2,
-    "blocked_backlog_count": 2,
+    "approved_backlog_count": 3,
+    "blocked_backlog_count": 3,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -25,7 +25,8 @@
     "apply_allowed_without_override": false,
     "blocked_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK"
     ],
     "normal_apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
@@ -38,14 +39,15 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 2,
-    "blocked_backlog_count": 2,
+    "approved_backlog_count": 3,
+    "blocked_backlog_count": 3,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
     "blocked_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK"
     ],
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-18T10:00:00+00:00' --spacing-hours 24",
     "safe_apply_command": "",
@@ -78,6 +80,17 @@
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
+      },
+      {
+        "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+        "platform": "Facebook",
+        "song": "Slow Walk",
+        "blocker_kind": "max_attempts_exceeded",
+        "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+        "proposed_scheduled_at": "2026-07-20T10:00:00+00:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
       }
     ],
     "operator_checklist": [
@@ -103,11 +116,12 @@
   "partial_clear_apply_manifest": {
     "status": "empty",
     "clear_to_apply_count": 0,
-    "blocked_backlog_count": 2,
+    "blocked_backlog_count": 3,
     "clear_ids": [],
     "blocked_ids_retained": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
-      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK"
+      "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
+      "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK"
     ],
     "preview_commands": [],
     "apply_commands": [],
@@ -154,6 +168,23 @@
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-15T11:20:00-04:00",
       "proposed_scheduled_at": "2026-07-19T10:00:00+00:00",
+      "blocked": true,
+      "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
+    },
+    {
+      "id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+      "platform": "Facebook",
+      "song": "Slow Walk",
+      "current_scheduled_at": "2026-07-17T11:20:00-04:00",
+      "proposed_scheduled_at": "2026-07-20T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",

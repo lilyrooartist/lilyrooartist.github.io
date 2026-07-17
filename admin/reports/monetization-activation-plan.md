@@ -1,14 +1,14 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-17T14:04:44.803436Z
+Generated: 2026-07-17T16:39:50.887638Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
 - Runway status: **stalled**
 - Ready release-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **2**
-- Activation actions: **4**
+- Platform fixes: **3**
+- Activation actions: **5**
 
 ## Activation Sequence
 1. **Preview approved backlog reschedule**
@@ -25,10 +25,14 @@ Generated: 2026-07-17T14:04:44.803436Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
-4. **Current operations next action: Fix Facebook executor**
+4. **Repair Facebook executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
+5. **Current operations next action: Fix Facebook executor**
    - Phase: `Operations packet`; status: `needs_fix`
    - Detail: Platform executor needs repair before queued auto posts can publish.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

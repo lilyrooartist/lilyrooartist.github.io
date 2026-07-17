@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T14:04:42.607975Z",
+  "generated_at": "2026-07-17T16:39:49.091592Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -10,11 +10,11 @@
   },
   "summary": {
     "status": "needs_values",
-    "metric_card_count": 18,
-    "missing_public_url_count": 13,
+    "metric_card_count": 19,
+    "missing_public_url_count": 12,
     "measurement_priority_count": 12,
     "post_log_measurement_handoff_count": 0,
-    "pending_result_field_count": 102,
+    "pending_result_field_count": 105,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
     "entry_csv_path": "data/experiment_result_entry_template.csv",
@@ -1712,6 +1712,81 @@
           "collection_hint": "Open YouTube Studio analytics for https://youtu.be/X1LIKda1ZOI and record comments."
         }
       ]
+    },
+    {
+      "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "YouTube",
+      "song": "Slow Walk",
+      "post_url": "https://youtu.be/-gH_jEl5GLM",
+      "published_date": "2026-07-17",
+      "source_row": "69",
+      "pending_field_count": 3,
+      "ready_field_count": 0,
+      "wide_ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments"
+      ],
+      "ready_fields": [],
+      "wide_ready_fields": [],
+      "wide_entry_row": {
+        "experiment_format": "Short video clip + platform-native CTA",
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
+        "song": "Slow Walk",
+        "post_url": "https://youtu.be/-gH_jEl5GLM",
+        "published_date": "2026-07-17",
+        "source_row": "69",
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": "",
+        "subs_delta": "",
+        "evidence_note": ""
+      },
+      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
+      "evidence_sources": [
+        {
+          "label": "Logged public post",
+          "url": "https://youtu.be/-gH_jEl5GLM",
+          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
+        },
+        {
+          "label": "YouTube Studio analytics",
+          "url": "https://studio.youtube.com/",
+          "instruction": "Open the matching Community post analytics and copy available public-performance values."
+        }
+      ],
+      "collection_checklist": [
+        "Open the logged public post and confirm it matches this post_id.",
+        "Open the platform analytics or insights source listed for this card.",
+        "Copy only numeric values that are visible in the source.",
+        "Enter values in the wide entry CSV row for this post_id and source_row.",
+        "Add an evidence_note with source and collection date before import preview."
+      ],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open YouTube Studio analytics for https://youtu.be/-gH_jEl5GLM and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open YouTube Studio analytics for https://youtu.be/-gH_jEl5GLM and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open YouTube Studio analytics for https://youtu.be/-gH_jEl5GLM and record comments."
+        }
+      ]
     }
   ],
   "missing_public_url_cards": [
@@ -1727,14 +1802,6 @@
       "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
       "experiment_format": "Short video clip + platform-native CTA",
       "platform": "Facebook",
-      "song": "Slow Walk",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
-    {
-      "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
-      "experiment_format": "Short video clip + platform-native CTA",
-      "platform": "YouTube",
       "song": "Slow Walk",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
@@ -2047,12 +2114,12 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE --source-row 66 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE --source-row 66 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 13 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 3 logged post(s), 12 missing URL(s) in this format."
     },
     {
       "action": "await_scheduled_auto_post",
       "priority": 2,
-      "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+      "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "platform": "Facebook",
       "song": "Slow Walk",
       "experiment_format": "Short video clip + platform-native CTA",
@@ -2066,10 +2133,10 @@
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "scheduled_at": "2026-07-17T11:20:00-04:00",
-      "scheduled_at_utc": "2026-07-17T15:20:00+00:00",
+      "scheduled_at": "2026-07-19T11:20:00-04:00",
+      "scheduled_at_utc": "2026-07-19T15:20:00+00:00",
       "scheduler_status": "future_auto_ready",
-      "reason": "Approved auto row is scheduled for 2026-07-17T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 2 logged post(s), 13 missing URL(s) in this format."
+      "reason": "Approved auto row is scheduled for 2026-07-19T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 12 missing URL(s) in this format."
     }
   ],
   "first_measurement_runbook": {

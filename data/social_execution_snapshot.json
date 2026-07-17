@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-17T14:04:28.520135Z",
+  "updated_at": "2026-07-17T16:39:35.105753Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,18 +8,31 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 66,
-    "current_execution_count": 51,
+    "execution_count": 68,
+    "current_execution_count": 53,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-07-17T16:30:48.662Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
       {
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
         "platform": "Facebook",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-17T14:00:48.673Z",
+        "updated_at": "2026-07-17T16:30:48.475Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -32,12 +45,25 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-17T14:00:48.551Z",
+        "updated_at": "2026-07-17T16:30:48.365Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
         "next_action": "",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-17T14:15:51.291Z",
+        "source": "cron",
+        "post_url": "https://youtu.be/-gH_jEl5GLM",
+        "external_id": "-gH_jEl5GLM",
+        "next_action": "",
+        "error_summary": ""
       },
       {
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
@@ -679,6 +705,19 @@
     ],
     "posted": [
       {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-17T14:15:51.291Z",
+        "source": "cron",
+        "post_url": "https://youtu.be/-gH_jEl5GLM",
+        "external_id": "-gH_jEl5GLM",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
         "platform": "YouTube",
         "status": "posted",
@@ -1317,22 +1356,35 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 49,
+    "posted_count": 50,
     "draft_uploaded_count": 0,
-    "attention_count": 2,
+    "attention_count": 3,
     "approval_needed_count": 0,
-    "platform_fix_needed_count": 2,
+    "platform_fix_needed_count": 3,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "failed": 2,
-      "posted": 49
+      "failed": 3,
+      "posted": 50
     },
     "platform_counts": {
-      "Facebook": 23,
+      "Facebook": 24,
       "X": 21,
-      "YouTube": 7
+      "YouTube": 8
     },
     "latest_posted": [
+      {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-17T14:15:51.291Z",
+        "source": "cron",
+        "post_url": "https://youtu.be/-gH_jEl5GLM",
+        "external_id": "-gH_jEl5GLM",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE",
         "platform": "YouTube",
@@ -1384,31 +1436,31 @@
         "external_id": "903693509504290_122121593013249470",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
-        "platform": "X",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-11T14:15:44.632Z",
-        "source": "cron",
-        "post_url": "https://x.com/i/web/status/2075947147338391981",
-        "external_id": "2075947147338391981",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
     "approval_needed": [],
     "platform_fix_needed": [
       {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-07-17T16:30:48.662Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
+      {
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
         "platform": "Facebook",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-17T14:00:48.673Z",
+        "updated_at": "2026-07-17T16:30:48.475Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -1421,7 +1473,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-17T14:00:48.551Z",
+        "updated_at": "2026-07-17T16:30:48.365Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -1432,12 +1484,25 @@
     "manual_handoff_needed": [],
     "latest_attention": [
       {
+        "post_id": "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-07-17T16:30:48.662Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
+      },
+      {
         "post_id": "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
         "platform": "Facebook",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-17T14:00:48.673Z",
+        "updated_at": "2026-07-17T16:30:48.475Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -1450,7 +1515,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-07-17T14:00:48.551Z",
+        "updated_at": "2026-07-17T16:30:48.365Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -1461,10 +1526,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 66
+    "execution_count": 68
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-17T14:04:28.564634Z",
+  "reconciled_at": "2026-07-17T16:39:35.154791Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

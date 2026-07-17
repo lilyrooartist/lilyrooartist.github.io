@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-17T14:04:44.591083Z
+Generated: 2026-07-17T16:39:50.669905Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -8,7 +8,7 @@ Generated: 2026-07-17T14:04:44.591083Z
 - Public URLs needed: **0**
 - Pending result fields: **102**
 - Winner-ready formats: **3 / 3**
-- Blocked platform rows: **2**
+- Blocked platform rows: **3**
 
 ## Next Publish Action
 - Collect experiment results when public URLs and measurement values are available.
@@ -26,3 +26,4 @@ Generated: 2026-07-17T14:04:44.591083Z
 ## Blocked Platform Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK` Facebook - max_attempts_exceeded
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook - max_attempts_exceeded
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook - max_attempts_exceeded
