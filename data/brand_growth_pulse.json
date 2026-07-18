@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T16:58:54.900934Z",
+  "generated_at": "2026-07-18T19:33:06.316634Z",
   "safe_mode": true,
   "status": "posting_needs_check",
   "source": {
@@ -23,7 +23,7 @@
     "posting_preflight_ready": false,
     "queued_future_posts": 27,
     "posted_or_measured_rows": 21,
-    "ready_for_metric_capture_rows": 20,
+    "ready_for_metric_capture_rows": 21,
     "click_count": 10,
     "click_post_count": 5,
     "clicks_by_platform": {
@@ -38,13 +38,13 @@
       "echo": 1,
       "playlist": 1
     },
-    "click_snapshot_updated_at": "2026-07-18T16:58:51.725569Z",
+    "click_snapshot_updated_at": "2026-07-18T19:33:03.279950Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_post_at": "2026-07-19T10:15:00-04:00",
     "proof_due_at": "2026-07-13T18:06:00Z",
-    "hours_until_next_post": 21.27,
-    "hours_until_proof_due": -118.88,
+    "hours_until_next_post": 18.7,
+    "hours_until_proof_due": -121.45,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -56,9 +56,9 @@
     "learning_status": "learn_from_clicks",
     "learning_headline": "Click response is ready to review",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_rows": 20,
-    "waiting_measurement_rows": 1,
-    "next_learning_due_at": "2026-07-18T18:15:49.491000Z",
+    "measurement_due_rows": 21,
+    "waiting_measurement_rows": 0,
+    "next_learning_due_at": "2026-07-13T18:06:00Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
@@ -69,11 +69,11 @@
     "headline": "Click response is ready to review",
     "note": "Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
-    "measurement_due_count": 20,
-    "waiting_measurement_count": 1,
+    "measurement_due_count": 21,
+    "waiting_measurement_count": 0,
     "scheduled_future_count": 27,
-    "next_learning_due_at": "2026-07-18T18:15:49.491000Z",
-    "click_snapshot_updated_at": "2026-07-18T16:58:51.725569Z",
+    "next_learning_due_at": "2026-07-13T18:06:00Z",
+    "click_snapshot_updated_at": "2026-07-18T19:33:03.279950Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -89,7 +89,7 @@
     "pulse_refresh_command": "python3 scripts/build_brand_growth_pulse.py",
     "proof_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
     "metric_capture_commands": [
-      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X",
+      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X",
       "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK"
     ],
     "automation_note": "No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.",
@@ -140,17 +140,6 @@
         "learning_use": "Ready for post-window comparison"
       },
       {
-        "post_id": "FP-GROWTH-RESET-VOICE-02-X",
-        "platform": "X",
-        "title": "Voice 02",
-        "status": "posted_waiting_measurement_window",
-        "scheduled_at": "2026-07-17T14:05:00-04:00",
-        "measurement_due_at": "2026-07-18T18:15:49.491000+00:00",
-        "post_url": "https://x.com/i/web/status/2078181893921513961",
-        "public_visibility_ok": null,
-        "learning_use": "Waiting for first useful result check"
-      },
-      {
         "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
         "platform": "YouTube",
         "title": "Slow Walk Echo Thread Setup Song Payoff",
@@ -173,7 +162,7 @@
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": 1.28
+    "hours_until_next_learning_due": -121.45
   },
   "recommendations": [
     {
