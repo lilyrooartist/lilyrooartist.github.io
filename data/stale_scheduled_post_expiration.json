@@ -1,11 +1,11 @@
 {
   "ok": true,
   "mode": "write",
-  "generated_at": "2026-07-17T19:34:08.694419Z",
+  "generated_at": "2026-07-18T03:33:29.854362Z",
   "source": "data/scheduled_posts.csv",
   "archive": "data/expired_scheduled_posts.csv",
   "older_than_hours": 24.0,
-  "cutoff": "2026-07-16T19:34:08.694419Z",
+  "cutoff": "2026-07-17T03:33:29.854362Z",
   "input_count": 94,
   "kept_count": 81,
   "expired_count": 13,
@@ -25,8 +25,8 @@
     "FP-AUTO-284"
   ],
   "skipped_reasons": {
-    "already_published": 53,
-    "approved": 28
+    "already_published": 54,
+    "approved": 27
   },
   "source_pruned": false,
   "guardrail": "Only unapproved, unpublished, past-due rows outside the stale grace window are archived; source pruning requires --prune-source."

@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-17T19:34:28.033451Z
+Generated: 2026-07-18T03:33:46.993300Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **28 / 28**
-- Tracking URLs checked: **28 / 28**
+- Future campaign rows ready: **27 / 27**
+- Tracking URLs checked: **27 / 27**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **6 / 28**
-- Visible full destination sets: **28 / 28**
+- Visible album click paths: **6 / 27**
+- Visible full destination sets: **27 / 27**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,14 +24,14 @@ Generated: 2026-07-17T19:34:28.033451Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 6, echo: 8, spotify: 7, video: 7**
+- Destinations: **album: 6, echo: 8, spotify: 7, video: 6**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-growth-reset-voice-02-x`
+- Probe campaign id: `fp-growth-reset-voice-03-x`
 - Event: **x / album / track unknown**
 
 ## Redirect Checks
@@ -203,10 +203,6 @@ Generated: 2026-07-17T19:34:28.033451Z
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook 2026-07-17T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `video`
   - Visible surface: **attention** (`video`)
-- `FP-GROWTH-RESET-VOICE-02-X` X 2026-07-17T14:05:00-04:00 - **ready** (1 link)
-  - Destinations: `video`
-  - Visible surface: **attention** (`video`)
-  - Main-post album link: **ready**
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-19T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)
