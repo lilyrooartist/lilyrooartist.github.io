@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-18T13:51:03.766736Z
+Generated: 2026-07-18T16:26:15.103539Z
 
 ## Summary
 - Campaign rows: **48**
@@ -8,30 +8,30 @@ Generated: 2026-07-18T13:51:03.766736Z
 - Visible in future queue: **27**
 - Posted or measured rows: **21**
 - Measured rows: **0**
-- Ready for metric capture: **19**
+- Ready for metric capture: **20**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **10** across **5** post(s); last click `2026-07-17T14:15:52.906Z`
 - Click tracking links: **ready** (27 / 27 future rows; 27 / 27 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 3, posted_waiting_measurement_window: 2, ready_for_metric_capture: 19, scheduled_future: 24**
+- Status counts: **execution_attention: 3, posted_waiting_measurement_window: 1, ready_for_metric_capture: 20, scheduled_future: 24**
 - Next scheduled: `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` at `2026-07-19T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
-- YouTube total views: **512**
+- YouTube total views: **514**
 - Spotify monthly listeners: **0**
 
 ## Learning Now
 - Status: **click_response_ready**
 - Headline: **First-party click response is ready to review**
 - First-party clicks: **10** across **5** post(s)
-- Public posts ready for learning: **19**
+- Public posts ready for learning: **20**
 - Next learning action: Review the tracks, platforms, and destinations with click response before changing the next copy wave.
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py`
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Waiting posts: `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-VOICE-02-X`
+- Waiting posts: `FP-GROWTH-RESET-VOICE-02-X`
 - Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
@@ -209,9 +209,9 @@ Generated: 2026-07-18T13:51:03.766736Z
   - Next: Use first-party click tracking for this post now; native YouTube result counts can join after analytics credentials are connected (GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN).
 - `FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-15T11:20:00-04:00 - **execution_attention**
   - Next: Inspect executor state for FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
-- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube 2026-07-17T10:15:00-04:00 - **posted_waiting_measurement_window**
+- `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE` YouTube 2026-07-17T10:15:00-04:00 - **ready_for_metric_capture**
   - URL: https://youtu.be/-gH_jEl5GLM
-  - Next: Wait until 2026-07-18T14:15:51.291000+00:00 before capturing metrics.
+  - Next: Use first-party click tracking for this post now; native YouTube result counts can join after analytics credentials are connected (GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN).
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` Facebook 2026-07-17T11:20:00-04:00 - **execution_attention**
   - Next: Inspect executor state for FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
 - `FP-GROWTH-RESET-VOICE-02-X` X 2026-07-17T14:05:00-04:00 - **posted_waiting_measurement_window**
