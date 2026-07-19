@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T19:34:05.243263Z",
+  "generated_at": "2026-07-19T03:56:35.937829Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -26,8 +26,8 @@
     "active_campaign_next_proof_due_at": "2026-07-19T15:21:00Z",
     "active_campaign_next_measurement_due_at": "2026-07-20T15:20:00Z",
     "ready_lane_count": 5,
-    "blocked_lane_count": 2,
-    "deferred_lane_count": 1,
+    "blocked_lane_count": 3,
+    "deferred_lane_count": 0,
     "attention_lane_count": 2,
     "lane_count": 10,
     "workflow_crons": [
@@ -59,7 +59,7 @@
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
+    "next_action": "Repair the active campaign platform before the next scheduled slot."
   },
   "proof_refresh": {
     "status": "ready",
@@ -81,7 +81,7 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29658021443",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29672517435",
       "next_action": ""
     },
     {
@@ -94,7 +94,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-18T19:34:03.228301Z",
+      "detail": "19 refresh commands captured at 2026-07-19T03:56:33.823367Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -114,10 +114,10 @@
     },
     {
       "label": "Platform readiness",
-      "status": "deferred",
-      "detail": "ready=X, Facebook, YouTube; blocked=Instagram, TikTok",
+      "status": "blocked",
+      "detail": "ready=X, Facebook; blocked=Instagram, TikTok, YouTube",
       "evidence": "data/executor_readiness_snapshot.json",
-      "next_action": "Optional expansion only; unsupported platforms stay inactive until their automated lane is ready."
+      "next_action": "Repair the active campaign platform before the next scheduled slot."
     },
     {
       "label": "TikTok API lane",

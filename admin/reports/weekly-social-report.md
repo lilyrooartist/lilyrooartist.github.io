@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-07-12 to 2026-07-18
-**Last updated:** 2026-07-18 07:34 PM UTC
+**Period:** 2026-07-13 to 2026-07-19
+**Last updated:** 2026-07-19 03:56 AM UTC
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -62,10 +62,10 @@
 ## Platform Snapshot
 
 ### YouTube
-- Subscribers: **5**
+- Subscribers: **6**
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
-- API status: **live API**
+- API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py, then run scripts/update_youtube_video_title.py --apply and redeploy/push the refreshed token**
 - Public RSS recent-video views: **27 across 15 videos**
 - Latest public upload: **Just Don't Talk About It - Lily Roo** (0 views)
 - Title-track video: https://www.youtube.com/watch?v=vK0mDIW65o4
@@ -128,7 +128,7 @@
 - Latest post: https://www.facebook.com/lilyrooartist/posts/122121593013249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-07-18T19:33:42.924Z**
+- Live API captured: **2026-07-19T03:56:13.840Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -138,9 +138,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-18T19:34:06.844505+00:00**
+- All-release store verification captured: **2026-07-19T03:56:37.288379+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-07-18T19:33:56.599274Z**
+- Social executor history captured: **2026-07-19T03:56:28.023681Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`

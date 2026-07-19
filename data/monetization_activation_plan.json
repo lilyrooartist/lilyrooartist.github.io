@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T19:34:06.770533Z",
+  "generated_at": "2026-07-19T03:56:37.214051Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -11,7 +11,7 @@
   "summary": {
     "brand_growth_goal": "release_forward_brand_growth",
     "public_target_hidden": true,
-    "runway_status": "stalled",
+    "runway_status": "moving",
     "ready_release_approval_count": 0,
     "auto_release_approval_count": 0,
     "manual_release_approval_count": 0,
@@ -31,7 +31,7 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-19T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-20T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
         "approved_backlog_posts": 3,
@@ -40,8 +40,8 @@
         "approved_upcoming_posts": 24,
         "blocked_backlog_count": 3,
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-19T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-19T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-20T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-20T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       }
     },
     {

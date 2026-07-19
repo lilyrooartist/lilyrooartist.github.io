@@ -1,21 +1,12 @@
 {
   "ok": true,
-  "updated_at": "2026-07-18T19:33:42.924Z",
+  "updated_at": "2026-07-19T03:56:13.840Z",
   "platforms": {
     "youtube": {
-      "ok": true,
-      "source": "youtube-data-api",
-      "metrics": {
-        "subscribers": 5,
-        "total_views": 514,
-        "video_count": 37
-      },
-      "channel_title": "Lily Roo",
-      "period_28d": {
-        "startDate": "2026-06-20",
-        "endDate": "2026-07-17"
-      },
-      "analytics_status": "Request had insufficient authentication scopes."
+      "ok": false,
+      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "metrics": {},
+      "status": 400
     },
     "spotify": {
       "ok": true,
@@ -63,11 +54,11 @@
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
-      "http_status": 200,
-      "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
+      "http_status": 429,
+      "description": "",
       "public_capture_status": "ok",
       "preserved_previous_public_metrics": true,
-      "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+      "latest_capture_status": "HTTP Error 429: Too Many Requests"
     },
     "facebook": {
       "ok": true,
@@ -78,7 +69,7 @@
       },
       "page_name": "Lily Roo",
       "profile_url": "https://www.facebook.com/903693509504290",
-      "insights_period": "2026-07-11..2026-07-17",
+      "insights_period": "2026-07-12..2026-07-18",
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
@@ -131,11 +122,11 @@
           "followers": 0
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
-        "http_status": 200,
-        "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
+        "http_status": 429,
+        "description": "",
         "public_capture_status": "ok",
         "preserved_previous_public_metrics": true,
-        "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+        "latest_capture_status": "HTTP Error 429: Too Many Requests"
       },
       "x": {
         "ok": true,
