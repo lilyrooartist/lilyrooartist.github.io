@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T13:55:09.490321Z",
+  "generated_at": "2026-07-19T16:25:58.122788Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -28,9 +28,9 @@
       "YouTube": 12
     },
     "status_counts": {
-      "execution_attention": 3,
+      "execution_attention": 5,
       "ready_for_metric_capture": 21,
-      "scheduled_future": 24
+      "scheduled_future": 22
     },
     "approved_auto_rows": 48,
     "future_queue_visible_rows": 27,
@@ -54,9 +54,9 @@
     "campaign_click_tracking_url_count": 27,
     "campaign_click_tracking_expected_url_count": 27,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 24,
-    "next_scheduled_post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-    "next_scheduled_at": "2026-07-19T10:15:00-04:00",
+    "attention_rows": 26,
+    "next_scheduled_post_id": "FP-GROWTH-RESET-VOICE-03-X",
+    "next_scheduled_at": "2026-07-20T14:05:00-04:00",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
@@ -81,9 +81,9 @@
     ],
     "post_slot_watch_window_count": 24,
     "post_slot_watch_status_counts": {
-      "attention": 3,
+      "attention": 4,
       "measurement_due": 8,
-      "scheduled_future": 13
+      "scheduled_future": 12
     },
     "next_action_window_date": "2026-07-04",
     "next_action_window_status": "measurement_due",
@@ -119,9 +119,9 @@
     "summary": {
       "window_count": 24,
       "status_counts": {
-        "attention": 3,
+        "attention": 4,
         "measurement_due": 8,
-        "scheduled_future": 13
+        "scheduled_future": 12
       },
       "next_window_date": "2026-07-04",
       "next_window_status": "measurement_due",
@@ -491,7 +491,7 @@
       },
       {
         "date": "2026-07-19",
-        "status": "scheduled_future",
+        "status": "attention",
         "post_ids": [
           "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
@@ -505,15 +505,18 @@
         "proof_due_at": "2026-07-19T15:21:00Z",
         "measurement_due_at": "2026-07-20T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "execution_attention": 2
         },
-        "rows_needing_proof": [],
+        "rows_needing_proof": [
+          "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
+        ],
         "rows_ready_for_metrics": [],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Inspect executor state, then refresh and export posted URLs after the issue is resolved."
       },
       {
         "date": "2026-07-20",
@@ -1212,7 +1215,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-20T13:45:52.373000+00:00",
+      "measurement_due_at": "2026-07-20T16:15:52.345000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1278,7 +1281,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-20T13:45:53.243000+00:00",
+      "measurement_due_at": "2026-07-20T16:15:53.711000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1322,7 +1325,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-20T13:45:54.133000+00:00",
+      "measurement_due_at": "2026-07-20T16:15:54.622000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1364,16 +1367,16 @@
       "text": "What did you stop rushing? Slow Walk answers without speeding up. #Shorts",
       "post_url": "",
       "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
+      "execution_status": "failed",
+      "execution_reason": "max_attempts_exceeded",
+      "measurement_due_at": "2026-07-20T16:15:55.487000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "execution_attention",
+      "next_action": "Inspect executor state for FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "visible_in_future_queue": true
     },
     {
@@ -1386,16 +1389,16 @@
       "text": "What did you stop rushing? Slow Walk answers without speeding up.",
       "post_url": "",
       "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
+      "execution_status": "failed",
+      "execution_reason": "max_attempts_exceeded",
+      "measurement_due_at": "2026-07-20T16:15:56.356000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "execution_attention",
+      "next_action": "Inspect executor state for FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "visible_in_future_queue": true
     },
     {

@@ -1,10 +1,10 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-19T13:55:06.994095+00:00
+Generated: 2026-07-19T16:25:55.585506+00:00
 
 ## Summary
-- Approved backlog rows: **3**
-- Rows with known blockers: **3**
+- Approved backlog rows: **5**
+- Rows with known blockers: **5**
 - Clear to apply without override: **0**
 - Manual handoff rows excluded from auto-reschedule: **0**
 - Start at: **2026-07-20T10:00:00+00:00**
@@ -28,10 +28,20 @@ Generated: 2026-07-19T13:55:06.994095+00:00
   - Proposed: `2026-07-22T10:00:00+00:00`
   - Blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
+- **YouTube - Slow Walk** (`FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`)
+  - Current: `2026-07-19T10:15:00-04:00`
+  - Proposed: `2026-07-23T10:00:00+00:00`
+  - Blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
+  - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
+- **Facebook - Slow Walk** (`FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`)
+  - Current: `2026-07-19T11:20:00-04:00`
+  - Proposed: `2026-07-24T10:00:00+00:00`
+  - Blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
+  - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**
-- Blocked IDs: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
+- Blocked IDs: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
 - Safe apply command: `blocked until clearance steps complete`
 - Partial clear apply available: **False**
 - Partial clear apply count: **0**
@@ -40,7 +50,7 @@ Generated: 2026-07-19T13:55:06.994095+00:00
 ## Partial Clear Apply
 - Status: **empty**
 - Clear IDs: `none`
-- Blocked IDs retained: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
+- Blocked IDs retained: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
 - Recommended preview: `none`
 - Recommended apply: `none`
 

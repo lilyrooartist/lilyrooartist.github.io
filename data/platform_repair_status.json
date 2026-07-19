@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T13:55:07.948723Z",
+  "generated_at": "2026-07-19T16:25:56.590983Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -8,15 +8,16 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "summary": {
-    "platform_fix_count": 3,
-    "blocked_count": 3,
-    "preview_command_count": 3,
+    "platform_fix_count": 5,
+    "blocked_count": 5,
+    "preview_command_count": 5,
     "apply_command_count": 0,
-    "retry_reset_count": 3,
-    "checklist_item_count": 6,
+    "retry_reset_count": 5,
+    "checklist_item_count": 10,
     "checklist_blocked_count": 0,
     "platforms": [
-      "Facebook"
+      "Facebook",
+      "YouTube"
     ]
   },
   "rows": [
@@ -27,7 +28,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-07-19T13:45:52.373Z",
+      "updated_at": "2026-07-19T16:15:52.345Z",
       "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "repair_lane": "",
@@ -79,7 +80,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-07-19T13:45:53.243Z",
+      "updated_at": "2026-07-19T16:15:53.711Z",
       "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "repair_lane": "",
@@ -131,7 +132,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-07-19T13:45:54.133Z",
+      "updated_at": "2026-07-19T16:15:54.622Z",
       "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "repair_lane": "",
@@ -145,6 +146,116 @@
       "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
       "readiness": {
         "ready": true
+      },
+      "missing_secrets": [],
+      "credential_missing_secrets": [],
+      "local_missing_secrets": [],
+      "local_secret_presence": {},
+      "local_secret_ready": null,
+      "local_secret_source": "",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "review",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 0,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "platform": "Facebook",
+      "priority": 2,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-07-19T16:15:56.356Z",
+      "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "repair_lane": "",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "apply_command": "",
+      "blocked_apply_command": "",
+      "blocked_apply_reasons": [],
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": true
+      },
+      "missing_secrets": [],
+      "credential_missing_secrets": [],
+      "local_missing_secrets": [],
+      "local_secret_presence": {},
+      "local_secret_ready": null,
+      "local_secret_source": "",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "review",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 0,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "priority": 9,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-07-19T16:15:55.487Z",
+      "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "repair_lane": "",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "apply_command": "",
+      "blocked_apply_command": "",
+      "blocked_apply_reasons": [],
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": false,
+        "missing_secrets": [],
+        "refresh_token_valid": false,
+        "token_resolution_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+        "client_secret_present": true,
+        "media_map_present": true,
+        "privacy_status": "public"
       },
       "missing_secrets": [],
       "credential_missing_secrets": [],
