@@ -1,6 +1,6 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-20T16:52:43.510267Z
+Generated: 2026-07-20T18:05:12.195600Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
@@ -37,10 +37,10 @@ Generated: 2026-07-20T16:52:43.510267Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
-7. **Current operations next action: Fix Facebook executor**
-   - Phase: `Operations packet`; status: `needs_fix`
-   - Detail: Platform executor needs repair before queued auto posts can publish.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+7. **Current operations next action: Preview clear approved backlog row**
+   - Phase: `Operations packet`; status: `waiting_for_user`
+   - Detail: Approved posts are past due; preview a new schedule before any apply step.
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

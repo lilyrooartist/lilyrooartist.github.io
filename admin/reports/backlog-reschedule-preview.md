@@ -1,11 +1,11 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-20T16:52:40.134813+00:00
+Generated: 2026-07-20T18:05:08.791121+00:00
 
 ## Summary
-- Approved backlog rows: **5**
+- Approved backlog rows: **6**
 - Rows with known blockers: **5**
-- Clear to apply without override: **0**
+- Clear to apply without override: **1**
 - Manual handoff rows excluded from auto-reschedule: **0**
 - Start at: **2026-07-21T10:00:00+00:00**
 - Spacing hours: **24**
@@ -38,21 +38,25 @@ Generated: 2026-07-20T16:52:40.134813+00:00
   - Proposed: `2026-07-25T10:00:00+00:00`
   - Blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
+- **X - No Mortgage** (`FP-GROWTH-RESET-VOICE-03-X`)
+  - Current: `2026-07-20T14:05:00-04:00`
+  - Proposed: `2026-07-26T10:00:00+00:00`
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**
 - Blocked IDs: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
 - Safe apply command: `blocked until clearance steps complete`
-- Partial clear apply available: **False**
-- Partial clear apply count: **0**
+- Partial clear apply available: **True**
+- Partial clear apply count: **1**
 - Apply gate: **blocked_until_clearance_steps_complete**
 
 ## Partial Clear Apply
-- Status: **empty**
-- Clear IDs: `none`
+- Status: **ready**
+- Clear IDs: `FP-GROWTH-RESET-VOICE-03-X`
 - Blocked IDs retained: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
-- Recommended preview: `none`
-- Recommended apply: `none`
+- Recommended preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24`
+- Recommended apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24`
 
 ### Operator Checklist
 - Preview each clear row before applying it.
@@ -84,8 +88,8 @@ Generated: 2026-07-20T16:52:40.134813+00:00
 
 ## Commands
 - Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24`
-- Partial clear preview: `none`
-- Partial clear apply: `none`
+- Partial clear preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24`
+- Partial clear apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - Safe apply: none until blockers clear
 - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`

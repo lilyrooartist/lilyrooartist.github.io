@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-20T16:52:43.186256Z
+Generated: 2026-07-20T18:05:11.863964Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-07-20T16:52:43.186256Z
 - Posted or measured rows: **21**
 - Ready for result capture: **21**
 - First-party clicks: **10** across **5** post(s)
-- Click snapshot: `2026-07-20T16:52:39.975080Z` (covers current due posts)
-- Next post at: `2026-07-20T14:05:00-04:00`
+- Click snapshot: `2026-07-20T18:05:08.622026Z` (covers current due posts)
+- Next post at: `2026-07-21T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `1.2`
-- Hours until proof due: `-166.78`
+- Hours until next post: `20.16`
+- Hours until proof due: `-167.99`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -37,8 +37,8 @@ Generated: 2026-07-20T16:52:43.186256Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-VOICE-03-X` (X): Voice 03 - Next queued learning input
   - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` (YouTube): Spilling The Tea Lyric Punch Line - Next queued learning input
+  - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): Spilling The Tea Lyric Punch Line - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

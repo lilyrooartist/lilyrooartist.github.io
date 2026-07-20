@@ -1,32 +1,46 @@
 {
   "ok": true,
-  "updated_at": "2026-07-20T16:52:37.498603Z",
+  "updated_at": "2026-07-20T18:05:06.306098Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-20T16:52:37.322554Z",
-  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/83932147dc6da3499a41687ff2efe9447d6bd266/admin/future-posts.json",
-  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/83932147dc6da3499a41687ff2efe9447d6bd266/admin/future-posts.json",
+  "requested_scheduled_time": "2026-07-20T18:05:05.845885Z",
+  "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/e94ad19b5144edb7830e66eee20360999ec9a392/admin/future-posts.json",
+  "requested_queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/e94ad19b5144edb7830e66eee20360999ec9a392/admin/future-posts.json",
   "queue_source": "commit_queue_url",
   "fallback_reason": "",
   "dry_run": true,
-  "checked_at": "2026-07-20T16:52:37.322Z",
+  "checked_at": "2026-07-20T18:05:05.845Z",
   "summary": {
-    "due_count": 5,
-    "result_count": 5,
-    "would_post_count": 0,
+    "due_count": 6,
+    "result_count": 6,
+    "would_post_count": 1,
     "posted_count": 0,
     "blocked_count": 5,
     "status_counts": {
-      "failed": 5
+      "failed": 5,
+      "would_post": 1
     },
     "platform_counts": {
       "Facebook": 4,
+      "X": 1,
       "YouTube": 1
     },
-    "would_post": [],
+    "would_post": [
+      {
+        "post_id": "FP-GROWTH-RESET-VOICE-03-X",
+        "platform": "X",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "text",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "posted": [],
     "blocked": [
       {
@@ -36,7 +50,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-20T16:52:37.463Z",
+        "updated_at": "2026-07-20T18:05:06.121Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -47,7 +61,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-20T16:52:37.467Z",
+        "updated_at": "2026-07-20T18:05:06.128Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -58,7 +72,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-20T16:52:37.470Z",
+        "updated_at": "2026-07-20T18:05:06.133Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -69,7 +83,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-20T16:52:37.473Z",
+        "updated_at": "2026-07-20T18:05:06.140Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -80,7 +94,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-20T16:52:37.477Z",
+        "updated_at": "2026-07-20T18:05:06.144Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       }
@@ -88,8 +102,8 @@
   },
   "payload": {
     "ok": true,
-    "due_count": 5,
-    "result_count": 5
+    "due_count": 6,
+    "result_count": 6
   },
   "action_needed": ""
 }

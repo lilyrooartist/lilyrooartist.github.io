@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T16:52:43.510267Z",
+  "generated_at": "2026-07-20T18:05:12.195600Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -34,10 +34,10 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 5,
-        "raw_approved_backlog_posts": 5,
+        "approved_backlog_posts": 6,
+        "raw_approved_backlog_posts": 6,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 22,
+        "approved_upcoming_posts": 21,
         "blocked_backlog_count": 5,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
@@ -135,14 +135,14 @@
       }
     },
     {
-      "label": "Current operations next action: Fix Facebook executor",
+      "label": "Current operations next action: Preview clear approved backlog row",
       "phase": "Operations packet",
-      "status": "needs_fix",
-      "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "status": "waiting_for_user",
+      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "kind": "platform_fix",
+        "kind": "backlog_reschedule",
         "urgency": "high"
       }
     }

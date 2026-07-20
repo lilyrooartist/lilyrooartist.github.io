@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-20T16:52:42.707049Z
+Generated: 2026-07-20T18:05:11.401267Z
 
 ## Summary
 - Campaign rows: **48**
@@ -13,8 +13,8 @@ Generated: 2026-07-20T16:52:42.707049Z
 - Campaign clicks: **10** across **5** post(s); last click `2026-07-17T14:15:52.906Z`
 - Click tracking links: **ready** (27 / 27 future rows; 27 / 27 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 5, ready_for_metric_capture: 21, scheduled_future: 22**
-- Next scheduled: `FP-GROWTH-RESET-VOICE-03-X` at `2026-07-20T14:05:00-04:00`
+- Status counts: **execution_attention: 5, ready_for_metric_capture: 21, scheduled_due: 1, scheduled_future: 21**
+- Next scheduled: `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` at `2026-07-21T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -102,8 +102,8 @@ Generated: 2026-07-20T16:52:42.707049Z
 - `2026-07-19` **attention** proof due `2026-07-19T15:21:00Z` for `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
   - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-20` **scheduled_future** proof due `2026-07-20T18:06:00Z` for `FP-GROWTH-RESET-VOICE-03-X`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-07-20` **proof_due** proof due `2026-07-20T18:06:00Z` for `FP-GROWTH-RESET-VOICE-03-X`
+  - Next: Capture executions and export posted Worker URLs into Published_Log.csv.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-21` **scheduled_future** proof due `2026-07-21T15:21:00Z` for `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -221,8 +221,8 @@ Generated: 2026-07-20T16:52:42.707049Z
   - Next: Inspect executor state for FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-19T11:20:00-04:00 - **execution_attention**
   - Next: Inspect executor state for FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
-- `FP-GROWTH-RESET-VOICE-03-X` X 2026-07-20T14:05:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-VOICE-03-X` X 2026-07-20T14:05:00-04:00 - **scheduled_due**
+  - Next: Run scheduler dry-run or capture social executions to verify due post state.
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-21T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-21T11:20:00-04:00 - **scheduled_future**
