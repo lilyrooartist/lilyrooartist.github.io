@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T18:05:08.791121+00:00",
+  "generated_at": "2026-07-20T19:58:10.732426+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,11 +10,11 @@
     "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 6,
+    "approved_backlog_count": 5,
     "blocked_backlog_count": 5,
-    "clear_to_apply_count": 1,
-    "partial_clear_apply_available": true,
-    "partial_clear_apply_count": 1,
+    "clear_to_apply_count": 0,
+    "partial_clear_apply_available": false,
+    "partial_clear_apply_count": 0,
     "start_at": "2026-07-21T10:00:00+00:00",
     "spacing_hours": 24,
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24",
@@ -34,22 +34,18 @@
     "clearance_steps": [
       "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
     ],
-    "partial_clear_preview_commands": [
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24"
-    ],
-    "partial_clear_apply_commands": [
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin"
-    ],
+    "partial_clear_preview_commands": [],
+    "partial_clear_apply_commands": [],
     "manual_handoff_count": 0,
     "manual_handoff_ids": []
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 6,
+    "approved_backlog_count": 5,
     "blocked_backlog_count": 5,
-    "clear_to_apply_count": 1,
-    "partial_clear_apply_available": true,
-    "partial_clear_apply_count": 1,
+    "clear_to_apply_count": 0,
+    "partial_clear_apply_available": false,
+    "partial_clear_apply_count": 0,
     "blocked_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -144,12 +140,10 @@
     ]
   },
   "partial_clear_apply_manifest": {
-    "status": "ready",
-    "clear_to_apply_count": 1,
+    "status": "empty",
+    "clear_to_apply_count": 0,
     "blocked_backlog_count": 5,
-    "clear_ids": [
-      "FP-GROWTH-RESET-VOICE-03-X"
-    ],
+    "clear_ids": [],
     "blocked_ids_retained": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
       "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -157,14 +151,10 @@
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
     ],
-    "preview_commands": [
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24"
-    ],
-    "apply_commands": [
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin"
-    ],
-    "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24",
-    "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-GROWTH-RESET-VOICE-03-X --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "preview_commands": [],
+    "apply_commands": [],
+    "recommended_next_command": "",
+    "recommended_apply_command": "",
     "operator_checklist": [
       "Preview each clear row before applying it.",
       "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -267,21 +257,6 @@
       "clearance_steps": [
         "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
       ]
-    },
-    {
-      "id": "FP-GROWTH-RESET-VOICE-03-X",
-      "platform": "X",
-      "song": "No Mortgage",
-      "current_scheduled_at": "2026-07-20T14:05:00-04:00",
-      "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
-      "blocked": false,
-      "blocker_reason": "",
-      "blocker_status": "",
-      "blocker_source": "",
-      "blocker_kind": "",
-      "blocks_normal_apply": false,
-      "safe_apply_available": true,
-      "clearance_steps": []
     }
   ]
 }

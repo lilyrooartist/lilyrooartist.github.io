@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T18:05:10.042456Z",
+  "generated_at": "2026-07-20T19:58:12.071148Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -108,7 +108,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 6,
+          "blockers_resolved": 5,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
@@ -207,14 +207,14 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 6,
+        "blockers_resolved": 5,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 6,
+          "approved_backlog_count": 5,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -585,14 +585,14 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 6,
+        "blockers_resolved": 5,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 6,
+          "approved_backlog_count": 5,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -889,17 +889,17 @@
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
-        "approved_backlog_count": 6,
+        "approved_backlog_count": 5,
         "blocked_backlog_count": 5,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 6,
+          "approved_backlog_count": 5,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",

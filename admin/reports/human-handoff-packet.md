@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-20T18:05:10.042456Z
+Generated: 2026-07-20T19:58:12.071148Z
 
 ## Summary
 - Open handoff tasks: **9**
@@ -52,7 +52,7 @@ Generated: 2026-07-20T18:05:10.042456Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows the optional metric count decreased.
   - Guardrail: Optional reporting input only; automated promotion is not blocked. Import only collected numeric values and leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **6**
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **5**
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24`
   - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-21T10:00:00+00:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
