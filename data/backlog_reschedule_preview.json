@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T14:24:00.577867+00:00",
+  "generated_at": "2026-07-21T16:52:51.489395+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,8 +10,8 @@
     "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 6,
-    "blocked_backlog_count": 6,
+    "approved_backlog_count": 7,
+    "blocked_backlog_count": 7,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -29,7 +29,8 @@
       "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
     ],
     "normal_apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
@@ -42,8 +43,8 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 6,
-    "blocked_backlog_count": 6,
+    "approved_backlog_count": 7,
+    "blocked_backlog_count": 7,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -53,7 +54,8 @@
       "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
     ],
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
     "safe_apply_command": "",
@@ -124,9 +126,20 @@
         "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
         "song": "Spilling the Tea",
-        "blocker_kind": "failed",
+        "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
         "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
+      },
+      {
+        "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "song": "Spilling the Tea",
+        "blocker_kind": "max_attempts_exceeded",
+        "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+        "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -155,7 +168,7 @@
   "partial_clear_apply_manifest": {
     "status": "empty",
     "clear_to_apply_count": 0,
-    "blocked_backlog_count": 6,
+    "blocked_backlog_count": 7,
     "clear_ids": [],
     "blocked_ids_retained": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -163,7 +176,8 @@
       "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
     ],
     "preview_commands": [],
     "apply_commands": [],
@@ -282,7 +296,24 @@
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "blocker_status": "failed",
       "blocker_source": "cron",
-      "blocker_kind": "failed",
+      "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
+    },
+    {
+      "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "platform": "Facebook",
+      "song": "Spilling the Tea",
+      "current_scheduled_at": "2026-07-21T11:20:00-04:00",
+      "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
+      "blocked": true,
+      "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "max_attempts_exceeded",
       "blocks_normal_apply": true,
       "safe_apply_available": false,
       "clearance_steps": [

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T14:24:04.507605Z",
+  "generated_at": "2026-07-21T16:52:55.105133Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -22,8 +22,8 @@
     "manual_release_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "solicitation_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 6,
-    "action_count": 8
+    "platform_fix_count": 7,
+    "action_count": 9
   },
   "actions": [
     {
@@ -34,11 +34,11 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 6,
-        "raw_approved_backlog_posts": 6,
+        "approved_backlog_posts": 7,
+        "raw_approved_backlog_posts": 7,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 20,
-        "blocked_backlog_count": 6,
+        "approved_upcoming_posts": 19,
+        "blocked_backlog_count": 7,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
@@ -117,6 +117,24 @@
       }
     },
     {
+      "label": "Repair Facebook executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+        "platform": "Facebook",
+        "reason": "max_attempts_exceeded",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "local_secret_source": "",
+        "local_secret_ready": null,
+        "public_posting_approved": null
+      }
+    },
+    {
       "label": "Repair YouTube executor",
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
@@ -139,12 +157,12 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
       "after_review_command": "",
       "context": {
         "post_id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
-        "reason": "",
+        "reason": "max_attempts_exceeded",
         "missing_secrets": [],
         "local_missing_secrets": [],
         "local_secret_source": "",
@@ -153,11 +171,11 @@
       }
     },
     {
-      "label": "Current operations next action: Fix YouTube executor",
+      "label": "Current operations next action: Fix Facebook executor",
       "phase": "Operations packet",
       "status": "needs_fix",
       "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
       "after_review_command": "",
       "context": {
         "kind": "platform_fix",

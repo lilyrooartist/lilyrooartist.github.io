@@ -1,22 +1,22 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-21T14:24:03.704858Z
+Generated: 2026-07-21T16:52:54.314968Z
 
 ## Summary
 - Status: **needs_attention**
-- Next window: **2026-07-21** at `2026-07-21T15:21:00Z`
+- Next window: **2026-07-23** at `2026-07-23T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-21T15:21:00Z`, due **7**, satisfied **2**, would post **2**, posted **0**, blocked **5**
-- Current scheduler snapshot: checked `2026-07-21T14:23:58.076640Z`, requested `2026-07-21T14:23:57.796537Z`, due **6**, would post **1**, posted **0**, blocked **5**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-23T15:21:00Z`, due **9**, satisfied **2**, would post **2**, posted **0**, blocked **7**
+- Current scheduler snapshot: checked `2026-07-21T16:52:48.919949Z`, requested `2026-07-21T16:52:48.629433Z`, due **7**, would post **0**, posted **0**, blocked **7**
 - Link checks: **4 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **2 / 2 checked ok**
 - Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-21T15:21:00Z`
-- Current window measurement due: `2026-07-22T15:20:00Z`
+- Current window proof due: `2026-07-23T15:21:00Z`
+- Current window measurement due: `2026-07-24T15:20:00Z`
 
 ## Expected Posts
-- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube at `2026-07-21T10:15:00-04:00`
-- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook at `2026-07-21T11:20:00-04:00`
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube at `2026-07-23T10:15:00-04:00`
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook at `2026-07-23T11:20:00-04:00`
 
 ## Blocked Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
@@ -24,16 +24,18 @@ Generated: 2026-07-21T14:24:03.704858Z
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE`
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
 
 ## Link Checks
-- **ok** `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE Hear the song` 200 text/html
-- **ok** `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK Hear the song` 200 text/html
+- **ok** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE Enter the album room` 200 text/html
+- **ok** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK Enter the album room` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE Hear the song target spotify` 200 text/html; charset=utf-8
-- **ok** `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK Hear the song target spotify` 200 text/html; charset=utf-8
+- **ok** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE Enter the album room target album` 200 text/html
+- **ok** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK Enter the album room target album` 200 text/html
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

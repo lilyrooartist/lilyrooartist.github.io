@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T14:24:02.810144Z",
+  "generated_at": "2026-07-21T16:52:53.438227Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -50,11 +50,11 @@
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
     "posted_count": 52,
-    "attention_count": 6,
-    "platform_fix_needed_count": 6,
+    "attention_count": 7,
+    "platform_fix_needed_count": 7,
     "story_post_count": 6,
     "story_queued_future_count": 0,
-    "platform_repair_blocked_count": 6,
+    "platform_repair_blocked_count": 7,
     "blocker_input_status": "missing_local_input",
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
@@ -73,7 +73,7 @@
     {
       "label": "Active Analog Myth brand campaign",
       "status": "needs_attention",
-      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE at 2026-07-21T10:15:00-04:00; preflight=needs_attention",
+      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK at 2026-07-21T11:20:00-04:00; preflight=needs_attention",
       "evidence": "data/brand_growth_preflight.json",
       "next_action": "Refresh brand growth readout and preflight."
     },
@@ -81,7 +81,7 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29838854939",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29850496759",
       "next_action": ""
     },
     {
@@ -94,21 +94,21 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-21T14:24:00.455264Z",
+      "detail": "19 refresh commands captured at 2026-07-21T16:52:51.340221Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=6 would_post=1",
+      "detail": "HTTP 200 using bearer auth; due=7 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=52 attention=6 platform_fix_needed=6",
+      "detail": "posted=52 attention=7 platform_fix_needed=7",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },

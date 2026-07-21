@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T14:24:02.238628Z",
+  "generated_at": "2026-07-21T16:52:52.725298Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,33 +13,33 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 10,
+    "task_count": 11,
     "owner_counts": {
       "external_platform": 1,
-      "tod": 9
+      "tod": 10
     },
     "urgency_counts": {
-      "high": 8,
+      "high": 9,
       "low": 2
     },
     "phase_counts": {
       "Backlog recovery": 1,
       "Manual metrics": 2,
-      "Platform setup": 7
+      "Platform setup": 8
     },
     "blocker_summary": {
-      "open_blocker_count": 7,
-      "urgent_count": 7,
+      "open_blocker_count": 8,
+      "urgent_count": 8,
       "owner_counts": {
-        "external_platform": 5,
+        "external_platform": 6,
         "tod": 2
       },
       "category_counts": {
         "backlog_reschedule": 1,
-        "platform_repair": 6
+        "platform_repair": 7
       },
       "status_counts": {
-        "blocked": 7
+        "blocked": 8
       },
       "next_resolution_projection": {
         "kind": "checked_scheduled_approval_batch",
@@ -108,7 +108,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 6,
+          "blockers_resolved": 7,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
@@ -118,7 +118,8 @@
             "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
@@ -161,7 +162,7 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 10,
+    "task_count": 11,
     "ready_step_count": 0,
     "blocked_step_count": 2,
     "manual_post_count": 0,
@@ -179,10 +180,11 @@
           "platform-setup-FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
           "platform-setup-FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
           "platform-setup-FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
           "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
           "platform-setup-tiktok-preflight"
         ],
-        "blockers_resolved": 7,
+        "blockers_resolved": 8,
         "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
         "apply_command": "",
         "command_sequence": [
@@ -209,11 +211,11 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 6,
+        "blockers_resolved": 7,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 6,
-          "blocked_backlog_count": 6,
+          "approved_backlog_count": 7,
+          "blocked_backlog_count": 7,
           "clear_to_apply_count": 0,
           "partial_clear_apply_available": false,
           "partial_clear_apply_count": 0,
@@ -223,7 +225,8 @@
             "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -294,9 +297,20 @@
               "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
               "platform": "YouTube",
               "song": "Spilling the Tea",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
               "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Spilling the Tea",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+              "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -420,10 +434,11 @@
           "platform-setup-FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
           "platform-setup-FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
           "platform-setup-FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
           "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
           "platform-setup-tiktok-preflight"
         ],
-        "blockers_resolved": 7,
+        "blockers_resolved": 8,
         "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
         "apply_command": "",
         "command_sequence": [
@@ -600,11 +615,11 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 6,
+        "blockers_resolved": 7,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 6,
-          "blocked_backlog_count": 6,
+          "approved_backlog_count": 7,
+          "blocked_backlog_count": 7,
           "clear_to_apply_count": 0,
           "partial_clear_apply_available": false,
           "partial_clear_apply_count": 0,
@@ -614,7 +629,8 @@
             "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -685,9 +701,20 @@
               "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
               "platform": "YouTube",
               "song": "Spilling the Tea",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
               "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Spilling the Tea",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+              "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -748,7 +775,7 @@
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 10,
+    "row_count": 11,
     "fieldnames": [
       "task_id",
       "phase",
@@ -874,6 +901,27 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
+      "id": "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "title": "Repair Facebook executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "failed",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "Facebook",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "public_posting_approved": null,
+        "repair_checklist_blocked_count": 0
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
       "id": "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
       "title": "Repair YouTube executor",
       "phase": "Platform setup",
@@ -881,7 +929,7 @@
       "urgency": "high",
       "status": "failed",
       "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -937,14 +985,14 @@
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
-        "approved_backlog_count": 6,
-        "blocked_backlog_count": 6,
+        "approved_backlog_count": 7,
+        "blocked_backlog_count": 7,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 6,
-          "blocked_backlog_count": 6,
+          "approved_backlog_count": 7,
+          "blocked_backlog_count": 7,
           "clear_to_apply_count": 0,
           "partial_clear_apply_available": false,
           "partial_clear_apply_count": 0,
@@ -954,7 +1002,8 @@
             "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
-            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -1025,9 +1074,20 @@
               "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
               "platform": "YouTube",
               "song": "Spilling the Tea",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
               "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+              "platform": "Facebook",
+              "song": "Spilling the Tea",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
+              "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]

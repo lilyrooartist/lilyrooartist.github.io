@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-07-21T14:24:02.418503Z",
+  "generated_at": "2026-07-21T16:52:52.945714Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 10,
-    "preview_count": 10,
+    "worksheet_row_count": 11,
+    "preview_count": 11,
     "executed_preview_count": 4,
-    "skipped_preview_count": 6,
+    "skipped_preview_count": 7,
     "status_counts": {
       "input_missing": 2,
       "preview_ok": 1,
       "preview_ok_with_warning": 1,
-      "skipped": 6
+      "skipped": 7
     },
     "phase_counts": {
       "Backlog recovery": 1,
       "Manual metrics": 2,
-      "Platform setup": 7
+      "Platform setup": 8
     },
     "safe_command_policy": "Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.",
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
@@ -96,13 +96,27 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
+      "task_id": "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
       "task_id": "platform-setup-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
       "phase": "Platform setup",
       "status": "failed",
       "input_needed": "local_secret_presence_and_public_posting_approval",
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
       "safety": "skipped",
-      "safety_reason": "unsupported_command",
+      "safety_reason": "not_marked_preview_safe",
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
@@ -133,7 +147,7 @@
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
       "preview_status": "preview_ok_with_warning",
-      "output_excerpt": "Rows selected: 6\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-22T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-23T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-07-24T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-07-25T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-07-26T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-07-27T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired ",
+      "output_excerpt": "Rows selected: 7\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-22T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-23T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-07-24T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-07-25T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-07-26T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-07-27T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired ",
       "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },
@@ -168,7 +182,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 10,
+    "row_count": 11,
     "fieldnames": [
       "task_id",
       "phase",
