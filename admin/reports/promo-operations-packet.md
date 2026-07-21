@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-21T17:22:26.626267Z
+Generated: 2026-07-21T19:52:53.565195Z
 
 ## Summary
 - Actions: **16**
@@ -76,7 +76,7 @@ Generated: 2026-07-21T17:22:26.626267Z
 
 ### Measure active brand campaign
 - **[high] Connect automated brand metrics capture**
-  - Why: 21 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.
+  - Why: 22 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.
   - Detail: Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. Add the missing names to ../secrets/social_api.env, use the scoped GitHub Actions secret push, then rerun the capture commands.
   - Local source: `secrets/social_api.env`
   - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
@@ -96,13 +96,13 @@ Generated: 2026-07-21T17:22:26.626267Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-22T17:22:02.037873+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-21T17:22:02.037873+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-22T19:52:30.597713+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-21T19:52:30.597713+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-22T17:22:03.799810+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-21T17:22:03.799810+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-22T19:52:32.314775+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-21T19:52:32.314775+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 
 ## Guardrails
