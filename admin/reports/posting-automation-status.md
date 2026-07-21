@@ -1,17 +1,17 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-20T19:58:12.813695Z
+Generated: 2026-07-21T03:47:08.115593Z
 
 ## Summary
 - Status: **blocked**
 - Active campaign ready: **False**
-- Lanes ready: **4 / 10**
+- Lanes ready: **5 / 10**
 - Blocked lanes: **3**
 - Deferred optional lanes: **0**
-- Needs attention: **3**
+- Needs attention: **2**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Proof refresh: **ready** at `2026-07-20T18:20:00Z` (14 min)
+- Proof refresh: **ready** at `2026-07-21T15:25:00Z` (4 min)
 - Proof export: **needs_attention** via `python3 scripts/export_social_executions.py`
 - Next action: Repair the active campaign platform before the next scheduled slot.
 
@@ -20,16 +20,15 @@ Generated: 2026-07-20T19:58:12.813695Z
   - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE at 2026-07-21T10:15:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
-- **Scheduled refresh workflow** - `needs_attention`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run pending / pending; proof refresh next fixed refresh 14 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29774131849
-  - Next: Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window.
+- **Scheduled refresh workflow** - `ready`
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29799408666
 - **Published URL export** - `needs_attention`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-20T18:20:00Z
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-21T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-20T19:58:10.582451Z
+  - Detail: 19 refresh commands captured at 2026-07-21T03:47:06.257212Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=6 would_post=0

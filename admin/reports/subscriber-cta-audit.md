@@ -1,13 +1,13 @@
 # Solicitation Copy Audit - Lily Roo
 
-Generated: 2026-07-20T19:58:10.927496Z
+Generated: 2026-07-21T03:47:06.540156Z
 
 ## Summary
 - Draft posts: **0**
 - Selected solicitation-style CTAs: **0**
 - Non-soliciting swaps available: **0**
 - Ready-after-approval rewrites: **0**
-- Active future posts checked: **27**
+- Active future posts checked: **26**
 - Active future solicitation issues: **0**
 - Active future non-auto issues: **0**
 - Active future Analog Myth focus issues: **0**
@@ -22,9 +22,9 @@ Generated: 2026-07-20T19:58:10.927496Z
 - `FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK` (Facebook): 2026-07-17T11:20:00-04:00 - soft_listen; auto=True; release-forward=True
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` (YouTube): 2026-07-19T10:15:00-04:00 - youtube_link; auto=True; release-forward=True
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Facebook): 2026-07-19T11:20:00-04:00 - soft_listen; auto=True; release-forward=True
-- `FP-GROWTH-RESET-VOICE-03-X` (X): 2026-07-20T14:05:00-04:00 - soft_listen; auto=True; release-forward=True
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` (YouTube): 2026-07-21T10:15:00-04:00 - youtube_link; auto=True; release-forward=True
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): 2026-07-21T11:20:00-04:00 - soft_listen; auto=True; release-forward=True
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` (YouTube): 2026-07-23T10:15:00-04:00 - youtube_link; auto=True; release-forward=True
 
 ## Guardrails
 - This audit does not edit, approve, apply, publish, or post anything.
