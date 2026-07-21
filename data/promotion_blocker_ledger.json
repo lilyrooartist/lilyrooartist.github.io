@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-07-21T08:46:26.642435Z",
+  "generated_at": "2026-07-21T14:24:02.200238Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 6,
-    "urgent_count": 6,
+    "open_blocker_count": 7,
+    "urgent_count": 7,
     "owner_counts": {
       "external_platform": 5,
-      "tod": 1
+      "tod": 2
     },
     "category_counts": {
       "backlog_reschedule": 1,
-      "platform_repair": 5
+      "platform_repair": 6
     },
     "status_counts": {
-      "blocked": 6
+      "blocked": 7
     },
     "next_resolution_projection": {
       "kind": "checked_scheduled_approval_batch",
@@ -82,7 +82,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 5,
+        "blockers_resolved": 6,
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
@@ -91,7 +91,8 @@
           "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
           "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-          "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
+          "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+          "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
@@ -155,6 +156,29 @@
       }
     },
     {
+      "id": "platform-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "blocker_id": "platform-FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+      "title": "Repair YouTube executor",
+      "category": "platform_repair",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
+      "platform": "YouTube",
+      "release": "",
+      "evidence": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "next_step": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "external_url": "",
+      "guardrail": "Run retry resets only after the external platform repair is verified.",
+      "impact": {
+        "kind": "platform_repair_gate",
+        "blocked_apply_command": "",
+        "blocked_apply_reasons": []
+      }
+    },
+    {
       "id": "backlog-reschedule",
       "blocker_id": "backlog-reschedule",
       "title": "Reschedule approved past-due backlog",
@@ -164,7 +188,7 @@
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "5 approved backlog row(s); 5 still have executor blockers.",
+      "evidence": "6 approved backlog row(s); 6 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
       "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
       "apply_command": "",
@@ -178,8 +202,8 @@
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 5,
-          "blocked_backlog_count": 5,
+          "approved_backlog_count": 6,
+          "blocked_backlog_count": 6,
           "clear_to_apply_count": 0,
           "partial_clear_apply_available": false,
           "partial_clear_apply_count": 0,
@@ -188,7 +212,8 @@
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
             "FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK",
             "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-            "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
+            "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+            "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -251,6 +276,17 @@
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
               "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Spilling the Tea",
+              "blocker_kind": "failed",
+              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+              "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]

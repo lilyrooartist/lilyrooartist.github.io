@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-21T08:46:27.887116Z
+Generated: 2026-07-21T14:24:03.544694Z
 
 ## Summary
 - Campaign rows: **48**
@@ -13,8 +13,8 @@ Generated: 2026-07-21T08:46:27.887116Z
 - Campaign clicks: **10** across **5** post(s); last click `2026-07-17T14:15:52.906Z`
 - Click tracking links: **ready** (26 / 26 future rows; 26 / 26 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 5, posted_waiting_measurement_window: 1, ready_for_metric_capture: 21, scheduled_future: 21**
-- Next scheduled: `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` at `2026-07-21T10:15:00-04:00`
+- Status counts: **execution_attention: 6, posted_waiting_measurement_window: 1, ready_for_metric_capture: 21, scheduled_future: 20**
+- Next scheduled: `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` at `2026-07-21T11:20:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -106,8 +106,8 @@ Generated: 2026-07-21T08:46:27.887116Z
 - `2026-07-20` **posted_waiting_measurement** proof due `2026-07-20T18:06:00Z` for `FP-GROWTH-RESET-VOICE-03-X`
   - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-21` **scheduled_future** proof due `2026-07-21T15:21:00Z` for `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-07-21` **attention** proof due `2026-07-21T15:21:00Z` for `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
+  - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-23` **scheduled_future** proof due `2026-07-23T15:21:00Z` for `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -225,8 +225,8 @@ Generated: 2026-07-21T08:46:27.887116Z
 - `FP-GROWTH-RESET-VOICE-03-X` X 2026-07-20T14:05:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://x.com/i/web/status/2079269100426084464
   - Next: Wait until 2026-07-21T18:15:59.639000+00:00 before capturing metrics.
-- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-21T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-21T10:15:00-04:00 - **execution_attention**
+  - Next: Inspect executor state for FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-21T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-23T10:15:00-04:00 - **scheduled_future**

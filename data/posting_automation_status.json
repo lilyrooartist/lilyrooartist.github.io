@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T08:46:27.418054Z",
+  "generated_at": "2026-07-21T14:24:02.810144Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -50,11 +50,11 @@
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
     "posted_count": 52,
-    "attention_count": 5,
-    "platform_fix_needed_count": 5,
+    "attention_count": 6,
+    "platform_fix_needed_count": 6,
     "story_post_count": 6,
     "story_queued_future_count": 0,
-    "platform_repair_blocked_count": 5,
+    "platform_repair_blocked_count": 6,
     "blocker_input_status": "missing_local_input",
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
@@ -81,7 +81,7 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29815536499",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29838854939",
       "next_action": ""
     },
     {
@@ -94,21 +94,21 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-21T08:46:25.303051Z",
+      "detail": "19 refresh commands captured at 2026-07-21T14:24:00.455264Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=5 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=6 would_post=1",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=52 attention=5 platform_fix_needed=5",
+      "detail": "posted=52 attention=6 platform_fix_needed=6",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },

@@ -1,14 +1,14 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-21T08:46:28.880830Z
+Generated: 2026-07-21T14:24:04.507605Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
 - Runway status: **moving**
 - Ready release-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **5**
-- Activation actions: **7**
+- Platform fixes: **6**
+- Activation actions: **8**
 
 ## Activation Sequence
 1. **Preview approved backlog reschedule**
@@ -37,10 +37,14 @@ Generated: 2026-07-21T08:46:28.880830Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
-7. **Current operations next action: Fix Facebook executor**
+7. **Repair YouTube executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
+   - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+8. **Current operations next action: Fix YouTube executor**
    - Phase: `Operations packet`; status: `needs_fix`
    - Detail: Platform executor needs repair before queued auto posts can publish.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+   - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

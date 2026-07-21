@@ -1,14 +1,14 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-21T08:46:29.040659Z
+Generated: 2026-07-21T14:24:04.642526Z
 
 ## Summary
 - Steps: **5**
 - Ready for human review: **0**
 - Blocked or warning: **1**
-- Projected resolution units across sequence: **5**
+- Projected resolution units across sequence: **6**
 - Current step: `unlock-backlog-reschedule` (`preview_ready_with_blocker_warning`)
-- Open blockers still tracked: **6**
+- Open blockers still tracked: **7**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
