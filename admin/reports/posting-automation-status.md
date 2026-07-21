@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-21T16:52:53.438227Z
+Generated: 2026-07-21T17:22:25.441577Z
 
 ## Summary
 - Status: **blocked**
@@ -11,24 +11,24 @@ Generated: 2026-07-21T16:52:53.438227Z
 - Needs attention: **2**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Proof refresh: **ready** at `2026-07-21T15:25:00Z` (4 min)
+- Proof refresh: **ready** at `2026-07-23T15:25:00Z` (4 min)
 - Proof export: **needs_attention** via `python3 scripts/export_social_executions.py`
 - Next action: Repair the active campaign platform before the next scheduled slot.
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `needs_attention`
-  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK at 2026-07-21T11:20:00-04:00; preflight=needs_attention
+  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE at 2026-07-23T10:15:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29850496759
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/29852552500
 - **Published URL export** - `needs_attention`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-21T15:25:00Z
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-23T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-21T16:52:51.340221Z
+  - Detail: 19 refresh commands captured at 2026-07-21T17:22:23.208047Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=7 would_post=0
