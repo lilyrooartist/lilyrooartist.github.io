@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-21T19:53:51.335262Z
+Generated: 2026-07-22T03:48:25.855687Z
 
 ## Summary
 - Actions: **16**
@@ -28,7 +28,7 @@ Generated: 2026-07-21T19:53:51.335262Z
 - **[blocked] Preview reschedule for approved past-due posts**
   - Why: All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling.
   - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-22T10:00:00+00:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-23T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
 - **[high] Fix Facebook executor**
@@ -96,13 +96,13 @@ Generated: 2026-07-21T19:53:51.335262Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-22T19:53:24.776379+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-21T19:53:24.776379+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-23T03:48:02.592449+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-22T03:48:02.592449+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-22T19:53:26.406913+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-21T19:53:26.406913+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-23T03:48:03.192772+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-22T03:48:03.192772+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 
 ## Guardrails

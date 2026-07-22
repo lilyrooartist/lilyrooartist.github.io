@@ -1,6 +1,6 @@
 # X Post Results - Lily Roo
 
-Generated: 2026-07-21T19:53:42.760947Z
+Generated: 2026-07-22T03:48:19.782641Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
@@ -17,169 +17,169 @@ Generated: 2026-07-21T19:53:42.760947Z
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-208** row `10`
   - URL: https://x.com/i/web/status/2047879043295420822
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-213** row `11`
   - URL: https://x.com/i/web/status/2048245628736622826
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-257** row `16`
   - URL: https://x.com/i/web/status/2062920257577029712
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-262** row `17`
   - URL: https://x.com/i/web/status/2063600780834136468
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-271** row `19`
   - URL: https://x.com/i/web/status/2071402084403118566
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA** row `20`
   - URL: https://x.com/i/web/status/2071236124497080380
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-266** row `21`
   - URL: https://x.com/i/web/status/2071039677357003221
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA** row `22`
   - URL: https://x.com/i/web/status/2070511391048405318
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK** row `23`
   - URL: https://x.com/i/web/status/2069786481556635841
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-PLAN-TWELVE-DOLLARS-X** row `24`
   - URL: https://x.com/i/web/status/2068336870803587325
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-276** row `38`
   - URL: https://x.com/i/web/status/2071764617978950017
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-LAUNCH-ANALOG-MYTH-X** row `40`
   - URL: https://x.com/i/web/status/2072179856264278171
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-AUTO-281** row `42`
   - URL: https://x.com/i/web/status/2072127000391905619
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA** row `43`
   - URL: https://x.com/i/web/status/2071960909967442193
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-LAUNCH-ANALOG-MYTH-X-EVENING** row `47`
   - URL: https://x.com/i/web/status/2072445477686026289
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-LAUNCH-ANALOG-MYTH-X-NIGHT** row `48`
   - URL: https://x.com/i/web/status/2072487612313419803
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-01-13-X** row `51`
   - URL: https://x.com/i/web/status/2073410401006751908
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-02-GIRLS-CAMP-X** row `53`
   - URL: https://x.com/i/web/status/2073772787177861205
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-03-ANALOG-MYTH-X** row `54`
   - URL: https://x.com/i/web/status/2074135149185266159
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-04-SPILLING-THE-TEA-X** row `56`
   - URL: https://x.com/i/web/status/2074497538409779510
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-05-NO-MORTGAGE-X** row `58`
   - URL: https://x.com/i/web/status/2074859954704441417
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-06-GUARDS-DOWN-X** row `61`
   - URL: https://x.com/i/web/status/2075222310240535024
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-07-SLOW-WALK-X** row `62`
   - URL: https://x.com/i/web/status/2075584699003740283
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X** row `65`
   - URL: https://x.com/i/web/status/2075947147338391981
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-GROWTH-RESET-VOICE-01-X** row `67`
   - URL: https://x.com/i/web/status/2076732356363448431
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-GROWTH-RESET-VOICE-02-X** row `70`
   - URL: https://x.com/i/web/status/2078181893921513961
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-GROWTH-RESET-VOICE-03-X** row `71`
   - URL: https://x.com/i/web/status/2079269100426084464
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
-  - Evidence: X metric capture skipped 2026-07-21: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Evidence: X metric capture skipped 2026-07-22: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 
 ## Guardrails
 - Metrics come from the X API for already-published Lily Roo posts.
