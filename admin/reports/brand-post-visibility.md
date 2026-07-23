@@ -1,6 +1,6 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-22T19:45:35.045591Z
+Generated: 2026-07-23T03:46:05.071365Z
 
 ## Summary
 - Status: **verified**
@@ -24,7 +24,7 @@ Generated: 2026-07-22T19:45:35.045591Z
 - **FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
   - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121402309249470
   - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121402309249470
-  - HTTP: `200`; copy matched: `False`
+  - HTTP: `200`; copy matched: `True`
   - Note: Facebook public page loaded without the common unavailable-content marker.
 - **FP-BRAND-AM-06-GUARDS-DOWN-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2075222310240535024
