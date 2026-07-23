@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T08:45:14.347174+00:00",
+  "generated_at": "2026-07-23T14:33:57.548594+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,8 +10,8 @@
     "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 7,
-    "blocked_backlog_count": 7,
+    "approved_backlog_count": 8,
+    "blocked_backlog_count": 8,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -30,7 +30,8 @@
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
-      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE"
     ],
     "normal_apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
@@ -43,8 +44,8 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 7,
-    "blocked_backlog_count": 7,
+    "approved_backlog_count": 8,
+    "blocked_backlog_count": 8,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -55,7 +56,8 @@
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
-      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE"
     ],
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-24T10:00:00+00:00' --spacing-hours 24",
     "safe_apply_command": "",
@@ -143,6 +145,17 @@
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
+      },
+      {
+        "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+        "platform": "YouTube",
+        "song": "Spilling the Tea",
+        "blocker_kind": "failed",
+        "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+        "proposed_scheduled_at": "2026-07-31T10:00:00+00:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
       }
     ],
     "operator_checklist": [
@@ -168,7 +181,7 @@
   "partial_clear_apply_manifest": {
     "status": "empty",
     "clear_to_apply_count": 0,
-    "blocked_backlog_count": 7,
+    "blocked_backlog_count": 8,
     "clear_ids": [],
     "blocked_ids_retained": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -177,7 +190,8 @@
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
       "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE",
-      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK"
+      "FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK",
+      "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE"
     ],
     "preview_commands": [],
     "apply_commands": [],
@@ -314,6 +328,23 @@
       "blocker_status": "failed",
       "blocker_source": "cron",
       "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
+    },
+    {
+      "id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+      "platform": "YouTube",
+      "song": "Spilling the Tea",
+      "current_scheduled_at": "2026-07-23T10:15:00-04:00",
+      "proposed_scheduled_at": "2026-07-31T10:00:00+00:00",
+      "blocked": true,
+      "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "failed",
       "blocks_normal_apply": true,
       "safe_apply_available": false,
       "clearance_steps": [

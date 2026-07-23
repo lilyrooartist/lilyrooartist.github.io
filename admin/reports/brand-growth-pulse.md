@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-23T08:45:17.983111Z
+Generated: 2026-07-23T14:34:00.655351Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-07-23T08:45:17.983111Z
 - Posted or measured rows: **22**
 - Ready for result capture: **22**
 - First-party clicks: **10** across **5** post(s)
-- Click snapshot: `2026-07-23T08:45:14.176476Z` (covers current due posts)
-- Next post at: `2026-07-23T10:15:00-04:00`
+- Click snapshot: `2026-07-23T14:33:57.388036Z` (covers current due posts)
+- Next post at: `2026-07-23T11:20:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `5.5`
-- Hours until proof due: `-230.65`
+- Hours until next post: `0.77`
+- Hours until proof due: `-236.47`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -37,8 +37,8 @@ Generated: 2026-07-23T08:45:17.983111Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` (YouTube): Spilling The Tea Relatable Situation - Next queued learning input
   - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` (Facebook): Spilling The Tea Relatable Situation - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-04-X` (X): Voice 04 - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

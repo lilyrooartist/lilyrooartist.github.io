@@ -1,24 +1,24 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-23T08:45:18.146308Z
+Generated: 2026-07-23T14:34:00.813173Z
 
 ## Summary
-- Actions: **16**
+- Actions: **17**
 - User review: **0**
-- Platform fixes: **7**
+- Platform fixes: **8**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
 - Store checks: **4**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 9, low: 2, medium: 4**
+- Urgency: **blocked: 1, high: 10, low: 2, medium: 4**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Measure active brand campaign: **1**
-- Repair executor: **7**
+- Repair executor: **8**
 - Reschedule approved backlog: **1**
 - Verify music sites: **4**
 
@@ -31,6 +31,10 @@ Generated: 2026-07-23T08:45:18.146308Z
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-24T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
+- **[high] Fix YouTube executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
+  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 - **[high] Fix Facebook executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
@@ -96,14 +100,9 @@ Generated: 2026-07-23T08:45:18.146308Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-24T08:44:52.401463+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-23T08:44:52.401463+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-24T14:33:33.740694+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-23T14:33:33.740694+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
-- **[medium] Re-check Twelve Dollars on Apple Music**
-  - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-24T08:44:53.986319+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-23T08:44:53.986319+00:00`
-  - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.
