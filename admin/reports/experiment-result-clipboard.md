@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-23T14:33:59.440181Z
+Generated: 2026-07-23T16:55:15.902718Z
 
 ## Summary
 - Status: **needs_values**
@@ -510,7 +510,7 @@ Generated: 2026-07-23T14:33:59.440181Z
 - **Collect metrics** `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 3 logged post(s), 12 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE --source-row 66 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE --source-row 66 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Await scheduled auto post** `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-07-23T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 12 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` Facebook / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-07-25T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 12 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**

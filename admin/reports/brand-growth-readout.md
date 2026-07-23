@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-23T14:34:00.193004Z
+Generated: 2026-07-23T16:55:16.623387Z
 
 ## Summary
 - Campaign rows: **48**
@@ -13,8 +13,8 @@ Generated: 2026-07-23T14:34:00.193004Z
 - Campaign clicks: **10** across **5** post(s); last click `2026-07-17T14:15:52.906Z`
 - Click tracking links: **ready** (26 / 26 future rows; 26 / 26 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 8, ready_for_metric_capture: 22, scheduled_future: 18**
-- Next scheduled: `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` at `2026-07-23T11:20:00-04:00`
+- Status counts: **execution_attention: 9, ready_for_metric_capture: 22, scheduled_future: 17**
+- Next scheduled: `FP-GROWTH-RESET-VOICE-04-X` at `2026-07-24T14:05:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -231,8 +231,8 @@ Generated: 2026-07-23T14:34:00.193004Z
   - Next: Inspect executor state for FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-23T10:15:00-04:00 - **execution_attention**
   - Next: Inspect executor state for FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
-- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **execution_attention**
+  - Next: Inspect executor state for FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
 - `FP-GROWTH-RESET-VOICE-04-X` X 2026-07-24T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube 2026-07-25T10:15:00-04:00 - **scheduled_future**

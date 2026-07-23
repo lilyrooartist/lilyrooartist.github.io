@@ -1,14 +1,14 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-23T14:34:01.092289Z
+Generated: 2026-07-23T16:55:17.421898Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
 - Runway status: **moving**
 - Ready release-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **8**
-- Activation actions: **10**
+- Platform fixes: **9**
+- Activation actions: **11**
 
 ## Activation Sequence
 1. **Preview approved backlog reschedule**
@@ -37,22 +37,26 @@ Generated: 2026-07-23T14:34:01.092289Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
-7. **Repair YouTube executor**
+7. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
 8. **Repair YouTube executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
 9. **Repair YouTube executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.
-   - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
-10. **Current operations next action: Fix YouTube executor**
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE`
+10. **Repair YouTube executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE`
+11. **Current operations next action: Fix Facebook executor**
    - Phase: `Operations packet`; status: `needs_fix`
    - Detail: Platform executor needs repair before queued auto posts can publish.
-   - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.
