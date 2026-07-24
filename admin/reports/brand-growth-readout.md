@@ -1,17 +1,17 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-24T19:48:11.140104Z
+Generated: 2026-07-24T19:49:06.909199Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
-- Visible in future queue: **26**
+- Visible in future queue: **25**
 - Posted or measured rows: **23**
 - Measured rows: **0**
 - Ready for metric capture: **22**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **10** across **5** post(s); last click `2026-07-17T14:15:52.906Z`
-- Click tracking links: **ready** (26 / 26 future rows; 26 / 26 URLs)
+- Click tracking links: **ready** (25 / 25 future rows; 25 / 25 URLs)
 - Post-slot watch windows: **24**
 - Status counts: **execution_attention: 9, posted_waiting_measurement_window: 1, ready_for_metric_capture: 22, scheduled_future: 16**
 - Next scheduled: `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` at `2026-07-25T10:15:00-04:00`

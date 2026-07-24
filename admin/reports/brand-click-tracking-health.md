@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-24T19:48:10.574883Z
+Generated: 2026-07-24T19:49:06.552143Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **26 / 26**
-- Tracking URLs checked: **26 / 26**
+- Future campaign rows ready: **25 / 25**
+- Tracking URLs checked: **25 / 25**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **6 / 26**
-- Visible full destination sets: **26 / 26**
+- Visible album click paths: **6 / 25**
+- Visible full destination sets: **25 / 25**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,14 +24,14 @@ Generated: 2026-07-24T19:48:10.574883Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 6, echo: 8, spotify: 6, video: 6**
+- Destinations: **album: 6, echo: 7, spotify: 6, video: 6**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-growth-reset-voice-04-x`
+- Probe campaign id: `fp-growth-reset-voice-05-x`
 - Event: **x / album / track unknown**
 
 ## Redirect Checks
@@ -221,10 +221,6 @@ Generated: 2026-07-24T19:48:10.574883Z
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-23T11:20:00-04:00 - **ready** (1 link)
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
-- `FP-GROWTH-RESET-VOICE-04-X` X 2026-07-24T14:05:00-04:00 - **ready** (1 link)
-  - Destinations: `echo`
-  - Visible surface: **attention** (`echo`)
-  - Main-post album link: **ready**
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube 2026-07-25T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `video`
   - Visible surface: **attention** (`video`)

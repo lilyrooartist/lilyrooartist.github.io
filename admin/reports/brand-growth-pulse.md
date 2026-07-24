@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-24T19:48:12.272002Z
+Generated: 2026-07-24T19:49:08.141122Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -9,15 +9,15 @@ Generated: 2026-07-24T19:48:12.272002Z
 - Command: `python3 scripts/build_brand_growth_preflight.py`
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
-- Future queued posts: **26**
+- Future queued posts: **25**
 - Posted or measured rows: **23**
 - Ready for result capture: **22**
 - First-party clicks: **10** across **5** post(s)
-- Click snapshot: `2026-07-24T19:48:08.651617Z` (covers current due posts)
+- Click snapshot: `2026-07-24T19:49:04.706709Z` (covers current due posts)
 - Next post at: `2026-07-25T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `18.45`
-- Hours until proof due: `-265.7`
+- Hours until next post: `18.43`
+- Hours until proof due: `-265.72`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -26,7 +26,7 @@ Generated: 2026-07-24T19:48:12.272002Z
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **22**
 - Waiting measurement rows: **1**
-- Future scheduled rows: **26**
+- Future scheduled rows: **25**
 - Next learning due at: `2026-07-25T18:15:27.362000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
