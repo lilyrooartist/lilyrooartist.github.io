@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-25T14:03:48.846261Z
+Generated: 2026-07-25T16:25:55.783936Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-07-25T14:03:48.846261Z
 - Posted or measured rows: **23**
 - Ready for result capture: **22**
 - First-party clicks: **10** across **5** post(s)
-- Click snapshot: `2026-07-25T14:03:45.070975Z` (covers current due posts)
-- Next post at: `2026-07-25T10:15:00-04:00`
+- Click snapshot: `2026-07-25T16:25:52.213614Z` (covers current due posts)
+- Next post at: `2026-07-27T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.19`
-- Hours until proof due: `-283.96`
+- Hours until next post: `45.82`
+- Hours until proof due: `-286.33`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -38,8 +38,8 @@ Generated: 2026-07-25T14:03:48.846261Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-GROWTH-RESET-VOICE-04-X` (X): Voice 04 - Waiting for first useful result check
-  - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` (YouTube): Spilling The Tea Visual Story - Next queued learning input
-  - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` (Facebook): Spilling The Tea Visual Story - Next queued learning input
+  - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` (YouTube): Spilling The Tea Echo Thread Setup Song Payoff - Next queued learning input
+  - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Facebook): Spilling The Tea Echo Thread Setup Song Payoff - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

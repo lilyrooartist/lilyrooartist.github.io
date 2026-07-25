@@ -1,22 +1,23 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-25T14:03:47.583235Z
+Generated: 2026-07-25T16:25:55.152216Z
 
 ## Summary
 - Status: **needs_attention**
-- Next window: **2026-07-25** at `2026-07-25T15:21:00Z`
-- Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-25T15:21:00Z`, due **11**, satisfied **2**, would post **2**, posted **0**, blocked **9**
-- Current scheduler snapshot: checked `2026-07-25T14:03:41.731867Z`, requested `2026-07-25T14:03:41.406056Z`, due **9**, would post **0**, posted **0**, blocked **9**
-- Link checks: **4 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **2 / 2 checked ok**
-- Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-25T15:21:00Z`
-- Current window measurement due: `2026-07-26T15:20:00Z`
+- Next window: **2026-07-27** at `2026-07-27T18:06:00Z`
+- Expected posts: **3**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-27T18:06:00Z`, due **14**, satisfied **3**, would post **3**, posted **0**, blocked **11**
+- Current scheduler snapshot: checked `2026-07-25T16:25:49.429148Z`, requested `2026-07-25T16:25:49.134112Z`, due **11**, would post **0**, posted **0**, blocked **11**
+- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **3 / 3 checked ok**
+- Redirect targets: **3 / 3 checked**, **3 ok**, **0 warning**, **0 blocking failed**
+- Current window proof due: `2026-07-27T18:06:00Z`
+- Current window measurement due: `2026-07-28T18:05:00Z`
 
 ## Expected Posts
-- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube at `2026-07-25T10:15:00-04:00`
-- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` Facebook at `2026-07-25T11:20:00-04:00`
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube at `2026-07-27T10:15:00-04:00`
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook at `2026-07-27T11:20:00-04:00`
+- `FP-GROWTH-RESET-VOICE-05-X` X at `2026-07-27T14:05:00-04:00`
 
 ## Blocked Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
@@ -28,16 +29,20 @@ Generated: 2026-07-25T14:03:47.583235Z
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK`
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE`
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
 
 ## Link Checks
-- **ok** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE Watch the full track` 200 text/html
-- **ok** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK Watch the full track` 200 text/html
+- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread` 200 text/html
+- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread` 200 text/html
+- **ok** `FP-GROWTH-RESET-VOICE-05-X Enter the album room` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE Watch the full track target video` 200 text/html; charset=utf-8
-- **ok** `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK Watch the full track target video` 200 text/html; charset=utf-8
+- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread target echo` 200 text/html
+- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread target echo` 200 text/html
+- **ok** `FP-GROWTH-RESET-VOICE-05-X Enter the album room target album` 200 text/html
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

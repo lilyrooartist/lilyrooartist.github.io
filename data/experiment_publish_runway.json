@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T14:03:48.932045Z",
+  "generated_at": "2026-07-25T16:25:55.898926Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -16,9 +16,9 @@
     "pending_result_field_count": 105,
     "winner_ready_candidate_count": 3,
     "winner_count_target": 3,
-    "blocked_platform_count": 9,
-    "approved_backlog_count": 9,
-    "blocked_backlog_count": 9,
+    "blocked_platform_count": 11,
+    "approved_backlog_count": 11,
+    "blocked_backlog_count": 11,
     "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
   },
   "manual_review_rows": [],
@@ -78,6 +78,15 @@
       "blocked_apply_reasons": []
     },
     {
+      "post_id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+      "platform": "Facebook",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+      "blocked_apply_reasons": []
+    },
+    {
       "post_id": "FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "platform": "YouTube",
       "reason": "max_attempts_exceeded",
@@ -102,6 +111,15 @@
       "status": "failed",
       "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
       "blocked_apply_reasons": []
     }
   ],

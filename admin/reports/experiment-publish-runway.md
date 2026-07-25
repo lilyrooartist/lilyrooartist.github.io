@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-25T14:03:48.932045Z
+Generated: 2026-07-25T16:25:55.898926Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -8,7 +8,7 @@ Generated: 2026-07-25T14:03:48.932045Z
 - Public URLs needed: **0**
 - Pending result fields: **105**
 - Winner-ready formats: **3 / 3**
-- Blocked platform rows: **9**
+- Blocked platform rows: **11**
 
 ## Next Publish Action
 - Collect experiment results when public URLs and measurement values are available.
@@ -30,6 +30,8 @@ Generated: 2026-07-25T14:03:48.932045Z
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook - max_attempts_exceeded
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-FACEBOOK` Facebook - max_attempts_exceeded
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK` Facebook - max_attempts_exceeded
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK` Facebook - max_attempts_exceeded
 - `FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube - max_attempts_exceeded
 - `FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE` YouTube - max_attempts_exceeded
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube - max_attempts_exceeded
+- `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube - max_attempts_exceeded

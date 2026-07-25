@@ -1,24 +1,24 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-25T14:03:48.970989Z
+Generated: 2026-07-25T16:25:55.948449Z
 
 ## Summary
-- Actions: **18**
+- Actions: **20**
 - User review: **0**
-- Platform fixes: **9**
+- Platform fixes: **11**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
 - Store checks: **4**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 11, low: 2, medium: 4**
+- Urgency: **blocked: 1, high: 13, low: 2, medium: 4**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Measure active brand campaign: **1**
-- Repair executor: **9**
+- Repair executor: **11**
 - Reschedule approved backlog: **1**
 - Verify music sites: **4**
 
@@ -31,6 +31,18 @@ Generated: 2026-07-25T14:03:48.970989Z
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
+- **[high] Fix Facebook executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK --apply`
+- **[high] Fix YouTube executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE --apply`
 - **[high] Fix Facebook executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
@@ -85,25 +97,6 @@ Generated: 2026-07-25T14:03:48.970989Z
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK --apply`
-
-### Measure active brand campaign
-- **[high] Connect automated brand metrics capture**
-  - Why: 22 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.
-  - Detail: Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. Add the missing names to ../secrets/social_api.env, use the scoped GitHub Actions secret push, then rerun the capture commands.
-  - Local source: `secrets/social_api.env`
-  - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
-  - Packet: `admin/reports/brand-growth-readout.md`
-
-### Collect experiment results
-- **[high] Collect experiment result metrics**
-  - Why: 19 logged experiment post(s) have 105 result field(s) waiting; these results rank repeatable formats.
-  - Detail: Fill measured result values with evidence notes, preview the import, then apply only after review.
-  - Command: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
-  - Packet: `admin/reports/experiment-result-clipboard.md`
-  - Metric cards: **19**; pending fields: **105**
-  - Measurement priorities: **12**
-  - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
-  - Preview result import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

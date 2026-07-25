@@ -1,12 +1,12 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-07-25T14:03:46.478012Z
+Generated: 2026-07-25T16:25:53.946387Z
 
 ## Summary
-- Worksheet rows: **13**
+- Worksheet rows: **15**
 - Executed previews: **4**
-- Skipped previews: **9**
-- Status counts: `{"input_missing": 2, "preview_ok": 1, "preview_ok_with_warning": 1, "skipped": 9}`
+- Skipped previews: **11**
+- Status counts: `{"input_missing": 2, "preview_ok": 1, "preview_ok_with_warning": 1, "skipped": 11}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
@@ -56,6 +56,16 @@ Generated: 2026-07-25T14:03:46.478012Z
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE`
   - Guardrail: Push worker secrets only after local platform setup is complete.
+- **platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
+- **platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-tiktok-preflight** (`preview_ok`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `safe_preview` (dry_run_command)
@@ -66,7 +76,7 @@ Generated: 2026-07-25T14:03:46.478012Z
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 9 | - FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-26T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-27T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-07-28T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-07-29T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-07-30T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-07-31T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired 
+  - Output: Rows selected: 11 | - FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-26T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-27T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-07-28T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-07-29T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-07-30T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-07-31T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`
