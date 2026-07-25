@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T19:49:04.836833+00:00",
+  "generated_at": "2026-07-25T03:39:34.107068+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -15,12 +15,12 @@
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
-    "start_at": "2026-07-25T10:00:00+00:00",
+    "start_at": "2026-07-26T10:00:00+00:00",
     "spacing_hours": 24,
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-25T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24",
     "apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-25T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-25T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
     "apply_allowed_without_override": false,
     "blocked_ids": [
@@ -61,10 +61,10 @@
       "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
       "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK"
     ],
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-25T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24",
     "safe_apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-25T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-25T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-26T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_allowed_without_override": false,
     "apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
@@ -77,7 +77,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-25T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -88,7 +88,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -99,7 +99,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -110,7 +110,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-        "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-29T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -121,7 +121,7 @@
         "song": "Slow Walk",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-29T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-30T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -132,7 +132,7 @@
         "song": "Spilling the Tea",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-        "proposed_scheduled_at": "2026-07-30T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-07-31T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -143,7 +143,7 @@
         "song": "Spilling the Tea",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-07-31T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-08-01T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -154,7 +154,7 @@
         "song": "Spilling the Tea",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-        "proposed_scheduled_at": "2026-08-01T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-08-02T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -165,7 +165,7 @@
         "song": "Spilling the Tea",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-        "proposed_scheduled_at": "2026-08-02T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-08-03T10:00:00+00:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -234,7 +234,7 @@
       "platform": "Facebook",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-13T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-25T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
@@ -251,7 +251,7 @@
       "platform": "Facebook",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-15T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
@@ -268,7 +268,7 @@
       "platform": "Facebook",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-17T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-27T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
@@ -285,7 +285,7 @@
       "platform": "YouTube",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-19T10:15:00-04:00",
-      "proposed_scheduled_at": "2026-07-28T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-29T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "blocker_status": "failed",
@@ -302,7 +302,7 @@
       "platform": "Facebook",
       "song": "Slow Walk",
       "current_scheduled_at": "2026-07-19T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-29T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-30T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
@@ -319,7 +319,7 @@
       "platform": "YouTube",
       "song": "Spilling the Tea",
       "current_scheduled_at": "2026-07-21T10:15:00-04:00",
-      "proposed_scheduled_at": "2026-07-30T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-07-31T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "blocker_status": "failed",
@@ -336,7 +336,7 @@
       "platform": "Facebook",
       "song": "Spilling the Tea",
       "current_scheduled_at": "2026-07-21T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-07-31T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-08-01T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
@@ -353,7 +353,7 @@
       "platform": "YouTube",
       "song": "Spilling the Tea",
       "current_scheduled_at": "2026-07-23T10:15:00-04:00",
-      "proposed_scheduled_at": "2026-08-01T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-08-02T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "blocker_status": "failed",
@@ -370,7 +370,7 @@
       "platform": "Facebook",
       "song": "Spilling the Tea",
       "current_scheduled_at": "2026-07-23T11:20:00-04:00",
-      "proposed_scheduled_at": "2026-08-02T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-08-03T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
       "blocker_status": "failed",
