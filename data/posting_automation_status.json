@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T16:25:54.469133Z",
+  "generated_at": "2026-07-25T16:59:34.166415Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -23,8 +23,8 @@
       "X",
       "YouTube"
     ],
-    "active_campaign_next_proof_due_at": "2026-07-25T15:21:00Z",
-    "active_campaign_next_measurement_due_at": "2026-07-26T15:20:00Z",
+    "active_campaign_next_proof_due_at": "2026-07-27T18:06:00Z",
+    "active_campaign_next_measurement_due_at": "2026-07-28T18:05:00Z",
     "ready_lane_count": 5,
     "blocked_lane_count": 3,
     "deferred_lane_count": 0,
@@ -37,9 +37,9 @@
       "20 18 * * *"
     ],
     "active_campaign_proof_refresh_status": "ready",
-    "active_campaign_next_proof_refresh_at": "2026-07-25T15:25:00Z",
-    "active_campaign_proof_refresh_lag_minutes": 4,
-    "active_campaign_proof_refresh_cron": "25 15 * * *",
+    "active_campaign_next_proof_refresh_at": "2026-07-27T18:20:00Z",
+    "active_campaign_proof_refresh_lag_minutes": 14,
+    "active_campaign_proof_refresh_cron": "20 18 * * *",
     "active_campaign_proof_export_status": "needs_attention",
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
@@ -63,38 +63,38 @@
   },
   "proof_refresh": {
     "status": "ready",
-    "proof_due_at": "2026-07-25T15:21:00Z",
-    "next_refresh_at": "2026-07-25T15:25:00Z",
-    "lag_minutes": 4,
-    "cron": "25 15 * * *",
-    "detail": "next fixed refresh 4 minute(s) after proof due"
+    "proof_due_at": "2026-07-27T18:06:00Z",
+    "next_refresh_at": "2026-07-27T18:20:00Z",
+    "lag_minutes": 14,
+    "cron": "20 18 * * *",
+    "detail": "next fixed refresh 14 minute(s) after proof due"
   },
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
       "status": "needs_attention",
-      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE at 2026-07-25T10:15:00-04:00; preflight=needs_attention",
+      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE at 2026-07-27T10:15:00-04:00; preflight=needs_attention",
       "evidence": "data/brand_growth_preflight.json",
       "next_action": "Refresh brand growth readout and preflight."
     },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30165583506",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30166698530",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-25T15:25:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-27T18:20:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-25T16:25:52.224051Z",
+      "detail": "19 refresh commands captured at 2026-07-25T16:59:32.061402Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
