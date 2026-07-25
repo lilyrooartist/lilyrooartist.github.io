@@ -1088,15 +1088,26 @@ async function postFacebookReel(payload, env, mediaUrl) {
   const uploadUrl = text(start.upload_url);
   if (!videoId || !uploadUrl) throw new Error(`Facebook Reel upload initialization failed: ${JSON.stringify(start)}`);
 
+  // Upload the bytes ourselves so Meta does not need to crawl the hosted clip URL.
+  const media = await fetch(mediaUrl);
+  if (!media.ok) throw new Error(`Unable to fetch Facebook Reel media URL (${media.status})`);
+  const videoBytes = await media.arrayBuffer();
+  if (looksLikeGitLfsPointer(videoBytes)) {
+    throw new Error("Facebook Reel media URL resolved to a Git LFS pointer, not a playable video.");
+  }
+  const contentType = media.headers.get("content-type") || guessVideoType(mediaUrl);
   const upload = await fetch(uploadUrl, {
     method: "POST",
     headers: {
       Authorization: `OAuth ${env.META_LONG_LIVED_TOKEN}`,
-      file_url: mediaUrl,
+      "Content-Type": contentType,
+      offset: "0",
+      file_size: String(videoBytes.byteLength),
     },
+    body: videoBytes,
   });
   if (!upload.ok) {
-    throw new Error(`Facebook Reel hosted upload failed (${upload.status}): ${await safeText(upload)}`);
+    throw new Error(`Facebook Reel upload failed (${upload.status}): ${await safeText(upload)}`);
   }
 
   const finish = await formPost(endpoint, {

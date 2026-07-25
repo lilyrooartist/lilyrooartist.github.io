@@ -31,9 +31,9 @@ class FacebookPostTests(unittest.TestCase):
 
     @patch.object(posts, 'append_published_log')
     @patch.object(posts, 'facebook_permalink_url', return_value='https://facebook.com/reel')
-    @patch.object(posts, 'api_post_hosted_video', return_value={'success': True})
+    @patch.object(posts, 'api_upload_video_bytes', return_value={'success': True})
     @patch.object(posts, 'api_post')
-    def test_video_uses_page_reels_flow_and_logs_permalink(self, api_post, hosted_upload, permalink, log):
+    def test_video_uses_page_reels_flow_and_logs_permalink(self, api_post, byte_upload, permalink, log):
         api_post.side_effect = [
             {'video_id': 'video-1', 'upload_url': 'https://rupload.facebook.com/upload/video-1'},
             {'success': True},
@@ -52,7 +52,7 @@ class FacebookPostTests(unittest.TestCase):
         self.assertEqual(result['post_url'], 'https://facebook.com/reel')
         self.assertEqual(api_post.call_args_list[0].args[0], 'https://graph.facebook.com/v25.0/page/video_reels')
         self.assertEqual(api_post.call_args_list[0].args[1]['upload_phase'], 'start')
-        hosted_upload.assert_called_once_with('https://rupload.facebook.com/upload/video-1', row['clip_url'], 'token')
+        byte_upload.assert_called_once_with('https://rupload.facebook.com/upload/video-1', row['clip_url'], 'token')
         self.assertEqual(api_post.call_args_list[1].args[1]['upload_phase'], 'finish')
         self.assertEqual(api_post.call_args_list[1].args[1]['video_state'], 'PUBLISHED')
         log.assert_called_once_with(

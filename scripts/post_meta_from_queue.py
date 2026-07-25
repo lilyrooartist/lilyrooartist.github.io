@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import mimetypes
 import urllib.parse
 import urllib.request
 
@@ -26,10 +27,18 @@ def api_get(url: str, params: dict[str, str]) -> dict:
         return json.loads(resp.read().decode('utf-8'))
 
 
-def api_post_hosted_video(upload_url: str, media_url: str, token: str) -> dict:
-    req = urllib.request.Request(upload_url, data=b'', headers={
+def api_upload_video_bytes(upload_url: str, media_url: str, token: str) -> dict:
+    media_req = urllib.request.Request(media_url, headers={'User-Agent': 'LilyRooPublisher/1.0'})
+    with urllib.request.urlopen(media_req) as media_resp:
+        body = media_resp.read()
+        content_type = media_resp.headers.get_content_type() or mimetypes.guess_type(media_url)[0] or 'video/mp4'
+    if body.startswith(b'version https://git-lfs.github.com/spec/'):
+        raise RuntimeError('Facebook Reel media URL resolved to a Git LFS pointer, not a playable video.')
+    req = urllib.request.Request(upload_url, data=body, headers={
         'Authorization': f'OAuth {token}',
-        'file_url': media_url,
+        'Content-Type': content_type,
+        'offset': '0',
+        'file_size': str(len(body)),
     }, method='POST')
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read().decode('utf-8'))
@@ -101,7 +110,7 @@ def facebook_reel_post(
     if not video_id or not upload_url:
         raise RuntimeError(f'Facebook Reel upload initialization failed: {start}')
 
-    api_post_hosted_video(upload_url, media_url, token)
+    api_upload_video_bytes(upload_url, media_url, token)
     finish = api_post(endpoint, {
         'upload_phase': 'finish',
         'video_id': video_id,
