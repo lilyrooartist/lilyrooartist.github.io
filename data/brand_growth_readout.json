@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T16:59:34.647436Z",
+  "generated_at": "2026-07-25T19:35:53.981146Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -29,15 +29,14 @@
     },
     "status_counts": {
       "execution_attention": 11,
-      "posted_waiting_measurement_window": 1,
-      "ready_for_metric_capture": 22,
+      "ready_for_metric_capture": 23,
       "scheduled_future": 14
     },
     "approved_auto_rows": 48,
     "future_queue_visible_rows": 25,
     "posted_or_measured_rows": 23,
     "measured_rows": 0,
-    "ready_for_metric_capture_rows": 22,
+    "ready_for_metric_capture_rows": 23,
     "public_visibility_status": "verified",
     "public_visibility_checked_post_count": 8,
     "public_visibility_ok_count": 8,
@@ -55,10 +54,10 @@
     "campaign_click_tracking_url_count": 25,
     "campaign_click_tracking_expected_url_count": 25,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 33,
+    "attention_rows": 34,
     "next_scheduled_post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
     "next_scheduled_at": "2026-07-27T10:15:00-04:00",
-    "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X",
+    "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
     "facebook_metric_capture_status": "skipped_missing_secrets",
@@ -83,8 +82,7 @@
     "post_slot_watch_window_count": 24,
     "post_slot_watch_status_counts": {
       "attention": 7,
-      "measurement_due": 9,
-      "posted_waiting_measurement": 1,
+      "measurement_due": 10,
       "scheduled_future": 7
     },
     "next_action_window_date": "2026-07-04",
@@ -122,8 +120,7 @@
       "window_count": 24,
       "status_counts": {
         "attention": 7,
-        "measurement_due": 9,
-        "posted_waiting_measurement": 1,
+        "measurement_due": 10,
         "scheduled_future": 7
       },
       "next_window_date": "2026-07-04",
@@ -607,7 +604,7 @@
       },
       {
         "date": "2026-07-24",
-        "status": "posted_waiting_measurement",
+        "status": "measurement_due",
         "post_ids": [
           "FP-GROWTH-RESET-VOICE-04-X"
         ],
@@ -619,15 +616,17 @@
         "proof_due_at": "2026-07-24T18:06:00Z",
         "measurement_due_at": "2026-07-25T18:05:00Z",
         "status_counts": {
-          "posted_waiting_measurement_window": 1
+          "ready_for_metric_capture": 1
         },
         "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
+        "rows_ready_for_metrics": [
+          "FP-GROWTH-RESET-VOICE-04-X"
+        ],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Wait for the first measurement window before capturing result metrics."
+        "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-GROWTH-RESET-VOICE-04-X",
+        "next_action": "Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected."
       },
       {
         "date": "2026-07-25",
@@ -1229,7 +1228,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:46.445000+00:00",
+      "measurement_due_at": "2026-07-26T19:30:55.194000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1295,7 +1294,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:46.681000+00:00",
+      "measurement_due_at": "2026-07-26T19:30:56.185000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1339,7 +1338,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:46.937000+00:00",
+      "measurement_due_at": "2026-07-26T19:30:57.182000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1383,7 +1382,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:47.330000+00:00",
+      "measurement_due_at": "2026-07-26T19:30:58.173000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1405,7 +1404,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:47.559000+00:00",
+      "measurement_due_at": "2026-07-26T19:30:59.154000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1449,7 +1448,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:47.766000+00:00",
+      "measurement_due_at": "2026-07-26T19:31:00.045000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1471,7 +1470,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:48.008000+00:00",
+      "measurement_due_at": "2026-07-26T19:31:01.042000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1493,7 +1492,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:48.273000+00:00",
+      "measurement_due_at": "2026-07-26T19:31:02.043000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1515,7 +1514,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:48.526000+00:00",
+      "measurement_due_at": "2026-07-26T19:31:03.049000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1543,8 +1542,8 @@
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "posted_waiting_measurement_window",
-      "next_action": "Wait until 2026-07-25T18:15:27.362000+00:00 before capturing metrics.",
+      "status": "ready_for_metric_capture",
+      "next_action": "Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).",
       "visible_in_future_queue": false
     },
     {
@@ -1559,7 +1558,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:48.727000+00:00",
+      "measurement_due_at": "2026-07-26T19:31:03.930000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1581,7 +1580,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-26T16:45:48.968000+00:00",
+      "measurement_due_at": "2026-07-26T19:31:04.925000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1909,7 +1908,7 @@
     "click_status": "ready",
     "click_count": 10,
     "click_post_count": 5,
-    "ready_for_learning_count": 22,
+    "ready_for_learning_count": 23,
     "native_metric_missing_secret_names": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -1927,9 +1926,7 @@
       "FP-BRAND-AM-03-ANALOG-MYTH-X",
       "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
     ],
-    "waiting_post_ids": [
-      "FP-GROWTH-RESET-VOICE-04-X"
-    ],
+    "waiting_post_ids": [],
     "next_proof_post_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
