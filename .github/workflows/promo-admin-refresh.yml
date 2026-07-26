@@ -32,6 +32,8 @@ jobs:
       X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
       META_LONG_LIVED_TOKEN: ${{ secrets.META_LONG_LIVED_TOKEN }}
       FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+      FAMOUS_ADMIN_ACTIVITY_SECRET: ${{ secrets.FAMOUS_ADMIN_ACTIVITY_SECRET }}
+      FAMOUS_ADMIN_ACTIVITY_URL: https://admin.famous.land
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -45,6 +47,9 @@ jobs:
 
       - name: Run safe promo admin refresh
         run: python3 scripts/refresh_promo_admin.py
+
+      - name: Publish meaningful Admin activity
+        run: python3 scripts/publish_master_activity.py
 
       - name: Validate content system
         run: |
@@ -86,6 +91,7 @@ jobs:
             scripts/build_posting_automation_status.py \
             scripts/update_experiment_results.py \
             scripts/build_promo_operations_packet.py \
+            scripts/publish_master_activity.py \
             scripts/build_manual_metric_collection.py \
             scripts/validate_content_system.py
 
