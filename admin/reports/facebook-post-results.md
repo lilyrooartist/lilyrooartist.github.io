@@ -1,6 +1,6 @@
 # Facebook Post Results - Lily Roo
 
-Generated: 2026-07-25T19:35:47.966253Z
+Generated: 2026-07-26T03:56:53.606326Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
@@ -18,161 +18,161 @@ Generated: 2026-07-25T19:35:47.966253Z
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-260** row `18`
   - URL: https://www.facebook.com/903693509504290_122118326547249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-278** row `30`
   - URL: https://www.facebook.com/903693509504290_122120594715249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA** row `31`
   - URL: https://www.facebook.com/903693509504290_122120594589249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-273** row `32`
   - URL: https://www.facebook.com/903693509504290_122120594571249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-265** row `33`
   - URL: https://www.facebook.com/903693509504290_122120594493249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-268** row `34`
   - URL: https://www.facebook.com/903693509504290_122120594409249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA** row `35`
   - URL: https://www.facebook.com/903693509504290_122120594331249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK** row `36`
   - URL: https://www.facebook.com/903693509504290_122120594301249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-PLAN-TWELVE-DOLLARS-FACEBOOK** row `37`
   - URL: https://www.facebook.com/903693509504290_122120594247249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-LAUNCH-ANALOG-MYTH-FACEBOOK** row `39`
   - URL: https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-283** row `41`
   - URL: https://www.facebook.com/903693509504290_122120643825249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA** row `45`
   - URL: https://www.facebook.com/903693509504290_122120699235249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING** row `46`
   - URL: https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT** row `49`
   - URL: https://www.facebook.com/permalink.php?story_fbid=122120725569249470&id=903693509504290
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-01-13-FACEBOOK** row `50`
   - URL: https://www.facebook.com/lilyrooartist/posts/122120959905249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK** row `52`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK** row `55`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK** row `57`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121211923249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK** row `59`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121305865249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK** row `60`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121402309249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-07-SLOW-WALK-FACEBOOK** row `63`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121496545249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK** row `64`
   - URL: https://www.facebook.com/lilyrooartist/posts/122121593013249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook metric capture skipped 2026-07-25: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Evidence: Facebook metric capture skipped 2026-07-26: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 
 ## Guardrails
 - Metrics come from the Facebook Graph API for already-published Lily Roo posts.
