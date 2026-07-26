@@ -33180,8 +33180,10 @@ Generated: 2026-07-26T13:58:07.691452Z
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
+  const ADMIN_SSO_KEY='lilyroo_admin_famous_sso_v1';
   const ADMIN_PASSWORD_DIGEST='24b26ab1e602268c369f95fc3612fd80417c9d0fcb90b965ce8f4b227943c8df';
   const ADMIN_PASSWORD_HEADER='X-Lilyroo-Admin-Password';
+  const FAMOUS_ADMIN_REDEEM_URL='https://admin.famous.land/api/sso/redeem';
 
   async function sha256(value){
     const bytes=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
@@ -33201,7 +33203,35 @@ Generated: 2026-07-26T13:58:07.691452Z
     document.body.classList.add('authenticated');
   }
 
+  async function redeemFamousAdminHandoff(){
+    const url=new URL(window.location.href);
+    const code=url.searchParams.get('famous_admin_code');
+    if(!code) return false;
+    url.searchParams.delete('famous_admin_code');
+    history.replaceState({},'',`${url.pathname}${url.search}${url.hash}`);
+    try{
+      const response=await fetch(FAMOUS_ADMIN_REDEEM_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({projectId:'lily-roo',code})
+      });
+      if(!response.ok) return false;
+      localStorage.setItem(ADMIN_SSO_KEY,'granted');
+      return true;
+    }catch(error){
+      return false;
+    }
+  }
+
   async function requireAdminAuth(){
+    if(await redeemFamousAdminHandoff()){
+      setAdminAuthenticated();
+      return true;
+    }
+    if(localStorage.getItem(ADMIN_SSO_KEY)==='granted'){
+      setAdminAuthenticated();
+      return true;
+    }
     const saved=adminPassword();
     if(saved && await passwordIsValid(saved)){
       setAdminAuthenticated();
@@ -33271,6 +33301,7 @@ Generated: 2026-07-26T13:58:07.691452Z
   }
   document.getElementById('lock-admin').addEventListener('click',()=>{
     localStorage.removeItem(ADMIN_AUTH_KEY);
+    localStorage.removeItem(ADMIN_SSO_KEY);
     location.reload();
   });
 
