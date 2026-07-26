@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-26T17:02:29.738531Z
+Generated: 2026-07-26T19:36:04.831146Z
 
 ## Summary
 - Open blockers: **12**
