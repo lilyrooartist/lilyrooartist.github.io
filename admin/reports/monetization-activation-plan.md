@@ -1,6 +1,6 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-26T13:58:09.032753Z
+Generated: 2026-07-26T16:28:26.955803Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**

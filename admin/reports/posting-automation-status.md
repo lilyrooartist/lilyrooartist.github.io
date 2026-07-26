@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-26T13:58:07.609125Z
+Generated: 2026-07-26T16:28:25.483502Z
 
 ## Summary
 - Status: **blocked**
@@ -22,13 +22,13 @@ Generated: 2026-07-26T13:58:07.609125Z
   - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30205091401
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30210478335
 - **Published URL export** - `needs_attention`
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-27T18:20:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-26T13:58:05.403878Z
+  - Detail: 19 refresh commands captured at 2026-07-26T16:28:23.393563Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=11 would_post=0
