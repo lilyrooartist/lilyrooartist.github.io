@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-27T17:43:42.630380Z
+Generated: 2026-07-27T19:57:04.810588Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -10,14 +10,14 @@ Generated: 2026-07-27T17:43:42.630380Z
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **24**
-- Posted or measured rows: **24**
+- Posted or measured rows: **25**
 - Ready for result capture: **23**
 - First-party clicks: **16** across **7** post(s)
-- Click snapshot: `2026-07-27T17:43:39.251233Z` (covers current due posts)
-- Next post at: `2026-07-27T14:05:00-04:00`
+- Click snapshot: `2026-07-27T19:57:01.416098Z` (covers current due posts)
+- Next post at: `2026-07-29T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.35`
-- Hours until proof due: `-335.63`
+- Hours until next post: `42.3`
+- Hours until proof due: `-337.85`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25,7 +25,7 @@ Generated: 2026-07-27T17:43:42.630380Z
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **23**
-- Waiting measurement rows: **1**
+- Waiting measurement rows: **2**
 - Future scheduled rows: **24**
 - Next learning due at: `2026-07-28T15:30:34.890000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
@@ -38,8 +38,9 @@ Generated: 2026-07-27T17:43:42.630380Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Facebook): Spilling The Tea Echo Thread Setup Song Payoff - Waiting for first useful result check
-  - `FP-GROWTH-RESET-VOICE-05-X` (X): Voice 05 - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-05-X` (X): Voice 05 - Waiting for first useful result check
   - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` (YouTube): No Mortgage Lyric Punch Line - Next queued learning input
+  - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): No Mortgage Lyric Punch Line - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

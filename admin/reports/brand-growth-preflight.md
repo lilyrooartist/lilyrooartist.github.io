@@ -1,25 +1,22 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-27T17:43:42.011205Z
+Generated: 2026-07-27T19:57:03.966357Z
 
 ## Summary
 - Status: **needs_attention**
-- Next window: **2026-07-27** at `2026-07-27T18:06:00Z`
+- Next window: **2026-07-29** at `2026-07-29T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-27T18:06:00Z`, due **14**, satisfied **1**, would post **1**, posted **1**, blocked **12**
-- Current scheduler snapshot: checked `2026-07-27T17:43:35.631743Z`, requested `2026-07-27T17:43:34.888748Z`, due **13**, would post **0**, posted **1**, blocked **12**
-- Link checks: **3 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-29T15:21:00Z`, due **15**, satisfied **2**, would post **2**, posted **1**, blocked **12**
+- Current scheduler snapshot: checked `2026-07-27T19:56:57.395841Z`, requested `2026-07-27T19:56:57.110452Z`, due **13**, would post **0**, posted **1**, blocked **12**
+- Link checks: **4 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **2 / 2 checked ok**
 - Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-27T18:06:00Z`
-- Current window measurement due: `2026-07-28T18:05:00Z`
+- Current window proof due: `2026-07-29T15:21:00Z`
+- Current window measurement due: `2026-07-30T15:20:00Z`
 
 ## Expected Posts
-- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube at `2026-07-27T10:15:00-04:00`
-- `FP-GROWTH-RESET-VOICE-05-X` X at `2026-07-27T14:05:00-04:00`
-
-## Missing From Dry Run
-- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube at `2026-07-29T10:15:00-04:00`
+- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` Facebook at `2026-07-29T11:20:00-04:00`
 
 ## Blocked Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
@@ -36,13 +33,14 @@ Generated: 2026-07-27T17:43:42.011205Z
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
 
 ## Link Checks
-- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread` 200 text/html
-- **ok** `FP-GROWTH-RESET-VOICE-05-X Enter the album room` 200 text/html
+- **ok** `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE Hear the song` 200 text/html
+- **ok** `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK Hear the song` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread target echo` 200 text/html
-- **ok** `FP-GROWTH-RESET-VOICE-05-X Enter the album room target album` 200 text/html
+- **ok** `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE Hear the song target spotify` 200 text/html; charset=utf-8
+- **ok** `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK Hear the song target spotify` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

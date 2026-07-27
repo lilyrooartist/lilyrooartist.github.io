@@ -1,14 +1,14 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-27T17:43:41.213125Z
+Generated: 2026-07-27T19:57:03.444520Z
 
 ## Summary
 - Status: **blocked**
 - Active campaign ready: **False**
-- Lanes ready: **5 / 10**
+- Lanes ready: **4 / 10**
 - Blocked lanes: **3**
 - Deferred optional lanes: **0**
-- Needs attention: **2**
+- Needs attention: **3**
 - Story posts tracked: **6**
 - Help-needed items: **0**
 - Proof refresh: **ready** at `2026-07-27T18:20:00Z` (14 min)
@@ -20,21 +20,22 @@ Generated: 2026-07-27T17:43:41.213125Z
   - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-VOICE-05-X at 2026-07-27T14:05:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
-- **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30290467060
+- **Scheduled refresh workflow** - `needs_attention`
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run pending / pending; proof refresh next fixed refresh 14 minute(s) after proof due
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30300453100
+  - Next: Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window.
 - **Published URL export** - `needs_attention`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-27T18:20:00Z
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-27T18:20:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-27T17:43:39.260359Z
+  - Detail: 19 refresh commands captured at 2026-07-27T19:57:01.426217Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=13 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=54 attention=12 platform_fix_needed=12
+  - Detail: posted=55 attention=12 platform_fix_needed=12
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `blocked`
   - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube

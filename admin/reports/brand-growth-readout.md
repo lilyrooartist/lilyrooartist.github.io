@@ -1,20 +1,20 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-27T17:43:41.939760Z
+Generated: 2026-07-27T19:57:03.889267Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
 - Visible in future queue: **24**
-- Posted or measured rows: **24**
+- Posted or measured rows: **25**
 - Measured rows: **0**
 - Ready for metric capture: **23**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **16** across **7** post(s); last click `2026-07-27T15:30:42.566Z`
 - Click tracking links: **ready** (24 / 24 future rows; 24 / 24 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 12, posted_waiting_measurement_window: 1, ready_for_metric_capture: 23, scheduled_future: 12**
-- Next scheduled: `FP-GROWTH-RESET-VOICE-05-X` at `2026-07-27T14:05:00-04:00`
+- Status counts: **execution_attention: 12, posted_waiting_measurement_window: 2, ready_for_metric_capture: 23, scheduled_future: 11**
+- Next scheduled: `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` at `2026-07-29T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -31,7 +31,7 @@ Generated: 2026-07-27T17:43:41.939760Z
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Waiting posts: `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+- Waiting posts: `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK, FP-GROWTH-RESET-VOICE-05-X`
 - Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
@@ -247,8 +247,9 @@ Generated: 2026-07-27T17:43:41.939760Z
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-07-27T11:20:00-04:00 - **posted_waiting_measurement_window**
   - URL: /reel/1059741379726711/
   - Next: Wait until 2026-07-28T15:30:34.890000+00:00 before capturing metrics.
-- `FP-GROWTH-RESET-VOICE-05-X` X 2026-07-27T14:05:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-VOICE-05-X` X 2026-07-27T14:05:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://x.com/i/web/status/2081805666893853143
+  - Next: Wait until 2026-07-28T18:15:24.338000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-29T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **scheduled_future**
