@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-07-27T10:10:11.664213Z",
+  "generated_at": "2026-07-27T15:17:05.546613Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 12,
-    "urgent_count": 12,
+    "open_blocker_count": 13,
+    "urgent_count": 13,
     "owner_counts": {
       "external_platform": 8,
-      "tod": 4
+      "tod": 5
     },
     "category_counts": {
       "backlog_reschedule": 1,
-      "platform_repair": 11
+      "platform_repair": 12
     },
     "status_counts": {
-      "blocked": 12
+      "blocked": 13
     },
     "next_resolution_projection": {
       "kind": "checked_scheduled_approval_batch",
@@ -82,7 +82,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 11,
+        "blockers_resolved": 12,
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
@@ -97,7 +97,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
-          "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK"
+          "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
@@ -230,6 +231,29 @@
       }
     },
     {
+      "id": "platform-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "blocker_id": "platform-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "title": "Repair YouTube executor",
+      "category": "platform_repair",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
+      "platform": "YouTube",
+      "release": "",
+      "evidence": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "next_step": "Review platform credentials/readiness, then rerun the social execution capture. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` before any retry reset; only reset if the worker reports executable.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "apply_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply",
+      "source_path": "data/platform_repair_status.json",
+      "external_url": "",
+      "guardrail": "Run retry resets only after the external platform repair is verified.",
+      "impact": {
+        "kind": "platform_repair_gate",
+        "blocked_apply_command": "",
+        "blocked_apply_reasons": []
+      }
+    },
+    {
       "id": "backlog-reschedule",
       "blocker_id": "backlog-reschedule",
       "title": "Reschedule approved past-due backlog",
@@ -239,7 +263,7 @@
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "11 approved backlog row(s); 11 still have executor blockers.",
+      "evidence": "12 approved backlog row(s); 12 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
       "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24",
       "apply_command": "",
@@ -253,8 +277,8 @@
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 11,
-          "blocked_backlog_count": 11,
+          "approved_backlog_count": 12,
+          "blocked_backlog_count": 12,
           "clear_to_apply_count": 0,
           "partial_clear_apply_available": false,
           "partial_clear_apply_count": 0,
@@ -269,7 +293,8 @@
             "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
             "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
-            "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK"
+            "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -398,6 +423,17 @@
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
               "proposed_scheduled_at": "2026-08-07T10:00:00+00:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "platform": "YouTube",
+              "song": "Spilling the Tea",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+              "proposed_scheduled_at": "2026-08-08T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]

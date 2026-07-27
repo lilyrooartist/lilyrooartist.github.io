@@ -1,13 +1,13 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-07-27T10:10:11.495596Z
+Generated: 2026-07-27T15:17:05.273156Z
 
 ## Summary
-- Platform fixes: **11**
-- Blocked rows: **11**
-- Preview commands: **11**
+- Platform fixes: **12**
+- Blocked rows: **12**
+- Preview commands: **12**
 - Apply commands: **0**
-- Checklist items: **22**
+- Checklist items: **24**
 - Checklist blocked: **0**
 - Platforms: **Facebook, YouTube**
 
@@ -143,6 +143,18 @@ Generated: 2026-07-27T10:10:11.495596Z
   - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE --apply`
+  - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
+- **YouTube** (`FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`)
+  - Status: `failed`; reason: `max_attempts_exceeded`
+  - Error: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
+  - Repair: Review platform credentials/readiness, then rerun the social execution capture.
+  - Checklist:
+    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 
 ## Guardrails

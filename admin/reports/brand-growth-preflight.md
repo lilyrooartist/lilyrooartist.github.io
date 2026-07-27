@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-27T10:10:14.560835Z
+Generated: 2026-07-27T15:17:07.003973Z
 
 ## Summary
 - Status: **needs_attention**
 - Next window: **2026-07-27** at `2026-07-27T18:06:00Z`
 - Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-27T18:06:00Z`, due **14**, satisfied **3**, would post **3**, posted **0**, blocked **11**
-- Current scheduler snapshot: checked `2026-07-27T10:10:07.681965Z`, requested `2026-07-27T10:10:07.361613Z`, due **11**, would post **0**, posted **0**, blocked **11**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-27T18:06:00Z`, due **14**, satisfied **2**, would post **2**, posted **0**, blocked **12**
+- Current scheduler snapshot: checked `2026-07-27T15:17:01.203236Z`, requested `2026-07-27T15:17:00.954034Z`, due **12**, would post **0**, posted **0**, blocked **12**
 - Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **3 / 3 checked ok**
 - Redirect targets: **3 / 3 checked**, **3 ok**, **0 warning**, **0 blocking failed**
@@ -18,6 +18,9 @@ Generated: 2026-07-27T10:10:14.560835Z
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube at `2026-07-27T10:15:00-04:00`
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook at `2026-07-27T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-05-X` X at `2026-07-27T14:05:00-04:00`
+
+## Missing From Dry Run
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
 
 ## Blocked Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
@@ -31,6 +34,7 @@ Generated: 2026-07-27T10:10:14.560835Z
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
+- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
 
 ## Link Checks
 - **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url` 200 video/mp4

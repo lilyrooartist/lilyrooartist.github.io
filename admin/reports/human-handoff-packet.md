@@ -1,12 +1,12 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-27T10:10:11.696205Z
+Generated: 2026-07-27T15:17:05.600841Z
 
 ## Summary
-- Open handoff tasks: **15**
-- Tod-owned tasks: **14**
+- Open handoff tasks: **16**
+- Tod-owned tasks: **15**
 - External/platform-gated tasks: **1**
-- High urgency tasks: **13**
+- High urgency tasks: **14**
 - Low urgency tasks: **2**
 
 ## Action Docket
@@ -14,7 +14,7 @@ Generated: 2026-07-27T10:10:11.696205Z
 - Blocked steps: **2**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (15 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (16 row(s))
 
 - **Review checked approval batch** (`not_available`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
@@ -30,7 +30,7 @@ Generated: 2026-07-27T10:10:11.696205Z
   - Next after apply: Remove or convert each approved manual-only YouTube Community row; only log URLs for historical rows that already have real public post URLs.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Manual posting is not in the active plan; log only real historical public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
-  - Owner: `tod`; tasks: **12**; blockers resolved: **12**
+  - Owner: `tod`; tasks: **13**; blockers resolved: **13**
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
   - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
@@ -52,7 +52,7 @@ Generated: 2026-07-27T10:10:11.696205Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows the optional metric count decreased.
   - Guardrail: Optional reporting input only; automated promotion is not blocked. Import only collected numeric values and leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **11**
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **12**
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24`
   - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
@@ -115,6 +115,11 @@ Generated: 2026-07-27T10:10:11.696205Z
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
+- **Repair YouTube executor** (`platform-setup-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Review platform credentials/readiness, then rerun the social execution capture.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
   - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Review TikTok upload-mode preflight** (`platform-setup-tiktok-preflight`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T10:10:14.500464Z",
+  "generated_at": "2026-07-27T15:17:06.911058Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -28,9 +28,9 @@
       "YouTube": 12
     },
     "status_counts": {
-      "execution_attention": 11,
+      "execution_attention": 12,
       "ready_for_metric_capture": 23,
-      "scheduled_future": 14
+      "scheduled_future": 13
     },
     "approved_auto_rows": 48,
     "future_queue_visible_rows": 25,
@@ -54,9 +54,9 @@
     "campaign_click_tracking_url_count": 25,
     "campaign_click_tracking_expected_url_count": 25,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 34,
-    "next_scheduled_post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-    "next_scheduled_at": "2026-07-27T10:15:00-04:00",
+    "attention_rows": 35,
+    "next_scheduled_post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+    "next_scheduled_at": "2026-07-27T11:20:00-04:00",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
@@ -81,9 +81,9 @@
     ],
     "post_slot_watch_window_count": 24,
     "post_slot_watch_status_counts": {
-      "attention": 7,
+      "attention": 8,
       "measurement_due": 10,
-      "scheduled_future": 7
+      "scheduled_future": 6
     },
     "next_action_window_date": "2026-07-04",
     "next_action_window_status": "measurement_due",
@@ -119,9 +119,9 @@
     "summary": {
       "window_count": 24,
       "status_counts": {
-        "attention": 7,
+        "attention": 8,
         "measurement_due": 10,
-        "scheduled_future": 7
+        "scheduled_future": 6
       },
       "next_window_date": "2026-07-04",
       "next_window_status": "measurement_due",
@@ -659,7 +659,7 @@
       },
       {
         "date": "2026-07-27",
-        "status": "scheduled_future",
+        "status": "attention",
         "post_ids": [
           "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
@@ -675,15 +675,18 @@
         "proof_due_at": "2026-07-27T18:06:00Z",
         "measurement_due_at": "2026-07-28T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 3
+          "execution_attention": 1,
+          "scheduled_future": 2
         },
-        "rows_needing_proof": [],
+        "rows_needing_proof": [
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+        ],
         "rows_ready_for_metrics": [],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Inspect executor state, then refresh and export posted URLs after the issue is resolved."
       },
       {
         "date": "2026-07-29",
@@ -1228,7 +1231,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:13.465000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:16.701000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1294,7 +1297,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:13.558000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:17.274000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1338,7 +1341,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:13.634000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:17.821000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1382,7 +1385,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:13.717000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:18.379000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1404,7 +1407,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:13.812000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:18.928000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1448,7 +1451,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:13.902000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:19.491000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1470,7 +1473,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:14.014000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:20.052000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1492,7 +1495,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:14.106000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:20.640000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1514,7 +1517,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:14.225000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:21.203000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1558,7 +1561,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:14.321000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:21.769000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1580,7 +1583,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-07-28T10:00:14.427000+00:00",
+      "measurement_due_at": "2026-07-28T15:15:22.332000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1600,16 +1603,16 @@
       "text": "What truth are you ready to say out loud? Spilling the Tea lets it pour. #Shorts",
       "post_url": "",
       "published_log_row": "",
-      "execution_status": "",
-      "execution_reason": "",
-      "measurement_due_at": "",
+      "execution_status": "failed",
+      "execution_reason": "max_attempts_exceeded",
+      "measurement_due_at": "2026-07-28T15:15:22.931000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "execution_attention",
+      "next_action": "Inspect executor state for FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "visible_in_future_queue": true
     },
     {

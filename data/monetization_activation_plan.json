@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T10:10:15.564768Z",
+  "generated_at": "2026-07-27T15:17:07.810824Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -22,8 +22,8 @@
     "manual_release_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "solicitation_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 11,
-    "action_count": 13
+    "platform_fix_count": 12,
+    "action_count": 14
   },
   "actions": [
     {
@@ -34,11 +34,11 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 11,
-        "raw_approved_backlog_posts": 11,
+        "approved_backlog_posts": 12,
+        "raw_approved_backlog_posts": 12,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 14,
-        "blocked_backlog_count": 11,
+        "approved_upcoming_posts": 13,
+        "blocked_backlog_count": 12,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-28T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
@@ -243,11 +243,29 @@
       }
     },
     {
-      "label": "Current operations next action: Fix Facebook executor",
+      "label": "Repair YouTube executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+        "platform": "YouTube",
+        "reason": "max_attempts_exceeded",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "local_secret_source": "",
+        "local_secret_ready": null,
+        "public_posting_approved": null
+      }
+    },
+    {
+      "label": "Current operations next action: Fix YouTube executor",
       "phase": "Operations packet",
       "status": "needs_fix",
       "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "after_review_command": "",
       "context": {
         "kind": "platform_fix",
