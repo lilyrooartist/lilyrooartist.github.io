@@ -66,6 +66,7 @@ def main() -> int:
         headers={
             "Authorization": f"Bearer {secret}",
             "Content-Type": "application/json",
+            "User-Agent": "LilyRooAdminActivity/1.0",
         },
         method="POST",
     )
