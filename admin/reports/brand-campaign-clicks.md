@@ -1,39 +1,44 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-07-27T15:17:04.117236Z
+Generated: 2026-07-27T17:16:45.327689Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **12**
-- Posts with clicks: **6**
+- Clicks captured: **16**
+- Posts with clicks: **7**
 - First click: `2026-07-10T15:30:43.264Z`
-- Last click: `2026-07-26T21:00:33.520Z`
+- Last click: `2026-07-27T15:30:42.566Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
+- facebook: **7**
 - youtube: **6**
-- facebook: **3**
 - site: **3**
 
 ### Destination
+- echo: **5**
 - album: **3**
 - playlist: **3**
 - video: **3**
 - spotify: **2**
-- echo: **1**
 
 ### Wave
-- video-reset: **6**
+- video-reset: **10**
 - site-home: **3**
 - track-moments: **3**
 
 ### Track
 - slow-walk: **9**
+- spilling-the-tea: **4**
 - hero-playlist: **2**
 - starter-playlist: **1**
 
 ## Recent Clicks
+- `2026-07-27T15:30:42.566Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`
+- `2026-07-27T15:30:41.359Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`
+- `2026-07-27T15:30:41.296Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`
+- `2026-07-27T15:30:40.957Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`
 - `2026-07-26T21:00:33.520Z` site playlist `site-home-hero-playlist`
 - `2026-07-26T20:35:21.736Z` site playlist `site-home-starter-playlist`
 - `2026-07-17T14:15:52.906Z` youtube video `fp-growth-reset-03-slow-walk-visual-story-youtube`

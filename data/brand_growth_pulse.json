@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T15:17:07.456137Z",
+  "generated_at": "2026-07-27T17:16:48.353502Z",
   "safe_mode": true,
   "status": "posting_needs_check",
   "source": {
@@ -22,29 +22,29 @@
     "active_campaign_ready": false,
     "posting_preflight_ready": false,
     "queued_future_posts": 25,
-    "posted_or_measured_rows": 23,
+    "posted_or_measured_rows": 24,
     "ready_for_metric_capture_rows": 23,
-    "click_count": 12,
-    "click_post_count": 6,
+    "click_count": 16,
+    "click_post_count": 7,
     "clicks_by_platform": {
+      "facebook": 7,
       "youtube": 6,
-      "facebook": 3,
       "site": 3
     },
     "clicks_by_destination": {
+      "echo": 5,
       "album": 3,
       "playlist": 3,
       "video": 3,
-      "spotify": 2,
-      "echo": 1
+      "spotify": 2
     },
-    "click_snapshot_updated_at": "2026-07-27T15:17:04.117236Z",
+    "click_snapshot_updated_at": "2026-07-27T17:16:45.327689Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
-    "next_post_at": "2026-07-27T11:20:00-04:00",
+    "next_post_at": "2026-07-27T14:05:00-04:00",
     "proof_due_at": "2026-07-13T18:06:00Z",
-    "hours_until_next_post": 0.05,
-    "hours_until_proof_due": -333.19,
+    "hours_until_next_post": 0.8,
+    "hours_until_proof_due": -335.18,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -57,8 +57,8 @@
     "learning_headline": "Click response is ready to review",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_rows": 23,
-    "waiting_measurement_rows": 0,
-    "next_learning_due_at": "2026-07-13T18:06:00Z",
+    "waiting_measurement_rows": 1,
+    "next_learning_due_at": "2026-07-28T15:30:34.890000Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
@@ -70,10 +70,10 @@
     "note": "Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_count": 23,
-    "waiting_measurement_count": 0,
+    "waiting_measurement_count": 1,
     "scheduled_future_count": 25,
-    "next_learning_due_at": "2026-07-13T18:06:00Z",
-    "click_snapshot_updated_at": "2026-07-27T15:17:04.117236Z",
+    "next_learning_due_at": "2026-07-28T15:30:34.890000Z",
+    "click_snapshot_updated_at": "2026-07-27T17:16:45.327689Z",
     "click_snapshot_age_hours": 0.0,
     "click_snapshot_covers_ready_measurements": true,
     "next_metric_post_ids": [
@@ -143,12 +143,12 @@
         "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
         "platform": "Facebook",
         "title": "Spilling The Tea Echo Thread Setup Song Payoff",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement_window",
         "scheduled_at": "2026-07-27T11:20:00-04:00",
-        "measurement_due_at": "",
-        "post_url": "",
+        "measurement_due_at": "2026-07-28T15:30:34.890000+00:00",
+        "post_url": "/reel/1059741379726711/",
         "public_visibility_ok": null,
-        "learning_use": "Next queued learning input"
+        "learning_use": "Waiting for first useful result check"
       },
       {
         "post_id": "FP-GROWTH-RESET-VOICE-05-X",
@@ -160,9 +160,20 @@
         "post_url": "",
         "public_visibility_ok": null,
         "learning_use": "Next queued learning input"
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+        "platform": "YouTube",
+        "title": "No Mortgage Lyric Punch Line",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-29T10:15:00-04:00",
+        "measurement_due_at": "",
+        "post_url": "",
+        "public_visibility_ok": null,
+        "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": -333.19
+    "hours_until_next_learning_due": 22.23
   },
   "recommendations": [
     {
