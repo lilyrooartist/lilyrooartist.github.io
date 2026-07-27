@@ -1,22 +1,21 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-27T17:16:48.037503Z
+Generated: 2026-07-27T17:43:42.011205Z
 
 ## Summary
 - Status: **needs_attention**
 - Next window: **2026-07-27** at `2026-07-27T18:06:00Z`
-- Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-27T18:06:00Z`, due **14**, satisfied **2**, would post **1**, posted **1**, blocked **12**
-- Current scheduler snapshot: checked `2026-07-27T17:16:41.279060Z`, requested `2026-07-27T17:16:40.821166Z`, due **13**, would post **0**, posted **1**, blocked **12**
-- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **3 / 3 checked ok**
-- Redirect targets: **3 / 3 checked**, **3 ok**, **0 warning**, **0 blocking failed**
+- Expected posts: **2**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-27T18:06:00Z`, due **14**, satisfied **1**, would post **1**, posted **1**, blocked **12**
+- Current scheduler snapshot: checked `2026-07-27T17:43:35.631743Z`, requested `2026-07-27T17:43:34.888748Z`, due **13**, would post **0**, posted **1**, blocked **12**
+- Link checks: **3 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **2 / 2 checked ok**
+- Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
 - Current window proof due: `2026-07-27T18:06:00Z`
 - Current window measurement due: `2026-07-28T18:05:00Z`
 
 ## Expected Posts
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube at `2026-07-27T10:15:00-04:00`
-- `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook at `2026-07-27T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-05-X` X at `2026-07-27T14:05:00-04:00`
 
 ## Missing From Dry Run
@@ -39,13 +38,10 @@ Generated: 2026-07-27T17:16:48.037503Z
 ## Link Checks
 - **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url` 200 video/mp4
 - **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread` 200 text/html
-- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread` 200 text/html
 - **ok** `FP-GROWTH-RESET-VOICE-05-X Enter the album room` 200 text/html
 
 ## Redirect Target Checks
 - **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread target echo` 200 text/html
-- **ok** `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread target echo` 200 text/html
 - **ok** `FP-GROWTH-RESET-VOICE-05-X Enter the album room target album` 200 text/html
 
 ## Guardrails
