@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-28T03:37:53.169733Z",
+  "generated_at": "2026-07-28T09:05:29.710096Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/978eaac0d448613701b67d0b7a87a3c855adc8e8/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/05ae0fd77a033df59e87d1991fe3267f1a05b935/admin/future-posts.json"
   },
   "summary": {
     "status": "needs_attention",
@@ -21,21 +21,21 @@
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
     "scheduler_simulated_at": "2026-07-29T15:21:00Z",
-    "scheduler_simulated_due_count": 15,
+    "scheduler_simulated_due_count": 14,
     "scheduler_simulated_would_post_count": 2,
-    "scheduler_simulated_posted_count": 1,
+    "scheduler_simulated_posted_count": 0,
     "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 12,
-    "scheduler_due_count": 15,
+    "scheduler_due_count": 14,
     "scheduler_would_post_count": 2,
-    "scheduler_posted_count": 1,
+    "scheduler_posted_count": 0,
     "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 12,
-    "current_scheduler_checked_at": "2026-07-28T03:37:47.417232Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-28T03:37:47.129256Z",
-    "current_scheduler_due_count": 13,
+    "current_scheduler_checked_at": "2026-07-28T09:05:23.765636Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-28T09:05:23.504751Z",
+    "current_scheduler_due_count": 12,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 1,
+    "current_scheduler_posted_count": 0,
     "current_scheduler_blocked_count": 12,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -74,19 +74,17 @@
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 15,
-    "result_count": 15,
+    "due_count": 14,
+    "result_count": 14,
     "would_post_count": 2,
-    "posted_count": 1,
+    "posted_count": 0,
     "blocked_count": 12,
     "status_counts": {
       "failed": 12,
-      "posted": 1,
       "would_post": 2
     },
     "platform_counts": {
       "Facebook": 8,
-      "Unknown": 1,
       "YouTube": 6
     },
     "would_post": [
@@ -113,19 +111,7 @@
         "error_summary": ""
       }
     ],
-    "posted": [
-      {
-        "post_id": "FP-GROWTH-RESET-VOICE-05-X",
-        "platform": "",
-        "status": "posted",
-        "reason": "",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      }
-    ],
+    "posted": [],
     "blocked": [
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -134,7 +120,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.235Z",
+        "updated_at": "2026-07-28T09:05:29.803Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -145,7 +131,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.239Z",
+        "updated_at": "2026-07-28T09:05:29.807Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -156,7 +142,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.246Z",
+        "updated_at": "2026-07-28T09:05:29.811Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -167,7 +153,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.249Z",
+        "updated_at": "2026-07-28T09:05:29.815Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -178,7 +164,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.253Z",
+        "updated_at": "2026-07-28T09:05:29.818Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -189,7 +175,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.256Z",
+        "updated_at": "2026-07-28T09:05:29.822Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -200,7 +186,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.259Z",
+        "updated_at": "2026-07-28T09:05:29.830Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -211,7 +197,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.261Z",
+        "updated_at": "2026-07-28T09:05:29.836Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -222,7 +208,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.265Z",
+        "updated_at": "2026-07-28T09:05:29.840Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -233,7 +219,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.268Z",
+        "updated_at": "2026-07-28T09:05:29.843Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -244,7 +230,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.273Z",
+        "updated_at": "2026-07-28T09:05:29.849Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -255,7 +241,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-28T03:37:53.277Z",
+        "updated_at": "2026-07-28T09:05:29.853Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       }
