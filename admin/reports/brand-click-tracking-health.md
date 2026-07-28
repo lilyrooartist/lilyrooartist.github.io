@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-27T19:57:03.513738Z
+Generated: 2026-07-28T03:37:52.682847Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **24 / 24**
-- Tracking URLs checked: **24 / 24**
+- Future campaign rows ready: **23 / 23**
+- Tracking URLs checked: **23 / 23**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **6 / 24**
-- Visible full destination sets: **24 / 24**
+- Visible album click paths: **5 / 23**
+- Visible full destination sets: **23 / 23**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,14 +24,14 @@ Generated: 2026-07-27T19:57:03.513738Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 6, echo: 6, spotify: 6, video: 6**
+- Destinations: **album: 5, echo: 6, spotify: 6, video: 6**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-growth-reset-voice-05-x`
+- Probe campaign id: `fp-growth-reset-voice-06-x`
 - Event: **x / album / track unknown**
 
 ## Redirect Checks
@@ -230,10 +230,6 @@ Generated: 2026-07-27T19:57:03.513738Z
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-07-27T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)
-- `FP-GROWTH-RESET-VOICE-05-X` X 2026-07-27T14:05:00-04:00 - **ready** (1 link)
-  - Destinations: `album`
-  - Visible surface: **ready** (`album`)
-  - Main-post album link: **ready**
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube 2026-07-29T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `spotify`
   - Visible surface: **attention** (`spotify`)
