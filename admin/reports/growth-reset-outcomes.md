@@ -1,18 +1,18 @@
 # Lily Roo Growth Reset Outcomes
 
-Generated: 2026-07-29T14:32:58.453704Z
+Generated: 2026-07-29T16:48:20.948132Z
 Status: **learning**
 
 ## Scorecard
 - Native video plays: **0 / 5000**
-- Qualified clicks: **10 / 25**
+- Qualified clicks: **14 / 25**
 - YouTube subscribers: **6 / 11**
 - Spotify monthly listeners: **0 / 10**
 - Repeatable formats: **0 / 2**
 
 ## Current Leaders
 - Song: **Slow Walk** (0 plays, 6 clicks)
-- Format: **echo_thread_setup_song_payoff** (0 plays, 4 clicks)
+- Format: **lyric_punch_line** (0 plays, 6 clicks)
 - Next decision: Scale only the formats beating the campaign median.
 
 ## Budget

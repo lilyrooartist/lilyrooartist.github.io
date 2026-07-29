@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-29T14:32:58.377877Z
+Generated: 2026-07-29T16:48:20.882353Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -10,14 +10,14 @@ Generated: 2026-07-29T14:32:58.377877Z
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **23**
-- Posted or measured rows: **25**
+- Posted or measured rows: **26**
 - Ready for result capture: **25**
-- First-party clicks: **16** across **7** post(s)
-- Click snapshot: `2026-07-29T14:32:54.610240Z` (covers current due posts)
-- Next post at: `2026-07-29T11:20:00-04:00`
+- First-party clicks: **20** across **8** post(s)
+- Click snapshot: `2026-07-29T16:48:17.487572Z` (covers current due posts)
+- Next post at: `2026-07-31T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.78`
-- Hours until proof due: `-380.45`
+- Hours until next post: `45.44`
+- Hours until proof due: `-382.71`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25,9 +25,9 @@ Generated: 2026-07-29T14:32:58.377877Z
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **25**
-- Waiting measurement rows: **0**
+- Waiting measurement rows: **1**
 - Future scheduled rows: **23**
-- Next learning due at: `2026-07-13T18:06:00Z`
+- Next learning due at: `2026-07-30T15:30:34.833000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
@@ -37,8 +37,9 @@ Generated: 2026-07-29T14:32:58.377877Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): No Mortgage Lyric Punch Line - Next queued learning input
+  - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): No Mortgage Lyric Punch Line - Waiting for first useful result check
   - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` (YouTube): No Mortgage Relatable Situation - Next queued learning input
+  - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` (Facebook): No Mortgage Relatable Situation - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

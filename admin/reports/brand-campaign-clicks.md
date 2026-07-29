@@ -1,40 +1,45 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-07-29T14:32:54.610240Z
+Generated: 2026-07-29T16:48:17.487572Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **16**
-- Posts with clicks: **7**
+- Clicks captured: **20**
+- Posts with clicks: **8**
 - First click: `2026-07-10T15:30:43.264Z`
-- Last click: `2026-07-27T15:30:42.566Z`
+- Last click: `2026-07-29T15:30:43.654Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
-- facebook: **7**
+- facebook: **11**
 - youtube: **6**
 - site: **3**
 
 ### Destination
+- spotify: **6**
 - echo: **5**
 - album: **3**
 - playlist: **3**
 - video: **3**
-- spotify: **2**
 
 ### Wave
-- video-reset: **10**
+- video-reset: **14**
 - site-home: **3**
 - track-moments: **3**
 
 ### Track
 - slow-walk: **9**
+- no-mortgage: **4**
 - spilling-the-tea: **4**
 - hero-playlist: **2**
 - starter-playlist: **1**
 
 ## Recent Clicks
+- `2026-07-29T15:30:43.654Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
+- `2026-07-29T15:30:39.780Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
+- `2026-07-29T15:30:39.536Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
+- `2026-07-29T15:30:38.542Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
 - `2026-07-27T15:30:42.566Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`
 - `2026-07-27T15:30:41.359Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`
 - `2026-07-27T15:30:41.296Z` facebook echo `fp-growth-reset-08-spilling-the-tea-echo-thread-setup-song-payoff-facebook`

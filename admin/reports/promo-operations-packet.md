@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-29T14:32:58.549131Z
+Generated: 2026-07-29T16:48:21.036442Z
 
 ## Summary
 - Actions: **22**
@@ -34,7 +34,9 @@ Generated: 2026-07-29T14:32:58.549131Z
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
-  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE --apply`
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}

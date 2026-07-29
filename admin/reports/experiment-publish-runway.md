@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-29T14:32:58.492640Z
+Generated: 2026-07-29T16:48:20.985170Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -36,4 +36,4 @@ Generated: 2026-07-29T14:32:58.492640Z
 - `FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE` YouTube - max_attempts_exceeded
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE` YouTube - max_attempts_exceeded
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube - max_attempts_exceeded
-- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube - failed
+- `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube - max_attempts_exceeded

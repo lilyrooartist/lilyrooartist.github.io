@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T14:32:54.790365+00:00",
+  "generated_at": "2026-07-29T16:48:17.655780+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -215,7 +215,7 @@
         "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
         "song": "No Mortgage",
-        "blocker_kind": "failed",
+        "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
         "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
         "clearance_steps": [
@@ -499,7 +499,7 @@
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "blocker_status": "failed",
       "blocker_source": "cron",
-      "blocker_kind": "failed",
+      "blocker_kind": "max_attempts_exceeded",
       "blocks_normal_apply": true,
       "safe_apply_available": false,
       "clearance_steps": [

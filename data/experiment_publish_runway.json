@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T14:32:58.492640Z",
+  "generated_at": "2026-07-29T16:48:20.985170Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -134,10 +134,10 @@
     {
       "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
       "platform": "YouTube",
-      "reason": "",
+      "reason": "max_attempts_exceeded",
       "status": "failed",
       "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
       "blocked_apply_reasons": []
     }
   ],

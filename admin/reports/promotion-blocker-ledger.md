@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-29T14:32:56.039661Z
+Generated: 2026-07-29T16:48:18.886787Z
 
 ## Summary
 - Open blockers: **14**
@@ -72,8 +72,9 @@ Generated: 2026-07-29T14:32:56.039661Z
 - **[high] Repair YouTube executor** (`platform-FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
   - Evidence: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
-  - Next step: Review platform credentials/readiness, then rerun the social execution capture.
-  - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Next step: Review platform credentials/readiness, then rerun the social execution capture. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE --apply`
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`

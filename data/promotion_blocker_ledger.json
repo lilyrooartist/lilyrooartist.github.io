@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T14:32:56.039661Z",
+  "generated_at": "2026-07-29T16:48:18.886787Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 14,
@@ -265,9 +265,9 @@
       "platform": "YouTube",
       "release": "",
       "evidence": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-      "next_step": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
-      "apply_command": "",
+      "next_step": "Review platform credentials/readiness, then rerun the social execution capture. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` before any retry reset; only reset if the worker reports executable.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+      "apply_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE --apply",
       "source_path": "data/platform_repair_status.json",
       "external_url": "",
       "guardrail": "Run retry resets only after the external platform repair is verified.",
@@ -467,7 +467,7 @@
               "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
               "platform": "YouTube",
               "song": "No Mortgage",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
               "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
               "clearance_steps": [

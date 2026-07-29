@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-29T14:32:56.890797Z
+Generated: 2026-07-29T16:48:19.702097Z
 
 ## Summary
 - Status: **blocked**
@@ -17,24 +17,24 @@ Generated: 2026-07-29T14:32:56.890797Z
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `needs_attention`
-  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE at 2026-07-29T10:15:00-04:00; preflight=needs_attention
+  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK at 2026-07-29T11:20:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30461335841
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30472356821
 - **Published URL export** - `needs_attention`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-29T15:25:00Z
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-29T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-29T14:32:54.624469Z
+  - Detail: 19 refresh commands captured at 2026-07-29T16:48:17.498467Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=13 would_post=1
+  - Detail: HTTP 200 using bearer auth; due=14 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=55 attention=13 platform_fix_needed=13
+  - Detail: posted=56 attention=13 platform_fix_needed=13
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `blocked`
   - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube
