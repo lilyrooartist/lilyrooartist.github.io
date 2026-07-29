@@ -1,14 +1,14 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-29T09:10:07.625663Z
+Generated: 2026-07-29T14:32:58.729567Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
 - Runway status: **moving**
 - Ready release-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **12**
-- Activation actions: **14**
+- Platform fixes: **13**
+- Activation actions: **15**
 
 ## Activation Sequence
 1. **Preview approved backlog reschedule**
@@ -65,10 +65,14 @@ Generated: 2026-07-29T09:10:07.625663Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
-14. **Current operations next action: Fix YouTube executor**
+14. **Repair YouTube executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
+   - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+15. **Current operations next action: Fix YouTube executor**
    - Phase: `Operations packet`; status: `needs_fix`
    - Detail: Platform executor needs repair before queued auto posts can publish.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+   - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

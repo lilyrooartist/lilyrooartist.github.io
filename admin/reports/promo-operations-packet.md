@@ -1,24 +1,24 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-29T09:10:07.514853Z
+Generated: 2026-07-29T14:32:58.549131Z
 
 ## Summary
-- Actions: **21**
+- Actions: **22**
 - User review: **0**
-- Platform fixes: **12**
+- Platform fixes: **13**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
 - Store checks: **4**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 14, low: 2, medium: 4**
+- Urgency: **blocked: 1, high: 15, low: 2, medium: 4**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Measure active brand campaign: **1**
-- Repair executor: **12**
+- Repair executor: **13**
 - Reschedule approved backlog: **1**
 - Verify music sites: **4**
 
@@ -31,6 +31,10 @@ Generated: 2026-07-29T09:10:07.514853Z
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
+- **[high] Fix YouTube executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
+  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
@@ -91,12 +95,6 @@ Generated: 2026-07-29T09:10:07.514853Z
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK --apply`
-- **[high] Fix Facebook executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK --apply`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

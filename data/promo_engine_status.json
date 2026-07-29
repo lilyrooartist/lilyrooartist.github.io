@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T09:10:08.429850+00:00",
+  "generated_at": "2026-07-29T14:32:59.098994+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1086,10 +1086,10 @@
         "audience_signal_per_week": 0.14,
         "action_needed": "Maintain release-forward distribution and compare measured post formats after each proof window."
       },
-      "approved_upcoming_posts": 11,
-      "approved_backlog_posts": 12,
+      "approved_upcoming_posts": 10,
+      "approved_backlog_posts": 13,
       "manual_handoff_backlog_posts": 0,
-      "actionable_backlog_posts": 12,
+      "actionable_backlog_posts": 13,
       "review_upcoming_posts": 0,
       "review_backlog_posts": 0,
       "draft_review_posts": 0,
@@ -1097,12 +1097,12 @@
       "approved_plan_posts": 0,
       "ready_to_apply_posts": 0,
       "approval_blockers": 0,
-      "platform_fix_blockers": 12,
+      "platform_fix_blockers": 13,
       "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
       "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
-        "12 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "12 executor records need platform repair before they can publish."
+        "13 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+        "13 executor records need platform repair before they can publish."
       ]
     },
     "live_platform_count": 5,
@@ -1443,15 +1443,15 @@
         "Import only nonnegative numeric new_value cells from the named analytics source."
       ]
     },
-    "live_metrics_updated_at": "2026-07-29T09:09:41.780Z",
+    "live_metrics_updated_at": "2026-07-29T14:32:30.375Z",
     "metrics_history": {
       "snapshot_count": 45,
-      "updated_at": "2026-07-29T09:10:00.085437Z",
+      "updated_at": "2026-07-29T14:32:51.257887Z",
       "latest_date": "2026-07-29",
       "latest": {
         "date": "2026-07-29",
-        "captured_at": "2026-07-29T09:10:00.085437Z",
-        "live_metrics_updated_at": "2026-07-29T09:09:41.780Z",
+        "captured_at": "2026-07-29T14:32:51.257887Z",
+        "live_metrics_updated_at": "2026-07-29T14:32:30.375Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 514,
@@ -1485,7 +1485,7 @@
           "published_total": 73
         },
         "queue": {
-          "approved_upcoming": 11,
+          "approved_upcoming": 10,
           "approved_total": 60,
           "scheduled_total": 94
         },
@@ -1504,7 +1504,7 @@
           "x.followers": 0,
           "publishing.published_30d": 0,
           "publishing.published_total": 0,
-          "queue.approved_upcoming": 0,
+          "queue.approved_upcoming": -1,
           "queue.approved_total": 0,
           "queue.scheduled_total": 0
         }
@@ -1521,7 +1521,7 @@
         "x.followers": 0,
         "publishing.published_30d": 0,
         "publishing.published_total": 0,
-        "queue.approved_upcoming": 0,
+        "queue.approved_upcoming": -1,
         "queue.approved_total": 0,
         "queue.scheduled_total": 0
       }
@@ -3761,9 +3761,9 @@
         "pending_result_field_count": 105,
         "winner_ready_candidate_count": 3,
         "winner_count_target": 3,
-        "blocked_platform_count": 12,
-        "approved_backlog_count": 12,
-        "blocked_backlog_count": 12,
+        "blocked_platform_count": 13,
+        "approved_backlog_count": 13,
+        "blocked_backlog_count": 13,
         "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
       },
       "steps": [
@@ -3804,8 +3804,8 @@
         "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
         "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK"
       ],
-      "next_scheduled_post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
-      "next_scheduled_at": "2026-07-29T10:15:00-04:00",
+      "next_scheduled_post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK",
+      "next_scheduled_at": "2026-07-29T11:20:00-04:00",
       "next_proof_due_at": "2026-07-29T15:21:00Z",
       "next_measurement_due_at": "2026-07-30T15:20:00Z",
       "scheduler_http_status": 200,
@@ -3829,7 +3829,7 @@
       "next_learning_due_at": "2026-07-13T18:06:00Z",
       "click_count": 16,
       "click_post_count": 7,
-      "click_snapshot_updated_at": "2026-07-29T09:10:03.026030Z",
+      "click_snapshot_updated_at": "2026-07-29T14:32:54.610240Z",
       "click_snapshot_covers_ready_measurements": true,
       "manual_posting_required": false,
       "next_action": "Repair the active campaign platform before the next scheduled slot."
@@ -3865,7 +3865,7 @@
       "recheck_due": 0,
       "waiting_for_next_recheck": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-30T09:09:42.030554+00:00"
+      "next_recheck_at": "2026-07-30T14:32:30.561586+00:00"
     },
     "store_verification": {
       "source_path": "data/store_verification_history.json",
@@ -3886,12 +3886,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3905,12 +3905,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3924,12 +3924,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3943,12 +3943,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3965,12 +3965,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3983,12 +3983,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4001,12 +4001,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4019,12 +4019,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4036,7 +4036,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+      "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -4047,12 +4047,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4066,12 +4066,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4085,12 +4085,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4104,12 +4104,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4119,7 +4119,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-07-29T09:09:44.727239Z",
+        "updated_at": "2026-07-29T14:32:34.032694Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -4135,34 +4135,47 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-07-29T09:09:55.143913Z",
+      "updated_at": "2026-07-29T14:32:47.010966Z",
       "http_status": 200,
-      "execution_count": 82,
-      "current_execution_count": 67,
+      "execution_count": 83,
+      "current_execution_count": 68,
       "superseded_execution_count": 0,
       "superseded_executions": [],
       "posted_count": 55,
-      "attention_count": 12,
+      "attention_count": 13,
       "approval_needed_count": 0,
-      "platform_fix_needed_count": 12,
+      "platform_fix_needed_count": 13,
       "manual_handoff_needed_count": 0,
       "status_counts": {
-        "failed": 12,
+        "failed": 13,
         "posted": 55
       },
       "platform_counts": {
         "Facebook": 29,
         "X": 25,
-        "YouTube": 13
+        "YouTube": 14
       },
       "latest_attention": [
+        {
+          "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+          "platform": "YouTube",
+          "status": "failed",
+          "reason": "",
+          "attempts": 2,
+          "updated_at": "2026-07-29T14:30:25.891Z",
+          "source": "cron",
+          "post_url": "",
+          "external_id": "",
+          "next_action": "",
+          "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
+        },
         {
           "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "platform": "YouTube",
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:23.565Z",
+          "updated_at": "2026-07-29T14:30:23.003Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4175,7 +4188,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:22.984Z",
+          "updated_at": "2026-07-29T14:30:22.427Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4188,7 +4201,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:22.406Z",
+          "updated_at": "2026-07-29T14:30:21.859Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4201,36 +4214,40 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:21.840Z",
+          "updated_at": "2026-07-29T14:30:21.295Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
           "next_action": "",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
-        },
-        {
-          "post_id": "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-YOUTUBE",
-          "platform": "YouTube",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "attempts": 3,
-          "updated_at": "2026-07-29T09:00:21.280Z",
-          "source": "cron",
-          "post_url": "",
-          "external_id": "",
-          "next_action": "",
-          "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         }
       ],
       "approval_needed": [],
       "platform_fix_needed": [
+        {
+          "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+          "platform": "YouTube",
+          "status": "failed",
+          "reason": "",
+          "attempts": 2,
+          "updated_at": "2026-07-29T14:30:25.891Z",
+          "source": "cron",
+          "post_url": "",
+          "external_id": "",
+          "next_action": "",
+          "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+          "song": "No Mortgage",
+          "approved": "yes",
+          "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
+          "repair_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py"
+        },
         {
           "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "platform": "YouTube",
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:23.565Z",
+          "updated_at": "2026-07-29T14:30:23.003Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4247,7 +4264,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:22.984Z",
+          "updated_at": "2026-07-29T14:30:22.427Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4264,7 +4281,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:22.406Z",
+          "updated_at": "2026-07-29T14:30:21.859Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4281,7 +4298,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:21.840Z",
+          "updated_at": "2026-07-29T14:30:21.295Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4298,7 +4315,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:21.280Z",
+          "updated_at": "2026-07-29T14:30:20.745Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4315,7 +4332,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:20.698Z",
+          "updated_at": "2026-07-29T14:30:20.173Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4332,7 +4349,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:20.126Z",
+          "updated_at": "2026-07-29T14:30:19.622Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4349,7 +4366,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:19.528Z",
+          "updated_at": "2026-07-29T14:30:19.038Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4366,7 +4383,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:18.921Z",
+          "updated_at": "2026-07-29T14:30:18.472Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4383,7 +4400,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:18.359Z",
+          "updated_at": "2026-07-29T14:30:17.899Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4400,7 +4417,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:17.707Z",
+          "updated_at": "2026-07-29T14:30:17.312Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4417,7 +4434,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:00:16.965Z",
+          "updated_at": "2026-07-29T14:30:16.745Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4434,24 +4451,37 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-07-29T09:10:00.016947Z",
+      "updated_at": "2026-07-29T14:32:51.158465Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-07-29T09:09:59.350167Z",
-      "checked_at": "2026-07-29T09:09:59.350Z",
+      "requested_scheduled_time": "2026-07-29T14:32:50.801223Z",
+      "checked_at": "2026-07-29T14:32:50.801Z",
       "dry_run": true,
-      "due_count": 12,
-      "result_count": 12,
-      "would_post_count": 0,
+      "due_count": 13,
+      "result_count": 13,
+      "would_post_count": 1,
       "blocked_count": 12,
       "status_counts": {
-        "failed": 12
+        "failed": 12,
+        "would_post": 1
       },
       "platform_counts": {
         "Facebook": 7,
-        "YouTube": 5
+        "YouTube": 6
       },
-      "would_post": [],
+      "would_post": [
+        {
+          "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+          "platform": "YouTube",
+          "status": "would_post",
+          "reason": "",
+          "post_type": "video",
+          "attempts": 0,
+          "updated_at": "",
+          "source": "",
+          "error_summary": ""
+        }
+      ],
       "blocked": [
         {
           "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -4460,7 +4490,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.869Z",
+          "updated_at": "2026-07-29T14:32:51.051Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4471,7 +4501,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.875Z",
+          "updated_at": "2026-07-29T14:32:51.054Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4482,7 +4512,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.881Z",
+          "updated_at": "2026-07-29T14:32:51.061Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4493,7 +4523,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.886Z",
+          "updated_at": "2026-07-29T14:32:51.066Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4504,7 +4534,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.891Z",
+          "updated_at": "2026-07-29T14:32:51.069Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4515,7 +4545,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.897Z",
+          "updated_at": "2026-07-29T14:32:51.075Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4526,7 +4556,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.902Z",
+          "updated_at": "2026-07-29T14:32:51.081Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4537,7 +4567,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.908Z",
+          "updated_at": "2026-07-29T14:32:51.084Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4548,7 +4578,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.912Z",
+          "updated_at": "2026-07-29T14:32:51.089Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4559,7 +4589,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.918Z",
+          "updated_at": "2026-07-29T14:32:51.093Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4570,7 +4600,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.924Z",
+          "updated_at": "2026-07-29T14:32:51.096Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4581,7 +4611,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-07-29T09:09:59.931Z",
+          "updated_at": "2026-07-29T14:32:51.100Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         }
@@ -4594,14 +4624,14 @@
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "e48b1e570b43e4a486d45dca9843895624b97585",
-        "short_commit": "e48b1e57",
+        "commit": "fa580c42ffb1622aa874b1c403551423cda9281a",
+        "short_commit": "fa580c42",
         "branch": "main",
-        "committed_at": "2026-07-29T03:42:24Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/e48b1e570b43e4a486d45dca9843895624b97585"
+        "committed_at": "2026-07-29T09:10:11Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/fa580c42ffb1622aa874b1c403551423cda9281a"
       },
-      "finished_at": "2026-07-29T09:10:08.391056Z",
-      "duration_seconds": 30.17,
+      "finished_at": "2026-07-29T14:32:59.035344Z",
+      "duration_seconds": 32.53,
       "command_count": 63,
       "passed": 63,
       "failed": 0,
@@ -4619,11 +4649,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "e48b1e570b43e4a486d45dca9843895624b97585",
-        "short_commit": "e48b1e57",
+        "commit": "fa580c42ffb1622aa874b1c403551423cda9281a",
+        "short_commit": "fa580c42",
         "branch": "main",
-        "committed_at": "2026-07-29T03:42:24Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/e48b1e570b43e4a486d45dca9843895624b97585"
+        "committed_at": "2026-07-29T09:10:11Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/fa580c42ffb1622aa874b1c403551423cda9281a"
       },
       "latest_run_covers_source_commit": true,
       "latest_run_coverage_basis": "exact_source_commit",
@@ -4636,36 +4666,32 @@
       "workflow_status_ok": true,
       "latest_run_status": "in_progress",
       "latest_run_conclusion": "",
-      "latest_run_head_sha": "e48b1e570b43e4a486d45dca9843895624b97585",
-      "latest_run_updated_at": "2026-07-29T09:09:25Z",
-      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30438465531",
+      "latest_run_head_sha": "fa580c42ffb1622aa874b1c403551423cda9281a",
+      "latest_run_updated_at": "2026-07-29T14:32:12Z",
+      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30461335841",
       "latest_completed_run_status": "completed",
       "latest_completed_run_conclusion": "success",
-      "latest_completed_run_head_sha": "c17b059f22c29b0ce71bf0ea595bbbfcc1db2b7e",
-      "latest_completed_run_updated_at": "2026-07-29T03:42:31Z",
-      "latest_completed_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30420243171",
+      "latest_completed_run_head_sha": "e48b1e570b43e4a486d45dca9843895624b97585",
+      "latest_completed_run_updated_at": "2026-07-29T09:10:16Z",
+      "latest_completed_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30438465531",
       "current_run_status": "in_progress",
       "current_run_conclusion": "",
-      "current_run_head_sha": "e48b1e570b43e4a486d45dca9843895624b97585",
-      "current_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30438465531",
+      "current_run_head_sha": "fa580c42ffb1622aa874b1c403551423cda9281a",
+      "current_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30461335841",
       "workflow_status_action_needed": ""
     },
     "operational_next_action": {
       "label": "Fix YouTube executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
       "context": {
-        "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+        "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
-        "reason": "max_attempts_exceeded",
+        "reason": "",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
         "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
         "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
           "ready": false,
           "missing_secrets": [],
@@ -4687,19 +4713,19 @@
       ]
     },
     "unlock_impact": {
-      "open_blocker_count": 13,
-      "urgent_count": 13,
+      "open_blocker_count": 14,
+      "urgent_count": 14,
       "owner_counts": {
         "external_platform": 8,
-        "tod": 5
+        "tod": 6
       },
       "category_counts": {
         "backlog_reschedule": 1,
-        "platform_repair": 12
+        "platform_repair": 13
       },
       "roadmap_step_count": 5,
-      "projected_resolvable_blockers": 12,
-      "user_action_blocker_count": 5,
+      "projected_resolvable_blockers": 13,
+      "user_action_blocker_count": 6,
       "external_blocker_count": 8,
       "next_resolution_projection": {
         "label": "Checked scheduled approval batch",
@@ -4725,7 +4751,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 12,
+        "blockers_resolved": 13,
         "blocked_by": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -4738,7 +4764,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
@@ -4783,7 +4810,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "blocked_by": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -4796,7 +4823,8 @@
             "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
@@ -4825,8 +4853,8 @@
       "step_count": 5,
       "ready_for_human_review_count": 0,
       "blocked_or_warning_count": 1,
-      "total_projected_resolution_units": 12,
-      "open_blocker_count": 13,
+      "total_projected_resolution_units": 13,
+      "open_blocker_count": 14,
       "current_step_id": "unlock-backlog-reschedule",
       "current_gate_state": "preview_ready_with_blocker_warning",
       "current_step": {
@@ -4836,7 +4864,7 @@
         "owner": "external_platform",
         "gate_state": "preview_ready_with_blocker_warning",
         "reason": "Preview ran, but the output still names a known blocker.",
-        "blockers_resolved": 12,
+        "blockers_resolved": 13,
         "blocked_by": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -4849,7 +4877,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
@@ -4884,7 +4913,7 @@
           "owner": "external_platform",
           "gate_state": "preview_ready_with_blocker_warning",
           "reason": "Preview ran, but the output still names a known blocker.",
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "blocked_by": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -4897,7 +4926,8 @@
             "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
           ],
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
@@ -4939,7 +4969,7 @@
       "ready_step_count": 0,
       "blocked_step_count": 2,
       "roadmap_step_count": 5,
-      "task_count": 16,
+      "task_count": 17,
       "manual_post_count": 0,
       "manual_metric_field_count": 6,
       "first_ready_step": {},
@@ -4962,9 +4992,10 @@
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "platform-setup-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "platform-setup-FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
             "platform-setup-tiktok-preflight"
           ],
-          "blockers_resolved": 13,
+          "blockers_resolved": 14,
           "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "apply_command": "",
           "command_sequence": [
@@ -4991,11 +5022,11 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 12,
-            "blocked_backlog_count": 12,
+            "approved_backlog_count": 13,
+            "blocked_backlog_count": 13,
             "clear_to_apply_count": 0,
             "partial_clear_apply_available": false,
             "partial_clear_apply_count": 0,
@@ -5011,7 +5042,8 @@
               "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
             ],
             "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
@@ -5154,6 +5186,17 @@
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
+              },
+              {
+                "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+                "platform": "YouTube",
+                "song": "No Mortgage",
+                "blocker_kind": "failed",
+                "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+                "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
+                "clearance_steps": [
+                  "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+                ]
               }
             ],
             "operator_checklist": [
@@ -5281,9 +5324,10 @@
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "platform-setup-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "platform-setup-FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
             "platform-setup-tiktok-preflight"
           ],
-          "blockers_resolved": 13,
+          "blockers_resolved": 14,
           "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "apply_command": "",
           "command_sequence": [
@@ -5460,11 +5504,11 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 12,
-            "blocked_backlog_count": 12,
+            "approved_backlog_count": 13,
+            "blocked_backlog_count": 13,
             "clear_to_apply_count": 0,
             "partial_clear_apply_available": false,
             "partial_clear_apply_count": 0,
@@ -5480,7 +5524,8 @@
               "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
             ],
             "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
@@ -5623,6 +5668,17 @@
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
+              },
+              {
+                "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+                "platform": "YouTube",
+                "song": "No Mortgage",
+                "blocker_kind": "failed",
+                "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+                "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
+                "clearance_steps": [
+                  "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+                ]
               }
             ],
             "operator_checklist": [
@@ -5681,20 +5737,20 @@
     "handoff_resolution_preview": {
       "source_path": "data/human_handoff_resolution_preview.json",
       "available": true,
-      "worksheet_row_count": 16,
-      "preview_count": 16,
+      "worksheet_row_count": 17,
+      "preview_count": 17,
       "executed_preview_count": 4,
-      "skipped_preview_count": 12,
+      "skipped_preview_count": 13,
       "status_counts": {
         "input_missing": 2,
         "preview_ok": 1,
         "preview_ok_with_warning": 1,
-        "skipped": 12
+        "skipped": 13
       },
       "phase_counts": {
         "Backlog recovery": 1,
         "Manual metrics": 2,
-        "Platform setup": 13
+        "Platform setup": 14
       },
       "ready_preview_count": 1,
       "input_missing_count": 2,
@@ -5756,7 +5812,7 @@
           "safety_reason": "reschedule_preview_command",
           "returncode": 0,
           "preview_status": "preview_ok_with_warning",
-          "output_excerpt": "Rows selected: 12\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-30T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-31T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-08-01T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-08-02T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-08-03T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-08-04T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
+          "output_excerpt": "Rows selected: 13\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-30T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-31T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-08-01T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-08-02T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-08-03T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-08-04T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
           "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
           "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
         }
@@ -6092,8 +6148,8 @@
       "source_path": "data/backlog_reschedule_preview.json",
       "available": true,
       "summary": {
-        "approved_backlog_count": 12,
-        "blocked_backlog_count": 12,
+        "approved_backlog_count": 13,
+        "blocked_backlog_count": 13,
         "clear_to_apply_count": 0,
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
@@ -6117,7 +6173,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "normal_apply_gate": "blocked_until_clearance_steps_complete",
         "clearance_steps": [
@@ -6130,8 +6187,8 @@
       },
       "backlog_clearance_manifest": {
         "status": "blocked_until_clearance_steps_complete",
-        "approved_backlog_count": 12,
-        "blocked_backlog_count": 12,
+        "approved_backlog_count": 13,
+        "blocked_backlog_count": 13,
         "clear_to_apply_count": 0,
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
@@ -6147,7 +6204,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
         "safe_apply_command": "",
@@ -6290,6 +6348,17 @@
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
+          },
+          {
+            "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+            "platform": "YouTube",
+            "song": "No Mortgage",
+            "blocker_kind": "failed",
+            "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+            "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
+            "clearance_steps": [
+              "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+            ]
           }
         ],
         "operator_checklist": [
@@ -6315,7 +6384,7 @@
       "partial_clear_apply_manifest": {
         "status": "empty",
         "clear_to_apply_count": 0,
-        "blocked_backlog_count": 12,
+        "blocked_backlog_count": 13,
         "clear_ids": [],
         "blocked_ids_retained": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -6329,7 +6398,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "preview_commands": [],
         "apply_commands": [],
@@ -6359,7 +6429,7 @@
     "score": 67,
     "healthy_releases": 2,
     "tracked_releases": 3,
-    "open_action_count": 21,
+    "open_action_count": 22,
     "status_queue_count": 12,
     "fresh_sources": 14,
     "stale_sources": 0,
@@ -6368,18 +6438,14 @@
       "label": "Fix YouTube executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
       "context": {
-        "post_id": "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+        "post_id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
         "platform": "YouTube",
-        "reason": "max_attempts_exceeded",
+        "reason": "",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
         "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
         "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
           "ready": false,
           "missing_secrets": [],
@@ -6401,19 +6467,19 @@
       ]
     },
     "unlock_impact": {
-      "open_blocker_count": 13,
-      "urgent_count": 13,
+      "open_blocker_count": 14,
+      "urgent_count": 14,
       "owner_counts": {
         "external_platform": 8,
-        "tod": 5
+        "tod": 6
       },
       "category_counts": {
         "backlog_reschedule": 1,
-        "platform_repair": 12
+        "platform_repair": 13
       },
       "roadmap_step_count": 5,
-      "projected_resolvable_blockers": 12,
-      "user_action_blocker_count": 5,
+      "projected_resolvable_blockers": 13,
+      "user_action_blocker_count": 6,
       "external_blocker_count": 8,
       "next_resolution_projection": {
         "label": "Checked scheduled approval batch",
@@ -6439,7 +6505,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 12,
+        "blockers_resolved": 13,
         "blocked_by": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -6452,7 +6518,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
@@ -6497,7 +6564,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "blocked_by": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -6510,7 +6577,8 @@
             "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
@@ -6539,8 +6607,8 @@
       "step_count": 5,
       "ready_for_human_review_count": 0,
       "blocked_or_warning_count": 1,
-      "total_projected_resolution_units": 12,
-      "open_blocker_count": 13,
+      "total_projected_resolution_units": 13,
+      "open_blocker_count": 14,
       "current_step_id": "unlock-backlog-reschedule",
       "current_gate_state": "preview_ready_with_blocker_warning",
       "current_step": {
@@ -6550,7 +6618,7 @@
         "owner": "external_platform",
         "gate_state": "preview_ready_with_blocker_warning",
         "reason": "Preview ran, but the output still names a known blocker.",
-        "blockers_resolved": 12,
+        "blockers_resolved": 13,
         "blocked_by": [
           "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -6563,7 +6631,8 @@
           "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+          "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+          "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
         ],
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
@@ -6598,7 +6667,7 @@
           "owner": "external_platform",
           "gate_state": "preview_ready_with_blocker_warning",
           "reason": "Preview ran, but the output still names a known blocker.",
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "blocked_by": [
             "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
             "FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK",
@@ -6611,7 +6680,8 @@
             "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+            "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
           ],
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
@@ -6653,7 +6723,7 @@
       "ready_step_count": 0,
       "blocked_step_count": 2,
       "roadmap_step_count": 5,
-      "task_count": 16,
+      "task_count": 17,
       "manual_post_count": 0,
       "manual_metric_field_count": 6,
       "first_ready_step": {},
@@ -6676,9 +6746,10 @@
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "platform-setup-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "platform-setup-FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
             "platform-setup-tiktok-preflight"
           ],
-          "blockers_resolved": 13,
+          "blockers_resolved": 14,
           "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "apply_command": "",
           "command_sequence": [
@@ -6705,11 +6776,11 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 12,
-            "blocked_backlog_count": 12,
+            "approved_backlog_count": 13,
+            "blocked_backlog_count": 13,
             "clear_to_apply_count": 0,
             "partial_clear_apply_available": false,
             "partial_clear_apply_count": 0,
@@ -6725,7 +6796,8 @@
               "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
             ],
             "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
@@ -6868,6 +6940,17 @@
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
+              },
+              {
+                "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+                "platform": "YouTube",
+                "song": "No Mortgage",
+                "blocker_kind": "failed",
+                "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+                "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
+                "clearance_steps": [
+                  "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+                ]
               }
             ],
             "operator_checklist": [
@@ -6995,9 +7078,10 @@
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
             "platform-setup-FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
             "platform-setup-FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+            "platform-setup-FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
             "platform-setup-tiktok-preflight"
           ],
-          "blockers_resolved": 13,
+          "blockers_resolved": 14,
           "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
           "apply_command": "",
           "command_sequence": [
@@ -7174,11 +7258,11 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 12,
+          "blockers_resolved": 13,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 12,
-            "blocked_backlog_count": 12,
+            "approved_backlog_count": 13,
+            "blocked_backlog_count": 13,
             "clear_to_apply_count": 0,
             "partial_clear_apply_available": false,
             "partial_clear_apply_count": 0,
@@ -7194,7 +7278,8 @@
               "FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
-              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+              "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE"
             ],
             "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
@@ -7337,6 +7422,17 @@
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
+              },
+              {
+                "id": "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
+                "platform": "YouTube",
+                "song": "No Mortgage",
+                "blocker_kind": "failed",
+                "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+                "proposed_scheduled_at": "2026-08-11T10:00:00+00:00",
+                "clearance_steps": [
+                  "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+                ]
               }
             ],
             "operator_checklist": [
@@ -7395,20 +7491,20 @@
     "handoff_resolution_preview": {
       "source_path": "data/human_handoff_resolution_preview.json",
       "available": true,
-      "worksheet_row_count": 16,
-      "preview_count": 16,
+      "worksheet_row_count": 17,
+      "preview_count": 17,
       "executed_preview_count": 4,
-      "skipped_preview_count": 12,
+      "skipped_preview_count": 13,
       "status_counts": {
         "input_missing": 2,
         "preview_ok": 1,
         "preview_ok_with_warning": 1,
-        "skipped": 12
+        "skipped": 13
       },
       "phase_counts": {
         "Backlog recovery": 1,
         "Manual metrics": 2,
-        "Platform setup": 13
+        "Platform setup": 14
       },
       "ready_preview_count": 1,
       "input_missing_count": 2,
@@ -7470,7 +7566,7 @@
           "safety_reason": "reschedule_preview_command",
           "returncode": 0,
           "preview_status": "preview_ok_with_warning",
-          "output_excerpt": "Rows selected: 12\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-30T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-31T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-08-01T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-08-02T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-08-03T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-08-04T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
+          "output_excerpt": "Rows selected: 13\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-07-30T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-07-31T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-08-01T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-08-02T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-08-03T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-08-04T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
           "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
           "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
         }
@@ -7628,12 +7724,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7647,12 +7743,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7666,12 +7762,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7685,12 +7781,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7707,12 +7803,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7725,12 +7821,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7743,12 +7839,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7761,12 +7857,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7778,7 +7874,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+      "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -7789,12 +7885,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7808,12 +7904,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7827,12 +7923,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7846,12 +7942,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -7861,7 +7957,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-07-29T09:09:44.727239Z",
+        "updated_at": "2026-07-29T14:32:34.032694Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -7883,18 +7979,18 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-07-29T09:10:08.429850+00:00"
+      "checked_at": "2026-07-29T14:32:59.098994+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 622.0,
+        "age_hours": 627.4,
         "max_age_hours": 72,
         "timestamp": "2026-07-03T11:10:52.058673+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-07-29T09:10:08.429850+00:00",
+        "checked_at": "2026-07-29T14:32:59.098994+00:00",
         "checked_age_hours": 0.0,
         "evidence": "4 pending store links checked; no new public URLs found."
       },
@@ -7904,7 +8000,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-07-29T09:09:45.871942+00:00",
+        "timestamp": "2026-07-29T14:32:35.059850+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -7913,7 +8009,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:00.051271+00:00",
+        "timestamp": "2026-07-29T14:32:51.208013+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -7922,7 +8018,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 168,
-        "timestamp": "2026-07-29T09:09:37.006948+00:00",
+        "timestamp": "2026-07-29T14:32:25.055882+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "row_count": 73,
         "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
@@ -7940,7 +8036,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-07-29T09:09:37.469938+00:00",
+        "timestamp": "2026-07-29T14:32:25.560879+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -7949,7 +8045,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:09:41.780000+00:00",
+        "timestamp": "2026-07-29T14:32:30.375000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -7958,7 +8054,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:00.085437+00:00",
+        "timestamp": "2026-07-29T14:32:51.257887+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -7967,7 +8063,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:09:45.820486+00:00",
+        "timestamp": "2026-07-29T14:32:34.982658+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -7976,7 +8072,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:08.429850+00:00",
+        "timestamp": "2026-07-29T14:32:59.098994+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -7985,7 +8081,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:09:55.143913+00:00",
+        "timestamp": "2026-07-29T14:32:47.010966+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -7994,7 +8090,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:00.016947+00:00",
+        "timestamp": "2026-07-29T14:32:51.158465+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8003,7 +8099,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:05.454913+00:00",
+        "timestamp": "2026-07-29T14:32:56.841596+00:00",
         "refresh_command": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8012,7 +8108,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:08.392493+00:00",
+        "timestamp": "2026-07-29T14:32:59.037430+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -8021,7 +8117,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:00.713162+00:00",
+        "timestamp": "2026-07-29T14:32:51.876686+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8030,7 +8126,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-29T09:10:07.406340+00:00",
+        "timestamp": "2026-07-29T14:32:58.377877+00:00",
         "refresh_command": "python3 scripts/build_brand_growth_pulse.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -8172,12 +8268,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:42.030554Z",
+            "updated_at": "2026-07-29T14:32:30.561586Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:42.030554+00:00",
+            "checked_at": "2026-07-29T14:32:30.561586+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:42.030554+00:00",
+            "next_recheck_at": "2026-07-30T14:32:30.561586+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8189,12 +8285,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.556997Z",
+            "updated_at": "2026-07-29T14:32:32.277601Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.556997+00:00",
+            "checked_at": "2026-07-29T14:32:32.277601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.556997+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.277601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8206,12 +8302,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.799977Z",
+            "updated_at": "2026-07-29T14:32:32.493229Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-07-29T09:09:43.799977+00:00",
+            "checked_at": "2026-07-29T14:32:32.493229+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.799977+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.493229+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8305,12 +8401,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-07-29T09:09:43.845542Z",
+            "updated_at": "2026-07-29T14:32:32.560763Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-07-29T09:09:43.845542+00:00",
+            "checked_at": "2026-07-29T14:32:32.560763+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-07-30T09:09:43.845542+00:00",
+            "next_recheck_at": "2026-07-30T14:32:32.560763+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8351,16 +8447,16 @@
     }
   ],
   "next_actions": [
-    "Next operational action: Fix YouTube executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+    "Next operational action: Fix YouTube executor — LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
     "Current unlock gate: Reschedule approved past-due backlog (preview_ready_with_blocker_warning); 0 ready, 1 waiting/warning; preview python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-30T10:00:00+00:00' --spacing-hours 24",
     "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
     "Collect experiment results: 105 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "12 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-30T09:09:42.030554+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
-    "12 executor records need platform repair before they can publish.",
-    "Resolve social executor attention states: 12 failed.",
+    "13 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-30T14:32:30.561586+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "13 executor records need platform repair before they can publish.",
+    "Resolve social executor attention states: 13 failed.",
     "Fix social executor platform failures for Facebook, YouTube.",
     "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
   ]
