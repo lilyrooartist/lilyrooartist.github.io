@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-30T14:33:24.187097Z
+Generated: 2026-07-30T16:58:23.638911Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -11,23 +11,23 @@ Generated: 2026-07-30T14:33:24.187097Z
 - Posting preflight ready: **False**
 - Future queued posts: **22**
 - Posted or measured rows: **26**
-- Ready for result capture: **25**
+- Ready for result capture: **26**
 - First-party clicks: **20** across **8** post(s)
-- Click snapshot: `2026-07-30T14:33:20.661166Z` (covers current due posts)
+- Click snapshot: `2026-07-30T16:58:19.694319Z` (covers current due posts)
 - Next post at: `2026-07-31T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `23.69`
-- Hours until proof due: `-404.46`
+- Hours until next post: `21.28`
+- Hours until proof due: `-406.87`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
 - Headline: **Click response is ready to review**
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
-- Measurement due rows: **25**
-- Waiting measurement rows: **1**
+- Measurement due rows: **26**
+- Waiting measurement rows: **0**
 - Future scheduled rows: **22**
-- Next learning due at: `2026-07-30T15:30:34.833000Z`
+- Next learning due at: `2026-07-13T18:06:00Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
@@ -37,7 +37,6 @@ Generated: 2026-07-30T14:33:24.187097Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` (Facebook): No Mortgage Lyric Punch Line - Waiting for first useful result check
   - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` (YouTube): No Mortgage Relatable Situation - Next queued learning input
   - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` (Facebook): No Mortgage Relatable Situation - Next queued learning input
 
