@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-07-23 to 2026-07-29
-**Last updated:** 2026-07-29 07:46 PM UTC
+**Period:** 2026-07-24 to 2026-07-30
+**Last updated:** 2026-07-30 03:31 AM UTC
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -128,7 +128,7 @@
 - Latest post: /reel/1979292206055402/
 
 ## Metrics Snapshot
-- Live API captured: **2026-07-29T19:45:33.837Z**
+- Live API captured: **2026-07-30T03:30:39.541Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -138,9 +138,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-29T19:46:05.481878+00:00**
+- All-release store verification captured: **2026-07-30T03:31:12.638462+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-07-29T19:45:47.333199Z**
+- Social executor history captured: **2026-07-30T03:30:56.638385Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
