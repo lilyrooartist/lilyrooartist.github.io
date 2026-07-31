@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T14:37:23.586716+00:00",
+  "generated_at": "2026-07-31T17:01:51.530448+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -228,7 +228,7 @@
         "id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
         "platform": "YouTube",
         "song": "No Mortgage",
-        "blocker_kind": "failed",
+        "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
         "proposed_scheduled_at": "2026-08-14T10:00:00+00:00",
         "clearance_steps": [
@@ -530,7 +530,7 @@
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
       "blocker_status": "failed",
       "blocker_source": "cron",
-      "blocker_kind": "failed",
+      "blocker_kind": "max_attempts_exceeded",
       "blocks_normal_apply": true,
       "safe_apply_available": false,
       "clearance_steps": [

@@ -1,41 +1,44 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-07-31T14:37:23.426620Z
+Generated: 2026-07-31T17:01:51.363805Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **20**
-- Posts with clicks: **8**
+- Clicks captured: **23**
+- Posts with clicks: **9**
 - First click: `2026-07-10T15:30:43.264Z`
-- Last click: `2026-07-29T15:30:43.654Z`
+- Last click: `2026-07-31T15:30:27.931Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
-- facebook: **11**
+- facebook: **14**
 - youtube: **6**
 - site: **3**
 
 ### Destination
+- album: **6**
 - spotify: **6**
 - echo: **5**
-- album: **3**
 - playlist: **3**
 - video: **3**
 
 ### Wave
-- video-reset: **14**
+- video-reset: **17**
 - site-home: **3**
 - track-moments: **3**
 
 ### Track
 - slow-walk: **9**
-- no-mortgage: **4**
+- no-mortgage: **7**
 - spilling-the-tea: **4**
 - hero-playlist: **2**
 - starter-playlist: **1**
 
 ## Recent Clicks
+- `2026-07-31T15:30:27.931Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
+- `2026-07-31T15:30:26.911Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
+- `2026-07-31T15:30:26.697Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
 - `2026-07-29T15:30:43.654Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
 - `2026-07-29T15:30:39.780Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
 - `2026-07-29T15:30:39.536Z` facebook spotify `fp-growth-reset-09-no-mortgage-lyric-punch-line-facebook`
@@ -53,9 +56,6 @@ Generated: 2026-07-31T14:37:23.426620Z
 - `2026-07-15T14:15:28.966Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
 - `2026-07-13T14:15:55.357Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
 - `2026-07-13T14:15:54.729Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
-- `2026-07-10T15:30:43.299Z` facebook album `fp-brand-am-07-slow-walk-facebook`
-- `2026-07-10T15:30:43.268Z` facebook echo `fp-brand-am-07-slow-walk-facebook`
-- `2026-07-10T15:30:43.264Z` facebook video `fp-brand-am-07-slow-walk-facebook`
 
 ## Guardrails
 - Click capture stores campaign metadata only; it does not store IP addresses.

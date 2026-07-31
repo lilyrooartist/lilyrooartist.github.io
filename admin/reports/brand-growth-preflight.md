@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-31T14:37:26.278074Z
+Generated: 2026-07-31T17:01:54.130444Z
 
 ## Summary
 - Status: **needs_attention**
 - Next window: **2026-07-31** at `2026-07-31T18:06:00Z`
 - Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-31T18:06:00Z`, due **16**, satisfied **3**, would post **3**, posted **0**, blocked **13**
-- Current scheduler snapshot: checked `2026-07-31T14:37:19.059387Z`, requested `2026-07-31T14:37:18.716088Z`, due **14**, would post **1**, posted **0**, blocked **13**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-31T18:06:00Z`, due **16**, satisfied **2**, would post **1**, posted **1**, blocked **14**
+- Current scheduler snapshot: checked `2026-07-31T17:01:47.172841Z`, requested `2026-07-31T17:01:46.773574Z`, due **15**, would post **0**, posted **1**, blocked **14**
 - Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **3 / 3 checked ok**
 - Redirect targets: **3 / 3 checked**, **2 ok**, **0 warning**, **1 blocking failed**
@@ -18,6 +18,9 @@ Generated: 2026-07-31T14:37:26.278074Z
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube at `2026-07-31T10:15:00-04:00`
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` Facebook at `2026-07-31T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-06-X` X at `2026-07-31T14:05:00-04:00`
+
+## Missing From Dry Run
+- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE`
 
 ## Blocked Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
@@ -33,6 +36,7 @@ Generated: 2026-07-31T14:37:26.278074Z
 - `FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK`
 - `FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE`
+- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE`
 
 ## Link Checks
 - **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE clip_url` 200 video/mp4
