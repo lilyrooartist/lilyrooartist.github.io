@@ -1,17 +1,17 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-31T17:01:54.044268Z
+Generated: 2026-07-31T17:39:26.781210Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
-- Visible in future queue: **22**
+- Visible in future queue: **21**
 - Posted or measured rows: **27**
 - Measured rows: **0**
 - Ready for metric capture: **26**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **23** across **9** post(s); last click `2026-07-31T15:30:27.931Z`
-- Click tracking links: **ready** (22 / 22 future rows; 22 / 22 URLs)
+- Click tracking links: **ready** (21 / 21 future rows; 21 / 21 URLs)
 - Post-slot watch windows: **24**
 - Status counts: **execution_attention: 14, posted_waiting_measurement_window: 1, ready_for_metric_capture: 26, scheduled_future: 7**
 - Next scheduled: `FP-GROWTH-RESET-VOICE-06-X` at `2026-07-31T14:05:00-04:00`

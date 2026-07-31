@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-31T17:01:53.549456Z
+Generated: 2026-07-31T17:39:26.208374Z
 
 ## Summary
 - Status: **blocked**
@@ -17,18 +17,18 @@ Generated: 2026-07-31T17:01:53.549456Z
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `needs_attention`
-  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK at 2026-07-31T11:20:00-04:00; preflight=needs_attention
+  - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-VOICE-06-X at 2026-07-31T14:05:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30649490933
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30651935679
 - **Published URL export** - `needs_attention`
-  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-31T18:20:00Z
+  - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-31T18:20:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-31T17:01:51.374514Z
+  - Detail: 19 refresh commands captured at 2026-07-31T17:39:24.139667Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=15 would_post=0

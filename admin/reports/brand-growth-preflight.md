@@ -1,22 +1,21 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-31T17:01:54.130444Z
+Generated: 2026-07-31T17:39:26.871370Z
 
 ## Summary
 - Status: **needs_attention**
 - Next window: **2026-07-31** at `2026-07-31T18:06:00Z`
-- Expected posts: **3**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-31T18:06:00Z`, due **16**, satisfied **2**, would post **1**, posted **1**, blocked **14**
-- Current scheduler snapshot: checked `2026-07-31T17:01:47.172841Z`, requested `2026-07-31T17:01:46.773574Z`, due **15**, would post **0**, posted **1**, blocked **14**
-- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **3 / 3 checked ok**
-- Redirect targets: **3 / 3 checked**, **2 ok**, **0 warning**, **1 blocking failed**
+- Expected posts: **2**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-31T18:06:00Z`, due **16**, satisfied **1**, would post **1**, posted **1**, blocked **14**
+- Current scheduler snapshot: checked `2026-07-31T17:39:20.436020Z`, requested `2026-07-31T17:39:20.029714Z`, due **15**, would post **0**, posted **1**, blocked **14**
+- Link checks: **3 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **2 / 2 checked ok**
+- Redirect targets: **2 / 2 checked**, **1 ok**, **0 warning**, **1 blocking failed**
 - Current window proof due: `2026-07-31T18:06:00Z`
 - Current window measurement due: `2026-08-01T18:05:00Z`
 
 ## Expected Posts
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube at `2026-07-31T10:15:00-04:00`
-- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` Facebook at `2026-07-31T11:20:00-04:00`
 - `FP-GROWTH-RESET-VOICE-06-X` X at `2026-07-31T14:05:00-04:00`
 
 ## Missing From Dry Run
@@ -41,13 +40,10 @@ Generated: 2026-07-31T17:01:54.130444Z
 ## Link Checks
 - **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE clip_url` 200 video/mp4
 - **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE Enter the album room` 200 text/html
-- **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK clip_url` 200 video/mp4
-- **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK Enter the album room` 200 text/html
 - **ok** `FP-GROWTH-RESET-VOICE-06-X Watch the full track` 200 text/html
 
 ## Redirect Target Checks
 - **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE Enter the album room target album` 200 text/html
-- **ok** `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK Enter the album room target album` 200 text/html
 - **failed** `FP-GROWTH-RESET-VOICE-06-X Watch the full track target video` 0 missing target URL
 
 ## Guardrails
