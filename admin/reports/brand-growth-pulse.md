@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-31T09:17:40.524487Z
+Generated: 2026-07-31T14:37:26.853184Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-07-31T09:17:40.524487Z
 - Posted or measured rows: **26**
 - Ready for result capture: **26**
 - First-party clicks: **20** across **8** post(s)
-- Click snapshot: `2026-07-31T09:17:37.383212Z` (covers current due posts)
-- Next post at: `2026-07-31T10:15:00-04:00`
+- Click snapshot: `2026-07-31T14:37:23.426620Z` (covers current due posts)
+- Next post at: `2026-07-31T11:20:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `4.96`
-- Hours until proof due: `-423.19`
+- Hours until next post: `0.71`
+- Hours until proof due: `-428.52`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -37,8 +37,8 @@ Generated: 2026-07-31T09:17:40.524487Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` (YouTube): No Mortgage Relatable Situation - Next queued learning input
   - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` (Facebook): No Mortgage Relatable Situation - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-06-X` (X): Voice 06 - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-31T09:17:39.910959Z
+Generated: 2026-07-31T14:37:26.194648Z
 
 ## Summary
 - Campaign rows: **48**
@@ -13,8 +13,8 @@ Generated: 2026-07-31T09:17:39.910959Z
 - Campaign clicks: **20** across **8** post(s); last click `2026-07-29T15:30:43.654Z`
 - Click tracking links: **ready** (22 / 22 future rows; 22 / 22 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 13, ready_for_metric_capture: 26, scheduled_future: 9**
-- Next scheduled: `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` at `2026-07-31T10:15:00-04:00`
+- Status counts: **execution_attention: 14, ready_for_metric_capture: 26, scheduled_future: 8**
+- Next scheduled: `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` at `2026-07-31T11:20:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -127,8 +127,8 @@ Generated: 2026-07-31T09:17:39.910959Z
   - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK`
-- `2026-07-31` **scheduled_future** proof due `2026-07-31T18:06:00Z` for `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-VOICE-06-X`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-07-31` **attention** proof due `2026-07-31T18:06:00Z` for `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE, FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK, FP-GROWTH-RESET-VOICE-06-X`
+  - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-08-02` **scheduled_future** proof due `2026-08-02T15:21:00Z` for `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -256,8 +256,8 @@ Generated: 2026-07-31T09:17:39.910959Z
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: /reel/1979292206055402/
   - Next: Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).
-- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-31T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-31T10:15:00-04:00 - **execution_attention**
+  - Next: Inspect executor state for FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK` Facebook 2026-07-31T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-06-X` X 2026-07-31T14:05:00-04:00 - **scheduled_future**
