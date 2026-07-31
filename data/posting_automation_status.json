@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T17:39:26.208374Z",
+  "generated_at": "2026-07-31T19:59:00.373158Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -25,10 +25,10 @@
     ],
     "active_campaign_next_proof_due_at": "2026-07-31T18:06:00Z",
     "active_campaign_next_measurement_due_at": "2026-08-01T18:05:00Z",
-    "ready_lane_count": 5,
+    "ready_lane_count": 4,
     "blocked_lane_count": 3,
     "deferred_lane_count": 0,
-    "attention_lane_count": 2,
+    "attention_lane_count": 3,
     "lane_count": 10,
     "workflow_crons": [
       "17 */6 * * *",
@@ -44,12 +44,12 @@
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 0,
+    "active_campaign_proof_export_added_last_run": 1,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
-    "posted_count": 57,
+    "posted_count": 58,
     "attention_count": 14,
     "platform_fix_needed_count": 14,
     "story_post_count": 6,
@@ -79,22 +79,22 @@
     },
     {
       "label": "Scheduled refresh workflow",
-      "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30651935679",
-      "next_action": ""
+      "status": "needs_attention",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run pending / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30660829124",
+      "next_action": "Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window."
     },
     {
       "label": "Published URL export",
       "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-31T18:20:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-31T18:20:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-31T17:39:24.139667Z",
+      "detail": "19 refresh commands captured at 2026-07-31T19:58:58.043028Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -108,7 +108,7 @@
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=57 attention=14 platform_fix_needed=14",
+      "detail": "posted=58 attention=14 platform_fix_needed=14",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },

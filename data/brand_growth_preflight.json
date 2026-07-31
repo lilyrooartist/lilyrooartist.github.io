@@ -1,45 +1,43 @@
 {
-  "generated_at": "2026-07-31T17:39:26.871370Z",
+  "generated_at": "2026-07-31T19:59:00.947397Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/5b2a138b49eeda5f6655f9fc08d32a8c8eb8504f/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/3b1919f875f32846bad8df9f4efa7dee3486ec6b/admin/future-posts.json"
   },
   "summary": {
     "status": "needs_attention",
-    "next_window_date": "2026-07-31",
-    "scheduled_time": "2026-07-31T18:06:00Z",
+    "next_window_date": "2026-08-02",
+    "scheduled_time": "2026-08-02T15:21:00Z",
     "expected_post_count": 2,
     "expected_post_ids": [
-      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
-      "FP-GROWTH-RESET-VOICE-06-X"
+      "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+      "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK"
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
-    "scheduler_simulated_at": "2026-07-31T18:06:00Z",
-    "scheduler_simulated_due_count": 16,
-    "scheduler_simulated_would_post_count": 1,
+    "scheduler_simulated_at": "2026-08-02T15:21:00Z",
+    "scheduler_simulated_due_count": 17,
+    "scheduler_simulated_would_post_count": 2,
     "scheduler_simulated_posted_count": 1,
-    "scheduler_simulated_satisfied_count": 1,
+    "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 14,
-    "scheduler_due_count": 16,
-    "scheduler_would_post_count": 1,
+    "scheduler_due_count": 17,
+    "scheduler_would_post_count": 2,
     "scheduler_posted_count": 1,
-    "scheduler_satisfied_count": 1,
+    "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 14,
-    "current_scheduler_checked_at": "2026-07-31T17:39:20.436020Z",
-    "current_scheduler_requested_scheduled_time": "2026-07-31T17:39:20.029714Z",
+    "current_scheduler_checked_at": "2026-07-31T19:58:52.015229Z",
+    "current_scheduler_requested_scheduled_time": "2026-07-31T19:58:51.514913Z",
     "current_scheduler_due_count": 15,
     "current_scheduler_would_post_count": 0,
     "current_scheduler_posted_count": 1,
     "current_scheduler_blocked_count": 14,
-    "missing_due_ids": [
-      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE"
-    ],
+    "missing_due_ids": [],
     "unexpected_due_ids": [],
     "blocked_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -57,50 +55,60 @@
       "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
       "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE"
     ],
-    "link_check_count": 3,
-    "link_ok_count": 3,
+    "link_check_count": 4,
+    "link_ok_count": 4,
     "link_failed_count": 0,
     "tracking_link_check_count": 2,
     "tracking_link_ok_count": 2,
     "expected_tracking_link_check_count": 2,
     "target_link_check_count": 2,
-    "target_link_ok_count": 1,
-    "target_link_failed_count": 1,
+    "target_link_ok_count": 2,
+    "target_link_failed_count": 0,
     "target_link_warning_count": 0,
-    "target_link_blocking_failed_count": 1,
+    "target_link_blocking_failed_count": 0,
     "expected_target_link_check_count": 2,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
-    "next_proof_due_at": "2026-07-31T18:06:00Z",
-    "next_measurement_due_at": "2026-08-01T18:05:00Z",
+    "next_proof_due_at": "2026-08-02T15:21:00Z",
+    "next_measurement_due_at": "2026-08-03T15:20:00Z",
     "readout_next_proof_due_at": "2026-07-13T18:06:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 16,
-    "result_count": 16,
-    "would_post_count": 1,
+    "due_count": 17,
+    "result_count": 17,
+    "would_post_count": 2,
     "posted_count": 1,
     "blocked_count": 14,
     "status_counts": {
       "failed": 14,
       "posted": 1,
-      "would_post": 1
+      "would_post": 2
     },
     "platform_counts": {
-      "Facebook": 7,
+      "Facebook": 8,
       "Unknown": 1,
-      "X": 1,
-      "YouTube": 7
+      "YouTube": 8
     },
     "would_post": [
       {
-        "post_id": "FP-GROWTH-RESET-VOICE-06-X",
-        "platform": "X",
+        "post_id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
         "status": "would_post",
         "reason": "",
-        "post_type": "text",
+        "post_type": "video",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK",
+        "platform": "Facebook",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "video",
         "attempts": 0,
         "updated_at": "",
         "source": "",
@@ -109,7 +117,7 @@
     ],
     "posted": [
       {
-        "post_id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
+        "post_id": "FP-GROWTH-RESET-VOICE-06-X",
         "platform": "",
         "status": "posted",
         "reason": "",
@@ -128,7 +136,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.930Z",
+        "updated_at": "2026-07-31T19:59:01.011Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -139,7 +147,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.933Z",
+        "updated_at": "2026-07-31T19:59:01.018Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -150,7 +158,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.937Z",
+        "updated_at": "2026-07-31T19:59:01.022Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -161,7 +169,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.941Z",
+        "updated_at": "2026-07-31T19:59:01.027Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -172,7 +180,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.945Z",
+        "updated_at": "2026-07-31T19:59:01.031Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -183,7 +191,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.948Z",
+        "updated_at": "2026-07-31T19:59:01.035Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -194,7 +202,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.952Z",
+        "updated_at": "2026-07-31T19:59:01.039Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -205,7 +213,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.957Z",
+        "updated_at": "2026-07-31T19:59:01.044Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -216,7 +224,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.960Z",
+        "updated_at": "2026-07-31T19:59:01.049Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -227,7 +235,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.964Z",
+        "updated_at": "2026-07-31T19:59:01.054Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -238,7 +246,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.968Z",
+        "updated_at": "2026-07-31T19:59:01.059Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -249,7 +257,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.970Z",
+        "updated_at": "2026-07-31T19:59:01.065Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -260,7 +268,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.974Z",
+        "updated_at": "2026-07-31T19:59:01.072Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -271,7 +279,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-31T17:39:26.977Z",
+        "updated_at": "2026-07-31T19:59:01.077Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       }
@@ -279,33 +287,44 @@
   },
   "link_checks": [
     {
-      "label": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE clip_url",
-      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-relatable-situation.mp4",
+      "label": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-visual-story.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-relatable-situation.mp4",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-visual-story.mp4",
       "content_type": "video/mp4",
-      "content_length": "3035610",
+      "content_length": "3567683",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE Enter the album room",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-10-no-mortgage-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=no-mortgage-relatable-situation",
+      "label": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE Watch the full track",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-10-no-mortgage-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=no-mortgage-relatable-situation",
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
       "source": "local_static_file"
     },
     {
-      "label": "FP-GROWTH-RESET-VOICE-06-X Watch the full track",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-06-x&to=video&utm_wave=video-reset&utm_term=no-mortgage-brand-voice",
+      "label": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-visual-story.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-06-x&to=video&utm_wave=video-reset&utm_term=no-mortgage-brand-voice",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-visual-story.mp4",
+      "content_type": "video/mp4",
+      "content_length": "3567683",
+      "error": "",
+      "source": "local_static_file"
+    },
+    {
+      "label": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK Watch the full track",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
@@ -314,50 +333,50 @@
   ],
   "target_checks": [
     {
-      "label": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE Enter the album room target album",
-      "url": "https://www.lilyroo.com/analog-myth.html",
+      "label": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE Watch the full track target video",
+      "url": "https://youtu.be/-r7khqOLpjQ",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/analog-myth.html",
-      "content_type": "text/html",
-      "content_length": "18355",
+      "final_url": "https://www.youtube.com/watch?v=-r7khqOLpjQ&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
       "error": "",
-      "source": "local_static_file",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-10-no-mortgage-relatable-situation-youtube&to=album&utm_wave=video-reset&utm_term=no-mortgage-relatable-situation",
-      "destination": "album",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-youtube&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
+      "destination": "video",
       "track": "05",
-      "post_id": "fp-growth-reset-10-no-mortgage-relatable-situation-youtube"
+      "post_id": "fp-growth-reset-11-no-mortgage-visual-story-youtube"
     },
     {
-      "label": "FP-GROWTH-RESET-VOICE-06-X Watch the full track target video",
-      "url": "",
-      "ok": false,
-      "status": 0,
-      "content_type": "",
+      "label": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK Watch the full track target video",
+      "url": "https://youtu.be/-r7khqOLpjQ",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=-r7khqOLpjQ&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
       "content_length": "",
-      "error": "missing target URL",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-06-x&to=video&utm_wave=video-reset&utm_term=no-mortgage-brand-voice",
+      "error": "",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-11-no-mortgage-visual-story-facebook&to=video&utm_wave=video-reset&utm_term=no-mortgage-visual-story",
       "destination": "video",
-      "track": "",
-      "post_id": "fp-growth-reset-voice-06-x"
+      "track": "05",
+      "post_id": "fp-growth-reset-11-no-mortgage-visual-story-facebook"
     }
   ],
   "next_window_posts": [
     {
-      "id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
+      "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
       "platform": "YouTube",
-      "scheduled_at": "2026-07-31T10:15:00-04:00",
+      "scheduled_at": "2026-08-02T10:15:00-04:00",
       "execution_mode": "auto",
       "post_type": "video",
-      "text": "When your dream home is mostly somewhere nobody can find you. #Shorts"
+      "text": "Trade the noise for a wide sky. Keep the signal. Lose the debt. #Shorts"
     },
     {
-      "id": "FP-GROWTH-RESET-VOICE-06-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-31T14:05:00-04:00",
+      "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK",
+      "platform": "Facebook",
+      "scheduled_at": "2026-08-02T11:20:00-04:00",
       "execution_mode": "auto",
-      "post_type": "text",
-      "text": "Put the keys down. Keep the wide sky."
+      "post_type": "video",
+      "text": "Trade the noise for a wide sky. Keep the signal. Lose the debt."
     }
   ],
   "guardrails": [
