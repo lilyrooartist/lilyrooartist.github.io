@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-08-01T16:28:24.850804Z
+Generated: 2026-08-01T17:00:58.395071Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-08-01T16:28:24.850804Z
 - Posted or measured rows: **28**
 - Ready for result capture: **27**
 - First-party clicks: **23** across **9** post(s)
-- Click snapshot: `2026-08-01T16:28:20.526388Z` (covers current due posts)
+- Click snapshot: `2026-08-01T17:00:54.330315Z` (covers current due posts)
 - Next post at: `2026-08-02T10:15:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `21.78`
-- Hours until proof due: `-454.37`
+- Hours until next post: `21.23`
+- Hours until proof due: `-454.92`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
