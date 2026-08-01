@@ -1,10 +1,10 @@
 # X Post Results - Lily Roo
 
-Generated: 2026-08-01T13:56:23.976215Z
+Generated: 2026-08-01T16:28:15.091480Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
-- Captured posts: **30**
+- Captured posts: **31**
 - Fillable posts: **0**
 - Fillable result fields: **0**
 - Apply command: `python3 scripts/capture_x_post_results.py --apply-results --refresh-admin`
@@ -188,6 +188,12 @@ Generated: 2026-08-01T13:56:23.976215Z
   - Evidence: X metric capture skipped 2026-08-01: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
 - **FP-GROWTH-RESET-VOICE-05-X** row `74`
   - URL: https://x.com/i/web/status/2081805666893853143
+  - Lookup: `skipped_missing_secrets`
+  - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
+  - Fillable fields: `none`
+  - Evidence: X metric capture skipped 2026-08-01: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+- **FP-GROWTH-RESET-VOICE-06-X** row `77`
+  - URL: https://x.com/i/web/status/2083255155508555959
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`; shares: `0`; saves: `0`
   - Fillable fields: `none`
