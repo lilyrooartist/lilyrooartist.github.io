@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T17:00:58.541606Z",
+  "generated_at": "2026-08-01T19:35:40.240536Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -889,7 +889,7 @@
       "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
       "context": {
         "status": "missing_metric_credentials",
-        "ready_post_count": 27,
+        "ready_post_count": 28,
         "ready_post_ids": [
           "FP-BRAND-AM-01-13-X",
           "FP-BRAND-AM-01-13-FACEBOOK",
@@ -917,7 +917,8 @@
           "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
           "FP-GROWTH-RESET-VOICE-05-X",
           "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK",
-          "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK"
+          "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
+          "FP-GROWTH-RESET-VOICE-06-X"
         ],
         "ready_x_post_ids": [
           "FP-BRAND-AM-01-13-X",
@@ -932,7 +933,8 @@
           "FP-GROWTH-RESET-VOICE-02-X",
           "FP-GROWTH-RESET-VOICE-03-X",
           "FP-GROWTH-RESET-VOICE-04-X",
-          "FP-GROWTH-RESET-VOICE-05-X"
+          "FP-GROWTH-RESET-VOICE-05-X",
+          "FP-GROWTH-RESET-VOICE-06-X"
         ],
         "ready_facebook_post_ids": [
           "FP-BRAND-AM-01-13-FACEBOOK",
@@ -955,9 +957,9 @@
           "X_API_KEY",
           "X_API_SECRET"
         ],
-        "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X --post-id FP-GROWTH-RESET-VOICE-05-X",
+        "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X --post-id FP-GROWTH-RESET-VOICE-05-X --post-id FP-GROWTH-RESET-VOICE-06-X",
         "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
-        "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X --post-id FP-GROWTH-RESET-VOICE-05-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
+        "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X --post-id FP-GROWTH-RESET-VOICE-05-X --post-id FP-GROWTH-RESET-VOICE-06-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
         "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET",
         "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET --apply",
         "local_secret_source": "secrets/social_api.env",
@@ -1099,13 +1101,18 @@
             "post_id": "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK",
             "platform": "Facebook",
             "url": "/reel/1710011240236530/"
+          },
+          {
+            "post_id": "FP-GROWTH-RESET-VOICE-06-X",
+            "platform": "X",
+            "url": "https://x.com/i/web/status/2083255155508555959"
           }
         ],
         "note": "Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. Add the missing names to ../secrets/social_api.env, use the scoped GitHub Actions secret push, then rerun the capture commands."
       },
       "phase": "Measure active brand campaign",
       "urgency": "high",
-      "urgency_reason": "27 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.",
+      "urgency_reason": "28 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.",
       "status": "waiting_for_credentials",
       "sort_key": [
         1,
@@ -1191,25 +1198,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-08-01T17:00:30.295484+00:00",
+        "checked_at": "2026-08-01T19:35:17.171528+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-08-02T17:00:30.295484+00:00",
+        "next_recheck_at": "2026-08-02T19:35:17.171528+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-08-01T17:00:30.295484Z",
+          "updated_at": "2026-08-01T19:35:17.171528Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-08-01T17:00:30.295484+00:00",
+          "checked_at": "2026-08-01T19:35:17.171528+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-08-02T17:00:30.295484+00:00",
+          "next_recheck_at": "2026-08-02T19:35:17.171528+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T17:00:30.295484+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T19:35:17.171528+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1229,25 +1236,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-08-01T17:00:32.219717+00:00",
+        "checked_at": "2026-08-01T19:35:18.885393+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-08-02T17:00:32.219717+00:00",
+        "next_recheck_at": "2026-08-02T19:35:18.885393+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-08-01T17:00:32.219717Z",
+          "updated_at": "2026-08-01T19:35:18.885393Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-08-01T17:00:32.219717+00:00",
+          "checked_at": "2026-08-01T19:35:18.885393+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-08-02T17:00:32.219717+00:00",
+          "next_recheck_at": "2026-08-02T19:35:18.885393+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T17:00:32.219717+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T19:35:18.885393+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1267,25 +1274,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-08-01T17:00:32.981789+00:00",
+        "checked_at": "2026-08-01T19:35:19.068149+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-08-02T17:00:32.981789+00:00",
+        "next_recheck_at": "2026-08-02T19:35:19.068149+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-08-01T17:00:32.981789Z",
+          "updated_at": "2026-08-01T19:35:19.068149Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-08-01T17:00:32.981789+00:00",
+          "checked_at": "2026-08-01T19:35:19.068149+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-08-02T17:00:32.981789+00:00",
+          "next_recheck_at": "2026-08-02T19:35:19.068149+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T17:00:32.981789+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T19:35:19.068149+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1305,25 +1312,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-08-01T17:00:33.044120+00:00",
+        "checked_at": "2026-08-01T19:35:19.119372+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-08-02T17:00:33.044120+00:00",
+        "next_recheck_at": "2026-08-02T19:35:19.119372+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-08-01T17:00:33.044120Z",
+          "updated_at": "2026-08-01T19:35:19.119372Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-08-01T17:00:33.044120+00:00",
+          "checked_at": "2026-08-01T19:35:19.119372+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-08-02T17:00:33.044120+00:00",
+          "next_recheck_at": "2026-08-02T19:35:19.119372+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T17:00:33.044120+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-08-02T19:35:19.119372+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
