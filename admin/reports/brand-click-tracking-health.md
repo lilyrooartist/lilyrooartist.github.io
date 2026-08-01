@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-31T19:59:00.451951Z
+Generated: 2026-08-01T03:51:56.875977Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **21 / 21**
-- Tracking URLs checked: **21 / 21**
+- Future campaign rows ready: **20 / 20**
+- Tracking URLs checked: **20 / 20**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **4 / 21**
-- Visible full destination sets: **21 / 21**
+- Visible album click paths: **4 / 20**
+- Visible full destination sets: **20 / 20**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,14 +24,14 @@ Generated: 2026-07-31T19:59:00.451951Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 4, echo: 6, spotify: 5, video: 6**
+- Destinations: **album: 4, echo: 6, spotify: 5, video: 5**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-growth-reset-voice-06-x`
+- Probe campaign id: `fp-growth-reset-voice-07-x`
 - Event: **x / album / track unknown**
 
 ## Redirect Checks
@@ -236,10 +236,6 @@ Generated: 2026-07-31T19:59:00.451951Z
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube 2026-07-31T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `album`
   - Visible surface: **ready** (`album`)
-- `FP-GROWTH-RESET-VOICE-06-X` X 2026-07-31T14:05:00-04:00 - **ready** (1 link)
-  - Destinations: `video`
-  - Visible surface: **attention** (`video`)
-  - Main-post album link: **ready**
 - `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube 2026-08-02T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `video`
   - Visible surface: **attention** (`video`)

@@ -1,17 +1,17 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-31T19:59:00.860531Z
+Generated: 2026-08-01T03:51:57.286514Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
-- Visible in future queue: **21**
+- Visible in future queue: **20**
 - Posted or measured rows: **28**
 - Measured rows: **0**
 - Ready for metric capture: **26**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **23** across **9** post(s); last click `2026-07-31T15:30:27.931Z`
-- Click tracking links: **ready** (21 / 21 future rows; 21 / 21 URLs)
+- Click tracking links: **ready** (20 / 20 future rows; 20 / 20 URLs)
 - Post-slot watch windows: **24**
 - Status counts: **execution_attention: 14, posted_waiting_measurement_window: 2, ready_for_metric_capture: 26, scheduled_future: 6**
 - Next scheduled: `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` at `2026-08-02T10:15:00-04:00`

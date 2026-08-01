@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T19:59:02.330061Z",
+  "generated_at": "2026-08-01T03:51:58.627840Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -31,17 +31,17 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-01T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-02T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
         "approved_backlog_posts": 14,
-        "raw_approved_backlog_posts": 15,
+        "raw_approved_backlog_posts": 14,
         "manual_handoff_backlog_posts": 0,
         "approved_upcoming_posts": 6,
         "blocked_backlog_count": 14,
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-01T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-01T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-02T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-02T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       }
     },
     {
