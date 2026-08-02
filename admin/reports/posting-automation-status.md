@@ -1,14 +1,14 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-08-01T19:35:38.813671Z
+Generated: 2026-08-02T03:54:36.746771Z
 
 ## Summary
 - Status: **blocked**
 - Active campaign ready: **False**
-- Lanes ready: **4 / 10**
+- Lanes ready: **5 / 10**
 - Blocked lanes: **3**
 - Deferred optional lanes: **0**
-- Needs attention: **3**
+- Needs attention: **2**
 - Story posts tracked: **6**
 - Help-needed items: **0**
 - Proof refresh: **ready** at `2026-08-02T15:25:00Z` (4 min)
@@ -20,16 +20,15 @@ Generated: 2026-08-01T19:35:38.813671Z
   - Detail: 48 approved auto posts; next=FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE at 2026-08-02T10:15:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
-- **Scheduled refresh workflow** - `needs_attention`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run pending / pending; proof refresh next fixed refresh 4 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30715097815
-  - Next: Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window.
+- **Scheduled refresh workflow** - `ready`
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30731412054
 - **Published URL export** - `needs_attention`
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-08-02T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
   - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-08-01T19:35:36.932997Z
+  - Detail: 19 refresh commands captured at 2026-08-02T03:54:34.618408Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=14 would_post=0
