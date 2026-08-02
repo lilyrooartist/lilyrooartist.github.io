@@ -1,24 +1,24 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-08-02T13:57:02.848523Z
+Generated: 2026-08-02T16:28:32.560101Z
 
 ## Summary
-- Actions: **23**
+- Actions: **24**
 - User review: **0**
-- Platform fixes: **14**
+- Platform fixes: **15**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
 - Store checks: **4**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 16, low: 2, medium: 4**
+- Urgency: **blocked: 1, high: 17, low: 2, medium: 4**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Measure active brand campaign: **1**
-- Repair executor: **14**
+- Repair executor: **15**
 - Reschedule approved backlog: **1**
 - Verify music sites: **4**
 
@@ -31,6 +31,12 @@ Generated: 2026-08-02T13:57:02.848523Z
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-03T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
+- **[high] Fix YouTube executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE --apply`
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
@@ -91,12 +97,6 @@ Generated: 2026-08-02T13:57:02.848523Z
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --apply`
-- **[high] Fix YouTube executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

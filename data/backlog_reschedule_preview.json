@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T13:56:58.452382+00:00",
+  "generated_at": "2026-08-02T16:28:29.236210+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,8 +10,8 @@
     "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 14,
-    "blocked_backlog_count": 14,
+    "approved_backlog_count": 15,
+    "blocked_backlog_count": 15,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -37,7 +37,8 @@
       "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
       "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
-      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE"
+      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
+      "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE"
     ],
     "normal_apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
@@ -50,8 +51,8 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 14,
-    "blocked_backlog_count": 14,
+    "approved_backlog_count": 15,
+    "blocked_backlog_count": 15,
     "clear_to_apply_count": 0,
     "partial_clear_apply_available": false,
     "partial_clear_apply_count": 0,
@@ -69,7 +70,8 @@
       "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
       "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
-      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE"
+      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
+      "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE"
     ],
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-03T10:00:00+00:00' --spacing-hours 24",
     "safe_apply_command": "",
@@ -234,6 +236,17 @@
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
+      },
+      {
+        "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+        "platform": "YouTube",
+        "song": "No Mortgage",
+        "blocker_kind": "max_attempts_exceeded",
+        "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+        "proposed_scheduled_at": "2026-08-17T10:00:00+00:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
       }
     ],
     "operator_checklist": [
@@ -259,7 +272,7 @@
   "partial_clear_apply_manifest": {
     "status": "empty",
     "clear_to_apply_count": 0,
-    "blocked_backlog_count": 14,
+    "blocked_backlog_count": 15,
     "clear_ids": [],
     "blocked_ids_retained": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -275,7 +288,8 @@
       "FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-FACEBOOK",
       "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
-      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE"
+      "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
+      "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE"
     ],
     "preview_commands": [],
     "apply_commands": [],
@@ -528,6 +542,23 @@
       "proposed_scheduled_at": "2026-08-16T10:00:00+00:00",
       "blocked": true,
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
+    },
+    {
+      "id": "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+      "platform": "YouTube",
+      "song": "No Mortgage",
+      "current_scheduled_at": "2026-08-02T10:15:00-04:00",
+      "proposed_scheduled_at": "2026-08-17T10:00:00+00:00",
+      "blocked": true,
+      "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
       "blocker_status": "failed",
       "blocker_source": "cron",
       "blocker_kind": "max_attempts_exceeded",

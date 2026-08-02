@@ -1,20 +1,20 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-08-02T13:57:01.408360Z
+Generated: 2026-08-02T16:28:31.805692Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
 - Visible in future queue: **20**
-- Posted or measured rows: **28**
+- Posted or measured rows: **29**
 - Measured rows: **0**
 - Ready for metric capture: **28**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **23** across **9** post(s); last click `2026-07-31T15:30:27.931Z`
 - Click tracking links: **ready** (20 / 20 future rows; 20 / 20 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 14, ready_for_metric_capture: 28, scheduled_future: 6**
-- Next scheduled: `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` at `2026-08-02T10:15:00-04:00`
+- Status counts: **execution_attention: 15, posted_waiting_measurement_window: 1, ready_for_metric_capture: 28, scheduled_future: 4**
+- Next scheduled: `FP-GROWTH-RESET-VOICE-07-X` at `2026-08-03T14:05:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -31,6 +31,7 @@ Generated: 2026-08-02T13:57:01.408360Z
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
+- Waiting posts: `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK`
 - Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
@@ -131,8 +132,8 @@ Generated: 2026-08-02T13:57:01.408360Z
   - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-GROWTH-RESET-VOICE-06-X && python3 scripts/capture_facebook_post_results.py --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK`
-- `2026-08-02` **scheduled_future** proof due `2026-08-02T15:21:00Z` for `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-08-02` **attention** proof due `2026-08-02T15:21:00Z` for `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE, FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK`
+  - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-08-03` **scheduled_future** proof due `2026-08-03T18:06:00Z` for `FP-GROWTH-RESET-VOICE-07-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -265,10 +266,11 @@ Generated: 2026-08-02T13:57:01.408360Z
 - `FP-GROWTH-RESET-VOICE-06-X` X 2026-07-31T14:05:00-04:00 - **ready_for_metric_capture**
   - URL: https://x.com/i/web/status/2083255155508555959
   - Next: Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).
-- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube 2026-08-02T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube 2026-08-02T10:15:00-04:00 - **execution_attention**
+  - Next: Inspect executor state for FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
+- `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **posted_waiting_measurement_window**
+  - URL: /reel/1414467443856977/
+  - Next: Wait until 2026-08-03T15:30:18.459000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-VOICE-07-X` X 2026-08-03T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **scheduled_future**

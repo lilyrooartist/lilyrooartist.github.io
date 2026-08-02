@@ -1,13 +1,13 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-08-02T13:56:59.515886Z
+Generated: 2026-08-02T16:28:30.220429Z
 
 ## Summary
-- Platform fixes: **14**
-- Blocked rows: **14**
-- Preview commands: **14**
+- Platform fixes: **15**
+- Blocked rows: **15**
+- Preview commands: **15**
 - Apply commands: **0**
-- Checklist items: **28**
+- Checklist items: **30**
 - Checklist blocked: **0**
 - Platforms: **Facebook, YouTube**
 
@@ -179,6 +179,18 @@ Generated: 2026-08-02T13:56:59.515886Z
   - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE`
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE --apply`
+  - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
+- **YouTube** (`FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`)
+  - Status: `failed`; reason: `max_attempts_exceeded`
+  - Error: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
+  - Repair: Review platform credentials/readiness, then rerun the social execution capture.
+  - Checklist:
+    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
+  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
+  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
+  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 
 ## Guardrails
