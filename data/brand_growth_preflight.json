@@ -1,40 +1,41 @@
 {
-  "generated_at": "2026-08-03T17:53:45.370859Z",
+  "generated_at": "2026-08-03T19:59:46.000067Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/0ff41c5109c0b0917ff62994b09d813265a7370a/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/b52530facf7bb4f604741bb2e81edabc02053864/admin/future-posts.json"
   },
   "summary": {
     "status": "needs_attention",
-    "next_window_date": "2026-08-03",
-    "scheduled_time": "2026-08-03T18:06:00Z",
-    "expected_post_count": 1,
+    "next_window_date": "2026-08-04",
+    "scheduled_time": "2026-08-04T15:21:00Z",
+    "expected_post_count": 2,
     "expected_post_ids": [
-      "FP-GROWTH-RESET-VOICE-07-X"
+      "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
-    "scheduler_simulated_at": "2026-08-03T18:06:00Z",
-    "scheduler_simulated_due_count": 16,
-    "scheduler_simulated_would_post_count": 1,
-    "scheduler_simulated_posted_count": 0,
-    "scheduler_simulated_satisfied_count": 1,
+    "scheduler_simulated_at": "2026-08-04T15:21:00Z",
+    "scheduler_simulated_due_count": 18,
+    "scheduler_simulated_would_post_count": 2,
+    "scheduler_simulated_posted_count": 1,
+    "scheduler_simulated_satisfied_count": 2,
     "scheduler_simulated_blocked_count": 15,
-    "scheduler_due_count": 16,
-    "scheduler_would_post_count": 1,
-    "scheduler_posted_count": 0,
-    "scheduler_satisfied_count": 1,
+    "scheduler_due_count": 18,
+    "scheduler_would_post_count": 2,
+    "scheduler_posted_count": 1,
+    "scheduler_satisfied_count": 2,
     "scheduler_blocked_count": 15,
-    "current_scheduler_checked_at": "2026-08-03T17:53:37.719320Z",
-    "current_scheduler_requested_scheduled_time": "2026-08-03T17:53:37.368460Z",
-    "current_scheduler_due_count": 15,
+    "current_scheduler_checked_at": "2026-08-03T19:59:38.891734Z",
+    "current_scheduler_requested_scheduled_time": "2026-08-03T19:59:38.515069Z",
+    "current_scheduler_due_count": 16,
     "current_scheduler_would_post_count": 0,
-    "current_scheduler_posted_count": 0,
+    "current_scheduler_posted_count": 1,
     "current_scheduler_blocked_count": 15,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
@@ -55,55 +56,79 @@
       "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
       "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE"
     ],
-    "link_check_count": 1,
-    "link_ok_count": 1,
+    "link_check_count": 4,
+    "link_ok_count": 4,
     "link_failed_count": 0,
-    "tracking_link_check_count": 1,
-    "tracking_link_ok_count": 1,
-    "expected_tracking_link_check_count": 1,
-    "target_link_check_count": 1,
-    "target_link_ok_count": 1,
+    "tracking_link_check_count": 2,
+    "tracking_link_ok_count": 2,
+    "expected_tracking_link_check_count": 2,
+    "target_link_check_count": 2,
+    "target_link_ok_count": 2,
     "target_link_failed_count": 0,
     "target_link_warning_count": 0,
     "target_link_blocking_failed_count": 0,
-    "expected_target_link_check_count": 1,
+    "expected_target_link_check_count": 2,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
-    "next_proof_due_at": "2026-08-03T18:06:00Z",
-    "next_measurement_due_at": "2026-08-04T18:05:00Z",
+    "next_proof_due_at": "2026-08-04T15:21:00Z",
+    "next_measurement_due_at": "2026-08-05T15:20:00Z",
     "readout_next_proof_due_at": "2026-07-13T18:06:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
-    "due_count": 16,
-    "result_count": 16,
-    "would_post_count": 1,
-    "posted_count": 0,
+    "due_count": 18,
+    "result_count": 18,
+    "would_post_count": 2,
+    "posted_count": 1,
     "blocked_count": 15,
     "status_counts": {
       "failed": 15,
-      "would_post": 1
+      "posted": 1,
+      "would_post": 2
     },
     "platform_counts": {
-      "Facebook": 7,
-      "X": 1,
-      "YouTube": 8
+      "Facebook": 8,
+      "Unknown": 1,
+      "YouTube": 9
     },
     "would_post": [
       {
-        "post_id": "FP-GROWTH-RESET-VOICE-07-X",
-        "platform": "X",
+        "post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+        "platform": "YouTube",
         "status": "would_post",
         "reason": "",
-        "post_type": "text",
+        "post_type": "video",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+        "platform": "Facebook",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "video",
         "attempts": 0,
         "updated_at": "",
         "source": "",
         "error_summary": ""
       }
     ],
-    "posted": [],
+    "posted": [
+      {
+        "post_id": "FP-GROWTH-RESET-VOICE-07-X",
+        "platform": "",
+        "status": "posted",
+        "reason": "",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
     "blocked": [
       {
         "post_id": "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",
@@ -112,7 +137,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.442Z",
+        "updated_at": "2026-08-03T19:59:46.058Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -123,7 +148,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.446Z",
+        "updated_at": "2026-08-03T19:59:46.066Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -134,7 +159,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.450Z",
+        "updated_at": "2026-08-03T19:59:46.088Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -145,7 +170,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.453Z",
+        "updated_at": "2026-08-03T19:59:46.095Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -156,7 +181,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.457Z",
+        "updated_at": "2026-08-03T19:59:46.102Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -167,7 +192,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.460Z",
+        "updated_at": "2026-08-03T19:59:46.108Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -178,7 +203,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.464Z",
+        "updated_at": "2026-08-03T19:59:46.114Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -189,7 +214,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.469Z",
+        "updated_at": "2026-08-03T19:59:46.118Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -200,7 +225,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.472Z",
+        "updated_at": "2026-08-03T19:59:46.125Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -211,7 +236,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.476Z",
+        "updated_at": "2026-08-03T19:59:46.132Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -222,7 +247,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.481Z",
+        "updated_at": "2026-08-03T19:59:46.138Z",
         "source": "dry-run",
         "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
       },
@@ -233,7 +258,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.487Z",
+        "updated_at": "2026-08-03T19:59:46.144Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -244,7 +269,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.490Z",
+        "updated_at": "2026-08-03T19:59:46.149Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -255,7 +280,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.493Z",
+        "updated_at": "2026-08-03T19:59:46.155Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -266,7 +291,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-08-03T17:53:45.497Z",
+        "updated_at": "2026-08-03T19:59:46.165Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
       }
@@ -274,11 +299,44 @@
   },
   "link_checks": [
     {
-      "label": "FP-GROWTH-RESET-VOICE-07-X Hear the song",
-      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-07-x&to=spotify&utm_wave=video-reset&utm_term=slow-walk-brand-voice",
+      "label": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-echo-thread.mp4",
       "ok": true,
       "status": 200,
-      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-07-x&to=spotify&utm_wave=video-reset&utm_term=slow-walk-brand-voice",
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-echo-thread.mp4",
+      "content_type": "video/mp4",
+      "content_length": "4149074",
+      "error": "",
+      "source": "local_static_file"
+    },
+    {
+      "label": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
+      "content_type": "text/html",
+      "content_length": "13930",
+      "error": "",
+      "source": "local_static_file"
+    },
+    {
+      "label": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK clip_url",
+      "url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-echo-thread.mp4",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/assets/campaigns/analog-myth-growth-reset/no-mortgage-echo-thread.mp4",
+      "content_type": "video/mp4",
+      "content_length": "4149074",
+      "error": "",
+      "source": "local_static_file"
+    },
+    {
+      "label": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread",
+      "url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-facebook&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-facebook&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
       "content_type": "text/html",
       "content_length": "13930",
       "error": "",
@@ -287,28 +345,52 @@
   ],
   "target_checks": [
     {
-      "label": "FP-GROWTH-RESET-VOICE-07-X Hear the song target spotify",
-      "url": "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
+      "label": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread target echo",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
       "ok": true,
       "status": 200,
-      "final_url": "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
-      "content_type": "text/html; charset=utf-8",
-      "content_length": "",
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "9020",
       "error": "",
-      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-voice-07-x&to=spotify&utm_wave=video-reset&utm_term=slow-walk-brand-voice",
-      "destination": "spotify",
-      "track": "",
-      "post_id": "fp-growth-reset-voice-07-x"
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
+      "destination": "echo",
+      "track": "05",
+      "post_id": "fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-youtube"
+    },
+    {
+      "label": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread target echo",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "9020",
+      "error": "",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-facebook&to=echo&utm_wave=video-reset&utm_term=no-mortgage-echo-thread-setup-song-payoff",
+      "destination": "echo",
+      "track": "05",
+      "post_id": "fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-facebook"
     }
   ],
   "next_window_posts": [
     {
-      "id": "FP-GROWTH-RESET-VOICE-07-X",
-      "platform": "X",
-      "scheduled_at": "2026-08-03T14:05:00-04:00",
+      "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "scheduled_at": "2026-08-04T10:15:00-04:00",
       "execution_mode": "auto",
-      "post_type": "text",
-      "text": "The shortcut looked suspicious, so the song kept walking."
+      "post_type": "video",
+      "text": "What would you keep if you needed less? No Mortgage has a short list. #Shorts"
+    },
+    {
+      "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+      "platform": "Facebook",
+      "scheduled_at": "2026-08-04T11:20:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "text": "What would you keep if you needed less? No Mortgage has a short list."
     }
   ],
   "guardrails": [

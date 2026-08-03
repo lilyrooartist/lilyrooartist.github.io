@@ -1,21 +1,22 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-08-03T17:53:45.370859Z
+Generated: 2026-08-03T19:59:46.000067Z
 
 ## Summary
 - Status: **needs_attention**
-- Next window: **2026-08-03** at `2026-08-03T18:06:00Z`
-- Expected posts: **1**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-08-03T18:06:00Z`, due **16**, satisfied **1**, would post **1**, posted **0**, blocked **15**
-- Current scheduler snapshot: checked `2026-08-03T17:53:37.719320Z`, requested `2026-08-03T17:53:37.368460Z`, due **15**, would post **0**, posted **0**, blocked **15**
-- Link checks: **1 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Tracking redirects: **1 / 1 checked ok**
-- Redirect targets: **1 / 1 checked**, **1 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-08-03T18:06:00Z`
-- Current window measurement due: `2026-08-04T18:05:00Z`
+- Next window: **2026-08-04** at `2026-08-04T15:21:00Z`
+- Expected posts: **2**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-08-04T15:21:00Z`, due **18**, satisfied **2**, would post **2**, posted **1**, blocked **15**
+- Current scheduler snapshot: checked `2026-08-03T19:59:38.891734Z`, requested `2026-08-03T19:59:38.515069Z`, due **16**, would post **0**, posted **1**, blocked **15**
+- Link checks: **4 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **2 / 2 checked ok**
+- Redirect targets: **2 / 2 checked**, **2 ok**, **0 warning**, **0 blocking failed**
+- Current window proof due: `2026-08-04T15:21:00Z`
+- Current window measurement due: `2026-08-05T15:20:00Z`
 
 ## Expected Posts
-- `FP-GROWTH-RESET-VOICE-07-X` X at `2026-08-03T14:05:00-04:00`
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube at `2026-08-04T10:15:00-04:00`
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook at `2026-08-04T11:20:00-04:00`
 
 ## Blocked Rows
 - `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK`
@@ -35,10 +36,14 @@ Generated: 2026-08-03T17:53:45.370859Z
 - `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
 
 ## Link Checks
-- **ok** `FP-GROWTH-RESET-VOICE-07-X Hear the song` 200 text/html
+- **ok** `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread` 200 text/html
+- **ok** `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK clip_url` 200 video/mp4
+- **ok** `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-GROWTH-RESET-VOICE-07-X Hear the song target spotify` 200 text/html; charset=utf-8
+- **ok** `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE Hear the Echo Thread target echo` 200 text/html
+- **ok** `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Hear the Echo Thread target echo` 200 text/html
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
