@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-08-04T14:40:28.423223Z
+Generated: 2026-08-04T17:15:13.884384Z
 
 ## Summary
 - Open blockers: **17**
@@ -93,8 +93,9 @@ Generated: 2026-08-04T14:40:28.423223Z
 - **[high] Repair YouTube executor** (`platform-FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
   - Evidence: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-  - Next step: Review platform credentials/readiness, then rerun the social execution capture.
-  - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Next step: Review platform credentials/readiness, then rerun the social execution capture. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply`
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`

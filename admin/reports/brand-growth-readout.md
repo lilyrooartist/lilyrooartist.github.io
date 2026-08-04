@@ -1,20 +1,20 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-08-04T14:40:29.767462Z
+Generated: 2026-08-04T17:15:15.299242Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
 - Visible in future queue: **18**
-- Posted or measured rows: **30**
+- Posted or measured rows: **31**
 - Measured rows: **0**
 - Ready for metric capture: **29**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
-- Campaign clicks: **23** across **9** post(s); last click `2026-07-31T15:30:27.931Z`
+- Campaign clicks: **24** across **10** post(s); last click `2026-08-04T15:31:18.263Z`
 - Click tracking links: **ready** (18 / 18 future rows; 18 / 18 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 16, posted_waiting_measurement_window: 1, ready_for_metric_capture: 29, scheduled_future: 2**
-- Next scheduled: `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` at `2026-08-04T11:20:00-04:00`
+- Status counts: **execution_attention: 16, posted_waiting_measurement_window: 2, ready_for_metric_capture: 29, scheduled_future: 1**
+- Next scheduled: `FP-GROWTH-RESET-VOICE-08-X` at `2026-08-07T14:05:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -24,14 +24,14 @@ Generated: 2026-08-04T14:40:29.767462Z
 ## Learning Now
 - Status: **click_response_ready**
 - Headline: **First-party click response is ready to review**
-- First-party clicks: **23** across **9** post(s)
+- First-party clicks: **24** across **10** post(s)
 - Public posts ready for learning: **29**
 - Next learning action: Review the tracks, platforms, and destinations with click response before changing the next copy wave.
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py`
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
-- Waiting posts: `FP-GROWTH-RESET-VOICE-07-X`
+- Waiting posts: `FP-GROWTH-RESET-VOICE-07-X, FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
 - Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
@@ -277,8 +277,9 @@ Generated: 2026-08-04T14:40:29.767462Z
   - Next: Wait until 2026-08-04T18:16:04.757000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **execution_attention**
   - Next: Inspect executor state for FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **posted_waiting_measurement_window**
+  - URL: /reel/3323425587859299/
+  - Next: Wait until 2026-08-05T15:31:13.610000+00:00 before capturing metrics.
 - `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 

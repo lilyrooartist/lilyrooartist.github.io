@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T14:40:27.226336+00:00",
+  "generated_at": "2026-08-04T17:15:12.625452+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -254,7 +254,7 @@
         "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
         "platform": "YouTube",
         "song": "No Mortgage",
-        "blocker_kind": "failed",
+        "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
         "proposed_scheduled_at": "2026-08-20T10:00:00+00:00",
         "clearance_steps": [
@@ -592,7 +592,7 @@
       "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
       "blocker_status": "failed",
       "blocker_source": "cron",
-      "blocker_kind": "failed",
+      "blocker_kind": "max_attempts_exceeded",
       "blocks_normal_apply": true,
       "safe_apply_available": false,
       "clearance_steps": [

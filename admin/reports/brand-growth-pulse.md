@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-08-04T14:40:30.231196Z
+Generated: 2026-08-04T17:15:15.790860Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -10,14 +10,14 @@ Generated: 2026-08-04T14:40:30.231196Z
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **18**
-- Posted or measured rows: **30**
+- Posted or measured rows: **31**
 - Ready for result capture: **29**
-- First-party clicks: **23** across **9** post(s)
-- Click snapshot: `2026-08-04T14:40:27.055936Z` (covers current due posts)
-- Next post at: `2026-08-04T11:20:00-04:00`
+- First-party clicks: **24** across **10** post(s)
+- Click snapshot: `2026-08-04T17:15:12.450651Z` (covers current due posts)
+- Next post at: `2026-08-07T14:05:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `0.66`
-- Hours until proof due: `-524.58`
+- Hours until next post: `72.83`
+- Hours until proof due: `-527.15`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25,7 +25,7 @@ Generated: 2026-08-04T14:40:30.231196Z
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **29**
-- Waiting measurement rows: **1**
+- Waiting measurement rows: **2**
 - Future scheduled rows: **18**
 - Next learning due at: `2026-08-04T18:16:04.757000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
@@ -38,7 +38,7 @@ Generated: 2026-08-04T14:40:30.231196Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-GROWTH-RESET-VOICE-07-X` (X): Voice 07 - Waiting for first useful result check
-  - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Facebook): No Mortgage Echo Thread Setup Song Payoff - Next queued learning input
+  - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Facebook): No Mortgage Echo Thread Setup Song Payoff - Waiting for first useful result check
   - `FP-GROWTH-RESET-VOICE-08-X` (X): Voice 08 - Next queued learning input
 
 ## Recommendations

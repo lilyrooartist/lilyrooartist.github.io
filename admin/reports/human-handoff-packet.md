@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-08-04T14:40:28.477310Z
+Generated: 2026-08-04T17:15:13.937247Z
 
 ## Summary
 - Open handoff tasks: **20**
@@ -139,7 +139,7 @@ Generated: 2026-08-04T14:40:28.477310Z
 - **Repair YouTube executor** (`platform-setup-FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`)
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
-  - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
   - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Review TikTok upload-mode preflight** (`platform-setup-tiktok-preflight`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`

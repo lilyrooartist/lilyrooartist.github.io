@@ -1,41 +1,42 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-08-04T14:40:27.055936Z
+Generated: 2026-08-04T17:15:12.450651Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **23**
-- Posts with clicks: **9**
+- Clicks captured: **24**
+- Posts with clicks: **10**
 - First click: `2026-07-10T15:30:43.264Z`
-- Last click: `2026-07-31T15:30:27.931Z`
+- Last click: `2026-08-04T15:31:18.263Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
-- facebook: **14**
+- facebook: **15**
 - youtube: **6**
 - site: **3**
 
 ### Destination
 - album: **6**
+- echo: **6**
 - spotify: **6**
-- echo: **5**
 - playlist: **3**
 - video: **3**
 
 ### Wave
-- video-reset: **17**
+- video-reset: **18**
 - site-home: **3**
 - track-moments: **3**
 
 ### Track
 - slow-walk: **9**
-- no-mortgage: **7**
+- no-mortgage: **8**
 - spilling-the-tea: **4**
 - hero-playlist: **2**
 - starter-playlist: **1**
 
 ## Recent Clicks
+- `2026-08-04T15:31:18.263Z` facebook echo `fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-facebook`
 - `2026-07-31T15:30:27.931Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
 - `2026-07-31T15:30:26.911Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
 - `2026-07-31T15:30:26.697Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
@@ -55,7 +56,6 @@ Generated: 2026-08-04T14:40:27.055936Z
 - `2026-07-15T14:15:29.380Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
 - `2026-07-15T14:15:28.966Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
 - `2026-07-13T14:15:55.357Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
-- `2026-07-13T14:15:54.729Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
 
 ## Guardrails
 - Click capture stores campaign metadata only; it does not store IP addresses.

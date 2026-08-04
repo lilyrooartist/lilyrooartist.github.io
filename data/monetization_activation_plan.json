@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T14:40:30.566799Z",
+  "generated_at": "2026-08-04T17:15:16.133768Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -35,9 +35,9 @@
       "after_review_command": "",
       "context": {
         "approved_backlog_posts": 16,
-        "raw_approved_backlog_posts": 16,
+        "raw_approved_backlog_posts": 17,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 2,
+        "approved_upcoming_posts": 1,
         "blocked_backlog_count": 16,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
@@ -319,12 +319,12 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "after_review_command": "",
       "context": {
         "post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
         "platform": "YouTube",
-        "reason": "",
+        "reason": "max_attempts_exceeded",
         "missing_secrets": [],
         "local_missing_secrets": [],
         "local_secret_source": "",
@@ -337,7 +337,7 @@
       "phase": "Operations packet",
       "status": "needs_fix",
       "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "after_review_command": "",
       "context": {
         "kind": "platform_fix",

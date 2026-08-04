@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-08-04T14:40:30.392556Z
+Generated: 2026-08-04T17:15:15.956910Z
 
 ## Summary
 - Actions: **25**
@@ -34,7 +34,9 @@ Generated: 2026-08-04T14:40:30.392556Z
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE --apply`
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}

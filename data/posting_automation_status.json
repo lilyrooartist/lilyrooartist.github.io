@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T14:40:29.244039Z",
+  "generated_at": "2026-08-04T17:15:14.729852Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -44,12 +44,12 @@
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 0,
+    "active_campaign_proof_export_added_last_run": 1,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
-    "posted_count": 60,
+    "posted_count": 61,
     "attention_count": 16,
     "platform_fix_needed_count": 16,
     "story_post_count": 6,
@@ -73,7 +73,7 @@
     {
       "label": "Active Analog Myth brand campaign",
       "status": "needs_attention",
-      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE at 2026-08-04T10:15:00-04:00; preflight=needs_attention",
+      "detail": "48 approved auto posts; next=FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK at 2026-08-04T11:20:00-04:00; preflight=needs_attention",
       "evidence": "data/brand_growth_preflight.json",
       "next_action": "Refresh brand growth readout and preflight."
     },
@@ -81,34 +81,34 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30920097833",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/30932666541",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-08-04T15:25:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-08-04T15:25:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-08-04T14:40:27.067038Z",
+      "detail": "19 refresh commands captured at 2026-08-04T17:15:12.462508Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=16 would_post=1",
+      "detail": "HTTP 200 using bearer auth; due=17 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=60 attention=16 platform_fix_needed=16",
+      "detail": "posted=61 attention=16 platform_fix_needed=16",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },

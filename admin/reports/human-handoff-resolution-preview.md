@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-08-04T14:40:28.713571Z
+Generated: 2026-08-04T17:15:14.180623Z
 
 ## Summary
 - Worksheet rows: **20**
@@ -88,8 +88,8 @@ Generated: 2026-08-04T14:40:28.713571Z
   - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE** (`skipped`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
-  - Safety: `skipped` (unsupported_command)
-  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`
   - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-tiktok-preflight** (`preview_ok`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`

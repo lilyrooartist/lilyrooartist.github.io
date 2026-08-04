@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T14:40:30.341041Z",
+  "generated_at": "2026-08-04T17:15:15.903434Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -161,10 +161,10 @@
     {
       "post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "platform": "YouTube",
-      "reason": "",
+      "reason": "max_attempts_exceeded",
       "status": "failed",
       "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
       "blocked_apply_reasons": []
     }
   ],
