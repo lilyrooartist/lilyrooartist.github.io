@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-08-04T09:09:51.745849Z",
+  "generated_at": "2026-08-04T14:40:28.423223Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 16,
-    "urgent_count": 16,
+    "open_blocker_count": 17,
+    "urgent_count": 17,
     "owner_counts": {
       "external_platform": 8,
-      "tod": 8
+      "tod": 9
     },
     "category_counts": {
       "backlog_reschedule": 1,
-      "platform_repair": 15
+      "platform_repair": 16
     },
     "status_counts": {
-      "blocked": 16
+      "blocked": 17
     },
     "next_resolution_projection": {
       "kind": "checked_scheduled_approval_batch",
@@ -82,7 +82,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 15,
+        "blockers_resolved": 16,
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
@@ -101,7 +101,8 @@
           "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
           "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
-          "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE"
+          "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+          "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
@@ -326,6 +327,29 @@
       }
     },
     {
+      "id": "platform-FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "blocker_id": "platform-FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "title": "Repair YouTube executor",
+      "category": "platform_repair",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
+      "platform": "YouTube",
+      "release": "",
+      "evidence": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+      "next_step": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "external_url": "",
+      "guardrail": "Run retry resets only after the external platform repair is verified.",
+      "impact": {
+        "kind": "platform_repair_gate",
+        "blocked_apply_command": "",
+        "blocked_apply_reasons": []
+      }
+    },
+    {
       "id": "backlog-reschedule",
       "blocker_id": "backlog-reschedule",
       "title": "Reschedule approved past-due backlog",
@@ -335,7 +359,7 @@
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "15 approved backlog row(s); 15 still have executor blockers.",
+      "evidence": "16 approved backlog row(s); 16 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
       "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24",
       "apply_command": "",
@@ -349,8 +373,8 @@
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 15,
-          "blocked_backlog_count": 15,
+          "approved_backlog_count": 16,
+          "blocked_backlog_count": 16,
           "clear_to_apply_count": 0,
           "partial_clear_apply_available": false,
           "partial_clear_apply_count": 0,
@@ -369,7 +393,8 @@
             "FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
             "FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE",
             "FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE",
-            "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE"
+            "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+            "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -542,6 +567,17 @@
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
               "proposed_scheduled_at": "2026-08-19T10:00:00+00:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+              "platform": "YouTube",
+              "song": "No Mortgage",
+              "blocker_kind": "failed",
+              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+              "proposed_scheduled_at": "2026-08-20T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]

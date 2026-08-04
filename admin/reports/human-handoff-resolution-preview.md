@@ -1,12 +1,12 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-08-04T09:09:52.025999Z
+Generated: 2026-08-04T14:40:28.713571Z
 
 ## Summary
-- Worksheet rows: **19**
+- Worksheet rows: **20**
 - Executed previews: **4**
-- Skipped previews: **15**
-- Status counts: `{"input_missing": 2, "preview_ok": 1, "preview_ok_with_warning": 1, "skipped": 15}`
+- Skipped previews: **16**
+- Status counts: `{"input_missing": 2, "preview_ok": 1, "preview_ok_with_warning": 1, "skipped": 16}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
@@ -86,6 +86,11 @@ Generated: 2026-08-04T09:09:52.025999Z
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
   - Guardrail: Push worker secrets only after local platform setup is complete.
+- **platform-setup-FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (unsupported_command)
+  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-tiktok-preflight** (`preview_ok`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `safe_preview` (dry_run_command)
@@ -96,7 +101,7 @@ Generated: 2026-08-04T09:09:52.025999Z
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 15 | - FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-08-05T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-08-06T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-08-07T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-08-08T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-08-09T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-08-10T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired
+  - Output: Rows selected: 16 | - FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-08-05T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-08-06T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-08-07T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-08-08T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."} | - FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-08-09T10:00:00+00:00 |   WARNING: known blocker: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}} | - FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-08-10T10:00:00+00:00 |   WARNING: known blocker: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`

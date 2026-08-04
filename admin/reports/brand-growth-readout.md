@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-08-04T09:09:52.997784Z
+Generated: 2026-08-04T14:40:29.767462Z
 
 ## Summary
 - Campaign rows: **48**
@@ -13,8 +13,8 @@ Generated: 2026-08-04T09:09:52.997784Z
 - Campaign clicks: **23** across **9** post(s); last click `2026-07-31T15:30:27.931Z`
 - Click tracking links: **ready** (18 / 18 future rows; 18 / 18 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 15, posted_waiting_measurement_window: 1, ready_for_metric_capture: 29, scheduled_future: 3**
-- Next scheduled: `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` at `2026-08-04T10:15:00-04:00`
+- Status counts: **execution_attention: 16, posted_waiting_measurement_window: 1, ready_for_metric_capture: 29, scheduled_future: 2**
+- Next scheduled: `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` at `2026-08-04T11:20:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -139,8 +139,8 @@ Generated: 2026-08-04T09:09:52.997784Z
 - `2026-08-03` **posted_waiting_measurement** proof due `2026-08-03T18:06:00Z` for `FP-GROWTH-RESET-VOICE-07-X`
   - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-04` **scheduled_future** proof due `2026-08-04T15:21:00Z` for `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-08-04` **attention** proof due `2026-08-04T15:21:00Z` for `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE, FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
+  - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-08-07` **scheduled_future** proof due `2026-08-07T18:06:00Z` for `FP-GROWTH-RESET-VOICE-08-X`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -275,8 +275,8 @@ Generated: 2026-08-04T09:09:52.997784Z
 - `FP-GROWTH-RESET-VOICE-07-X` X 2026-08-03T14:05:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://x.com/i/web/status/2084342552291897454
   - Next: Wait until 2026-08-04T18:16:04.757000+00:00 before capturing metrics.
-- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **execution_attention**
+  - Next: Inspect executor state for FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **scheduled_future**

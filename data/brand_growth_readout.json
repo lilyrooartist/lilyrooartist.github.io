@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T09:09:52.997784Z",
+  "generated_at": "2026-08-04T14:40:29.767462Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -28,10 +28,10 @@
       "YouTube": 12
     },
     "status_counts": {
-      "execution_attention": 15,
+      "execution_attention": 16,
       "posted_waiting_measurement_window": 1,
       "ready_for_metric_capture": 29,
-      "scheduled_future": 3
+      "scheduled_future": 2
     },
     "approved_auto_rows": 48,
     "future_queue_visible_rows": 18,
@@ -55,9 +55,9 @@
     "campaign_click_tracking_url_count": 18,
     "campaign_click_tracking_expected_url_count": 18,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
-    "attention_rows": 44,
-    "next_scheduled_post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-    "next_scheduled_at": "2026-08-04T10:15:00-04:00",
+    "attention_rows": 45,
+    "next_scheduled_post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
+    "next_scheduled_at": "2026-08-04T11:20:00-04:00",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X --post-id FP-GROWTH-RESET-VOICE-05-X --post-id FP-GROWTH-RESET-VOICE-06-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
@@ -82,10 +82,10 @@
     ],
     "post_slot_watch_window_count": 24,
     "post_slot_watch_status_counts": {
-      "attention": 11,
+      "attention": 12,
       "measurement_due": 10,
       "posted_waiting_measurement": 1,
-      "scheduled_future": 2
+      "scheduled_future": 1
     },
     "next_action_window_date": "2026-07-04",
     "next_action_window_status": "measurement_due",
@@ -121,10 +121,10 @@
     "summary": {
       "window_count": 24,
       "status_counts": {
-        "attention": 11,
+        "attention": 12,
         "measurement_due": 10,
         "posted_waiting_measurement": 1,
-        "scheduled_future": 2
+        "scheduled_future": 1
       },
       "next_window_date": "2026-07-04",
       "next_window_status": "measurement_due",
@@ -816,7 +816,7 @@
       },
       {
         "date": "2026-08-04",
-        "status": "scheduled_future",
+        "status": "attention",
         "post_ids": [
           "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
           "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK"
@@ -830,15 +830,18 @@
         "proof_due_at": "2026-08-04T15:21:00Z",
         "measurement_due_at": "2026-08-05T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "execution_attention": 1,
+          "scheduled_future": 1
         },
-        "rows_needing_proof": [],
+        "rows_needing_proof": [
+          "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
+        ],
         "rows_ready_for_metrics": [],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Inspect executor state, then refresh and export posted URLs after the issue is resolved."
       },
       {
         "date": "2026-08-07",
@@ -1253,7 +1256,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:00:59.004000+00:00",
+      "measurement_due_at": "2026-08-05T14:30:58.518000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1319,7 +1322,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:00:59.416000+00:00",
+      "measurement_due_at": "2026-08-05T14:30:58.917000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1363,7 +1366,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:00:59.770000+00:00",
+      "measurement_due_at": "2026-08-05T14:30:59.237000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1407,7 +1410,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:00.037000+00:00",
+      "measurement_due_at": "2026-08-05T14:30:59.553000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1429,7 +1432,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:00.376000+00:00",
+      "measurement_due_at": "2026-08-05T14:30:59.986000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1473,7 +1476,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:00.723000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:00.415000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1495,7 +1498,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:01.033000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:00.737000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1517,7 +1520,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:01.270000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:01.108000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1539,7 +1542,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:01.607000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:01.495000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1583,7 +1586,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:01.989000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:01.903000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1605,7 +1608,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:02.376000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:02.276000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1627,7 +1630,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:02.722000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:02.649000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1693,7 +1696,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:03+00:00",
+      "measurement_due_at": "2026-08-05T14:31:03.061000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1737,7 +1740,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:03.307000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:03.421000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1803,7 +1806,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-05T09:01:03.659000+00:00",
+      "measurement_due_at": "2026-08-05T14:31:03.764000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1867,16 +1870,16 @@
       "text": "What would you keep if you needed less? No Mortgage has a short list. #Shorts",
       "post_url": "",
       "published_log_row": "",
-      "execution_status": "",
+      "execution_status": "failed",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-08-05T14:31:04.233000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "execution_attention",
+      "next_action": "Inspect executor state for FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
       "visible_in_future_queue": true
     },
     {

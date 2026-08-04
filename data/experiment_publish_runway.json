@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T09:09:53.700660Z",
+  "generated_at": "2026-08-04T14:40:30.341041Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -16,9 +16,9 @@
     "pending_result_field_count": 105,
     "winner_ready_candidate_count": 3,
     "winner_count_target": 3,
-    "blocked_platform_count": 15,
-    "approved_backlog_count": 15,
-    "blocked_backlog_count": 15,
+    "blocked_platform_count": 16,
+    "approved_backlog_count": 16,
+    "blocked_backlog_count": 16,
     "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
   },
   "manual_review_rows": [],
@@ -156,6 +156,15 @@
       "status": "failed",
       "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+      "platform": "YouTube",
+      "reason": "",
+      "status": "failed",
+      "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "preview_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
       "blocked_apply_reasons": []
     }
   ],

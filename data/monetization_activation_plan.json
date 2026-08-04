@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T09:09:53.917309Z",
+  "generated_at": "2026-08-04T14:40:30.566799Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -22,8 +22,8 @@
     "manual_release_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "solicitation_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 15,
-    "action_count": 17
+    "platform_fix_count": 16,
+    "action_count": 18
   },
   "actions": [
     {
@@ -34,11 +34,11 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 15,
-        "raw_approved_backlog_posts": 15,
+        "approved_backlog_posts": 16,
+        "raw_approved_backlog_posts": 16,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 3,
-        "blocked_backlog_count": 15,
+        "approved_upcoming_posts": 2,
+        "blocked_backlog_count": 16,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-05T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
@@ -315,11 +315,29 @@
       }
     },
     {
+      "label": "Repair YouTube executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
+        "platform": "YouTube",
+        "reason": "",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "local_secret_source": "",
+        "local_secret_ready": null,
+        "public_posting_approved": null
+      }
+    },
+    {
       "label": "Current operations next action: Fix YouTube executor",
       "phase": "Operations packet",
       "status": "needs_fix",
       "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
+      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
       "after_review_command": "",
       "context": {
         "kind": "platform_fix",

@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-08-04T09:09:53.700660Z
+Generated: 2026-08-04T14:40:30.341041Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -8,7 +8,7 @@ Generated: 2026-08-04T09:09:53.700660Z
 - Public URLs needed: **0**
 - Pending result fields: **105**
 - Winner-ready formats: **3 / 3**
-- Blocked platform rows: **15**
+- Blocked platform rows: **16**
 
 ## Next Publish Action
 - Collect experiment results when public URLs and measurement values are available.
@@ -39,3 +39,4 @@ Generated: 2026-08-04T09:09:53.700660Z
 - `FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-YOUTUBE` YouTube - max_attempts_exceeded
 - `FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-YOUTUBE` YouTube - max_attempts_exceeded
 - `FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE` YouTube - max_attempts_exceeded
+- `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube - failed

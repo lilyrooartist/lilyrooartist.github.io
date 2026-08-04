@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-08-04T09:09:53.557442Z
+Generated: 2026-08-04T14:40:30.231196Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -13,11 +13,11 @@ Generated: 2026-08-04T09:09:53.557442Z
 - Posted or measured rows: **30**
 - Ready for result capture: **29**
 - First-party clicks: **23** across **9** post(s)
-- Click snapshot: `2026-08-04T09:09:50.355083Z` (covers current due posts)
-- Next post at: `2026-08-04T10:15:00-04:00`
+- Click snapshot: `2026-08-04T14:40:27.055936Z` (covers current due posts)
+- Next post at: `2026-08-04T11:20:00-04:00`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `5.09`
-- Hours until proof due: `-519.06`
+- Hours until next post: `0.66`
+- Hours until proof due: `-524.58`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -38,8 +38,8 @@ Generated: 2026-08-04T09:09:53.557442Z
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
   - `FP-GROWTH-RESET-VOICE-07-X` (X): Voice 07 - Waiting for first useful result check
-  - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` (YouTube): No Mortgage Echo Thread Setup Song Payoff - Next queued learning input
   - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` (Facebook): No Mortgage Echo Thread Setup Song Payoff - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-08-X` (X): Voice 08 - Next queued learning input
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.

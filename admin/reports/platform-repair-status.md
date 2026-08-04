@@ -1,13 +1,13 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-08-04T09:09:51.484942Z
+Generated: 2026-08-04T14:40:28.156051Z
 
 ## Summary
-- Platform fixes: **15**
-- Blocked rows: **15**
-- Preview commands: **15**
+- Platform fixes: **16**
+- Blocked rows: **16**
+- Preview commands: **16**
 - Apply commands: **0**
-- Checklist items: **30**
+- Checklist items: **32**
 - Checklist blocked: **0**
 - Platforms: **Facebook, YouTube**
 
@@ -192,6 +192,14 @@ Generated: 2026-08-04T09:09:51.484942Z
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
+- **YouTube** (`FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE`)
+  - Status: `failed`; reason: ``
+  - Error: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
+  - Repair: Review platform credentials/readiness, then rerun the social execution capture.
+  - Checklist:
+    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
+  - Preview/check: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 
 ## Guardrails
 - This report does not push secrets, reconnect accounts, approve posts, or publish posts.
