@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T17:00:39.431527Z",
+  "generated_at": "2026-08-07T19:21:34.560184Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/growth_reset_campaign.json",
@@ -29,12 +29,12 @@
     },
     "status_counts": {
       "execution_attention": 16,
-      "ready_for_metric_capture": 31,
-      "scheduled_future": 1
+      "posted_waiting_measurement_window": 1,
+      "ready_for_metric_capture": 31
     },
     "approved_auto_rows": 48,
     "future_queue_visible_rows": 17,
-    "posted_or_measured_rows": 31,
+    "posted_or_measured_rows": 32,
     "measured_rows": 0,
     "ready_for_metric_capture_rows": 31,
     "public_visibility_status": "verified",
@@ -55,8 +55,8 @@
     "campaign_click_tracking_expected_url_count": 17,
     "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
     "attention_rows": 47,
-    "next_scheduled_post_id": "FP-GROWTH-RESET-VOICE-08-X",
-    "next_scheduled_at": "2026-08-07T14:05:00-04:00",
+    "next_scheduled_post_id": "",
+    "next_scheduled_at": "",
     "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-X --post-id FP-BRAND-AM-05-NO-MORTGAGE-X --post-id FP-BRAND-AM-06-GUARDS-DOWN-X --post-id FP-BRAND-AM-07-SLOW-WALK-X --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X --post-id FP-GROWTH-RESET-VOICE-01-X --post-id FP-GROWTH-RESET-VOICE-02-X --post-id FP-GROWTH-RESET-VOICE-03-X --post-id FP-GROWTH-RESET-VOICE-04-X --post-id FP-GROWTH-RESET-VOICE-05-X --post-id FP-GROWTH-RESET-VOICE-06-X --post-id FP-GROWTH-RESET-VOICE-07-X",
     "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK --post-id FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK --post-id FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK --post-id FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK --post-id FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK --post-id FP-BRAND-AM-07-SLOW-WALK-FACEBOOK --post-id FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK --post-id FP-GROWTH-RESET-08-SPILLING-THE-TEA-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --post-id FP-GROWTH-RESET-09-NO-MORTGAGE-LYRIC-PUNCH-LINE-FACEBOOK --post-id FP-GROWTH-RESET-10-NO-MORTGAGE-RELATABLE-SITUATION-FACEBOOK --post-id FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-FACEBOOK --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK",
     "x_metric_capture_status": "skipped_missing_secrets",
@@ -83,7 +83,7 @@
     "post_slot_watch_status_counts": {
       "attention": 12,
       "measurement_due": 11,
-      "scheduled_future": 1
+      "posted_waiting_measurement": 1
     },
     "next_action_window_date": "2026-07-04",
     "next_action_window_status": "measurement_due",
@@ -121,7 +121,7 @@
       "status_counts": {
         "attention": 12,
         "measurement_due": 11,
-        "scheduled_future": 1
+        "posted_waiting_measurement": 1
       },
       "next_window_date": "2026-07-04",
       "next_window_status": "measurement_due",
@@ -846,7 +846,7 @@
       },
       {
         "date": "2026-08-07",
-        "status": "scheduled_future",
+        "status": "posted_waiting_measurement",
         "post_ids": [
           "FP-GROWTH-RESET-VOICE-08-X"
         ],
@@ -858,7 +858,7 @@
         "proof_due_at": "2026-08-07T18:06:00Z",
         "measurement_due_at": "2026-08-08T18:05:00Z",
         "status_counts": {
-          "scheduled_future": 1
+          "posted_waiting_measurement_window": 1
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -866,7 +866,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Wait for the first measurement window before capturing result metrics."
       }
     ]
   },
@@ -1257,7 +1257,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:05.371000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:05.387000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1323,7 +1323,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:05.770000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:05.784000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1367,7 +1367,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:06.127000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:06.092000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1411,7 +1411,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:06.458000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:06.430000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1433,7 +1433,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:06.888000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:06.822000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1477,7 +1477,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:07.338000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:07.237000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1499,7 +1499,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:07.713000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:07.586000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1521,7 +1521,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:08.064000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:07.887000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1543,7 +1543,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:08.426000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:08.232000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1587,7 +1587,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:08.899000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:08.597000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1609,7 +1609,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:09.257000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:09.025000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1631,7 +1631,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:09.584000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:09.398000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1697,7 +1697,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:09.951000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:09.827000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1741,7 +1741,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:10.378000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:10.160000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1807,7 +1807,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:10.761000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:10.542000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1873,7 +1873,7 @@
       "published_log_row": "",
       "execution_status": "failed",
       "execution_reason": "max_attempts_exceeded",
-      "measurement_due_at": "2026-08-08T17:00:11.038000+00:00",
+      "measurement_due_at": "2026-08-08T19:15:10.875000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
@@ -1913,18 +1913,18 @@
       "execution_mode": "auto",
       "post_type": "text",
       "text": "Truth sounds different after the cup hits the table.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
+      "post_url": "https://x.com/i/web/status/2085791880902590817",
+      "published_log_row": 81,
+      "execution_status": "posted",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-08-08T18:15:11.622000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
       "public_visibility_status": "",
       "public_visibility_ok": null,
       "public_visibility_note": "",
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "posted_waiting_measurement_window",
+      "next_action": "Wait until 2026-08-08T18:15:11.622000+00:00 before capturing metrics.",
       "visible_in_future_queue": true
     }
   ],
@@ -1955,7 +1955,9 @@
       "FP-BRAND-AM-03-ANALOG-MYTH-X",
       "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
     ],
-    "waiting_post_ids": [],
+    "waiting_post_ids": [
+      "FP-GROWTH-RESET-VOICE-08-X"
+    ],
     "next_proof_post_ids": [
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE",
       "FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK",

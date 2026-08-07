@@ -1,20 +1,20 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-08-07T17:00:39.431527Z
+Generated: 2026-08-07T19:21:34.560184Z
 
 ## Summary
 - Campaign rows: **48**
 - Approved auto rows: **48**
 - Visible in future queue: **17**
-- Posted or measured rows: **31**
+- Posted or measured rows: **32**
 - Measured rows: **0**
 - Ready for metric capture: **31**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
 - Campaign clicks: **24** across **10** post(s); last click `2026-08-04T15:31:18.263Z`
 - Click tracking links: **ready** (17 / 17 future rows; 17 / 17 URLs)
 - Post-slot watch windows: **24**
-- Status counts: **execution_attention: 16, ready_for_metric_capture: 31, scheduled_future: 1**
-- Next scheduled: `FP-GROWTH-RESET-VOICE-08-X` at `2026-08-07T14:05:00-04:00`
+- Status counts: **execution_attention: 16, posted_waiting_measurement_window: 1, ready_for_metric_capture: 31**
+- Next scheduled: `none` at `n/a`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-13` due `2026-07-13T18:06:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -31,6 +31,7 @@ Generated: 2026-08-07T17:00:39.431527Z
 - Due: `2026-07-05T15:20:00Z`
 - Native metric note: Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.
 - Ready posts: `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK, FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK, FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
+- Waiting posts: `FP-GROWTH-RESET-VOICE-08-X`
 - Next proof posts: `FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE, FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK, FP-GROWTH-RESET-VOICE-01-X`
 
 ## Commands
@@ -143,8 +144,8 @@ Generated: 2026-08-07T17:00:39.431527Z
   - Next: Inspect executor state, then refresh and export posted URLs after the issue is resolved.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
-- `2026-08-07` **scheduled_future** proof due `2026-08-07T18:06:00Z` for `FP-GROWTH-RESET-VOICE-08-X`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-08-07` **posted_waiting_measurement** proof due `2026-08-07T18:06:00Z` for `FP-GROWTH-RESET-VOICE-08-X`
+  - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
 ## Rows
@@ -281,8 +282,9 @@ Generated: 2026-08-07T17:00:39.431527Z
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: /reel/3323425587859299/
   - Next: Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).
-- `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://x.com/i/web/status/2085791880902590817
+  - Next: Wait until 2026-08-08T18:15:11.622000+00:00 before capturing metrics.
 
 ## Guardrails
 - Readout only; it does not post or import metrics.

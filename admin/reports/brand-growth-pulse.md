@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-08-07T17:00:39.957050Z
+Generated: 2026-08-07T19:21:34.703474Z
 
 ## Current Pulse
 - Status: **posting_needs_check**
@@ -10,14 +10,14 @@ Generated: 2026-08-07T17:00:39.957050Z
 - Active campaign ready: **False**
 - Posting preflight ready: **False**
 - Future queued posts: **17**
-- Posted or measured rows: **31**
+- Posted or measured rows: **32**
 - Ready for result capture: **31**
 - First-party clicks: **24** across **10** post(s)
-- Click snapshot: `2026-08-07T17:00:36.418181Z` (covers current due posts)
-- Next post at: `2026-08-07T14:05:00-04:00`
+- Click snapshot: `2026-08-07T19:21:31.766523Z` (covers current due posts)
+- Next post at: `n/a`
 - Proof due at: `2026-07-13T18:06:00Z`
-- Hours until next post: `1.07`
-- Hours until proof due: `-598.91`
+- Hours until next post: `None`
+- Hours until proof due: `-601.26`
 
 ## Post-Window Learning
 - Status: **learn_from_clicks**
@@ -25,9 +25,9 @@ Generated: 2026-08-07T17:00:39.957050Z
 - Note: Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **31**
-- Waiting measurement rows: **0**
+- Waiting measurement rows: **1**
 - Future scheduled rows: **17**
-- Next learning due at: `2026-07-13T18:06:00Z`
+- Next learning due at: `2026-08-08T18:15:11.622000Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic native-video posts, public URL proof, first-party click checks, and connected platform metrics when available.
@@ -37,7 +37,7 @@ Generated: 2026-08-07T17:00:39.957050Z
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-X` (X): Girls Camp - Ready for post-window comparison
   - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` (Facebook): Girls Camp - Ready for post-window comparison
-  - `FP-GROWTH-RESET-VOICE-08-X` (X): Voice 08 - Next queued learning input
+  - `FP-GROWTH-RESET-VOICE-08-X` (X): Voice 08 - Waiting for first useful result check
 
 ## Recommendations
 - **Refresh the next posting window**: The next Analog Myth scheduler check is not clean.
@@ -50,7 +50,7 @@ Generated: 2026-08-07T17:00:39.957050Z
   - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
 
 ## Blockers
-- **Next scheduler window**: The next scheduler dry-run has blocked rows.
+- No active posting blockers.
 
 ## Guardrails
 - No manual posting is introduced by this pulse.
