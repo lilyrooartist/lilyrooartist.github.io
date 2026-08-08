@@ -1,13 +1,13 @@
 # Solicitation Copy Audit - Lily Roo
 
-Generated: 2026-08-07T19:21:32.153829Z
+Generated: 2026-08-08T02:22:43.072223Z
 
 ## Summary
 - Draft posts: **0**
 - Selected solicitation-style CTAs: **0**
 - Non-soliciting swaps available: **0**
 - Ready-after-approval rewrites: **0**
-- Active future posts checked: **17**
+- Active future posts checked: **16**
 - Active future solicitation issues: **0**
 - Active future non-auto issues: **0**
 - Active future Analog Myth focus issues: **0**

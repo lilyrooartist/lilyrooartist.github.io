@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-08-07T19:21:34.078410Z
+Generated: 2026-08-08T02:22:44.766355Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **17 / 17**
-- Tracking URLs checked: **17 / 17**
+- Future campaign rows ready: **16 / 16**
+- Tracking URLs checked: **16 / 16**
 - X main-post album links: **0 / 0**
-- Visible album click paths: **4 / 17**
-- Visible full destination sets: **17 / 17**
+- Visible album click paths: **4 / 16**
+- Visible full destination sets: **16 / 16**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,15 +24,15 @@ Generated: 2026-08-07T19:21:34.078410Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 4, echo: 5, spotify: 4, video: 4**
+- Destinations: **album: 4, echo: 4, spotify: 4, video: 4**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-growth-reset-voice-08-x`
-- Event: **x / album / track unknown**
+- Probe campaign id: `fp-growth-reset-01-slow-walk-lyric-punch-line-facebook`
+- Event: **facebook / album / track 07**
 
 ## Redirect Checks
 - exists: **ok**
@@ -242,10 +242,6 @@ Generated: 2026-08-07T19:21:34.078410Z
 - `FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE` YouTube 2026-08-04T10:15:00-04:00 - **ready** (1 link)
   - Destinations: `echo`
   - Visible surface: **attention** (`echo`)
-- `FP-GROWTH-RESET-VOICE-08-X` X 2026-08-07T14:05:00-04:00 - **ready** (1 link)
-  - Destinations: `echo`
-  - Visible surface: **attention** (`echo`)
-  - Main-post album link: **ready**
 
 ## Guardrails
 - This check is read-only and does not post.
