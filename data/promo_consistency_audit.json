@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-08T02:22:46.164122Z",
+  "generated_at": "2026-08-08T07:16:57.305593Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -324,7 +324,7 @@
         "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
         "Collect experiment results: 105 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
         "16 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-08-09T02:22:12.957048+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-08-09T07:16:31.246462+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
         "16 executor records need platform repair before they can publish.",
         "Resolve social executor attention states: 16 failed.",
         "Fix social executor platform failures for Facebook, YouTube.",
@@ -417,7 +417,7 @@
         "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
         "Collect experiment results: 105 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
         "16 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-08-09T02:22:12.957048+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+        "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-08-09T07:16:31.246462+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
         "16 executor records need platform repair before they can publish.",
         "Resolve social executor attention states: 16 failed.",
         "Fix social executor platform failures for Facebook, YouTube.",
