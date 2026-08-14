@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T19:27:47.613583Z",
+  "generated_at": "2026-08-14T02:47:05.609705Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -25,10 +25,10 @@
     ],
     "active_campaign_next_proof_due_at": "2026-07-13T18:06:00Z",
     "active_campaign_next_measurement_due_at": "2026-07-05T15:20:00Z",
-    "ready_lane_count": 4,
+    "ready_lane_count": 5,
     "blocked_lane_count": 3,
     "deferred_lane_count": 0,
-    "attention_lane_count": 3,
+    "attention_lane_count": 2,
     "lane_count": 10,
     "workflow_crons": [
       "17 */6 * * *",
@@ -79,10 +79,10 @@
     },
     {
       "label": "Scheduled refresh workflow",
-      "status": "needs_attention",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run pending / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/31735877978",
-      "next_action": "Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window."
+      "status": "ready",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/31764742963",
+      "next_action": ""
     },
     {
       "label": "Published URL export",
@@ -94,7 +94,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-08-13T19:27:45.470420Z",
+      "detail": "19 refresh commands captured at 2026-08-14T02:47:03.483042Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
