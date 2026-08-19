@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-08-19T16:33:00.445087Z
+Generated: 2026-08-19T19:01:33.811614Z
 
 ## Summary
 - Campaign rows: **48**
