@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-08-18T19:01:29.258774Z
+Generated: 2026-08-19T01:53:57.920329Z
 
 ## Summary
 - Actions: **25**
@@ -28,7 +28,7 @@ Generated: 2026-08-18T19:01:29.258774Z
 - **[blocked] Preview reschedule for approved past-due posts**
   - Why: All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling.
   - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-19T10:00:00+00:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-20T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
 - **[high] Fix YouTube executor**
@@ -73,6 +73,12 @@ Generated: 2026-08-18T19:01:29.258774Z
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-07-SPILLING-THE-TEA-VISUAL-STORY-YOUTUBE --apply`
+- **[high] Fix Facebook executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-06-SPILLING-THE-TEA-RELATABLE-SITUATION-FACEBOOK --apply`
 - **[high] Fix YouTube executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Token has been expired or revoked."}
@@ -91,12 +97,6 @@ Generated: 2026-08-18T19:01:29.258774Z
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE --apply`
-- **[high] Fix Facebook executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook Reel hosted upload failed (422): {"debug_info":{"retriable":false,"type":"FileUrlProcessingError","message":"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt"}}
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK --apply`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.
