@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-08-21T18:58:56.736902Z
+Generated: 2026-08-22T01:51:30.903584Z
 
 ## Summary
 - Open handoff tasks: **20**
@@ -53,8 +53,8 @@ Generated: 2026-08-21T18:58:56.736902Z
   - Guardrail: Optional reporting input only; automated promotion is not blocked. Import only collected numeric values and leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
   - Owner: `external_platform`; tasks: **1**; blockers resolved: **16**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-22T10:00:00+00:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-22T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-23T10:00:00+00:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-23T10:00:00+00:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
@@ -149,7 +149,7 @@ Generated: 2026-08-21T18:58:56.736902Z
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-22T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-23T10:00:00+00:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`

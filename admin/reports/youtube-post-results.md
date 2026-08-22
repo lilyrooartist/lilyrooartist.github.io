@@ -1,6 +1,6 @@
 # YouTube Post Results - Lily Roo
 
-Generated: 2026-08-21T18:58:49.534422Z
+Generated: 2026-08-22T01:51:22.237119Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
@@ -18,91 +18,91 @@ Generated: 2026-08-21T18:58:49.534422Z
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **LR-SONG-023** row `13`
   - URL: https://youtu.be/BkkBE2pXHSY
   - Video ID: `BkkBE2pXHSY`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **LR-SONG-024** row `14`
   - URL: https://youtu.be/9rmy2JhBuF4
   - Video ID: `9rmy2JhBuF4`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-AUTO-229** row `15`
   - URL: https://youtu.be/IahKaEXEA_0
   - Video ID: `IahKaEXEA_0`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-AUTO-261** row `25`
   - URL: https://youtu.be/zY8LQmuf4e4
   - Video ID: `zY8LQmuf4e4`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA** row `26`
   - URL: https://youtu.be/lbT4adNE-cE
   - Video ID: `lbT4adNE-cE`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA** row `27`
   - URL: https://youtu.be/0d0PXb_h4FY
   - Video ID: `0d0PXb_h4FY`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY** row `28`
   - URL: https://youtu.be/404PvtuXnqY
   - Video ID: `404PvtuXnqY`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY** row `29`
   - URL: https://youtu.be/0GOYOFTMAKw
   - Video ID: `0GOYOFTMAKw`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-PODCAST-ANALOG-MYTH-YOUTUBE** row `44`
   - URL: https://youtu.be/xX2-Xf161js
   - Video ID: `xX2-Xf161js`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-YOUTUBE** row `66`
   - URL: https://youtu.be/WQs8Xk9Mm8o
   - Video ID: `WQs8Xk9Mm8o`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-YOUTUBE** row `68`
   - URL: https://youtu.be/X1LIKda1ZOI
   - Video ID: `X1LIKda1ZOI`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 - **FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-YOUTUBE** row `69`
   - URL: https://youtu.be/-gH_jEl5GLM
   - Video ID: `-gH_jEl5GLM`
   - Lookup: `skipped_missing_secrets`
   - Views: `0`; likes: `0`; comments: `0`
   - Fillable fields: `none`
-  - Evidence: YouTube metric capture skipped 2026-08-21: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
+  - Evidence: YouTube metric capture skipped 2026-08-22: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN
 
 ## Guardrails
 - Metrics come from public YouTube video statistics for already-published Lily Roo videos when OAuth credentials are present.
