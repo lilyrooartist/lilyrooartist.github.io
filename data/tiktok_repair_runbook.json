@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T22:17:46.677745Z",
+  "generated_at": "2026-08-28T00:30:05.758570Z",
   "safe_mode": true,
   "status": "ready_for_backlog_clearance",
   "source": {
@@ -113,7 +113,7 @@
     "apply_command": "",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-28T10:00:00+00:00' --spacing-hours 24",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-29T10:00:00+00:00' --spacing-hours 24",
     "backlog_apply_command": "",
     "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
@@ -207,7 +207,7 @@
       "status": "ready",
       "title": "Clear TikTok backlog gate",
       "detail": "Once direct public worker readiness is clean, rerun the backlog reschedule preview and apply TikTok rows only if they can publish without manual finish.",
-      "command": "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-28T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-08-29T10:00:00+00:00' --spacing-hours 24",
       "blocked_by": []
     }
   ],
