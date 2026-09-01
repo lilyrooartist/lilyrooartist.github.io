@@ -1,6 +1,6 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-09-01T05:12:16.245703Z
+Generated: 2026-09-01T11:41:46.683715Z
 
 ## Summary
 - Status: **pass**
