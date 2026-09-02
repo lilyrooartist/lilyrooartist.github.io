@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-09-01T21:05:17.847769Z
+Generated: 2026-09-02T04:37:17.718671Z
 
 ## Summary
 - Actions: **25**
@@ -28,7 +28,7 @@ Generated: 2026-09-01T21:05:17.847769Z
 - **[blocked] Preview reschedule for approved past-due posts**
   - Why: All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling.
   - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-02T10:00:00+00:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-03T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
 - **[high] Fix YouTube executor**
