@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T19:10:16.409931Z",
+  "generated_at": "2026-09-03T21:04:03.386638Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -44,8 +44,8 @@
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": null,
-    "active_campaign_proof_export_dry_run_last_run": null,
+    "active_campaign_proof_export_added_last_run": 0,
+    "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
@@ -81,20 +81,20 @@
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *, 20 18 * * *; latest run in_progress / pending; proof refresh next fixed refresh 14 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/33794734803",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/33805800418",
       "next_action": ""
     },
     {
       "label": "Published URL export",
       "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=unknown dry_run=unknown; next proof refresh=2026-07-13T18:20:00Z",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-13T18:20:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-09-03T19:10:14.138572Z",
+      "detail": "19 refresh commands captured at 2026-09-03T21:04:00.848442Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
