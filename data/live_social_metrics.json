@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-09-04T20:46:53.909Z",
+  "updated_at": "2026-09-05T04:32:24.630Z",
   "platforms": {
     "youtube": {
       "ok": false,
@@ -55,8 +55,10 @@
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
       "http_status": 200,
-      "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-      "public_capture_status": "ok"
+      "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
+      "public_capture_status": "ok",
+      "preserved_previous_public_metrics": true,
+      "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
     },
     "facebook": {
       "ok": true,
@@ -67,7 +69,7 @@
       },
       "page_name": "Lily Roo",
       "profile_url": "https://www.facebook.com/903693509504290",
-      "insights_period": "2026-08-28..2026-09-03",
+      "insights_period": "2026-08-29..2026-09-04",
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
@@ -81,9 +83,11 @@
       ],
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
-      "http_status": 200,
-      "html_bytes": 161490,
-      "public_capture_status": "ok"
+      "http_status": 403,
+      "html_bytes": 300,
+      "public_capture_status": "ok",
+      "preserved_previous_public_metrics": true,
+      "latest_capture_status": "HTTP Error 403: Forbidden"
     }
   },
   "capture_status": 200,
@@ -121,8 +125,10 @@
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
         "http_status": 200,
-        "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-        "public_capture_status": "ok"
+        "description": "Create an account or log in to Instagram - Share what you're into with the people who get you.",
+        "public_capture_status": "ok",
+        "preserved_previous_public_metrics": true,
+        "latest_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
       },
       "x": {
         "ok": true,
@@ -131,9 +137,11 @@
           "followers": 0
         },
         "profile_url": "https://x.com/lilyrooartist",
-        "http_status": 200,
-        "html_bytes": 161490,
-        "public_capture_status": "ok"
+        "http_status": 403,
+        "html_bytes": 300,
+        "public_capture_status": "ok",
+        "preserved_previous_public_metrics": true,
+        "latest_capture_status": "HTTP Error 403: Forbidden"
       }
     }
   }
