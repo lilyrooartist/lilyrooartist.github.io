@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-09-07T21:32:43.760138Z
+Generated: 2026-09-08T04:39:51.858321Z
 
 ## Summary
 - Status: **ready_for_backlog_clearance**
@@ -73,7 +73,7 @@ Generated: 2026-09-07T21:32:43.760138Z
   - Command: `python3 scripts/capture_executor_readiness.py && python3 scripts/refresh_promo_admin.py`
 - **Clear gate - Clear TikTok backlog gate**: `ready`
   - Once direct public worker readiness is clean, rerun the backlog reschedule preview and apply TikTok rows only if they can publish without manual finish.
-  - Command: `python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-08T10:00:00+00:00' --spacing-hours 24`
+  - Command: `python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-09T10:00:00+00:00' --spacing-hours 24`
 
 ## Guardrails
 - This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.
