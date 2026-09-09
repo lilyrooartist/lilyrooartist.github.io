@@ -1,41 +1,47 @@
 # Brand Campaign Clicks - Lily Roo
 
-Generated: 2026-09-09T11:26:06.899246Z
+Generated: 2026-09-09T16:40:48.168170Z
 
 ## Summary
 - Status: **ready**
-- Clicks captured: **24**
-- Posts with clicks: **10**
+- Clicks captured: **26**
+- Posts with clicks: **12**
 - First click: `2026-07-10T15:30:43.264Z`
-- Last click: `2026-08-04T15:31:18.263Z`
+- Last click: `2026-09-09T12:13:00.990Z`
 - Retention: **180 days**
 
 ## Breakdown
 ### Platform
 - facebook: **15**
 - youtube: **6**
-- site: **3**
+- site: **5**
 
 ### Destination
-- album: **6**
+- album: **7**
 - echo: **6**
 - spotify: **6**
 - playlist: **3**
 - video: **3**
+- listen: **1**
 
 ### Wave
 - video-reset: **18**
-- site-home: **3**
+- site-home: **4**
 - track-moments: **3**
+- site-album: **1**
 
 ### Track
 - slow-walk: **9**
 - no-mortgage: **8**
 - spilling-the-tea: **4**
 - hero-playlist: **2**
+- hero-album: **1**
+- hero-listen: **1**
 - starter-playlist: **1**
 
 ## Recent Clicks
+- `2026-09-09T12:13:00.990Z` site listen `site-album-hero-listen`
+- `2026-09-09T12:12:47.841Z` site album `site-home-hero-album`
 - `2026-08-04T15:31:18.263Z` facebook echo `fp-growth-reset-12-no-mortgage-echo-thread-setup-song-payoff-facebook`
 - `2026-07-31T15:30:27.931Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
 - `2026-07-31T15:30:26.911Z` facebook album `fp-growth-reset-10-no-mortgage-relatable-situation-facebook`
@@ -54,8 +60,6 @@ Generated: 2026-09-09T11:26:06.899246Z
 - `2026-07-17T14:15:51.774Z` youtube video `fp-growth-reset-03-slow-walk-visual-story-youtube`
 - `2026-07-16T14:39:51.984Z` site playlist `site-home-hero-playlist`
 - `2026-07-15T14:15:29.380Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
-- `2026-07-15T14:15:28.966Z` youtube album `fp-growth-reset-02-slow-walk-relatable-situation-youtube`
-- `2026-07-13T14:15:55.357Z` youtube spotify `fp-growth-reset-01-slow-walk-lyric-punch-line-youtube`
 
 ## Guardrails
 - Click capture stores campaign metadata only; it does not store IP addresses.
