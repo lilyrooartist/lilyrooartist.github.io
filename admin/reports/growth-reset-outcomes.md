@@ -1,6 +1,6 @@
 # Lily Roo Growth Reset Outcomes
 
-Generated: 2026-09-16T16:59:53.556825Z
+Generated: 2026-09-16T19:00:18.893981Z
 Status: **learning**
 
 ## Scorecard
