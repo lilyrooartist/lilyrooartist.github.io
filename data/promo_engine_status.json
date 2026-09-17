@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-16T21:21:20.258673+00:00",
+  "generated_at": "2026-09-17T04:55:49.492440+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1079,8 +1079,8 @@
       "runway": {
         "status": "moving",
         "snapshot_count": 90,
-        "first_date": "2026-06-14",
-        "latest_date": "2026-09-16",
+        "first_date": "2026-06-15",
+        "latest_date": "2026-09-17",
         "window_days": 94,
         "audience_signal_delta": 1,
         "audience_signal_per_week": 0.07,
@@ -1098,8 +1098,8 @@
       "ready_to_apply_posts": 0,
       "approval_blockers": 0,
       "platform_fix_blockers": 16,
-      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
-      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
+      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
         "16 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "16 executor records need platform repair before they can publish."
@@ -1443,15 +1443,15 @@
         "Import only nonnegative numeric new_value cells from the named analytics source."
       ]
     },
-    "live_metrics_updated_at": "2026-09-16T21:20:47.692Z",
+    "live_metrics_updated_at": "2026-09-17T04:55:16.931Z",
     "metrics_history": {
       "snapshot_count": 90,
-      "updated_at": "2026-09-16T21:21:10.226620Z",
-      "latest_date": "2026-09-16",
+      "updated_at": "2026-09-17T04:55:40.334758Z",
+      "latest_date": "2026-09-17",
       "latest": {
-        "date": "2026-09-16",
-        "captured_at": "2026-09-16T21:21:10.226620Z",
-        "live_metrics_updated_at": "2026-09-16T21:20:47.692Z",
+        "date": "2026-09-17",
+        "captured_at": "2026-09-17T04:55:40.334758Z",
+        "live_metrics_updated_at": "2026-09-17T04:55:16.931Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 514,
@@ -1489,7 +1489,7 @@
           "approved_total": 60,
           "scheduled_total": 94
         },
-        "preserved_from_same_day_snapshot": [
+        "preserved_from_previous_snapshot": [
           "youtube.total_views",
           "youtube.video_count"
         ],
@@ -1509,7 +1509,7 @@
           "queue.scheduled_total": 0
         }
       },
-      "previous_date": "2026-09-15",
+      "previous_date": "2026-09-16",
       "delta_from_previous": {
         "youtube.subscribers": 0,
         "youtube.total_views": 0,
@@ -3830,7 +3830,7 @@
       "next_learning_due_at": "2026-07-13T18:06:00Z",
       "click_count": 26,
       "click_post_count": 12,
-      "click_snapshot_updated_at": "2026-09-16T21:21:15.799278Z",
+      "click_snapshot_updated_at": "2026-09-17T04:55:45.866456Z",
       "click_snapshot_covers_ready_measurements": true,
       "manual_posting_required": false,
       "next_action": "Repair the active campaign platform before the next scheduled slot."
@@ -3866,7 +3866,7 @@
       "recheck_due": 0,
       "waiting_for_next_recheck": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-09-17T21:20:47.890694+00:00"
+      "next_recheck_at": "2026-09-18T04:55:17.115943+00:00"
     },
     "store_verification": {
       "source_path": "data/store_verification_history.json",
@@ -3887,12 +3887,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3906,12 +3906,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3925,12 +3925,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3944,12 +3944,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3966,12 +3966,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -3984,12 +3984,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4002,12 +4002,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4020,12 +4020,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4037,7 +4037,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+      "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -4048,12 +4048,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4067,12 +4067,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4086,12 +4086,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4105,12 +4105,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -4120,7 +4120,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-09-16T21:20:51.919231Z",
+        "updated_at": "2026-09-17T04:55:19.601620Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -4136,7 +4136,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-09-16T21:21:06.173622Z",
+      "updated_at": "2026-09-17T04:55:34.762291Z",
       "http_status": 200,
       "execution_count": 93,
       "current_execution_count": 78,
@@ -4163,7 +4163,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:33.337Z",
+          "updated_at": "2026-09-17T04:45:33.330Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4176,7 +4176,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:32.688Z",
+          "updated_at": "2026-09-17T04:45:32.688Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4189,7 +4189,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:32.125Z",
+          "updated_at": "2026-09-17T04:45:32.121Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4202,7 +4202,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:31.578Z",
+          "updated_at": "2026-09-17T04:45:31.550Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4215,7 +4215,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:31.021Z",
+          "updated_at": "2026-09-17T04:45:30.971Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4231,7 +4231,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:33.337Z",
+          "updated_at": "2026-09-17T04:45:33.330Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4248,7 +4248,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:32.688Z",
+          "updated_at": "2026-09-17T04:45:32.688Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4265,7 +4265,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:32.125Z",
+          "updated_at": "2026-09-17T04:45:32.121Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4282,7 +4282,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:31.578Z",
+          "updated_at": "2026-09-17T04:45:31.550Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4299,7 +4299,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:31.021Z",
+          "updated_at": "2026-09-17T04:45:30.971Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4316,7 +4316,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:30.458Z",
+          "updated_at": "2026-09-17T04:45:30.432Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4333,7 +4333,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:29.896Z",
+          "updated_at": "2026-09-17T04:45:29.871Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4350,7 +4350,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:29.420Z",
+          "updated_at": "2026-09-17T04:45:29.407Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4367,7 +4367,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:28.860Z",
+          "updated_at": "2026-09-17T04:45:28.837Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4384,7 +4384,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:28.205Z",
+          "updated_at": "2026-09-17T04:45:28.171Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4401,7 +4401,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:27.630Z",
+          "updated_at": "2026-09-17T04:45:27.595Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4418,7 +4418,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:27.164Z",
+          "updated_at": "2026-09-17T04:45:27.125Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4435,7 +4435,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:26.675Z",
+          "updated_at": "2026-09-17T04:45:26.652Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4452,7 +4452,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:26.110Z",
+          "updated_at": "2026-09-17T04:45:26.104Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4469,7 +4469,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:25.559Z",
+          "updated_at": "2026-09-17T04:45:25.555Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4486,7 +4486,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:15:25.066Z",
+          "updated_at": "2026-09-17T04:45:25.066Z",
           "source": "cron",
           "post_url": "",
           "external_id": "",
@@ -4503,11 +4503,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-09-16T21:21:10.147786Z",
+      "updated_at": "2026-09-17T04:55:40.238062Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-09-16T21:21:09.564038Z",
-      "checked_at": "2026-09-16T21:21:09.564Z",
+      "requested_scheduled_time": "2026-09-17T04:55:39.906621Z",
+      "checked_at": "2026-09-17T04:55:39.906Z",
       "dry_run": true,
       "due_count": 16,
       "result_count": 16,
@@ -4529,7 +4529,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.935Z",
+          "updated_at": "2026-09-17T04:55:40.126Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4540,7 +4540,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.941Z",
+          "updated_at": "2026-09-17T04:55:40.130Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4551,7 +4551,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.946Z",
+          "updated_at": "2026-09-17T04:55:40.135Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4562,7 +4562,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.951Z",
+          "updated_at": "2026-09-17T04:55:40.138Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4573,7 +4573,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.957Z",
+          "updated_at": "2026-09-17T04:55:40.143Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4584,7 +4584,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.961Z",
+          "updated_at": "2026-09-17T04:55:40.147Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4595,7 +4595,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.966Z",
+          "updated_at": "2026-09-17T04:55:40.151Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4606,7 +4606,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.977Z",
+          "updated_at": "2026-09-17T04:55:40.155Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4617,7 +4617,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.985Z",
+          "updated_at": "2026-09-17T04:55:40.158Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4628,7 +4628,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.989Z",
+          "updated_at": "2026-09-17T04:55:40.167Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4639,7 +4639,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:09.995Z",
+          "updated_at": "2026-09-17T04:55:40.171Z",
           "source": "dry-run",
           "error_summary": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}"
         },
@@ -4650,7 +4650,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:10.001Z",
+          "updated_at": "2026-09-17T04:55:40.175Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4661,7 +4661,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:10.008Z",
+          "updated_at": "2026-09-17T04:55:40.179Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4672,7 +4672,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:10.015Z",
+          "updated_at": "2026-09-17T04:55:40.182Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
         },
@@ -4683,7 +4683,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:10.025Z",
+          "updated_at": "2026-09-17T04:55:40.186Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
         },
@@ -4694,7 +4694,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-09-16T21:21:10.049Z",
+          "updated_at": "2026-09-17T04:55:40.190Z",
           "source": "dry-run",
           "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
         }
@@ -4707,14 +4707,14 @@
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "52a59e102e2571a0ca31ce6b47d3c95b027c414f",
-        "short_commit": "52a59e102",
+        "commit": "9cc08b3a5b08bad80cb8a81a4207b396cdeb58a7",
+        "short_commit": "9cc08b3a5",
         "branch": "main",
-        "committed_at": "2026-09-16T21:20:19Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/52a59e102e2571a0ca31ce6b47d3c95b027c414f"
+        "committed_at": "2026-09-16T21:21:22Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/9cc08b3a5b08bad80cb8a81a4207b396cdeb58a7"
       },
-      "finished_at": "2026-09-16T21:21:20.210628Z",
-      "duration_seconds": 35.14,
+      "finished_at": "2026-09-17T04:55:49.432912Z",
+      "duration_seconds": 35.11,
       "command_count": 63,
       "passed": 63,
       "failed": 0,
@@ -4732,11 +4732,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "52a59e102e2571a0ca31ce6b47d3c95b027c414f",
-        "short_commit": "52a59e102",
+        "commit": "9cc08b3a5b08bad80cb8a81a4207b396cdeb58a7",
+        "short_commit": "9cc08b3a5",
         "branch": "main",
-        "committed_at": "2026-09-16T21:20:19Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/52a59e102e2571a0ca31ce6b47d3c95b027c414f"
+        "committed_at": "2026-09-16T21:21:22Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/9cc08b3a5b08bad80cb8a81a4207b396cdeb58a7"
       },
       "latest_run_covers_source_commit": true,
       "latest_run_coverage_basis": "exact_source_commit",
@@ -4749,18 +4749,18 @@
       "workflow_status_ok": true,
       "latest_run_status": "in_progress",
       "latest_run_conclusion": "",
-      "latest_run_head_sha": "52a59e102e2571a0ca31ce6b47d3c95b027c414f",
-      "latest_run_updated_at": "2026-09-16T21:20:29Z",
-      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/35151824233",
+      "latest_run_head_sha": "9cc08b3a5b08bad80cb8a81a4207b396cdeb58a7",
+      "latest_run_updated_at": "2026-09-17T04:54:55Z",
+      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/35183707720",
       "latest_completed_run_status": "completed",
       "latest_completed_run_conclusion": "success",
-      "latest_completed_run_head_sha": "15c96251fd15a60160569be15cb13949f37fe983",
-      "latest_completed_run_updated_at": "2026-09-16T21:20:25Z",
-      "latest_completed_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/35151726040",
+      "latest_completed_run_head_sha": "52a59e102e2571a0ca31ce6b47d3c95b027c414f",
+      "latest_completed_run_updated_at": "2026-09-16T21:21:28Z",
+      "latest_completed_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/35151824233",
       "current_run_status": "in_progress",
       "current_run_conclusion": "",
-      "current_run_head_sha": "52a59e102e2571a0ca31ce6b47d3c95b027c414f",
-      "current_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/35151824233",
+      "current_run_head_sha": "9cc08b3a5b08bad80cb8a81a4207b396cdeb58a7",
+      "current_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/35183707720",
       "workflow_status_action_needed": ""
     },
     "operational_next_action": {
@@ -4857,7 +4857,7 @@
           "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
         "source_path": "data/backlog_reschedule_preview.json"
       },
@@ -4919,7 +4919,7 @@
             "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
             "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -4990,7 +4990,7 @@
         "commands": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
             "safe_to_run": true,
             "status": "preview_ok_with_warning",
             "returncodes": [
@@ -5042,7 +5042,7 @@
           "commands": [
             {
               "step": "preview",
-              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
               "safe_to_run": true,
               "status": "preview_ok_with_warning",
               "returncodes": [
@@ -5150,10 +5150,10 @@
               "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
             ],
-            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
-            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
             "apply_allowed_without_override": false,
             "apply_gate": "blocked_until_clearance_steps_complete",
             "clearance_steps": [
@@ -5166,7 +5166,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-17T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5177,7 +5177,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5188,7 +5188,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5199,7 +5199,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5210,7 +5210,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5221,7 +5221,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5232,7 +5232,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5243,7 +5243,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5254,7 +5254,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5265,7 +5265,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5276,7 +5276,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5287,7 +5287,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5298,7 +5298,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5309,7 +5309,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5320,7 +5320,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5331,7 +5331,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-03T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5370,12 +5370,12 @@
             "Do not use the override command unless accepting the blocked executor risk deliberately.",
             "A reschedule does not publish, approve, or repair platform credentials by itself."
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
           "command_sequence": [
             {
               "step": "preview",
-              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
               "required_before_apply": true
             },
             {
@@ -5671,10 +5671,10 @@
               "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
             ],
-            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
-            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
             "apply_allowed_without_override": false,
             "apply_gate": "blocked_until_clearance_steps_complete",
             "clearance_steps": [
@@ -5687,7 +5687,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-17T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5698,7 +5698,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5709,7 +5709,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5720,7 +5720,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5731,7 +5731,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5742,7 +5742,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5753,7 +5753,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5764,7 +5764,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5775,7 +5775,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5786,7 +5786,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5797,7 +5797,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5808,7 +5808,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5819,7 +5819,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5830,7 +5830,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5841,7 +5841,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5852,7 +5852,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-03T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5891,12 +5891,12 @@
             "Do not use the override command unless accepting the blocked executor risk deliberately.",
             "A reschedule does not publish, approve, or repair platform credentials by itself."
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
           "command_sequence": [
             {
               "step": "preview",
-              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
               "required_before_apply": true
             },
             {
@@ -5984,12 +5984,12 @@
           "phase": "Backlog recovery",
           "status": "blocked",
           "input_needed": "clearance_confirmation",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "safety": "safe_preview",
           "safety_reason": "reschedule_preview_command",
           "returncode": 0,
           "preview_status": "preview_ok_with_warning",
-          "output_excerpt": "Rows selected: 16\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-09-17T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-09-18T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-09-19T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-09-20T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-09-21T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-09-22T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
+          "output_excerpt": "Rows selected: 16\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-09-18T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-09-19T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-09-20T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-09-21T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-09-22T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-09-23T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
           "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
           "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
         }
@@ -6330,12 +6330,12 @@
         "clear_to_apply_count": 0,
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
-        "start_at": "2026-09-17T10:00:00+00:00",
+        "start_at": "2026-09-18T10:00:00+00:00",
         "spacing_hours": 24,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
         "apply_allowed_without_override": false,
         "blocked_ids": [
@@ -6390,10 +6390,10 @@
           "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
         "safe_apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "apply_allowed_without_override": false,
         "apply_gate": "blocked_until_clearance_steps_complete",
         "clearance_steps": [
@@ -6406,7 +6406,7 @@
             "song": "Slow Walk",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-17T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6417,7 +6417,7 @@
             "song": "Slow Walk",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6428,7 +6428,7 @@
             "song": "Slow Walk",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6439,7 +6439,7 @@
             "song": "Slow Walk",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6450,7 +6450,7 @@
             "song": "Slow Walk",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6461,7 +6461,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6472,7 +6472,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6483,7 +6483,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6494,7 +6494,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6505,7 +6505,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6516,7 +6516,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-            "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6527,7 +6527,7 @@
             "song": "Spilling the Tea",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6538,7 +6538,7 @@
             "song": "No Mortgage",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6549,7 +6549,7 @@
             "song": "No Mortgage",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-            "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6560,7 +6560,7 @@
             "song": "No Mortgage",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-            "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6571,7 +6571,7 @@
             "song": "No Mortgage",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-            "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
+            "proposed_scheduled_at": "2026-10-03T10:00:00+00:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -6747,7 +6747,7 @@
           "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
           "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
         "source_path": "data/backlog_reschedule_preview.json"
       },
@@ -6809,7 +6809,7 @@
             "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
             "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -6880,7 +6880,7 @@
         "commands": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
             "safe_to_run": true,
             "status": "preview_ok_with_warning",
             "returncodes": [
@@ -6932,7 +6932,7 @@
           "commands": [
             {
               "step": "preview",
-              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
               "safe_to_run": true,
               "status": "preview_ok_with_warning",
               "returncodes": [
@@ -7040,10 +7040,10 @@
               "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
             ],
-            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
-            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
             "apply_allowed_without_override": false,
             "apply_gate": "blocked_until_clearance_steps_complete",
             "clearance_steps": [
@@ -7056,7 +7056,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-17T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7067,7 +7067,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7078,7 +7078,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7089,7 +7089,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7100,7 +7100,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7111,7 +7111,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7122,7 +7122,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7133,7 +7133,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7144,7 +7144,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7155,7 +7155,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7166,7 +7166,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7177,7 +7177,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7188,7 +7188,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7199,7 +7199,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7210,7 +7210,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7221,7 +7221,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-03T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7260,12 +7260,12 @@
             "Do not use the override command unless accepting the blocked executor risk deliberately.",
             "A reschedule does not publish, approve, or repair platform credentials by itself."
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
           "command_sequence": [
             {
               "step": "preview",
-              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
               "required_before_apply": true
             },
             {
@@ -7561,10 +7561,10 @@
               "FP-GROWTH-RESET-11-NO-MORTGAGE-VISUAL-STORY-YOUTUBE",
               "FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE"
             ],
-            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+            "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
             "safe_apply_command": "",
-            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+            "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
             "apply_allowed_without_override": false,
             "apply_gate": "blocked_until_clearance_steps_complete",
             "clearance_steps": [
@@ -7577,7 +7577,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-17T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7588,7 +7588,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-18T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7599,7 +7599,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-19T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7610,7 +7610,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-20T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7621,7 +7621,7 @@
                 "song": "Slow Walk",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-21T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7632,7 +7632,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-22T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7643,7 +7643,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-23T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7654,7 +7654,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-24T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7665,7 +7665,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-25T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7676,7 +7676,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-26T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7687,7 +7687,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}",
-                "proposed_scheduled_at": "2026-09-27T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7698,7 +7698,7 @@
                 "song": "Spilling the Tea",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-28T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7709,7 +7709,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-29T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7720,7 +7720,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
-                "proposed_scheduled_at": "2026-09-30T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7731,7 +7731,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-01T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7742,7 +7742,7 @@
                 "song": "No Mortgage",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-                "proposed_scheduled_at": "2026-10-02T10:00:00+00:00",
+                "proposed_scheduled_at": "2026-10-03T10:00:00+00:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -7781,12 +7781,12 @@
             "Do not use the override command unless accepting the blocked executor risk deliberately.",
             "A reschedule does not publish, approve, or repair platform credentials by itself."
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "apply_command": "",
           "command_sequence": [
             {
               "step": "preview",
-              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+              "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
               "required_before_apply": true
             },
             {
@@ -7874,12 +7874,12 @@
           "phase": "Backlog recovery",
           "status": "blocked",
           "input_needed": "clearance_confirmation",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
           "safety": "safe_preview",
           "safety_reason": "reschedule_preview_command",
           "returncode": 0,
           "preview_status": "preview_ok_with_warning",
-          "output_excerpt": "Rows selected: 16\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-09-17T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-09-18T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-09-19T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-09-20T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-09-21T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-09-22T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
+          "output_excerpt": "Rows selected: 16\n- FP-GROWTH-RESET-01-SLOW-WALK-LYRIC-PUNCH-LINE-FACEBOOK Facebook Slow Walk: 2026-07-13T11:20:00-04:00 -> 2026-09-18T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-02-SLOW-WALK-RELATABLE-SITUATION-FACEBOOK Facebook Slow Walk: 2026-07-15T11:20:00-04:00 -> 2026-09-19T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-03-SLOW-WALK-VISUAL-STORY-FACEBOOK Facebook Slow Walk: 2026-07-17T11:20:00-04:00 -> 2026-09-20T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE YouTube Slow Walk: 2026-07-19T10:15:00-04:00 -> 2026-09-21T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}\n- FP-GROWTH-RESET-04-SLOW-WALK-ECHO-THREAD-SETUP-SONG-PAYOFF-FACEBOOK Facebook Slow Walk: 2026-07-19T11:20:00-04:00 -> 2026-09-22T10:00:00+00:00\n  WARNING: known blocker: Facebook Reel hosted upload failed (422): {\"debug_info\":{\"retriable\":false,\"type\":\"FileUrlProcessingError\",\"message\":\"Unable to fetch media from URL, got status code: 403 Restricted by robots.txt\"}}\n- FP-GROWTH-RESET-05-SPILLING-THE-TEA-LYRIC-PUNCH-LINE-YOUTUBE YouTube Spilling the Tea: 2026-07-21T10:15:00-04:00 -> 2026-09-23T10:00:00+00:00\n  WARNING: known blocker: API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired",
           "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
           "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
         }
@@ -8037,12 +8037,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8056,12 +8056,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8075,12 +8075,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8094,12 +8094,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8116,12 +8116,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8134,12 +8134,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8152,12 +8152,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8170,12 +8170,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8187,7 +8187,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+      "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -8198,12 +8198,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8217,12 +8217,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8236,12 +8236,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8255,12 +8255,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -8270,7 +8270,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-09-16T21:20:51.919231Z",
+        "updated_at": "2026-09-17T04:55:19.601620Z",
         "step_timeout_seconds": 25,
         "checked": 4,
         "ok": 0,
@@ -8292,18 +8292,18 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-09-16T21:21:20.258673+00:00"
+      "checked_at": "2026-09-17T04:55:49.492440+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 1810.2,
+        "age_hours": 1817.7,
         "max_age_hours": 72,
         "timestamp": "2026-07-03T11:10:52.058673+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-09-16T21:21:20.258673+00:00",
+        "checked_at": "2026-09-17T04:55:49.492440+00:00",
         "checked_age_hours": 0.0,
         "evidence": "4 pending store links checked; no new public URLs found."
       },
@@ -8313,7 +8313,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-09-16T21:20:52.515826+00:00",
+        "timestamp": "2026-09-17T04:55:20.222431+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -8322,7 +8322,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:10.186573+00:00",
+        "timestamp": "2026-09-17T04:55:40.285167+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8331,7 +8331,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 168,
-        "timestamp": "2026-09-16T21:20:44.027102+00:00",
+        "timestamp": "2026-09-17T04:55:12.865180+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "row_count": 80,
         "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
@@ -8349,7 +8349,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-09-16T21:20:44.411627+00:00",
+        "timestamp": "2026-09-17T04:55:13.322999+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -8358,7 +8358,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:20:47.692000+00:00",
+        "timestamp": "2026-09-17T04:55:16.931000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -8367,7 +8367,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:10.226620+00:00",
+        "timestamp": "2026-09-17T04:55:40.334758+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -8376,7 +8376,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:20:52.457451+00:00",
+        "timestamp": "2026-09-17T04:55:20.150896+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8385,7 +8385,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:20.258673+00:00",
+        "timestamp": "2026-09-17T04:55:49.492440+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -8394,7 +8394,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:06.173622+00:00",
+        "timestamp": "2026-09-17T04:55:34.762291+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8403,7 +8403,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:10.147786+00:00",
+        "timestamp": "2026-09-17T04:55:40.238062+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8412,7 +8412,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:17.813750+00:00",
+        "timestamp": "2026-09-17T04:55:48.110822+00:00",
         "refresh_command": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8421,7 +8421,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:20.212827+00:00",
+        "timestamp": "2026-09-17T04:55:49.435104+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -8430,7 +8430,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:10.973032+00:00",
+        "timestamp": "2026-09-17T04:55:40.985832+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8439,7 +8439,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-09-16T21:21:19.163481+00:00",
+        "timestamp": "2026-09-17T04:55:48.801606+00:00",
         "refresh_command": "python3 scripts/build_brand_growth_pulse.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -8581,12 +8581,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:47.890694Z",
+            "updated_at": "2026-09-17T04:55:17.115943Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:47.890694+00:00",
+            "checked_at": "2026-09-17T04:55:17.115943+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:47.890694+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.115943+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8598,12 +8598,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.839400Z",
+            "updated_at": "2026-09-17T04:55:17.890751Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-09-16T21:20:49.839400+00:00",
+            "checked_at": "2026-09-17T04:55:17.890751+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.839400+00:00",
+            "next_recheck_at": "2026-09-18T04:55:17.890751+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8615,12 +8615,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:49.990587Z",
+            "updated_at": "2026-09-17T04:55:18.033056Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-09-16T21:20:49.990587+00:00",
+            "checked_at": "2026-09-17T04:55:18.033056+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:49.990587+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.033056+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8714,12 +8714,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-09-16T21:20:50.041697Z",
+            "updated_at": "2026-09-17T04:55:18.097797Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-09-16T21:20:50.041697+00:00",
+            "checked_at": "2026-09-17T04:55:18.097797+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-09-17T21:20:50.041697+00:00",
+            "next_recheck_at": "2026-09-18T04:55:18.097797+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -8761,13 +8761,13 @@
   ],
   "next_actions": [
     "Next operational action: Fix YouTube executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-GROWTH-RESET-12-NO-MORTGAGE-ECHO-THREAD-SETUP-SONG-PAYOFF-YOUTUBE",
-    "Current unlock gate: Reschedule approved past-due backlog (preview_ready_with_blocker_warning); 0 ready, 1 waiting/warning; preview python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24; see data/promo_unlock_sequence.json.",
+    "Current unlock gate: Reschedule approved past-due backlog (preview_ready_with_blocker_warning); 0 ready, 1 waiting/warning; preview python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-17T10:00:00+00:00' --spacing-hours 24",
+    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-09-18T10:00:00+00:00' --spacing-hours 24",
     "Optional metric input: 6 worksheet row(s) still need new_value entries (waiting for values); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
     "Collect experiment results: 105 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-BRAND-AM-01-13-FACEBOOK on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "16 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-09-17T21:20:47.890694+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-09-18T04:55:17.115943+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
     "16 executor records need platform repair before they can publish.",
     "Resolve social executor attention states: 16 failed.",
     "Fix social executor platform failures for Facebook, YouTube.",
