@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-09-18T18:55:34.760067Z
+Generated: 2026-09-18T20:56:04.827063Z
 
 ## Summary
 - Campaign rows: **48**
@@ -10,7 +10,7 @@ Generated: 2026-09-18T18:55:34.760067Z
 - Measured rows: **0**
 - Ready for metric capture: **32**
 - Public visibility: **verified** (8 / 8 checked OK; 0 attention)
-- Campaign clicks: **26** across **12** post(s); last click `2026-09-09T12:13:00.990Z`
+- Campaign clicks: **31** across **14** post(s); last click `2026-09-18T19:23:55.508Z`
 - Click tracking links: **ready** (16 / 16 future rows; 16 / 16 URLs)
 - Post-slot watch windows: **24**
 - Status counts: **execution_attention: 16, ready_for_metric_capture: 32**
@@ -24,7 +24,7 @@ Generated: 2026-09-18T18:55:34.760067Z
 ## Learning Now
 - Status: **click_response_ready**
 - Headline: **First-party click response is ready to review**
-- First-party clicks: **26** across **12** post(s)
+- First-party clicks: **31** across **14** post(s)
 - Public posts ready for learning: **32**
 - Next learning action: Review the tracks, platforms, and destinations with click response before changing the next copy wave.
 - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py`
