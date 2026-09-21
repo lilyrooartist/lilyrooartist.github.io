@@ -1,6 +1,6 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-09-20T20:51:09.167280Z
+Generated: 2026-09-21T04:58:53.881230Z
 
 ## Summary
 - Drafts needing review: **0**
@@ -9,7 +9,7 @@ Generated: 2026-09-20T20:51:09.167280Z
 - Blocked drafts: **0**
 - Recommended approvals: **0**
 - Recommended manual approvals: **0**
-- Discovery runway: **moving**; prioritize release-forward posts and avoid solicitation-style copy.
+- Discovery runway: **stalled**; prioritize release-forward posts and avoid solicitation-style copy.
 
 ## Manual Approval Docket
 - Status: **clear**
