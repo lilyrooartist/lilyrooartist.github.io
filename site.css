@@ -1,0 +1,29 @@
+/* Lily Roo reset site (2026-10). Same palette/fonts as style.css, no build step. */
+:root{--bg:#070709;--text:#f6f4f0;--muted:#b6b1a9;--line:rgba(246,244,240,.16);--gold:#cba86f;--red:#8b1c2b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--text);font-family:"Cormorant Garamond",Georgia,serif;font-size:1.15rem;line-height:1.5;
+background:radial-gradient(circle at 15% 10%,rgba(139,28,43,.38),transparent 45%),radial-gradient(circle at 85% 0%,rgba(203,168,111,.24),transparent 35%),linear-gradient(140deg,#050508,var(--bg) 55%,#16161f) fixed}
+a{color:var(--gold)}
+.mono,.nav,.btn,.label{font-family:"Space Mono",ui-monospace,monospace}
+.nav{width:min(1000px,92vw);margin:0 auto;padding:.8rem 0;display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:flex-end;border-bottom:1px solid var(--line);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.nav a{color:var(--muted);text-decoration:none}.nav a:hover,.nav a[aria-current]{color:var(--text)}
+.nav .home{margin-right:auto;color:var(--text);font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:.06em;text-transform:none}
+main{width:min(1000px,92vw);margin:0 auto;padding:2rem 0 3rem}
+h1,h2{font-family:"Bebas Neue",Impact,sans-serif;font-weight:400;letter-spacing:.04em;line-height:1;margin:.2em 0}
+h1{font-size:clamp(3.5rem,13vw,7.5rem)}h2{font-size:clamp(2rem,6vw,3rem)}
+.label{color:var(--gold);font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;margin:0}
+.lede{font-size:clamp(1.25rem,3.4vw,1.6rem);max-width:34ch;color:var(--text)}
+.muted{color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;align-items:center;min-height:calc(100vh - 9rem)}
+.hero img{width:100%;border:1px solid var(--line);border-radius:6px;display:block}
+.btns{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.2rem 0}
+.btn{display:inline-block;padding:.65rem 1rem;border:1px solid var(--line);border-radius:999px;color:var(--text);text-decoration:none;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;background:rgba(0,0,0,.25);cursor:pointer}
+.btn:hover{border-color:var(--gold)}.btn.solid{background:var(--red);border-color:var(--red)}
+form.signup{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem;max-width:30rem}
+form.signup input{flex:1 1 14rem;padding:.65rem .9rem;border-radius:999px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--text);font:inherit;font-size:1rem}
+.album{display:grid;grid-template-columns:minmax(0,280px) 1fr;gap:1.6rem;padding:2rem 0;border-top:1px solid var(--line)}
+.album img{width:100%;border-radius:6px;border:1px solid var(--line)}
+.album ol{padding-left:1.4rem;margin:.6rem 0}.album li a{color:var(--text)}
+footer{width:min(1000px,92vw);margin:0 auto;padding:1rem 0 2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;display:flex;gap:1rem;flex-wrap:wrap}
+footer a{color:var(--muted)}
+@media (max-width:720px){.hero{grid-template-columns:1fr;min-height:0}.hero img{max-width:320px}.album{grid-template-columns:1fr}.album img{max-width:280px}}

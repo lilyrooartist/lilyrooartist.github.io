@@ -1,0 +1,408 @@
+{
+  "updated": "2026-10-10",
+  "plan_start": "2026-10-12",
+  "weeks": [
+    {
+      "week": 1,
+      "focus": "Setup",
+      "starts": "2026-10-12"
+    },
+    {
+      "week": 2,
+      "focus": "I Learned It All in Fifteen Seconds",
+      "starts": "2026-10-19"
+    },
+    {
+      "week": 3,
+      "focus": "I Learned It All in Fifteen Seconds",
+      "starts": "2026-10-26"
+    },
+    {
+      "week": 4,
+      "focus": "Second Serve",
+      "starts": "2026-11-02"
+    },
+    {
+      "week": 5,
+      "focus": "Twelve Dollars",
+      "starts": "2026-11-09"
+    },
+    {
+      "week": 6,
+      "focus": "Analog Myth (No Mortgage)",
+      "starts": "2026-11-16"
+    },
+    {
+      "week": 7,
+      "focus": "New single",
+      "starts": "2026-11-23"
+    },
+    {
+      "week": 8,
+      "focus": "Review",
+      "starts": "2026-11-30"
+    }
+  ],
+  "targets": {
+    "yt_subs": 100,
+    "spotify_monthly": 100,
+    "email_subs": 50,
+    "x_followers": 100
+  },
+  "target_labels": {
+    "yt_subs": "YouTube subscribers",
+    "spotify_monthly": "Spotify monthly listeners",
+    "email_subs": "Email subscribers",
+    "x_followers": "X followers"
+  },
+  "metrics": [
+    {
+      "date": "2026-10-10",
+      "yt_subs": 5,
+      "yt_videos": 37,
+      "spotify_monthly": null,
+      "spotify_followers": null,
+      "email_subs": null,
+      "x_followers": null,
+      "site_sessions": null
+    }
+  ],
+  "tasks": [
+    {
+      "id": "w1-site",
+      "week": 1,
+      "platform": "site",
+      "title": "Ship the reset site and new /admin tracker",
+      "owner": "LR",
+      "status": "done",
+      "done_on": "2026-10-10",
+      "notes": "Shipped 2026-10-10"
+    },
+    {
+      "id": "w1-worker",
+      "week": 1,
+      "platform": "ops",
+      "title": "Retire Cloudflare social-executor Worker (wrangler delete) and rotate executor token",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Needs Cloudflare access"
+    },
+    {
+      "id": "w1-email-tool",
+      "week": 1,
+      "platform": "email",
+      "title": "Pick a mailing-list provider (Buttondown/MailerLite); signup currently goes to the contact Google Form",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Decision needed"
+    },
+    {
+      "id": "w1-s4a",
+      "week": 1,
+      "platform": "spotify",
+      "title": "Claim Spotify for Artists; set bio, photos, Artist Pick",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Needs Tod login"
+    },
+    {
+      "id": "w1-amfa",
+      "week": 1,
+      "platform": "apple",
+      "title": "Claim Apple Music for Artists",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Needs Tod login"
+    },
+    {
+      "id": "w1-oac",
+      "week": 1,
+      "platform": "youtube",
+      "title": "Request YouTube Official Artist Channel via DistroKid",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Needs DistroKid login"
+    },
+    {
+      "id": "w1-yt-cleanup",
+      "week": 1,
+      "platform": "youtube",
+      "title": "Clean up playlists (3 albums), channel trailer, banner links, About with AI disclosure; turn on altered/synthetic labels",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w1-x-pin",
+      "week": 1,
+      "platform": "x",
+      "title": "Pin a 'start here' post on X",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w1-tiktok-ig",
+      "week": 1,
+      "platform": "social",
+      "title": "Decide on TikTok / Instagram accounts",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Decision needed"
+    },
+    {
+      "id": "w1-12d-verify",
+      "week": 1,
+      "platform": "site",
+      "title": "Confirm Twelve Dollars Spotify URL and add it to the discography",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w1-dupe",
+      "week": 1,
+      "platform": "distrokid",
+      "title": "Resolve duplicate single takedown with DistroKid",
+      "owner": "Tod",
+      "status": "blocked",
+      "done_on": null,
+      "notes": "Needs DistroKid support"
+    },
+    {
+      "id": "w2-shorts",
+      "week": 2,
+      "platform": "youtube",
+      "title": "3 Shorts (15-30s lyric cuts) + 1 Community poll",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w2-canvas",
+      "week": 2,
+      "platform": "spotify",
+      "title": "Spotify Canvas; start 'Transmissions' playlist",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": "Needs S4A claimed"
+    },
+    {
+      "id": "w2-x",
+      "week": 2,
+      "platform": "x",
+      "title": "3 X posts in Lily's voice; cross-post Shorts to TikTok/IG",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w2-news1",
+      "week": 2,
+      "platform": "email",
+      "title": "First newsletter",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w3-shorts",
+      "week": 3,
+      "platform": "youtube",
+      "title": "3 Shorts + 1 lyric video/visualizer",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w3-curators",
+      "week": 3,
+      "platform": "spotify",
+      "title": "Approve budget (~$30-50) for AI-friendly curator submissions",
+      "owner": "Tod",
+      "status": "todo",
+      "done_on": null,
+      "notes": "Money approval"
+    },
+    {
+      "id": "w3-single",
+      "week": 3,
+      "platform": "distrokid",
+      "title": "Submit the week-7 single to DistroKid (>=4 weeks ahead)",
+      "owner": "Tod",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w3-engage",
+      "week": 3,
+      "platform": "x",
+      "title": "Reply-engage with 10 folk/AI-music accounts",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w4-shorts",
+      "week": 4,
+      "platform": "youtube",
+      "title": "3 Shorts + Community post with backstory card (Second Serve)",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w4-thread",
+      "week": 4,
+      "platform": "x",
+      "title": "3 posts + 1 'how it was made' thread",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w4-news2",
+      "week": 4,
+      "platform": "email",
+      "title": "Newsletter #2",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w5-premiere",
+      "week": 5,
+      "platform": "youtube",
+      "title": "Premiere a full Twelve Dollars video + 3 Shorts",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w5-pitch",
+      "week": 5,
+      "platform": "spotify",
+      "title": "Pitch the week-7 single in Spotify for Artists (>=7 days pre-release)",
+      "owner": "Tod",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w5-x",
+      "week": 5,
+      "platform": "x",
+      "title": "3 posts",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w6-shorts",
+      "week": 6,
+      "platform": "youtube",
+      "title": "3 Shorts (No Mortgage) + playlist end screens",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w6-apple",
+      "week": 6,
+      "platform": "apple",
+      "title": "Apple share cards / promo assets",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w6-x",
+      "week": 6,
+      "platform": "x",
+      "title": "3 posts",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w7-premiere",
+      "week": 7,
+      "platform": "youtube",
+      "title": "Premiere new single + 4 Shorts",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w7-presave",
+      "week": 7,
+      "platform": "email",
+      "title": "HyperFollow pre-save + pre-save email",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w7-countdown",
+      "week": 7,
+      "platform": "x",
+      "title": "Countdown posts",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w8-stats",
+      "week": 8,
+      "platform": "spotify",
+      "title": "Read S4A / AMfA stats and enter metrics",
+      "owner": "Tod",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    },
+    {
+      "id": "w8-retro",
+      "week": 8,
+      "platform": "site",
+      "title": "Retro: double down on top 2 Shorts formats; write log entry",
+      "owner": "LR",
+      "status": "todo",
+      "done_on": null,
+      "notes": ""
+    }
+  ],
+  "log": [
+    {
+      "date": "2026-10-10",
+      "text": "Site reset (Option B): automation disabled, secrets removed, ops archived to private lilyroo-ops, new site + tracker shipped."
+    }
+  ]
+}
