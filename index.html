@@ -90,13 +90,29 @@
     <div class="join-box">
       <p class="label">Mailing list</p>
       <h2>Get the letters</h2>
-      <p class="muted" style="max-width:44ch">New songs when they&rsquo;re out. Occasionally a lyric I couldn&rsquo;t fit. No spam.</p>
-      <form class="signup" action="https://docs.google.com/forms/d/e/1FAIpQLSek150CSPfYJmX55sT_Pf16hkNV519FSXaLH32P4u5w7zdrug/formResponse" method="POST" target="signup_sink" onsubmit="setTimeout(()=>{this.reset();document.getElementById(&quot;signup-ok&quot;).hidden=false},300)">
-<input type="hidden" name="entry.40046047" value="MAILING LIST SIGNUP">
-<input type="email" name="entry.1587302304" required autocomplete="email" placeholder="you@domain.com" aria-label="Email address">
+      <p class="muted" style="max-width:44ch">New songs when they&rsquo;re out. Occasionally a lyric I couldn&rsquo;t fit. No spam. Your email goes straight to the mailing list.</p>
+      <form class="signup" id="ml-signup" action="https://assets.mailerlite.com/jsonp/2705903/forms/201701023186683700/subscribe" method="POST" target="signup_sink">
+<input type="hidden" name="ml-submit" value="1">
+<input type="hidden" name="anticsrf" value="true">
+<input type="email" name="fields[email]" required autocomplete="email" placeholder="you@domain.com" aria-label="Email address">
 <button class="btn solid" type="submit">Sign me up</button></form>
-<p id="signup-ok" class="mono muted" hidden style="font-size:.8rem">Got it. You&rsquo;re on the list. Very normal list. No spam, just new songs.</p>
+<p id="signup-ok" class="mono muted" role="status" aria-live="polite" hidden style="font-size:.8rem">You&rsquo;re in. Thanks for listening.</p>
+<p id="signup-err" class="mono muted" role="alert" hidden style="font-size:.8rem">Something went wrong. Please try again, or email <a href="mailto:lilyroo.artist@aol.com">lilyroo.artist@aol.com</a>.</p>
 <iframe name="signup_sink" title="signup" hidden style="display:none"></iframe>
+<script>
+(function(){
+  var f=document.getElementById('ml-signup');if(!f)return;
+  var ok=document.getElementById('signup-ok'),err=document.getElementById('signup-err'),b=f.querySelector('button');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();ok.hidden=true;err.hidden=true;b.disabled=true;
+    // MailerLite's endpoint is not CORS-enabled: send a no-cors POST; an opaque response means it was delivered.
+    fetch(f.action,{method:'POST',mode:'no-cors',body:new FormData(f)})
+      .then(function(){f.reset();ok.hidden=false;})
+      .catch(function(){err.hidden=false;})
+      .finally(function(){b.disabled=false;});
+  });
+})();
+</script>
     </div>
   </section>
 </main>
